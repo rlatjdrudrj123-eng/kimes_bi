@@ -14,7 +14,7 @@ backend:
   # Sveltia supports github / gitlab / gitea / bitbucket / test-repo / local.
   # For production, update `repo` below to <github-owner>/<repo>.
   name: github
-  repo: kimes/design-system   # TODO: replace with the real GitHub owner/repo before deploying
+  repo: rlatjdrudrj123-eng/kimes_bi
   branch: main
 
 # Where the CMS uploads images. Components reference these paths directly.
