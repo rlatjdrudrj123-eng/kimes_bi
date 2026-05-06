@@ -1,5 +1,6 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
+const useSiteBrand      = window.useSiteBrand;
 
 /**
  * Logo rules — slimmed-down usage guide.
@@ -34,13 +35,15 @@ const LBG_BRANDS = [
    06.1 — Clear space & minimum size
    ============================================================ */
 function ClearSpaceAndMin() {
+  const brand = useSiteBrand();
   // Per-brand first-letter cap-height ratio (clear space = 1× of that letter).
-  const examples = [
+  const allExamples = [
     { id: 'kimes', name: 'KIMES',          svg: 'kimes',     min: '80px / 24mm',  h: 36, anchor: 'cap-height of K' },
     { id: 'mc',    name: 'MedicomteK',     svg: 'mc',        min: '120px / 30mm', h: 24, anchor: 'cap-height of M' },
     { id: 'bd',    name: 'Beauty&Derma',   svg: 'bdSeoul',   min: '140px / 36mm', h: 14, anchor: 'cap-height of b' },
     { id: 'in',    name: 'INSPIRE',        svg: 'inTagline', min: '160px / 40mm', h: 22, anchor: 'cap-height of I' },
   ];
+  const examples = allExamples.filter(e => e.id === brand);
   return (
     <div id="logo-rules-clearspace" className="subsection">
       <h3>06.1 — Clear space &amp; minimum size</h3>
@@ -77,6 +80,7 @@ function ClearSpaceAndMin() {
    06.2 — Background usage
    ============================================================ */
 function BackgroundUsage() {
+  const brand = useSiteBrand();
   const ROWS = [
     { bg: 'Light solid (0–30%)',     logo: 'Full color',                  v: 'ok' },
     { bg: 'Mid-tone (40–60%)',       logo: 'Avoid — request approval',    v: 'avoid' },
@@ -124,7 +128,7 @@ function BackgroundUsage() {
           <span className="head-label">Black</span>
           <span className="head-label">Brand color</span>
         </div>
-        {LBG_BRANDS.map(b => (
+        {LBG_BRANDS.filter(b => b.id === brand).map(b => (
           <div className="rules-bg-mxrow" key={b.id}>
             <div className="rules-bg-mxlabel">
               <span className="dot" style={{ background: b.color }}></span>

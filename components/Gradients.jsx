@@ -1,5 +1,6 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
+const useSiteBrand      = window.useSiteBrand;
 
 /**
  * Gradients — section 05.
@@ -56,6 +57,8 @@ const GR_BRANDS = [
    05.1 — Brand gradient set
    ============================================================ */
 function GradientSet() {
+  const brand = useSiteBrand();
+  const items = GR_BRANDS.filter(b => b.key === brand);
   return (
     <div id="gr-set" className="subsection">
       <h3>05.1 — Brand gradient set</h3>
@@ -65,7 +68,7 @@ function GradientSet() {
         are not approved.
       </p>
       <div className="gr-set-grid">
-        {GR_BRANDS.map(b => (
+        {items.map(b => (
           <div className="gr-card" key={b.key}>
             <div className="gr-block" style={{ background: b.css }}>
               <span className="gr-block-tag">135°</span>
@@ -89,6 +92,8 @@ function GradientSet() {
    05.2 — Application examples (4 web-hero mocks)
    ============================================================ */
 function GradientApplications() {
+  const brand = useSiteBrand();
+  const items = GR_BRANDS.filter(b => b.key === brand);
   return (
     <div id="gr-applications" className="subsection">
       <h3>05.2 — Application examples</h3>
@@ -98,7 +103,7 @@ function GradientApplications() {
         the logo itself.
       </p>
       <div className="gr-app-grid">
-        {GR_BRANDS.map(b => (
+        {items.map(b => (
           <div className="gr-app" key={b.key}>
             <div className="gr-app-stage" style={{ background: b.css }}>
               <div className="gr-app-content">

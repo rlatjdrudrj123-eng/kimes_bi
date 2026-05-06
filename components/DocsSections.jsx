@@ -155,9 +155,13 @@ function currentPage() {
 function Sidebar({ active }) {
   const here = currentPage();
   const brand = useSiteBrand();
-  // For groups not matching the current page, treat all items as inert
-  // ("Soon"). For the Co-events group, items aren't anchors — they switch
-  // the active brand and the brand-aware sections re-render.
+  // Brand-switcher behavior:
+  //   - Foundations items are in-page anchors (#intro, #color, …).
+  //   - Co-events items aren't anchors. Each click sets SITE_BRAND so all
+  //     brand-keyed sections re-render filtered to that brand, then scrolls
+  //     to the top of the family section to anchor the new view.
+  //   - When SITE_BRAND ≠ 'kimes', a "Back to KIMES" reset appears below
+  //     the language toggle.
   return (
     <aside className="sidebar">
       <div className="brand-mark">
@@ -182,7 +186,7 @@ function Sidebar({ active }) {
           <div className="nav-group" key={group.title}>
             <h6>{group.title}</h6>
             {group.items.map(item => {
-              const inert = !onThisPage && !isCoEvents; // Co-events handled inline.
+              const inert = !onThisPage && !isCoEvents;
               const showSoon = item.soon || inert;
               let isActive = onThisPage && active === item.id;
               let href = onThisPage ? `#${item.id}` : 'javascript:void(0)';
@@ -221,7 +225,26 @@ function Sidebar({ active }) {
 
 /* ---------- Hero / Intro ---------- */
 function Hero() {
-  const c = useSectionContent('intro');
+  const c     = useSectionContent('intro');
+  const fam   = useSectionContent('family');
+  const brand = useSiteBrand();
+
+  // Co-event hero: pull the brand's display name and description from
+  // family.json so each co-event view has an obviously branded landing
+  // without needing a separate JSON file per brand.
+  if (brand !== 'kimes') {
+    const b = (fam.brands || []).find(x => x.id === brand);
+    if (b) {
+      return (
+        <section id="intro" className="section hero">
+          <div className="section-eyebrow">Co-event — {fam.title || 'Brand family'}</div>
+          <h1>{b.name}</h1>
+          <p className="lede">{b.desc}</p>
+        </section>
+      );
+    }
+  }
+
   return (
     <section id="intro" className="section hero">
       <div className="section-eyebrow">{c.eyebrow}</div>
@@ -237,6 +260,11 @@ function Hero() {
 }
 
 /* ---------- Brand family ---------- */
+// Brand-filter pattern (used in several sections below): main page (brand
+// = 'kimes') shows only KIMES content. Selecting a co-event in the sidebar
+// switches SITE_BRAND, which filters every brand-keyed section to that
+// brand. Sections that aren't brand-specific (typography, spacing, a11y,
+// BIAudit, etc.) ignore the toggle and render normally.
 function BrandFamily() {
   const c = useSectionContent('family');
   const brand = useSiteBrand();

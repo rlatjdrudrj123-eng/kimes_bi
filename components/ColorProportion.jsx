@@ -18,6 +18,10 @@ const useSectionContent = window.useSectionContent;
 
 /* ---------- Brand proportion data ----------------------------- */
 
+// Brand filter: each subsection iterates only the current brand from
+// PROPORTIONS / mocks. Hooked off window — DocsSections.jsx defines it.
+const useSiteBrand = window.useSiteBrand;
+
 const PROPORTIONS = [
   {
     id: 'kimes',
@@ -124,6 +128,8 @@ function pickContrastInk(hex) {
    04.1 — Brand-by-brand proportions
    ============================================================ */
 function BrandByBrand() {
+  const brand = useSiteBrand();
+  const items = PROPORTIONS.filter(b => b.id === brand);
   return (
     <div id="cp-brand-by-brand" className="subsection">
       <h3>04.1 — Brand-by-brand proportions</h3>
@@ -132,7 +138,7 @@ function BrandByBrand() {
         and accent. Bar widths match the percentages exactly.
       </p>
       <div className="cp-brand-list">
-        {PROPORTIONS.map(b => (
+        {items.map(b => (
           <div className="cp-brand-card" key={b.id}>
             <div className="cp-brand-head">
               <span className="cp-dot" style={{ background: b.accent }} />
@@ -152,6 +158,8 @@ function BrandByBrand() {
    04.2 — Comparison view
    ============================================================ */
 function ComparisonView() {
+  const brand = useSiteBrand();
+  const items = PROPORTIONS.filter(b => b.id === brand);
   const summary = [
     { id: 'kimes', text: 'red-accent industrial — 15% accent' },
     { id: 'mc',    text: 'blue-accent technical — 15% accent' },
@@ -166,7 +174,7 @@ function ComparisonView() {
         each brand has a distinct visual personality.
       </p>
       <div className="cp-compare-grid">
-        {PROPORTIONS.map(b => {
+        {items.map(b => {
           const note = summary.find(s => s.id === b.id)?.text;
           return (
             <div className="cp-compare-row" key={b.id}>
@@ -193,9 +201,10 @@ function ComparisonView() {
    04.3 — Application examples (mock posters)
    ============================================================ */
 function ApplicationMocks() {
+  const brand = useSiteBrand();
   // Each mock is a 4:5 ratio card. Zones are sized to mirror the
   // proportion table for that brand. Pure color blocks — no copy.
-  const mocks = [
+  const allMocks = [
     {
       id: 'kimes',
       name: 'KIMES',
@@ -234,6 +243,7 @@ function ApplicationMocks() {
       ],
     },
   ];
+  const mocks = allMocks.filter(m => m.id === brand);
 
   return (
     <div id="cp-mocks" className="subsection">

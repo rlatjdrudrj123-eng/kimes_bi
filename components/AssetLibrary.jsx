@@ -8,6 +8,7 @@
  */
 
 const useSectionContent = window.useSectionContent;
+const useSiteBrand      = window.useSiteBrand;
 
 const ASSET_FONTS = {
   sans: "var(--font-sans)",
@@ -71,8 +72,10 @@ function BrandLogoSection({ label, dot, variants, countSuffix, formats }) {
 
 function LogoFiles() {
   const c = useSectionContent('asset-library');
+  const brand = useSiteBrand();
   const logos = c.logos || {};
-  const brands = logos.brands || [];
+  const allBrands = logos.brands || [];
+  const brands = allBrands.filter(b => b.id === brand);
   return (
     <div id="al-logos" className="subsection">
       <h3>{logos.title}</h3>
@@ -93,9 +96,14 @@ function LogoFiles() {
 
 function ColorValues() {
   const c = useSectionContent('asset-library');
+  const brand = useSiteBrand();
   const colors = c.colors || {};
   const headers = colors.headers || {};
-  const rows = colors.rows || [];
+  const allRows = colors.rows || [];
+  // Filter rows by token prefix matching the current brand. For 'kimes',
+  // also include neutral tokens (--neutral-*) which are shared across brands.
+  const prefix = { kimes: '--kimes-', mc: '--mc-', bd: '--bd-', in: '--in-' }[brand] || '--kimes-';
+  const rows = allRows.filter(r => r.token.startsWith(prefix) || (brand === 'kimes' && r.token.startsWith('--neutral-')));
   return (
     <div id="al-colors" className="subsection">
       <h3>{colors.title}</h3>
