@@ -56,18 +56,22 @@ const NAV_BRAND_MAP = {
   inspire:     'in',
 };
 
-// Co-event pages render only this small subset of sections — a focused
-// summary of brand identity (logo, color, gradient, basic logo rules,
-// downloadable assets). The KIMES main page renders the full 17-section
-// guide. To add a section to the co-event summary, append its id here.
+// Co-event pages render this subset of sections — every part of brand
+// identity that's specific to a brand: intro, family card, color tokens,
+// proportion ratios, gradient, type, logo catalog, logo usage rules, and
+// the downloadable asset library. System-wide sections (typography in use,
+// logo lockups, iconography, spacing, motion, accessibility, social
+// templates, BI audit) stay on the KIMES main page only.
 const COEVENT_VIEW_IDS = new Set([
-  'intro',
-  'family',
-  'color',
-  'gradients',
-  'logo',
-  'logo-rules',
-  'asset-library',
+  'intro',             // 01
+  'family',            // 02
+  'color',             // 03
+  'color-proportion',  // 04
+  'gradients',         // 05
+  'typography',        // 06
+  'logo',              // 08
+  'logo-rules',        // 09
+  'asset-library',     // 13
 ]);
 
 // Hook: should the given section render in the current brand view?
