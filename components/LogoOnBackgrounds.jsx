@@ -1,6 +1,6 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
-const useSiteBrand      = window.useSiteBrand;
+const useBrandFilter    = window.useBrandFilter;
 
 /**
  * Logo rules — slimmed-down usage guide.
@@ -35,7 +35,7 @@ const LBG_BRANDS = [
    06.1 — Clear space & minimum size
    ============================================================ */
 function ClearSpaceAndMin() {
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   // Per-brand first-letter cap-height ratio (clear space = 1× of that letter).
   const allExamples = [
     { id: 'kimes', name: 'KIMES',          svg: 'kimes',     min: '80px / 24mm',  h: 36, anchor: 'cap-height of K' },
@@ -80,7 +80,7 @@ function ClearSpaceAndMin() {
    06.2 — Background usage
    ============================================================ */
 function BackgroundUsage() {
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   const ROWS = [
     { bg: 'Light solid (0–30%)',     logo: 'Full color',                  v: 'ok' },
     { bg: 'Mid-tone (40–60%)',       logo: 'Avoid — request approval',    v: 'avoid' },

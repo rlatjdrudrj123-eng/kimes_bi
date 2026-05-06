@@ -8,7 +8,7 @@
  */
 
 const useSectionContent = window.useSectionContent;
-const useSiteBrand      = window.useSiteBrand;
+const useBrandFilter    = window.useBrandFilter;
 
 const ASSET_FONTS = {
   sans: "var(--font-sans)",
@@ -72,7 +72,7 @@ function BrandLogoSection({ label, dot, variants, countSuffix, formats }) {
 
 function LogoFiles() {
   const c = useSectionContent('asset-library');
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   const logos = c.logos || {};
   const allBrands = logos.brands || [];
   const brands = allBrands.filter(b => b.id === brand);
@@ -96,7 +96,7 @@ function LogoFiles() {
 
 function ColorValues() {
   const c = useSectionContent('asset-library');
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   const colors = c.colors || {};
   const headers = colors.headers || {};
   const allRows = colors.rows || [];

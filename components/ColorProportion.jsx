@@ -20,7 +20,7 @@ const useSectionContent = window.useSectionContent;
 
 // Brand filter: each subsection iterates only the current brand from
 // PROPORTIONS / mocks. Hooked off window — DocsSections.jsx defines it.
-const useSiteBrand = window.useSiteBrand;
+const useBrandFilter = window.useBrandFilter;
 
 const PROPORTIONS = [
   {
@@ -128,7 +128,7 @@ function pickContrastInk(hex) {
    04.1 — Brand-by-brand proportions
    ============================================================ */
 function BrandByBrand() {
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   const items = PROPORTIONS.filter(b => b.id === brand);
   return (
     <div id="cp-brand-by-brand" className="subsection">
@@ -158,7 +158,7 @@ function BrandByBrand() {
    04.2 — Comparison view
    ============================================================ */
 function ComparisonView() {
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   const items = PROPORTIONS.filter(b => b.id === brand);
   const summary = [
     { id: 'kimes', text: 'red-accent industrial — 15% accent' },
@@ -201,7 +201,7 @@ function ComparisonView() {
    04.3 — Application examples (mock posters)
    ============================================================ */
 function ApplicationMocks() {
-  const brand = useSiteBrand();
+  const brand = useBrandFilter();
   // Each mock is a 4:5 ratio card. Zones are sized to mirror the
   // proportion table for that brand. Pure color blocks — no copy.
   const allMocks = [

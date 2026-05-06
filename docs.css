@@ -130,22 +130,68 @@ code {
   color: #fff;
 }
 
-/* "Back to KIMES" reset — only shown when viewing a co-event. */
-.brand-reset {
-  display: block;
-  margin: 0 0 18px;
-  padding: 6px 10px;
-  background: #fff5f5;
-  border: 1px solid #fecaca;
-  border-radius: 6px;
-  color: #b91c1c;
-  font: 600 11px/1 'Montserrat', system-ui, sans-serif;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: background-color 120ms;
+/* Co-event summary section — appended to the bottom of the main page,
+   one per concurrent exhibition. Each is a self-contained brand profile
+   with a heavier top divider so it reads as a distinct page within the
+   long scroll. */
+.co-event-page {
+  border-top: 6px solid var(--ink, #231815);
+  padding-top: 64px !important;
+  margin-top: 96px;
 }
-.brand-reset:hover {
-  background: #fee2e2;
+.co-event-page > .section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  color: #71717a;
+  text-transform: uppercase;
+}
+.co-event-page > h2 {
+  margin: 4px 0 8px;
+  font-size: 44px;
+  letter-spacing: -0.015em;
+}
+.co-event-page > .lede {
+  max-width: 720px;
+  font-size: 15px;
+  color: var(--ink-muted, #52525b);
+  margin-bottom: 18px;
+}
+.co-event-page .co-event-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.co-event-page .co-event-meta .dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: inline-block;
+}
+.co-event-page .co-event-meta .badge {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f4f4f5;
+  color: #52525b;
+  text-transform: uppercase;
+}
+.co-event-page .co-event-meta .badge.signature {
+  background: #fff1f2;
+  color: #b91c1c;
+}
+/* Inside the co-event body, nested sections lose their top border (we've
+   already drawn one for the page itself) and tighten their vertical rhythm. */
+.co-event-page .co-event-body .section {
+  border-top: none;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.co-event-page .co-event-body .section + .section {
+  border-top: 1px solid var(--ink-faint, #e1e5ea);
 }
 
 .nav-group { margin-bottom: 22px; }

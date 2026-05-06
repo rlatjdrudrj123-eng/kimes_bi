@@ -48,38 +48,23 @@ function useSiteBrand() {
   return brand;
 }
 
-// NAV item id → data-side brand id. Foundations uses real section anchors;
-// Co-events uses brand-switch ids that we map to family/color/logo data ids.
+// Brand context — every brand-keyed section (BrandFamily, ColorTokens,
+// ColorProportion, Gradients, LogoCatalog, LogoOnBackgrounds, AssetLibrary)
+// filters its data by the current Context value. The default is 'kimes',
+// so the main page shows only KIMES content. Each <CoEventPage> renders
+// inside a Provider that overrides the brand to mc / bd / in, so the same
+// section components render that brand's content inside the co-event
+// summary blocks at the bottom of the page.
+const BrandContext = React.createContext('kimes');
+function useBrandFilter() { return React.useContext(BrandContext); }
+
+// NAV id → family/color/logo data id, used by CoEventPage to wire each
+// summary section (#medicomtek / #beautyderma / #inspire) to its data.
 const NAV_BRAND_MAP = {
   medicomtek:  'mc',
   beautyderma: 'bd',
   inspire:     'in',
 };
-
-// Co-event pages render this subset of sections — every part of brand
-// identity that's specific to a brand: intro, family card, color tokens,
-// proportion ratios, gradient, type, logo catalog, logo usage rules, and
-// the downloadable asset library. System-wide sections (typography in use,
-// logo lockups, iconography, spacing, motion, accessibility, social
-// templates, BI audit) stay on the KIMES main page only.
-const COEVENT_VIEW_IDS = new Set([
-  'intro',             // 01
-  'family',            // 02
-  'color',             // 03
-  'color-proportion',  // 04
-  'gradients',         // 05
-  'typography',        // 06
-  'logo',              // 08
-  'logo-rules',        // 09
-  'asset-library',     // 13
-]);
-
-// Hook: should the given section render in the current brand view?
-function useSectionVisible(id) {
-  const brand = useSiteBrand();
-  if (brand === 'kimes') return true;       // main page = full guide
-  return COEVENT_VIEW_IDS.has(id);          // co-event = compact summary
-}
 
 // Returns the current-locale data for a section. Falls back to the other
 // locale if the current one is missing — preferable to rendering blanks.
@@ -179,14 +164,9 @@ function currentPage() {
 
 function Sidebar({ active }) {
   const here = currentPage();
-  const brand = useSiteBrand();
-  // Brand-switcher behavior:
-  //   - Foundations items are in-page anchors (#intro, #color, …).
-  //   - Co-events items aren't anchors. Each click sets SITE_BRAND so all
-  //     brand-keyed sections re-render filtered to that brand, then scrolls
-  //     to the top of the family section to anchor the new view.
-  //   - When SITE_BRAND ≠ 'kimes', a "Back to KIMES" reset appears below
-  //     the language toggle.
+  // Foundations and Co-events both live on the main page. Co-events items
+  // are in-page anchors to the compact brand summary sections rendered at
+  // the bottom of <main> (#medicomtek / #beautyderma / #inspire).
   return (
     <aside className="sidebar">
       <div className="brand-mark">
@@ -197,50 +177,22 @@ function Sidebar({ active }) {
         </div>
       </div>
       <LangToggle />
-      {brand !== 'kimes' && (
-        <button
-          className="brand-reset"
-          onClick={() => { window.setSiteBrand('kimes'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          title="Back to the main KIMES view"
-        >← KIMES (main)</button>
-      )}
       {NAV.map(group => {
         const onThisPage = group.page === here;
-        const isCoEvents = group.title === 'Co-events';
-        const isFoundations = group.title === 'Foundations';
-        // On co-event views, the Foundations group collapses to just the
-        // sections that belong on a brand summary page.
-        const items = (isFoundations && brand !== 'kimes')
-          ? group.items.filter(i => COEVENT_VIEW_IDS.has(i.id))
-          : group.items;
-        if (items.length === 0) return null;
         return (
           <div className="nav-group" key={group.title}>
             <h6>{group.title}</h6>
-            {items.map(item => {
-              const inert = !onThisPage && !isCoEvents;
+            {group.items.map(item => {
+              const inert = !onThisPage;
               const showSoon = item.soon || inert;
-              let isActive = onThisPage && active === item.id;
-              let href = onThisPage ? `#${item.id}` : 'javascript:void(0)';
-              let onClick = inert ? (e) => e.preventDefault() : undefined;
-
-              if (isCoEvents) {
-                const targetBrand = NAV_BRAND_MAP[item.id] || 'kimes';
-                isActive = brand === targetBrand;
-                href = '#family';
-                onClick = (e) => {
-                  e.preventDefault();
-                  window.setSiteBrand(targetBrand);
-                  const target = document.getElementById('family');
-                  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                };
-              }
+              const href = onThisPage ? `#${item.id}` : 'javascript:void(0)';
+              const isActive = onThisPage && active === item.id;
               return (
                 <a
                   key={item.id}
                   href={href}
                   className={`nav-link ${isActive ? 'active' : ''} ${showSoon ? 'soon' : ''}`}
-                  onClick={onClick}
+                  onClick={inert ? (e) => e.preventDefault() : undefined}
                   title={inert ? 'Available in extended deployment' : undefined}
                 >
                   <span>{item.label}</span>
@@ -257,26 +209,7 @@ function Sidebar({ active }) {
 
 /* ---------- Hero / Intro ---------- */
 function Hero() {
-  const c     = useSectionContent('intro');
-  const fam   = useSectionContent('family');
-  const brand = useSiteBrand();
-
-  // Co-event hero: pull the brand's display name and description from
-  // family.json so each co-event view has an obviously branded landing
-  // without needing a separate JSON file per brand.
-  if (brand !== 'kimes') {
-    const b = (fam.brands || []).find(x => x.id === brand);
-    if (b) {
-      return (
-        <section id="intro" className="section hero">
-          <div className="section-eyebrow">Co-event — {fam.title || 'Brand family'}</div>
-          <h1>{b.name}</h1>
-          <p className="lede">{b.desc}</p>
-        </section>
-      );
-    }
-  }
-
+  const c = useSectionContent('intro');
   return (
     <section id="intro" className="section hero">
       <div className="section-eyebrow">{c.eyebrow}</div>
@@ -292,16 +225,10 @@ function Hero() {
 }
 
 /* ---------- Brand family ---------- */
-// Brand-filter pattern (used in several sections below): main page (brand
-// = 'kimes') shows only KIMES content. Selecting a co-event in the sidebar
-// switches SITE_BRAND, which filters every brand-keyed section to that
-// brand. Sections that aren't brand-specific (typography, spacing, a11y,
-// BIAudit, etc.) ignore the toggle and render normally.
 function BrandFamily() {
   const c = useSectionContent('family');
-  const brand = useSiteBrand();
-  const allBrands = c.brands || [];
-  const brands = allBrands.filter(b => b.id === brand);
+  const brand = useBrandFilter();
+  const brands = (c.brands || []).filter(b => b.id === brand);
   const badges = c.badges || { signature: 'Slash-cut family', independent: 'Independent identity' };
   return (
     <section id="family" className="section">
@@ -339,9 +266,8 @@ function BrandFamily() {
 /* ---------- Color tokens ---------- */
 function ColorTokens() {
   const c = useSectionContent('color');
-  const brand = useSiteBrand();
-  const allGroups = c.groups || [];
-  const groups = allGroups.filter(g => g.id === brand);
+  const brand = useBrandFilter();
+  const groups = (c.groups || []).filter(g => g.id === brand);
   const h = c.tableHeaders || { token: 'Token', hex: 'HEX', rgb: 'RGB', cmyk: 'CMYK', usage: 'Usage' };
   return (
     <section id="color" className="section">
@@ -575,9 +501,8 @@ function LogoVariants() {
 
 function LogoCatalog() {
   const c = useSectionContent('logo');
-  const brand = useSiteBrand();
-  const allBrands = c.brands || [];
-  const brands = allBrands.filter(b => b.id === brand);
+  const brand = useBrandFilter();
+  const brands = (c.brands || []).filter(b => b.id === brand);
   const fs = c.familySignature || { title: '', body: '' };
   return (
     <section id="logo" className="section">
@@ -667,6 +592,59 @@ function SpacingGrid() {
   );
 }
 
+/* ---------- Co-event summary page ----------------------------
+ * Each <CoEventPage brandId="mc"> renders a focused brand profile at the
+ * bottom of the main page, anchored at #medicomtek / #beautyderma /
+ * #inspire so the Co-events sidebar group can scroll to it. Inside, we
+ * provide BrandContext = brandId, then re-use the same section components
+ * that the KIMES main page uses — they read the Context and filter their
+ * data to that brand. The navIds array drives which sub-sections appear.
+ * --------------------------------------------------------------- */
+function CoEventPage({ brandId, navId, sections }) {
+  const fam = useSectionContent('family');
+  const brandData = (fam.brands || []).find(b => b.id === brandId);
+  if (!brandData) return null;
+
+  // Page header already shows brand name / description; the inner sections
+  // pick up the design specifics. Override `sections` prop if a co-event
+  // needs a different ordering.
+  const SECTIONS = sections || ['color', 'color-proportion', 'gradients', 'logo', 'logo-rules', 'asset-library'];
+  // Look up each section component by name on window. AssetLibrary,
+  // ColorProportion, Gradients, LogoRules etc. live in their own .jsx
+  // files and self-register on window when they load.
+  const COMPS = {
+    'color':            window.ColorTokens,
+    'color-proportion': window.ColorProportion,
+    'gradients':        window.Gradients,
+    'logo':             window.LogoCatalog,
+    'logo-rules':       window.LogoRules,
+    'asset-library':    window.AssetLibrary,
+  };
+
+  return (
+    <BrandContext.Provider value={brandId}>
+      <section id={navId} className="section co-event-page">
+        <div className="section-eyebrow">동시개최행사 · Co-event</div>
+        <h2>{brandData.name}</h2>
+        <p className="lede">{brandData.desc}</p>
+        <div className="co-event-meta">
+          <span className="dot" style={{ background: brandData.primary }}   title={brandData.primary} />
+          <span className="dot" style={{ background: brandData.secondary }} title={brandData.secondary} />
+          <span className={`badge ${brandData.signature ? 'signature' : ''}`}>
+            {brandData.signature ? 'Slash-cut family' : 'Independent identity'}
+          </span>
+        </div>
+        <div className="co-event-body">
+          {SECTIONS.map(s => {
+            const Comp = COMPS[s];
+            return Comp ? <Comp key={s} /> : null;
+          })}
+        </div>
+      </section>
+    </BrandContext.Provider>
+  );
+}
+
 /* ---------- Active section tracker ---------- */
 function useActiveSection(ids) {
   const [active, setActive] = useState(ids[0]);
@@ -699,15 +677,14 @@ Object.assign(window, {
   // Back-compat: previous render call used <LogoUsage />.
   LogoUsage: LogoCatalog,
   SpacingGrid,
+  CoEventPage,
   useActiveSection,
-  // Shared hooks — every <section>.jsx grabs these off window so it can
-  // read content (useSectionContent), react to language (useSiteLang) /
-  // brand (useSiteBrand) changes, and gate rendering on the current brand
-  // view (useSectionVisible).
   useSiteLang,
-  useSiteBrand,
   useSectionContent,
-  useSectionVisible,
-  COEVENT_VIEW_IDS,
+  // Brand filter — section components below DocsSections.jsx grab these
+  // off window so they can join the same Context as the local sections.
+  BrandContext,
+  useBrandFilter,
+  NAV_BRAND_MAP,
   NAV,
 });
