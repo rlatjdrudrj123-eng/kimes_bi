@@ -105,7 +105,7 @@
         "fontVar": "kr",
         "sample": "한글 Aa 123",
         "sampleWeight": 800,
-        "role": "한글 · 한글 · 혼용 본문",
+        "role": "한글 · 혼용 본문",
         "desc": "GitHub에서 제공되는 오픈소스 서체.",
         "link": "https://github.com/orioncactus/pretendard",
         "linkLabel": "Pretendard 다운로드 ↗",

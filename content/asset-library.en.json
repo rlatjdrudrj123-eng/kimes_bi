@@ -105,7 +105,7 @@
         "fontVar": "kr",
         "sample": "한글 Aa 123",
         "sampleWeight": 800,
-        "role": "Korean · Hangul · Mixed body",
+        "role": "Korean · Mixed-language body",
         "desc": "Open-source font available on GitHub.",
         "link": "https://github.com/orioncactus/pretendard",
         "linkLabel": "Download Pretendard ↗",

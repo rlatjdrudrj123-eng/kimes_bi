@@ -1,7 +1,7 @@
 {
   "eyebrow": "06 — Typography",
   "title": "Typography",
-  "lede": "Latin text is set in <b>Montserrat</b> — the family used in the KIMES and MedicomteK wordmarks. Korean text is set in <b>Pretendard</b>, chosen for its harmonious metrics with Montserrat at matching sizes. Numerals always use Montserrat Bold.",
+  "lede": "Latin text uses <b>Montserrat</b> — the same family as the KIMES and MedicomteK wordmarks. Korean text uses <b>Pretendard</b>, which pairs cleanly with Montserrat at the same point size. Numerals always use Montserrat Bold.",
   "tabs": {
     "latin": "Latin · Montserrat",
     "kr": "한글 · Pretendard"

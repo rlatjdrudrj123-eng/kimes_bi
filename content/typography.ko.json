@@ -1,7 +1,7 @@
 {
   "eyebrow": "06 — 타이포그래피",
   "title": "Typography",
-  "lede": "라틴 텍스트는 <b>Montserrat</b> — KIMES와 MedicomteK 워드마크에 사용된 패밀리 — 로 조판합니다. 한글 텍스트는 <b>Pretendard</b>로 조판하며, 같은 크기에서 Montserrat과 조화로운 메트릭을 가집니다. 숫자는 항상 Montserrat Bold를 사용합니다.",
+  "lede": "라틴 텍스트는 <b>Montserrat</b>(KIMES·MedicomteK 워드마크와 동일)을 사용합니다. 한글 텍스트는 <b>Pretendard</b>를 사용하며, 같은 본문 크기에서 Montserrat과 깔끔하게 페어링됩니다. 숫자는 항상 Montserrat Bold.",
   "tabs": {
     "latin": "Latin · Montserrat",
     "kr": "한글 · Pretendard"

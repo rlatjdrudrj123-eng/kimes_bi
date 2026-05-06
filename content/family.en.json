@@ -1,12 +1,12 @@
 {
   "eyebrow": "02 — Brand family",
   "title": "Brand family",
-  "lede": "Four distinct sub-brands share the KIMES exhibition foundation. KIMES and MedicomteK form the medical-equipment family — both carry the signature slash-cut <code>i</code>. Beauty&Derma and INSPIRE Digital Health are stand-alone event identities with their own visual systems.",
+  "lede": "KIMES is a family of four exhibitions under one umbrella. KIMES and MedicomteK share medical-equipment heritage — both wordmarks carry the signature slash-cut <code>i</code>. Beauty&Derma and INSPIRE Digital Health each maintain an independent visual identity.",
   "brands": [
     {
       "id": "kimes",
       "name": "KIMES",
-      "desc": "Korea International Medical & Hospital Equipment Show — the flagship exhibition brand.",
+      "desc": "The flagship medical device and hospital equipment exhibition. Korea's industry anchor since 1980.",
       "primary": "#E60012",
       "secondary": "#231815",
       "signature": true,
@@ -17,7 +17,7 @@
     {
       "id": "mc",
       "name": "MedicomteK",
-      "desc": "Sister exhibition focused on medical communication technology and connected devices.",
+      "desc": "Concurrent event covering medical communication technology and connected hospital devices.",
       "primary": "#036EB8",
       "secondary": "#231815",
       "signature": true,
@@ -28,7 +28,7 @@
     {
       "id": "bd",
       "name": "Beauty&Derma",
-      "desc": "Aesthetic medicine and dermatology event line, held in Seoul and Busan editions.",
+      "desc": "Aesthetic medicine and dermatology exhibition. Held in Seoul and Busan editions.",
       "primary": "#5D3B8B",
       "secondary": "#BAB1D7",
       "signature": false,
@@ -39,7 +39,7 @@
     {
       "id": "in",
       "name": "INSPIRE Digital Health",
-      "desc": "Forward-looking conference exploring digital health innovation. Tagline: HEALTH MEETS INNOVATION.",
+      "desc": "Digital health innovation conference. Tagline: HEALTH MEETS INNOVATION.",
       "primary": "#595757",
       "secondary": "#BFD633",
       "signature": false,

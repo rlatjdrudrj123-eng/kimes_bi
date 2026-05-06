@@ -1,7 +1,7 @@
 {
   "eyebrow": "08 — 로고",
   "title": "Logo",
-  "lede": "승인된 로고 파일의 전체 카탈로그입니다. <code>/assets/logos/</code> 폴더의 SVG만 사용하세요 — CSS로 워드마크를 다시 만들거나 텍스트로 조판하지 마세요. 슬래시컷 <code>i</code>는 SVG에서만 정확히 렌더링됩니다.",
+  "lede": "승인된 모든 로고 파일을 모은 카탈로그입니다. <code>/assets/logos/</code>의 SVG만 사용하세요 — CSS로 워드마크를 재현하거나 텍스트로 조판하지 마세요. 슬래시컷 <code>i</code>는 SVG에서만 정확히 표현됩니다.",
   "brands": [
     {
       "id": "kimes",
