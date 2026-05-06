@@ -583,5 +583,9 @@ Object.assign(window, {
   LogoUsage: LogoCatalog,
   SpacingGrid,
   useActiveSection,
+  // Shared i18n hooks — every <section>.jsx grabs these off window so it
+  // can read content via useSectionContent('<id>') and re-render on toggle.
+  useSiteLang,
+  useSectionContent,
   NAV,
 });

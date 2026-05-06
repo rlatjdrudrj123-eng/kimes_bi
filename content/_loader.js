@@ -28,6 +28,7 @@
     'typography',
     'logo',
     'spacing',
+    'bi-audit',
   ];
 
   const LOCALES = ['en', 'ko'];
