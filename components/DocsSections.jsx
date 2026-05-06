@@ -10,6 +10,19 @@ const BeautyDermaWordmark = window.BeautyDermaWordmark;
 const InspireWordmark    = window.InspireWordmark;
 const InlineLogo         = window.InlineLogo;
 
+// Maps a content/*.json `wordmark` string to the corresponding wordmark
+// React element. The mapping lives in JSX (not JSON) because each variant
+// requires React props that can't be expressed cleanly in JSON.
+function wordmarkFromRef(ref, height) {
+  switch (ref) {
+    case 'kimes':                return <KimesWordmark height={height} />;
+    case 'medicomtek':           return <MedicomtekWordmark height={height} />;
+    case 'beautyderma-stack':    return <BeautyDermaWordmark height={height} variant="stack" />;
+    case 'inspire-tagline-lime': return <InspireWordmark height={height} variant="tagline" tone="lime" />;
+    default:                     return <KimesWordmark height={height} />;
+  }
+}
+
 /* ---------- Sidebar ---------- */
 const NAV = [
   {
@@ -116,97 +129,44 @@ function Sidebar({ active }) {
 
 /* ---------- Hero / Intro ---------- */
 function Hero() {
+  const c = (window.CONTENT && window.CONTENT.intro) || {};
   return (
     <section id="intro" className="section hero">
-      <div className="section-eyebrow">KIMES 2026 — Brand foundations</div>
-      <h1>The KIMES Design System</h1>
-      <p className="lede">
-        A multi-brand identity system for Korea's largest medical device and
-        hospital equipment exhibition. Four sub-event brands — KIMES, Beauty&amp;Derma,
-        MedicomteK, and INSPIRE Digital Health — share one foundation:
-        flat, high-impact, print-graphic visual language anchored in Montserrat
-        and Pretendard.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h1>{c.title}</h1>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <div className="meta">
-        <div><span>Established</span><span>1980</span></div>
-        <div><span>Venue</span><span>COEX, Seoul</span></div>
-        <div><span>Sub-brands</span><span>4</span></div>
-        <div><span>Languages</span><span>Korean / English</span></div>
+        {(c.meta || []).map((m, i) => (
+          <div key={i}><span>{m.label}</span><span>{m.value}</span></div>
+        ))}
       </div>
     </section>
   );
 }
 
 /* ---------- Brand family ---------- */
-const BRANDS = [
-  {
-    id: 'kimes',
-    name: 'KIMES',
-    desc: 'Korea International Medical & Hospital Equipment Show — the flagship exhibition brand.',
-    primary: '#E60012',
-    secondary: '#231815',
-    signature: true,
-    bgClass: 'bg-white',
-    Logo: ({ size = 64 }) => <KimesWordmark height={size} />,
-  },
-  {
-    id: 'mc',
-    name: 'MedicomteK',
-    desc: 'Sister exhibition focused on medical communication technology and connected devices.',
-    primary: '#036EB8',
-    secondary: '#231815',
-    signature: true,
-    bgClass: 'bg-white',
-    Logo: ({ size = 36 }) => <MedicomtekWordmark height={size} />,
-  },
-  {
-    id: 'bd',
-    name: 'Beauty&Derma',
-    desc: 'Aesthetic medicine and dermatology event line, held in Seoul and Busan editions.',
-    primary: '#5D3B8B',
-    secondary: '#BAB1D7',
-    signature: false,
-    bgClass: 'bg-white',
-    Logo: ({ size = 80 }) => <BeautyDermaWordmark height={size} variant="stack" />,
-  },
-  {
-    id: 'in',
-    name: 'INSPIRE Digital Health',
-    desc: 'Forward-looking conference exploring digital health innovation. Tagline: HEALTH MEETS INNOVATION.',
-    primary: '#595757',
-    secondary: '#BFD633',
-    signature: false,
-    bgClass: 'bg-in-gray',
-    Logo: ({ size = 36 }) => <InspireWordmark height={size} variant="tagline" tone="lime" />,
-  },
-];
-
 function BrandFamily() {
+  const c = (window.CONTENT && window.CONTENT.family) || {};
+  const brands = c.brands || [];
+  const badges = c.badges || { signature: 'Slash-cut family', independent: 'Independent identity' };
   return (
     <section id="family" className="section">
-      <div className="section-eyebrow">02 — Brand family</div>
-      <h2>Brand family</h2>
-      <p className="lede">
-        Four distinct sub-brands share the KIMES exhibition foundation. KIMES and
-        MedicomteK form the medical-equipment family — both carry the
-        signature slash-cut <code>i</code>. Beauty&amp;Derma and INSPIRE Digital Health
-        are stand-alone event identities with their own visual systems.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <div className="family-grid">
-        {BRANDS.map(b => {
-          const Logo = b.Logo;
-          return (
+        {brands.map(b => (
           <div key={b.id} className="family-card">
-            <div className={`preview ${b.bgClass}`}>
-              <Logo />
+            <div className={`preview ${b.bgClass || 'bg-white'}`}>
+              {wordmarkFromRef(b.wordmark, b.wordmarkSize)}
             </div>
             <div className="body">
               <div className="head">
                 <span className="name">{b.name}</span>
                 {b.signature ? (
-                  <span className="badge signature">Slash-cut family</span>
+                  <span className="badge signature">{badges.signature}</span>
                 ) : (
-                  <span className="badge">Independent identity</span>
+                  <span className="badge">{badges.independent}</span>
                 )}
               </div>
               <p className="desc-line">{b.desc}</p>
@@ -216,68 +176,23 @@ function BrandFamily() {
               </div>
             </div>
           </div>
-          );
-        })}
+        ))}
       </div>
     </section>
   );
 }
 
 /* ---------- Color tokens ---------- */
-const COLOR_GROUPS = [
-  {
-    id: 'kimes',
-    name: 'KIMES',
-    indicator: '#E60012',
-    note: 'Flagship medical exhibition',
-    rows: [
-      { token: '--kimes-red', hex: '#E60012', rgb: '230, 0, 18', cmyk: '0 / 100 / 100 / 0', usage: 'Primary brand color. Headlines, CTAs, brand surfaces.' },
-      { token: '--kimes-black', hex: '#231815', rgb: '35, 24, 21', cmyk: '0 / 0 / 0 / 100', usage: 'Body text, secondary brand surfaces, slash-cut accent.' },
-    ],
-  },
-  {
-    id: 'mc',
-    name: 'MedicomteK',
-    indicator: '#036EB8',
-    note: 'Medical communication technology',
-    rows: [
-      { token: '--mc-blue', hex: '#036EB8', rgb: '3, 110, 184', cmyk: '85 / 50 / 0 / 0', usage: 'Primary brand color. Headlines, CTAs, brand surfaces.' },
-      { token: '--mc-black', hex: '#231815', rgb: '35, 24, 21', cmyk: '0 / 0 / 0 / 100', usage: 'Body text, secondary surfaces, slash-cut accent.' },
-    ],
-  },
-  {
-    id: 'bd',
-    name: 'Beauty&Derma',
-    indicator: '#5D3B8B',
-    note: 'Seoul / Busan editions',
-    rows: [
-      { token: '--bd-purple', hex: '#5D3B8B', rgb: '93, 59, 139', cmyk: '78 / 90 / 0 / 0', usage: 'Primary brand color. Wordmark, hero surfaces.' },
-      { token: '--bd-light-purple', hex: '#BAB1D7', rgb: '186, 177, 215', cmyk: '30 / 30 / 0 / 0', usage: 'Secondary support color. Backgrounds, dividers.' },
-    ],
-  },
-  {
-    id: 'in',
-    name: 'INSPIRE Digital Health',
-    indicator: '#595757',
-    note: 'Health meets innovation',
-    rows: [
-      { token: '--in-gray', hex: '#595757', rgb: '89, 87, 87', cmyk: '0 / 0 / 0 / 80', usage: 'Primary brand color. Wordmark, banner backgrounds.' },
-      { token: '--in-lime', hex: '#BFD633', rgb: '191, 214, 51', cmyk: '30 / 0 / 90 / 0', usage: 'Accent color. CTAs, banner highlights, iconography.' },
-    ],
-  },
-];
-
 function ColorTokens() {
+  const c = (window.CONTENT && window.CONTENT.color) || {};
+  const groups = c.groups || [];
+  const h = c.tableHeaders || { token: 'Token', hex: 'HEX', rgb: 'RGB', cmyk: 'CMYK', usage: 'Usage' };
   return (
     <section id="color" className="section">
-      <div className="section-eyebrow">03 — Color</div>
-      <h2>Color tokens</h2>
-      <p className="lede">
-        Each brand owns a primary + a secondary color. Use solid fills only —
-        no gradients, no glows, no drop shadows. Pair brand color with black
-        or white only.
-      </p>
-      {COLOR_GROUPS.map(g => (
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
+      {groups.map(g => (
         <div key={g.id} className="tokens-group">
           <div className="group-head">
             <span className="ind" style={{ background: g.indicator }} />
@@ -288,19 +203,19 @@ function ColorTokens() {
             <thead>
               <tr>
                 <th></th>
-                <th>Token</th>
-                <th>HEX</th>
-                <th>RGB</th>
-                <th>CMYK</th>
-                <th>Usage</th>
+                <th>{h.token}</th>
+                <th>{h.hex}</th>
+                <th>{h.rgb}</th>
+                <th>{h.cmyk}</th>
+                <th>{h.usage}</th>
               </tr>
             </thead>
             <tbody>
-              {g.rows.map(r => (
+              {(g.rows || []).map(r => (
                 <tr key={r.token}>
                   <td className="swatch-cell"><div className="sw" style={{ background: r.hex }} /></td>
                   <td className="name-cell">{r.token}</td>
-                  <td className="mono">{r.hex.toUpperCase()}</td>
+                  <td className="mono">{(r.hex || '').toUpperCase()}</td>
                   <td className="mono">{r.rgb}</td>
                   <td className="mono">{r.cmyk}</td>
                   <td className="usage">{r.usage}</td>

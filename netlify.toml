@@ -1,0 +1,17 @@
+# Netlify deploy configuration
+# ---------------------------------------------------------------------------
+# This site is fully static — no build step. Netlify just serves the folder.
+# Decap CMS lives at /admin/ and authenticates via Netlify Identity (must be
+# enabled in the Netlify dashboard under Site settings → Identity, with
+# "Git Gateway" toggled on under Identity → Services).
+
+[build]
+  publish = "."
+  command = ""
+
+# Decap CMS expects /admin/ to load admin/index.html. Netlify already does
+# this with directory indexes, but we make it explicit for clarity.
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200

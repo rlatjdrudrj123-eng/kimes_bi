@@ -1,0 +1,55 @@
+{
+  "eyebrow": "02 — Brand family",
+  "title": "Brand family",
+  "lede": "Four distinct sub-brands share the KIMES exhibition foundation. KIMES and MedicomteK form the medical-equipment family — both carry the signature slash-cut <code>i</code>. Beauty&Derma and INSPIRE Digital Health are stand-alone event identities with their own visual systems.",
+  "brands": [
+    {
+      "id": "kimes",
+      "name": "KIMES",
+      "desc": "Korea International Medical & Hospital Equipment Show — the flagship exhibition brand.",
+      "primary": "#E60012",
+      "secondary": "#231815",
+      "signature": true,
+      "bgClass": "bg-white",
+      "wordmark": "kimes",
+      "wordmarkSize": 64
+    },
+    {
+      "id": "mc",
+      "name": "MedicomteK",
+      "desc": "Sister exhibition focused on medical communication technology and connected devices.",
+      "primary": "#036EB8",
+      "secondary": "#231815",
+      "signature": true,
+      "bgClass": "bg-white",
+      "wordmark": "medicomtek",
+      "wordmarkSize": 36
+    },
+    {
+      "id": "bd",
+      "name": "Beauty&Derma",
+      "desc": "Aesthetic medicine and dermatology event line, held in Seoul and Busan editions.",
+      "primary": "#5D3B8B",
+      "secondary": "#BAB1D7",
+      "signature": false,
+      "bgClass": "bg-white",
+      "wordmark": "beautyderma-stack",
+      "wordmarkSize": 80
+    },
+    {
+      "id": "in",
+      "name": "INSPIRE Digital Health",
+      "desc": "Forward-looking conference exploring digital health innovation. Tagline: HEALTH MEETS INNOVATION.",
+      "primary": "#595757",
+      "secondary": "#BFD633",
+      "signature": false,
+      "bgClass": "bg-in-gray",
+      "wordmark": "inspire-tagline-lime",
+      "wordmarkSize": 36
+    }
+  ],
+  "badges": {
+    "signature": "Slash-cut family",
+    "independent": "Independent identity"
+  }
+}

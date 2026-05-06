@@ -1,0 +1,54 @@
+{
+  "eyebrow": "03 — Color",
+  "title": "Color tokens",
+  "lede": "Each brand owns a primary + a secondary color. Use solid fills only — no gradients, no glows, no drop shadows. Pair brand color with black or white only.",
+  "groups": [
+    {
+      "id": "kimes",
+      "name": "KIMES",
+      "indicator": "#E60012",
+      "note": "Flagship medical exhibition",
+      "rows": [
+        { "token": "--kimes-red", "hex": "#E60012", "rgb": "230, 0, 18", "cmyk": "0 / 100 / 100 / 0", "usage": "Primary brand color. Headlines, CTAs, brand surfaces." },
+        { "token": "--kimes-black", "hex": "#231815", "rgb": "35, 24, 21", "cmyk": "0 / 0 / 0 / 100", "usage": "Body text, secondary brand surfaces, slash-cut accent." }
+      ]
+    },
+    {
+      "id": "mc",
+      "name": "MedicomteK",
+      "indicator": "#036EB8",
+      "note": "Medical communication technology",
+      "rows": [
+        { "token": "--mc-blue", "hex": "#036EB8", "rgb": "3, 110, 184", "cmyk": "85 / 50 / 0 / 0", "usage": "Primary brand color. Headlines, CTAs, brand surfaces." },
+        { "token": "--mc-black", "hex": "#231815", "rgb": "35, 24, 21", "cmyk": "0 / 0 / 0 / 100", "usage": "Body text, secondary surfaces, slash-cut accent." }
+      ]
+    },
+    {
+      "id": "bd",
+      "name": "Beauty&Derma",
+      "indicator": "#5D3B8B",
+      "note": "Seoul / Busan editions",
+      "rows": [
+        { "token": "--bd-purple", "hex": "#5D3B8B", "rgb": "93, 59, 139", "cmyk": "78 / 90 / 0 / 0", "usage": "Primary brand color. Wordmark, hero surfaces." },
+        { "token": "--bd-light-purple", "hex": "#BAB1D7", "rgb": "186, 177, 215", "cmyk": "30 / 30 / 0 / 0", "usage": "Secondary support color. Backgrounds, dividers." }
+      ]
+    },
+    {
+      "id": "in",
+      "name": "INSPIRE Digital Health",
+      "indicator": "#595757",
+      "note": "Health meets innovation",
+      "rows": [
+        { "token": "--in-gray", "hex": "#595757", "rgb": "89, 87, 87", "cmyk": "0 / 0 / 0 / 80", "usage": "Primary brand color. Wordmark, banner backgrounds." },
+        { "token": "--in-lime", "hex": "#BFD633", "rgb": "191, 214, 51", "cmyk": "30 / 0 / 90 / 0", "usage": "Accent color. CTAs, banner highlights, iconography." }
+      ]
+    }
+  ],
+  "tableHeaders": {
+    "token": "Token",
+    "hex": "HEX",
+    "rgb": "RGB",
+    "cmyk": "CMYK",
+    "usage": "Usage"
+  }
+}

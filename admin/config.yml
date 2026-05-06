@@ -1,0 +1,135 @@
+# Decap CMS configuration
+# ---------------------------------------------------------------------------
+# Backend: git-gateway. Editors authenticate via Netlify Identity (invite-
+# only) and Decap commits each save through Netlify's git-gateway proxy back
+# to this repo's `main` branch. To switch to GitHub OAuth instead, replace
+# the `backend` block with:
+#   backend:
+#     name: github
+#     repo: <owner>/<repo>
+#     branch: main
+#
+# Each section below corresponds to a content/<section-id>.json file. Adding
+# a new section is a four-step process — see content/_loader.js for the
+# details.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Where Decap uploads images. The CMS will rewrite <img src=...> URLs to
+# point at /assets/uploads/<filename>. Components reading these paths render
+# them directly.
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# Local-development mode. Run `npx decap-server` in this folder; Decap then
+# talks to the local proxy instead of git-gateway, so you can edit content
+# without setting up Netlify.
+local_backend: true
+
+site_url: "/"
+display_url: "/"
+logo_url: "/index.html"
+
+collections:
+  # =========================================================================
+  # Foundations — Brand foundations page (index.html)
+  # =========================================================================
+
+  - name: "foundations"
+    label: "Brand foundations"
+    description: "Each entry below is one section on the public site. Edits commit on save and trigger a rebuild."
+    files:
+
+      # ---------- 01 Intro / Hero ----------
+      - file: "content/intro.json"
+        name: "intro"
+        label: "01 — Intro / Hero"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
+          - name: "meta"
+            label: "Meta facts"
+            label_singular: "Fact"
+            widget: "list"
+            fields:
+              - { name: "label", label: "Label", widget: "string" }
+              - { name: "value", label: "Value", widget: "string" }
+
+      # ---------- 02 Brand family ----------
+      - file: "content/family.json"
+        name: "family"
+        label: "02 — Brand family"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
+          - name: "brands"
+            label: "Brands"
+            label_singular: "Brand"
+            widget: "list"
+            fields:
+              - { name: "id",            label: "ID",                  widget: "string" }
+              - { name: "name",          label: "Name",                widget: "string" }
+              - { name: "desc",          label: "Description",         widget: "text" }
+              - { name: "primary",       label: "Primary color (hex)", widget: "color" }
+              - { name: "secondary",     label: "Secondary color (hex)", widget: "color" }
+              - { name: "signature",     label: "Slash-cut family",    widget: "boolean", required: false }
+              - { name: "bgClass",       label: "Preview bg class",    widget: "string", default: "bg-white" }
+              - name: "wordmark"
+                label: "Wordmark"
+                widget: "select"
+                options:
+                  - { label: "KIMES",                 value: "kimes" }
+                  - { label: "MedicomteK",            value: "medicomtek" }
+                  - { label: "Beauty&Derma — stack",  value: "beautyderma-stack" }
+                  - { label: "INSPIRE — tagline lime", value: "inspire-tagline-lime" }
+              - { name: "wordmarkSize", label: "Wordmark height (px)", widget: "number", default: 64 }
+          - name: "badges"
+            label: "Badge labels"
+            widget: "object"
+            fields:
+              - { name: "signature",   label: "Slash-cut family badge", widget: "string" }
+              - { name: "independent", label: "Independent badge",      widget: "string" }
+
+      # ---------- 03 Color tokens ----------
+      - file: "content/color.json"
+        name: "color"
+        label: "03 — Color tokens"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
+          - name: "groups"
+            label: "Brand color groups"
+            label_singular: "Group"
+            widget: "list"
+            fields:
+              - { name: "id",        label: "ID",                  widget: "string" }
+              - { name: "name",      label: "Brand name",          widget: "string" }
+              - { name: "indicator", label: "Indicator dot color", widget: "color" }
+              - { name: "note",      label: "Sub-text",            widget: "string" }
+              - name: "rows"
+                label: "Color rows"
+                label_singular: "Color"
+                widget: "list"
+                fields:
+                  - { name: "token", label: "Token (CSS var)", widget: "string" }
+                  - { name: "hex",   label: "HEX",             widget: "color" }
+                  - { name: "rgb",   label: "RGB",             widget: "string" }
+                  - { name: "cmyk",  label: "CMYK",            widget: "string" }
+                  - { name: "usage", label: "Usage notes",     widget: "text" }
+          - name: "tableHeaders"
+            label: "Table column labels"
+            widget: "object"
+            fields:
+              - { name: "token", label: "Token col",  widget: "string", default: "Token" }
+              - { name: "hex",   label: "HEX col",    widget: "string", default: "HEX" }
+              - { name: "rgb",   label: "RGB col",    widget: "string", default: "RGB" }
+              - { name: "cmyk",  label: "CMYK col",   widget: "string", default: "CMYK" }
+              - { name: "usage", label: "Usage col",  widget: "string", default: "Usage" }

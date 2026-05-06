@@ -29,6 +29,12 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 
+<!-- Content loader — fetches all content/*.json files in parallel and
+     exposes the merged result on window.CONTENT. The final mount script
+     awaits window.CONTENT_READY before rendering, so components can read
+     window.CONTENT.<section-id> at first render time. -->
+<script src="content/_loader.js"></script>
+
 <style>
 /* Minimal pre-mount loading state so the page isn't blank before React
    takes over. Hidden as soon as React renders into #root. */
@@ -104,7 +110,11 @@ function App() {
     </div>
   );
 }
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+// Defer the mount until content/*.json files have loaded — components read
+// from window.CONTENT at render time, so we want the data on hand first.
+window.CONTENT_READY.then(() => {
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+});
 </script>
 
 <!-- Content editor overlay — runs AFTER React has mounted (it polls for

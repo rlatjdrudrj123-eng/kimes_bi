@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KIMES Design System — Content editor</title>
+
+<!--
+  Netlify Identity widget — handles invite-only sign-in. Pair with
+  "git-gateway" backend in config.yml. Without this, Decap can't authenticate
+  editors against the GitHub repo.
+-->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<!--
+  Decap CMS (formerly Netlify CMS) — the admin UI mounts itself into <body>.
+  Configuration is read from admin/config.yml in the same folder.
+-->
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<script>
+  // After signing out, kick the user back to the public site root.
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', user => {
+      if (!user) {
+        window.netlifyIdentity.on('login', () => {
+          document.location.href = '/admin/';
+        });
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
