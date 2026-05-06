@@ -2,39 +2,28 @@
 # ---------------------------------------------------------------------------
 # Backend: github. Editors authenticate with their GitHub account; Sveltia
 # commits each save directly to this repo's `main` branch via the GitHub
-# REST API. For local development, `local_backend: true` below routes saves
-# through `npx decap-server` instead (no GitHub needed).
+# REST API. For local development, "Work with Local Repository" reads/writes
+# files via the browser's File System Access API — no proxy needed.
 #
-# Each section below has two JSON files (one per locale: .en.json / .ko.json)
-# and one collection entry that ties the locales together via i18n.
-# See content/_loader.js for the details of how content is fetched at runtime.
+# Bilingual structure: every section has TWO file entries below — one for
+# English (.en.json) and one for Korean (.ko.json). Editors pick whichever
+# locale they need. The public site loads both at runtime and toggles via
+# the EN / 한국어 button in the sidebar.
 
 backend:
-  # Sveltia CMS supports github / gitlab / gitea / bitbucket / test-repo /
-  # local. Git Gateway is NOT supported (Sveltia dropped it). For production,
-  # update `repo` below to <your-github-owner>/<your-repo> and Sveltia will
-  # use GitHub OAuth directly — no Netlify Identity needed.
+  # Sveltia supports github / gitlab / gitea / bitbucket / test-repo / local.
+  # For production, update `repo` below to <github-owner>/<repo>.
   name: github
   repo: kimes/design-system   # TODO: replace with the real GitHub owner/repo before deploying
   branch: main
 
-# i18n — every collection below is bilingual EN/KO. Sveltia stores each
-# locale in a separate file using the `<base>.<locale>.<ext>` convention:
-#   content/intro.json  →  content/intro.en.json  +  content/intro.ko.json
-i18n:
-  structure: multiple_files
-  locales: [en, ko]
-  default_locale: en
-
-# Where Decap uploads images. The CMS will rewrite <img src=...> URLs to
-# point at /assets/uploads/<filename>. Components reading these paths render
-# them directly.
+# Where the CMS uploads images. Components reference these paths directly.
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-# Local-development mode. Run `npx decap-server` in this folder; Decap then
-# talks to the local proxy instead of git-gateway, so you can edit content
-# without setting up Netlify.
+# Local-development mode. When the site is loaded from localhost, Sveltia
+# offers a "Work with Local Repository" option that uses the File System
+# Access API to read/write the project folder directly.
 local_backend: true
 
 site_url: "/"
@@ -43,20 +32,17 @@ logo_url: "/index.html"
 
 collections:
   # =========================================================================
-  # Foundations — Brand foundations page (index.html)
+  # English copy
   # =========================================================================
-
-  - name: "foundations"
-    label: "Brand foundations"
-    description: "Each entry below is one section on the public site. Edits commit on save and trigger a rebuild."
+  - name: "foundations_en"
+    label: "Brand foundations · English"
+    description: "English copy for each section on the public site. Edits commit on save."
     files:
 
-      # ---------- 01 Intro / Hero ----------
-      - file: "content/intro.json"
-        name: "intro"
+      - file: "content/intro.en.json"
+        name: "intro_en"
         label: "01 — Intro / Hero"
         format: "json"
-        i18n: true
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
           - { name: "title",   label: "Title",   widget: "string" }
@@ -69,12 +55,10 @@ collections:
               - { name: "label", label: "Label", widget: "string" }
               - { name: "value", label: "Value", widget: "string" }
 
-      # ---------- 02 Brand family ----------
-      - file: "content/family.json"
-        name: "family"
+      - file: "content/family.en.json"
+        name: "family_en"
         label: "02 — Brand family"
         format: "json"
-        i18n: true
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
           - { name: "title",   label: "Title",   widget: "string" }
@@ -95,9 +79,9 @@ collections:
                 label: "Wordmark"
                 widget: "select"
                 options:
-                  - { label: "KIMES",                 value: "kimes" }
-                  - { label: "MedicomteK",            value: "medicomtek" }
-                  - { label: "Beauty&Derma — stack",  value: "beautyderma-stack" }
+                  - { label: "KIMES",                  value: "kimes" }
+                  - { label: "MedicomteK",             value: "medicomtek" }
+                  - { label: "Beauty&Derma — stack",   value: "beautyderma-stack" }
                   - { label: "INSPIRE — tagline lime", value: "inspire-tagline-lime" }
               - { name: "wordmarkSize", label: "Wordmark height (px)", widget: "number", default: 64 }
           - name: "badges"
@@ -107,12 +91,10 @@ collections:
               - { name: "signature",   label: "Slash-cut family badge", widget: "string" }
               - { name: "independent", label: "Independent badge",      widget: "string" }
 
-      # ---------- 03 Color tokens ----------
-      - file: "content/color.json"
-        name: "color"
+      - file: "content/color.en.json"
+        name: "color_en"
         label: "03 — Color tokens"
         format: "json"
-        i18n: true
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
           - { name: "title",   label: "Title",   widget: "string" }
@@ -146,12 +128,10 @@ collections:
               - { name: "cmyk",  label: "CMYK col",   widget: "string", default: "CMYK" }
               - { name: "usage", label: "Usage col",  widget: "string", default: "Usage" }
 
-      # ---------- 06 Typography ----------
-      - file: "content/typography.json"
-        name: "typography"
+      - file: "content/typography.en.json"
+        name: "typography_en"
         label: "06 — Typography"
         format: "json"
-        i18n: true
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
           - { name: "title",   label: "Title",   widget: "string" }
@@ -160,7 +140,7 @@ collections:
             label: "Tab labels"
             widget: "object"
             fields:
-              - { name: "latin", label: "Latin tab", widget: "string" }
+              - { name: "latin", label: "Latin tab",  widget: "string" }
               - { name: "kr",    label: "Korean tab", widget: "string" }
           - name: "scaleLatin"
             label: "Latin (Montserrat) scale"
@@ -185,12 +165,10 @@ collections:
               - { name: "label",  label: "Label",        widget: "string" }
               - { name: "sample", label: "Sample text",  widget: "text" }
 
-      # ---------- 08 Logo catalog ----------
-      - file: "content/logo.json"
-        name: "logo"
+      - file: "content/logo.en.json"
+        name: "logo_en"
         label: "08 — Logo catalog"
         format: "json"
-        i18n: true
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
           - { name: "title",   label: "Title",   widget: "string" }
@@ -200,9 +178,9 @@ collections:
             label_singular: "Brand"
             widget: "list"
             fields:
-              - { name: "id",    label: "ID",                widget: "string" }
-              - { name: "name",  label: "Brand name",        widget: "string" }
-              - { name: "color", label: "Indicator color",   widget: "color" }
+              - { name: "id",    label: "ID",              widget: "string" }
+              - { name: "name",  label: "Brand name",      widget: "string" }
+              - { name: "color", label: "Indicator color", widget: "color" }
               - name: "items"
                 label: "Logo files"
                 label_singular: "File"
@@ -217,15 +195,13 @@ collections:
             label: "Family signature footer"
             widget: "object"
             fields:
-              - { name: "title", label: "Title",              widget: "string" }
+              - { name: "title", label: "Title",               widget: "string" }
               - { name: "body",  label: "Body (HTML allowed)", widget: "text" }
 
-      # ---------- 12 Spacing & grid ----------
-      - file: "content/spacing.json"
-        name: "spacing"
+      - file: "content/spacing.en.json"
+        name: "spacing_en"
         label: "12 — Spacing & grid"
         format: "json"
-        i18n: true
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
           - { name: "title",   label: "Title",   widget: "string" }
@@ -234,26 +210,229 @@ collections:
             label: "Spacing scale"
             widget: "object"
             fields:
-              - { name: "title", label: "Sub-title",   widget: "string" }
+              - { name: "title", label: "Sub-title", widget: "string" }
               - { name: "desc",  label: "Description (HTML allowed)", widget: "text" }
               - name: "tokens"
                 label: "Tokens"
                 label_singular: "Step"
                 widget: "list"
                 fields:
-                  - { name: "token", label: "Token",        widget: "string" }
-                  - { name: "value", label: "Value (px)",   widget: "number" }
+                  - { name: "token", label: "Token",      widget: "string" }
+                  - { name: "value", label: "Value (px)", widget: "number" }
           - name: "grid"
             label: "Grid system"
             widget: "object"
             fields:
-              - { name: "title", label: "Sub-title",   widget: "string" }
+              - { name: "title", label: "Sub-title", widget: "string" }
               - { name: "desc",  label: "Description (HTML allowed)", widget: "text" }
               - name: "breakpoints"
                 label: "Breakpoints"
                 label_singular: "Breakpoint"
                 widget: "list"
                 fields:
-                  - { name: "label", label: "Label",          widget: "string" }
-                  - { name: "cols",  label: "Columns",        widget: "number" }
-                  - { name: "meta",  label: "Meta line",      widget: "string" }
+                  - { name: "label", label: "Label",     widget: "string" }
+                  - { name: "cols",  label: "Columns",   widget: "number" }
+                  - { name: "meta",  label: "Meta line", widget: "string" }
+
+  # =========================================================================
+  # Korean copy — same schema as English, edits the .ko.json files
+  # =========================================================================
+  - name: "foundations_ko"
+    label: "Brand foundations · 한국어"
+    description: "각 섹션의 한국어 콘텐츠. 저장하면 즉시 커밋됩니다."
+    files:
+
+      - file: "content/intro.ko.json"
+        name: "intro_ko"
+        label: "01 — Intro / Hero (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - name: "meta"
+            label: "메타 정보"
+            label_singular: "항목"
+            widget: "list"
+            fields:
+              - { name: "label", label: "라벨",  widget: "string" }
+              - { name: "value", label: "값",    widget: "string" }
+
+      - file: "content/family.ko.json"
+        name: "family_ko"
+        label: "02 — Brand family (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - name: "brands"
+            label: "브랜드"
+            label_singular: "브랜드"
+            widget: "list"
+            fields:
+              - { name: "id",            label: "ID",              widget: "string" }
+              - { name: "name",          label: "이름",            widget: "string" }
+              - { name: "desc",          label: "설명",            widget: "text" }
+              - { name: "primary",       label: "프라이머리 (hex)", widget: "color" }
+              - { name: "secondary",     label: "세컨더리 (hex)",   widget: "color" }
+              - { name: "signature",     label: "슬래시컷 패밀리",  widget: "boolean", required: false }
+              - { name: "bgClass",       label: "프리뷰 배경 클래스", widget: "string", default: "bg-white" }
+              - name: "wordmark"
+                label: "워드마크"
+                widget: "select"
+                options:
+                  - { label: "KIMES",                  value: "kimes" }
+                  - { label: "MedicomteK",             value: "medicomtek" }
+                  - { label: "Beauty&Derma — stack",   value: "beautyderma-stack" }
+                  - { label: "INSPIRE — tagline lime", value: "inspire-tagline-lime" }
+              - { name: "wordmarkSize", label: "워드마크 높이 (px)", widget: "number", default: 64 }
+          - name: "badges"
+            label: "배지 라벨"
+            widget: "object"
+            fields:
+              - { name: "signature",   label: "슬래시컷 배지",  widget: "string" }
+              - { name: "independent", label: "독립 배지",      widget: "string" }
+
+      - file: "content/color.ko.json"
+        name: "color_ko"
+        label: "03 — Color tokens (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - name: "groups"
+            label: "브랜드별 컬러 그룹"
+            label_singular: "그룹"
+            widget: "list"
+            fields:
+              - { name: "id",        label: "ID",          widget: "string" }
+              - { name: "name",      label: "브랜드명",    widget: "string" }
+              - { name: "indicator", label: "인디케이터 색", widget: "color" }
+              - { name: "note",      label: "보조 설명",    widget: "string" }
+              - name: "rows"
+                label: "색상 행"
+                label_singular: "색상"
+                widget: "list"
+                fields:
+                  - { name: "token", label: "토큰 (CSS 변수)", widget: "string" }
+                  - { name: "hex",   label: "HEX",            widget: "color" }
+                  - { name: "rgb",   label: "RGB",            widget: "string" }
+                  - { name: "cmyk",  label: "CMYK",           widget: "string" }
+                  - { name: "usage", label: "용도 설명",       widget: "text" }
+          - name: "tableHeaders"
+            label: "표 컬럼 라벨"
+            widget: "object"
+            fields:
+              - { name: "token", label: "토큰 컬럼",  widget: "string", default: "토큰" }
+              - { name: "hex",   label: "HEX 컬럼",   widget: "string", default: "HEX" }
+              - { name: "rgb",   label: "RGB 컬럼",   widget: "string", default: "RGB" }
+              - { name: "cmyk",  label: "CMYK 컬럼",  widget: "string", default: "CMYK" }
+              - { name: "usage", label: "용도 컬럼",  widget: "string", default: "용도" }
+
+      - file: "content/typography.ko.json"
+        name: "typography_ko"
+        label: "06 — Typography (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - name: "tabs"
+            label: "탭 라벨"
+            widget: "object"
+            fields:
+              - { name: "latin", label: "라틴 탭",   widget: "string" }
+              - { name: "kr",    label: "한글 탭",   widget: "string" }
+          - name: "scaleLatin"
+            label: "라틴 (Montserrat) 스케일"
+            label_singular: "단계"
+            widget: "list"
+            fields:
+              - { name: "token",  label: "토큰",       widget: "string" }
+              - { name: "size",   label: "크기 (px)", widget: "number" }
+              - { name: "weight", label: "두께",       widget: "number" }
+              - { name: "lh",     label: "행간",       widget: "number", value_type: "float" }
+              - { name: "label",  label: "라벨",       widget: "string" }
+              - { name: "sample", label: "샘플 텍스트", widget: "text" }
+          - name: "scaleKr"
+            label: "한글 (Pretendard) 스케일"
+            label_singular: "단계"
+            widget: "list"
+            fields:
+              - { name: "token",  label: "토큰",       widget: "string" }
+              - { name: "size",   label: "크기 (px)", widget: "number" }
+              - { name: "weight", label: "두께",       widget: "number" }
+              - { name: "lh",     label: "행간",       widget: "number", value_type: "float" }
+              - { name: "label",  label: "라벨",       widget: "string" }
+              - { name: "sample", label: "샘플 텍스트", widget: "text" }
+
+      - file: "content/logo.ko.json"
+        name: "logo_ko"
+        label: "08 — Logo catalog (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - name: "brands"
+            label: "브랜드"
+            label_singular: "브랜드"
+            widget: "list"
+            fields:
+              - { name: "id",    label: "ID",            widget: "string" }
+              - { name: "name",  label: "브랜드명",      widget: "string" }
+              - { name: "color", label: "인디케이터 색", widget: "color" }
+              - name: "items"
+                label: "로고 파일"
+                label_singular: "파일"
+                widget: "list"
+                fields:
+                  - { name: "svg",   label: "SVG 키 (LogoSvgs.js)", widget: "string" }
+                  - { name: "file",  label: "파일명",               widget: "string" }
+                  - { name: "label", label: "라벨",                 widget: "string" }
+                  - { name: "h",     label: "표시 높이 (px)",       widget: "number" }
+                  - { name: "dark",  label: "어두운 타일",          widget: "boolean", required: false, default: false }
+          - name: "familySignature"
+            label: "패밀리 시그니처 푸터"
+            widget: "object"
+            fields:
+              - { name: "title", label: "타이틀",            widget: "string" }
+              - { name: "body",  label: "본문 (HTML 가능)", widget: "text" }
+
+      - file: "content/spacing.ko.json"
+        name: "spacing_ko"
+        label: "12 — Spacing & grid (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - name: "scale"
+            label: "간격 스케일"
+            widget: "object"
+            fields:
+              - { name: "title", label: "서브 타이틀", widget: "string" }
+              - { name: "desc",  label: "설명 (HTML 가능)", widget: "text" }
+              - name: "tokens"
+                label: "토큰"
+                label_singular: "단계"
+                widget: "list"
+                fields:
+                  - { name: "token", label: "토큰",     widget: "string" }
+                  - { name: "value", label: "값 (px)", widget: "number" }
+          - name: "grid"
+            label: "그리드 시스템"
+            widget: "object"
+            fields:
+              - { name: "title", label: "서브 타이틀",   widget: "string" }
+              - { name: "desc",  label: "설명 (HTML 가능)", widget: "text" }
+              - name: "breakpoints"
+                label: "브레이크포인트"
+                label_singular: "브레이크포인트"
+                widget: "list"
+                fields:
+                  - { name: "label", label: "라벨",       widget: "string" }
+                  - { name: "cols",  label: "컬럼 수",     widget: "number" }
+                  - { name: "meta",  label: "메타 라인",   widget: "string" }
