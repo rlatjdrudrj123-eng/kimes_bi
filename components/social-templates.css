@@ -1,0 +1,229 @@
+/* ============================================================
+   KIMES Applications — Social Media Templates
+   Wireframe rendering: dashed boundaries, measurement labels,
+   neutral gray fills for placeholder zones.
+   ============================================================ */
+
+:root {
+  --wire-bg: #ffffff;
+  --wire-zone: #f4f6f8;
+  --wire-zone-strong: #e7eaee;
+  --wire-line: #b8bec7;
+  --wire-line-strong: #6f7682;
+  --wire-text: #18181b;
+  --wire-mute: #71717a;
+  --wire-dim: #E60012;
+  --wire-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---------- Page intro ---------- */
+.app-hero { padding-top: 24px; }
+.app-hero .meta { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 18px; font-size: 13px; color: var(--ink-muted); }
+.app-hero .meta div { display: flex; flex-direction: column; gap: 4px; }
+.app-hero .meta span:first-child {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+
+/* ---------- Format overview row ---------- */
+.formats-row {
+  display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap;
+  padding: 32px; border: 1px solid var(--border); border-radius: 4px; background: #fafafa;
+}
+.format-cell { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.format-cell .meta {
+  font-family: var(--wire-mono); font-size: 11px; color: var(--ink-soft);
+  letter-spacing: 0.04em; text-align: center; line-height: 1.5;
+}
+.format-cell .meta strong {
+  display: block; font-weight: 700; color: var(--ink); text-transform: uppercase;
+  letter-spacing: 0.08em; font-family: 'Montserrat', sans-serif; font-size: 12px;
+}
+
+/* ---------- Wireframe canvas ---------- */
+.wire {
+  position: relative;
+  background: var(--wire-bg);
+  border: 1px solid var(--wire-line-strong);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--wire-text);
+  flex-shrink: 0;
+}
+.wire * { box-sizing: border-box; }
+
+.wire-zone {
+  position: absolute;
+  border: 1px dashed var(--wire-line);
+  background: var(--wire-zone);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 4px;
+  font-family: var(--wire-mono); font-size: 10px;
+  color: var(--wire-mute); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px;
+  text-align: center;
+}
+.wire-zone .role {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--wire-text);
+}
+.wire-zone .spec { font-size: 9px; color: var(--wire-mute); }
+
+.wire-zone.is-photo { background: var(--wire-zone-strong); }
+.wire-zone.is-photo::after {
+  content: ''; position: absolute; inset: 8px;
+  background:
+    linear-gradient(135deg, transparent 49.5%, var(--wire-line) 49.5%, var(--wire-line) 50.5%, transparent 50.5%),
+    linear-gradient(45deg,  transparent 49.5%, var(--wire-line) 49.5%, var(--wire-line) 50.5%, transparent 50.5%);
+  opacity: 0.4; pointer-events: none;
+}
+.wire-zone.is-ui {
+  background: repeating-linear-gradient(
+    45deg, #ececef 0, #ececef 6px, #f6f6f8 6px, #f6f6f8 12px
+  );
+  border-style: dashed;
+  color: var(--wire-mute);
+}
+
+/* Margin guide — dashed inset boundary */
+.wire-margin {
+  position: absolute;
+  pointer-events: none;
+  border: 1px dashed var(--wire-dim);
+  opacity: 0.5;
+}
+
+/* Measurement labels (red) */
+.dim {
+  position: absolute;
+  font-family: var(--wire-mono);
+  font-size: 9.5px;
+  color: var(--wire-dim);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #fff;
+  padding: 1px 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Brand-color filled wireframes (Section 4) */
+.wire.brand-fill { color: #fff; }
+.wire.brand-fill .wire-zone {
+  background: rgba(255,255,255,0.10);
+  border: 1px dashed rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.85);
+}
+.wire.brand-fill .wire-zone .role { color: #fff; }
+.wire.brand-fill .wire-zone .spec { color: rgba(255,255,255,0.7); }
+.wire.brand-fill.fill-kimes { background: #E60012; }
+.wire.brand-fill.fill-mc    { background: #036EB8; }
+.wire.brand-fill.fill-bd    { background: #5D3B8B; }
+.wire.brand-fill.fill-in    { background: #595757; }
+
+.wire.brand-fill .wire-zone.logo-zone {
+  background: rgba(255,255,255,0.95);
+  border: none;
+  padding: 12px;
+}
+.wire.brand-fill .wire-zone.logo-zone svg { max-height: 70%; max-width: 80%; height: auto; width: auto; }
+
+/* In dark wireframes, switch margin guides to white */
+.wire.brand-fill .wire-margin { border-color: rgba(255,255,255,0.4); }
+.wire.brand-fill .dim { background: rgba(0,0,0,0.4); color: #fff; }
+
+/* ---------- Slide series row (Section 3) ---------- */
+.series-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.series-cell { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.series-cell .role-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.series-cell .desc {
+  font-size: 11px; color: var(--ink-muted); text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ---------- Brand color row (Section 4) ---------- */
+.brand-fills-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.brand-fill-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.brand-fill-cell .name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink);
+}
+.brand-fill-cell .swatch {
+  display: flex; gap: 6px; align-items: center;
+  font-family: var(--wire-mono); font-size: 10px; color: var(--ink-muted);
+}
+.brand-fill-cell .swatch i {
+  display: inline-block; width: 10px; height: 10px; border-radius: 1px;
+}
+
+/* ---------- Story row (Section 5) ---------- */
+.stories-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; justify-items: center;
+}
+.story-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.story-cell .label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink);
+}
+
+/* ---------- Rules table ---------- */
+.rules-table-wrap {
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+}
+.rules-table { width: 100%; border-collapse: collapse; }
+.rules-table th, .rules-table td {
+  text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);
+  font-size: 13.5px; vertical-align: top;
+}
+.rules-table th {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; color: var(--ink-muted);
+  background: #fafafa;
+}
+.rules-table tbody tr:last-child td { border-bottom: none; }
+.rules-table .element { font-weight: 700; color: var(--ink); width: 30%; }
+.rules-table .rule    { color: var(--ink-soft); }
+
+/* ---------- DO / DON'T ---------- */
+.dodont {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.dodont-col {
+  border: 1px solid var(--border); border-radius: 4px; padding: 24px 28px;
+}
+.dodont-col.do  { border-left: 3px solid #16a34a; }
+.dodont-col.dont { border-left: 3px solid #E60012; }
+.dodont-col h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 16px; letter-spacing: 0.04em;
+  margin: 0 0 12px;
+}
+.dodont-col.do h4::before  { content: '✓ '; color: #16a34a; }
+.dodont-col.dont h4::before { content: '✗ '; color: #E60012; }
+.dodont-col ul { margin: 0; padding: 0; list-style: none; }
+.dodont-col li {
+  padding: 8px 0; font-size: 13.5px; color: var(--ink-soft);
+  border-top: 1px solid var(--border);
+}
+.dodont-col li:first-child { border-top: none; }

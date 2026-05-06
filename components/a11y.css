@@ -1,0 +1,274 @@
+/* KIMES Design System — Accessibility matrix (Section 16) */
+
+/* ============ 16.1 Contrast ratio matrix ============ */
+.a11y-matrix-wrap {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+.a11y-matrix {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12.5px;
+}
+.a11y-matrix th,
+.a11y-matrix td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+}
+.a11y-matrix th:last-child,
+.a11y-matrix td:last-child { border-right: 0; }
+.a11y-matrix tr:last-child td { border-bottom: 0; }
+.a11y-matrix thead th {
+  background: var(--bg-subtle);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.a11y-matrix .row-label {
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.a11y-matrix .row-label small {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+.a11y-cell {
+  position: relative;
+  text-align: center;
+}
+.a11y-swatch {
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  height: 60px;
+  font-size: 13px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+.a11y-swatch .ratio {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.a11y-swatch .grade {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.16);
+  color: inherit;
+}
+.a11y-swatch.fail-bg .grade { background: rgba(255,255,255,0.18); }
+.a11y-swatch .preview {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+/* ============ 16.2 Pair callouts ============ */
+.a11y-pairs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+@media (max-width: 1100px) { .a11y-pairs { grid-template-columns: 1fr; } }
+.a11y-pair {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.a11y-pair-stage {
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.a11y-pair-stage .h {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.a11y-pair-stage .b {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.a11y-pair-meta {
+  border-top: 1px solid var(--border);
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  background: #fff;
+}
+.a11y-pair-fg-bg {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0;
+}
+.a11y-pair-ratio {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.a11y-pair-grades {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.a11y-grade-pill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.a11y-grade-pill.pass { background: #dcfce7; color: #15803d; }
+.a11y-grade-pill.fail { background: #fee2e2; color: #b91c1c; }
+.a11y-pair-note {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  margin-top: 4px;
+}
+
+/* ============ 16.3 Type minimums ============ */
+.a11y-types {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.a11y-type-row {
+  display: grid;
+  grid-template-columns: 200px 100px 1fr 240px;
+  gap: 18px;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.a11y-type-row:last-child { border-bottom: 0; }
+.a11y-type-row.is-head {
+  background: var(--bg-subtle);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 12px 18px;
+}
+.a11y-type-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.a11y-type-min {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.a11y-type-sample {
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+.a11y-type-use {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+/* ============ 16.4 Don'ts ============ */
+.a11y-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+@media (max-width: 900px) { .a11y-checklist { grid-template-columns: 1fr; } }
+.a11y-check {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px 14px 44px;
+  background: #fff;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.55;
+  position: relative;
+}
+.a11y-check::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+.a11y-check.do::before    { background: #dcfce7; box-shadow: inset 0 0 0 1px #86efac; }
+.a11y-check.do::after {
+  content: '✓';
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #15803d;
+}
+.a11y-check.dont::before  { background: #fee2e2; box-shadow: inset 0 0 0 1px #fca5a5; }
+.a11y-check.dont::after {
+  content: '✕';
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #b91c1c;
+}
+.a11y-check b {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.a11y-check small {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}

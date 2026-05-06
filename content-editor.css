@@ -1,0 +1,315 @@
+/* ===== KIMES Design System — Content Editor overlay ===== */
+/* Layered on top of docs.css; only activates in edit mode. */
+
+/* Login prompt modal */
+.ce-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(24, 24, 27, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+.ce-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 32px 28px;
+  min-width: 360px;
+  max-width: 90vw;
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3);
+}
+.ce-modal h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #18181b;
+}
+.ce-modal p {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: #71717a;
+  line-height: 1.5;
+}
+.ce-modal input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 12px;
+  transition: border-color 120ms;
+}
+.ce-modal input[type="password"]:focus {
+  border-color: #18181b;
+}
+.ce-modal .ce-modal-error {
+  font-size: 12px;
+  color: #b91c1c;
+  margin: 0 0 12px;
+  min-height: 16px;
+}
+.ce-modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.ce-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #d4d4d4;
+  background: #fff;
+  color: #18181b;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 100ms, border-color 100ms;
+}
+.ce-btn:hover {
+  background: #fafafa;
+}
+.ce-btn-primary {
+  background: #18181b;
+  color: #fff;
+  border-color: #18181b;
+}
+.ce-btn-primary:hover {
+  background: #3f3f46;
+  border-color: #3f3f46;
+}
+.ce-btn-danger {
+  background: #fff;
+  color: #b91c1c;
+  border-color: rgba(185, 28, 28, 0.3);
+}
+.ce-btn-danger:hover {
+  background: #fef2f2;
+}
+
+/* Floating toolbar (top-right) */
+.ce-toolbar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 6px;
+  background: #18181b;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.4);
+  z-index: 99997;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  align-items: center;
+}
+.ce-toolbar .ce-mode-pill {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 4px 10px;
+  background: #E60012;
+  border-radius: 999px;
+  margin-right: 4px;
+}
+.ce-toolbar .ce-tool-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 100ms, border-color 100ms;
+  white-space: nowrap;
+}
+.ce-toolbar .ce-tool-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.35);
+}
+.ce-toolbar .ce-tool-btn.danger {
+  color: #fca5a5;
+  border-color: rgba(252, 165, 165, 0.3);
+}
+.ce-toolbar .ce-tool-btn.danger:hover {
+  background: rgba(252, 165, 165, 0.12);
+  border-color: rgba(252, 165, 165, 0.5);
+}
+.ce-toolbar .ce-tool-btn.exit {
+  color: #18181b;
+  background: #fff;
+  border-color: #fff;
+}
+.ce-toolbar .ce-tool-btn.exit:hover {
+  background: #f4f4f5;
+}
+
+/* "Edit this page" pill (when not in edit mode but in admin URL) */
+.ce-enter-edit-pill {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #18181b;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 0;
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.3);
+  z-index: 99996;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  transition: transform 100ms;
+}
+.ce-enter-edit-pill:hover {
+  transform: translateY(-1px);
+}
+
+/* Save toast */
+.ce-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #18181b;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 99995;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms, transform 200ms;
+}
+.ce-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Edit-mode visual treatment */
+body.ce-edit-mode [data-ce-editable]:not(:focus) {
+  outline: 1px dashed rgba(230, 0, 18, 0.35);
+  outline-offset: 2px;
+  cursor: text;
+  border-radius: 2px;
+  transition: outline-color 120ms, background-color 120ms;
+}
+body.ce-edit-mode [data-ce-editable]:hover:not(:focus) {
+  outline-color: rgba(230, 0, 18, 0.7);
+  background: rgba(230, 0, 18, 0.04);
+}
+body.ce-edit-mode [data-ce-editable]:focus {
+  outline: 2px solid #E60012;
+  outline-offset: 2px;
+  background: #fff;
+}
+
+/* Image edit affordance — wrap that highlights image on hover */
+body.ce-edit-mode [data-ce-image] {
+  position: relative;
+  display: inline-block;
+  outline: 1px dashed rgba(3, 110, 184, 0.45);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+body.ce-edit-mode [data-ce-image]:hover {
+  outline-color: #036EB8;
+}
+body.ce-edit-mode [data-ce-image]::after {
+  content: 'Click to replace';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #036EB8;
+  padding: 2px 6px;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 100ms;
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+body.ce-edit-mode [data-ce-image]:hover::after {
+  opacity: 1;
+}
+
+/* Link edit treatment — links get a small pencil affordance */
+body.ce-edit-mode a[data-ce-link] {
+  outline: 1px dashed rgba(0, 109, 184, 0.4);
+  outline-offset: 2px;
+  position: relative;
+}
+body.ce-edit-mode a[data-ce-link]:hover {
+  outline-color: #036EB8;
+}
+
+/* Image picker dialog */
+.ce-image-dialog input[type="text"],
+.ce-image-dialog input[type="file"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.ce-image-dialog .ce-image-or {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin: 4px 0 10px;
+}
+.ce-image-dialog .ce-image-preview {
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  margin: 0 auto 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+}
+
+/* Content overrides indicator — shows count of edits on the page */
+.ce-edits-summary {
+  font-size: 11px;
+  color: #a1a1aa;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* Hide editing affordances when printing or screenshotting */
+@media print {
+  .ce-toolbar,
+  .ce-enter-edit-pill,
+  .ce-toast,
+  .ce-modal-backdrop {
+    display: none !important;
+  }
+  body.ce-edit-mode [data-ce-editable] {
+    outline: none !important;
+    background: transparent !important;
+  }
+}

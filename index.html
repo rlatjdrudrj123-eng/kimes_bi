@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KIMES Design System — Brand Foundations</title>
+<meta name="description" content="The official KIMES Design System — multi-brand identity foundations for KIMES, Beauty&Derma, MedicomteK, and INSPIRE Digital Health." />
+
+<!-- Fonts + base CSS -->
+<link rel="stylesheet" href="docs.css" />
+
+<!-- Component stylesheets -->
+<link rel="stylesheet" href="components/logo-on-backgrounds.css" />
+<link rel="stylesheet" href="components/logo-lockup.css" />
+<link rel="stylesheet" href="components/color-proportion.css" />
+<link rel="stylesheet" href="components/gradients.css" />
+<link rel="stylesheet" href="components/typography-in-use.css" />
+<link rel="stylesheet" href="components/iconography.css" />
+<link rel="stylesheet" href="components/motion.css" />
+<link rel="stylesheet" href="components/a11y.css" />
+<link rel="stylesheet" href="components/social.css" />
+<link rel="stylesheet" href="components/audit.css" />
+
+<!-- Editor overlay CSS -->
+<link rel="stylesheet" href="content-editor.css" />
+
+<!-- React + Babel from CDN. The prototype was built against these exact versions. -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<style>
+/* Minimal pre-mount loading state so the page isn't blank before React
+   takes over. Hidden as soon as React renders into #root. */
+#__pre_mount {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; z-index: 999;
+  font: 13px/1.4 'Montserrat', system-ui, sans-serif;
+  color: #71717a;
+}
+#__pre_mount .lp { animation: lp 1.4s ease-in-out infinite; }
+@keyframes lp { 0%,100% { opacity: .4 } 50% { opacity: 1 } }
+#root:not(:empty) ~ #__pre_mount { display: none; }
+</style>
+</head>
+<body>
+
+<!-- React mount point -->
+<div id="root"></div>
+
+<!-- Pre-mount loading indicator (hidden once #root has children) -->
+<div id="__pre_mount"><div class="lp">Loading KIMES Design System…</div></div>
+
+<!-- Shared SVG / wordmark library, then the docs shell, then per-section components.
+     Order matters: LogoSvgs.js populates window.LOGO_SVGS first; Wordmarks.jsx
+     reads it; then DocsSections.jsx defines the shell + sidebar; then each
+     content section. The final inline script at the bottom mounts <App />. -->
+<script src="components/LogoSvgs.js"></script>
+<script type="text/babel" src="components/Wordmarks.jsx"></script>
+<script type="text/babel" src="components/DocsSections.jsx"></script>
+<script type="text/babel" src="components/ColorProportion.jsx"></script>
+<script type="text/babel" src="components/Gradients.jsx"></script>
+<script type="text/babel" src="components/TypographyInUse.jsx"></script>
+<script type="text/babel" src="components/LogoOnBackgrounds.jsx"></script>
+<script type="text/babel" src="components/LogoLockup.jsx"></script>
+<script type="text/babel" src="components/Iconography.jsx"></script>
+<script type="text/babel" src="components/AssetLibrary.jsx"></script>
+<script type="text/babel" src="components/Motion.jsx"></script>
+<script type="text/babel" src="components/Accessibility.jsx"></script>
+<script type="text/babel" src="components/SocialTemplates.jsx"></script>
+<script type="text/babel" src="components/BIAudit.jsx"></script>
+
+<script type="text/babel">
+function App() {
+  // Each section is a window-exported component. We render every section in
+  // the order given by the design's NAV (Foundations group), matching the
+  // prototype 1:1. The Sidebar uses NAV + useActiveSection to highlight
+  // whichever section is currently in the viewport.
+  const ids = NAV.flatMap(g => g.items.map(i => i.id));
+  const active = useActiveSection(ids);
+  return (
+    <div className="app">
+      <Sidebar active={active} />
+      <main className="main">
+        {/* 01 */}<Hero />
+        {/* 02 */}<BrandFamily />
+        {/* 03 */}<ColorTokens />
+        {/* 04 */}<ColorProportion />
+        {/* 05 */}<Gradients />
+        {/* 06 */}<Typography />
+        {/* 07 */}<TypographyInUse />
+        {/* 08 */}<LogoCatalog />
+        {/* 09 — Logo rules */}<LogoRules />
+        {/* 10 */}<LogoLockup />
+        {/* 11 */}<Iconography />
+        {/* 12 */}<SpacingGrid />
+        {/* 13 */}<AssetLibrary />
+        {/* 14 */}<Motion />
+        {/* 15 */}<Accessibility />
+        {/* 16 */}<SocialTemplates />
+        {/* 17 */}<BIAudit />
+      </main>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<!-- Content editor overlay — runs AFTER React has mounted (it polls for
+     #root children before booting). Provides the auth flow, edit mode,
+     localStorage persistence, export/import, and DOM scanning. -->
+<script src="content-editor.js"></script>
+
+</body>
+</html>
