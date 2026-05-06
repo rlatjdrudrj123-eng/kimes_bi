@@ -36,6 +36,26 @@ function useSiteLang() {
   return lang;
 }
 
+// Subscribes to the global SITE_BRAND. 'kimes' is the main view; 'mc', 'bd',
+// 'in' are brand-filtered views of the same sections.
+function useSiteBrand() {
+  const [brand, setBrand] = useState(window.SITE_BRAND || 'kimes');
+  useEffect(() => {
+    function onChange(e) { setBrand(e.detail.brand); }
+    window.addEventListener('site-brand-change', onChange);
+    return () => window.removeEventListener('site-brand-change', onChange);
+  }, []);
+  return brand;
+}
+
+// NAV item id → data-side brand id. Foundations uses real section anchors;
+// Co-events uses brand-switch ids that we map to family/color/logo data ids.
+const NAV_BRAND_MAP = {
+  medicomtek:  'mc',
+  beautyderma: 'bd',
+  inspire:     'in',
+};
+
 // Returns the current-locale data for a section. Falls back to the other
 // locale if the current one is missing — preferable to rendering blanks.
 function useSectionContent(id) {
@@ -90,7 +110,8 @@ const NAV = [
   },
   {
     title: 'Co-events',
-    page: 'Co-events.html',
+    // Same page as Foundations — items are in-page anchors, not inert.
+    page: 'Brand Foundations.html',
     items: [
       { id: 'medicomtek',  label: 'MedicomteK' },
       { id: 'beautyderma', label: 'Beauty&Derma' },
@@ -133,10 +154,10 @@ function currentPage() {
 
 function Sidebar({ active }) {
   const here = currentPage();
+  const brand = useSiteBrand();
   // For groups not matching the current page, treat all items as inert
-  // ("Soon") since this deployment ships only the Brand Foundations page.
-  // Editors can extend the deployment by adding the Components.html and
-  // Applications - Social Media.html pages alongside index.html later.
+  // ("Soon"). For the Co-events group, items aren't anchors — they switch
+  // the active brand and the brand-aware sections re-render.
   return (
     <aside className="sidebar">
       <div className="brand-mark">
@@ -147,22 +168,43 @@ function Sidebar({ active }) {
         </div>
       </div>
       <LangToggle />
+      {brand !== 'kimes' && (
+        <button
+          className="brand-reset"
+          onClick={() => { window.setSiteBrand('kimes'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          title="Back to the main KIMES view"
+        >← KIMES (main)</button>
+      )}
       {NAV.map(group => {
         const onThisPage = group.page === here;
+        const isCoEvents = group.title === 'Co-events';
         return (
           <div className="nav-group" key={group.title}>
             <h6>{group.title}</h6>
             {group.items.map(item => {
-              const inert = !onThisPage; // Cross-page nav not deployed.
+              const inert = !onThisPage && !isCoEvents; // Co-events handled inline.
               const showSoon = item.soon || inert;
-              const href = onThisPage ? `#${item.id}` : 'javascript:void(0)';
-              const isActive = onThisPage && active === item.id;
+              let isActive = onThisPage && active === item.id;
+              let href = onThisPage ? `#${item.id}` : 'javascript:void(0)';
+              let onClick = inert ? (e) => e.preventDefault() : undefined;
+
+              if (isCoEvents) {
+                const targetBrand = NAV_BRAND_MAP[item.id] || 'kimes';
+                isActive = brand === targetBrand;
+                href = '#family';
+                onClick = (e) => {
+                  e.preventDefault();
+                  window.setSiteBrand(targetBrand);
+                  const target = document.getElementById('family');
+                  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+              }
               return (
                 <a
                   key={item.id}
                   href={href}
                   className={`nav-link ${isActive ? 'active' : ''} ${showSoon ? 'soon' : ''}`}
-                  onClick={inert ? (e) => e.preventDefault() : undefined}
+                  onClick={onClick}
                   title={inert ? 'Available in extended deployment' : undefined}
                 >
                   <span>{item.label}</span>
@@ -197,7 +239,9 @@ function Hero() {
 /* ---------- Brand family ---------- */
 function BrandFamily() {
   const c = useSectionContent('family');
-  const brands = c.brands || [];
+  const brand = useSiteBrand();
+  const allBrands = c.brands || [];
+  const brands = allBrands.filter(b => b.id === brand);
   const badges = c.badges || { signature: 'Slash-cut family', independent: 'Independent identity' };
   return (
     <section id="family" className="section">
@@ -235,7 +279,9 @@ function BrandFamily() {
 /* ---------- Color tokens ---------- */
 function ColorTokens() {
   const c = useSectionContent('color');
-  const groups = c.groups || [];
+  const brand = useSiteBrand();
+  const allGroups = c.groups || [];
+  const groups = allGroups.filter(g => g.id === brand);
   const h = c.tableHeaders || { token: 'Token', hex: 'HEX', rgb: 'RGB', cmyk: 'CMYK', usage: 'Usage' };
   return (
     <section id="color" className="section">
@@ -469,7 +515,9 @@ function LogoVariants() {
 
 function LogoCatalog() {
   const c = useSectionContent('logo');
-  const brands = c.brands || [];
+  const brand = useSiteBrand();
+  const allBrands = c.brands || [];
+  const brands = allBrands.filter(b => b.id === brand);
   const fs = c.familySignature || { title: '', body: '' };
   return (
     <section id="logo" className="section">

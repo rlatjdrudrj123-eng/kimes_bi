@@ -65,6 +65,31 @@
     window.dispatchEvent(new CustomEvent('site-lang-change', { detail: { lang } }));
   };
 
+  /* -------------------------------------------------------------------------
+   * Brand selector — main page is KIMES; co-events (mc / bd / in) are
+   * brand-filtered views of the same sections. SITE_BRAND drives which
+   * brand's content is shown in brand-specific sections.
+   * ----------------------------------------------------------------------- */
+  const BRANDS = ['kimes', 'mc', 'bd', 'in'];
+  const BRAND_STORAGE_KEY = 'kimes_ds_brand_v1';
+  function detectInitialBrand() {
+    try {
+      const m = (location.hash || '').match(/brand=([a-z]+)/);
+      if (m && BRANDS.includes(m[1])) return m[1];
+      const saved = sessionStorage.getItem(BRAND_STORAGE_KEY);
+      if (saved && BRANDS.includes(saved)) return saved;
+    } catch (e) {}
+    return 'kimes';
+  }
+  window.SITE_BRANDS = BRANDS;
+  window.SITE_BRAND  = detectInitialBrand();
+  window.setSiteBrand = function (brand) {
+    if (!BRANDS.includes(brand) || brand === window.SITE_BRAND) return;
+    window.SITE_BRAND = brand;
+    try { sessionStorage.setItem(BRAND_STORAGE_KEY, brand); } catch (e) {}
+    window.dispatchEvent(new CustomEvent('site-brand-change', { detail: { brand } }));
+  };
+
   window.CONTENT = {};
   window.CONTENT_READY = Promise.all(
     FILES.flatMap(name => LOCALES.map(loc =>
