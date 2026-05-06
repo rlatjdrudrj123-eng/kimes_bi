@@ -176,6 +176,9 @@ function AllowedContexts() {
    05.4 — Don'ts
    ============================================================ */
 function GradientDonts() {
+  const brand = useBrandFilter();
+  // The wrong-gradient examples render KIMES red. Hide on co-events.
+  if (brand !== 'kimes') return null;
   return (
     <div id="gr-donts" className="subsection">
       <h3>05.4 — Don&rsquo;ts</h3>

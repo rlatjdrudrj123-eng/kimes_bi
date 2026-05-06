@@ -532,15 +532,17 @@ function LogoCatalog() {
         </div>
       ))}
 
-      <div className="family-signature">
-        <div className="fs-zoom">
-          <InlineLogo name="kimes" height={120} ariaLabel="KIMES slash-cut detail" />
+      {brand === 'kimes' && (
+        <div className="family-signature">
+          <div className="fs-zoom">
+            <InlineLogo name="kimes" height={120} ariaLabel="KIMES slash-cut detail" />
+          </div>
+          <div className="fs-body">
+            <h4>{fs.title}</h4>
+            <p dangerouslySetInnerHTML={{ __html: fs.body || '' }} />
+          </div>
         </div>
-        <div className="fs-body">
-          <h4>{fs.title}</h4>
-          <p dangerouslySetInnerHTML={{ __html: fs.body || '' }} />
-        </div>
-      </div>
+      )}
     </section>
   );
 }

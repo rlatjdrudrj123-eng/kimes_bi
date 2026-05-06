@@ -154,6 +154,10 @@ function BackgroundUsage() {
    06.3 — Photographic backgrounds
    ============================================================ */
 function PhotographicUsage() {
+  const brand = useBrandFilter();
+  // The photo demos use KIMES wordmarks. Skip on co-event pages until per-
+  // brand photo examples exist.
+  if (brand !== 'kimes') return null;
   const cases = [
     { id: 'light', label: 'Light / uncluttered', verdict: 'ok',     rule: 'Full color logo',                       cls: 'photo-light' },
     { id: 'busy',  label: 'Busy / complex',      verdict: 'avoid',  rule: 'Place on a solid color plate first',    cls: 'photo-busy'  },
@@ -203,6 +207,10 @@ function PhotographicUsage() {
    06.4 — Misuse
    ============================================================ */
 function Misuse() {
+  const brand = useBrandFilter();
+  // The misuse grid uses KIMES SVG with CSS transforms. Skip on co-events
+  // until per-brand misuse demos exist.
+  if (brand !== 'kimes') return null;
   // Each entry renders the KIMES primary SVG with one CSS treatment that
   // demonstrates an incorrect modification.
   const items = [

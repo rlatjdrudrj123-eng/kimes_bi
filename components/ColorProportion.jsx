@@ -284,6 +284,10 @@ function ApplicationMocks() {
    04.4 — Acceptable deviation
    ============================================================ */
 function AcceptableDeviation() {
+  const brand = useBrandFilter();
+  // Demos are KIMES-specific (red proportion ratios) — hide on co-event
+  // pages where they'd misrepresent the brand colors.
+  if (brand !== 'kimes') return null;
   // KIMES base: 60 / 25 / 15 (white / black / red)
   // We vary the red percentage and rebalance the rest.
   const examples = [
@@ -345,6 +349,9 @@ function AcceptableDeviation() {
    04.5 — Don'ts
    ============================================================ */
 function ColorProportionDonts() {
+  const brand = useBrandFilter();
+  // Mini-mocks are KIMES red examples — hide on co-event pages.
+  if (brand !== 'kimes') return null;
   // Mini-mocks demonstrating each wrong proportion. Use abstract zones.
   const items = [
     {

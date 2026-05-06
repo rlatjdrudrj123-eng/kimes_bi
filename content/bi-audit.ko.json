@@ -1,112 +1,112 @@
 {
-  "eyebrow": "17 — BI audit",
+  "eyebrow": "17 — BI 감사",
   "title": "BI audit",
-  "lede": "How the KIMES 2026 brand identity measures up to leading international medical-exhibition BIs — what's strong, what's missing, and a phased plan to close the gaps.",
+  "lede": "KIMES 2026 브랜드 아이덴티티가 글로벌 의료 전시회 BI 표준 대비 어디까지 와 있는지 — 강점·갭·단계별 보완 계획.",
   "summary": {
-    "title": "17.1 — Composite assessment",
-    "desc": "Aggregate score across 7 weighted pillars, benchmarked against six leading international medical-exhibition BIs.",
-    "scoreLabel": "Composite score"
+    "title": "17.1 — 종합 평가",
+    "desc": "7개 가중 평가 항목의 합산 점수. 글로벌 6개 의료 전시회 BI를 기준선으로 사용.",
+    "scoreLabel": "종합 점수"
   },
   "pillars": [
-    { "id": "visual",  "name": "Visual identity system", "sub": "Logo, color, typography coherence",     "score": 88, "weight": 18, "grade": "A" },
-    { "id": "product", "name": "Sub-brand architecture",  "sub": "Family hierarchy, lockup discipline",   "score": 82, "weight": 14, "grade": "B" },
-    { "id": "digital", "name": "Digital & motion",        "sub": "Web, app, social, animated lockups",    "score": 58, "weight": 16, "grade": "C" },
-    { "id": "env",     "name": "Environmental & exhibit", "sub": "Signage, booth, on-site wayfinding",    "score": 71, "weight": 14, "grade": "B" },
-    { "id": "ops",     "name": "Governance & ops",        "sub": "Templates, asset library, contributor", "score": 64, "weight": 12, "grade": "C" },
-    { "id": "a11y",    "name": "Accessibility",           "sub": "Contrast, type sizing, alt text",       "score": 55, "weight": 12, "grade": "C" },
-    { "id": "i18n",    "name": "Internationalization",    "sub": "KO/EN parity, RTL, CJK type pairing",   "score": 70, "weight": 14, "grade": "B" }
+    { "id": "visual",  "name": "비주얼 아이덴티티 시스템", "sub": "로고·컬러·타이포그래피의 일관성",         "score": 88, "weight": 18, "grade": "A" },
+    { "id": "product", "name": "서브브랜드 아키텍처",     "sub": "패밀리 위계, 락업 일관성",                   "score": 82, "weight": 14, "grade": "B" },
+    { "id": "digital", "name": "디지털 & 모션",          "sub": "웹·앱·소셜·애니메이티드 락업",              "score": 58, "weight": 16, "grade": "C" },
+    { "id": "env",     "name": "환경 & 전시 시스템",      "sub": "사이니지·부스·현장 길찾기",                  "score": 71, "weight": 14, "grade": "B" },
+    { "id": "ops",     "name": "거버넌스 & 운영",        "sub": "템플릿·자산 라이브러리·기여 모델",           "score": 64, "weight": 12, "grade": "C" },
+    { "id": "a11y",    "name": "접근성",                "sub": "명도 대비, 텍스트 크기, alt 텍스트",         "score": 55, "weight": 12, "grade": "C" },
+    { "id": "i18n",    "name": "국제화",                "sub": "한·영 페어, RTL, CJK 타입 페어링",            "score": 70, "weight": 14, "grade": "B" }
   ],
   "lists": {
-    "title": "17.2 — Strengths & gaps",
-    "desc": "Five areas where KIMES already meets or exceeds international peers, followed by six concrete gaps and three partials.",
-    "headers": { "strengths": "Strengths", "gaps": "Gaps", "partials": "Partial" }
+    "title": "17.2 — 강점 & 취약점",
+    "desc": "글로벌 동급 전시회 대비 우위인 영역 5개, 명확한 갭 6개, 부분 충족 3개.",
+    "headers": { "strengths": "강점", "gaps": "취약점", "partials": "부분 충족" }
   },
   "strengths": [
-    { "title": "Distinctive slash-cut motif",       "body": "The diagonal cut on the i across KIMES and MedicomteK is memorable and proprietary — rare among medical-trade BIs which default to generic geometric sans.", "ref": "PILLAR 01" },
-    { "title": "Disciplined four-brand family",     "body": "Clear parent/sub-brand split, year-locked variants, and one shared anchor color keep the portfolio readable at a glance.", "ref": "PILLAR 02" },
-    { "title": "Print-ready color tokens",          "body": "Pantone, CMYK, RGB, and HEX defined per brand — meets print + digital production requirements out of the box.", "ref": "PILLAR 01" },
-    { "title": "Pretendard + Montserrat pairing",   "body": "Pretendard handles Korean with native metrics; Montserrat provides Latin parity. Both open-source and embed-safe internationally.", "ref": "PILLAR 07" },
-    { "title": "Clear-space + minimum-size rules",  "body": "Explicit ratios and 12mm/40px minimums prevent the most common misuse failures across booth and digital production.", "ref": "PILLAR 04" }
+    { "title": "고유의 슬래시컷 모티브",       "body": "KIMES와 MedicomteK의 i 슬래시컷은 기억성·차별성이 모두 강함. 일반적인 지오메트릭 산세리프에 머무는 의료 트레이드 BI 사이에서 드문 자산.", "ref": "필러 01" },
+    { "title": "잘 정돈된 4-브랜드 패밀리",     "body": "본 브랜드 / 서브브랜드 분기, 연도-락 베리언트, 공통 앵커 컬러 — 포트폴리오가 한눈에 읽힘.",                                  "ref": "필러 02" },
+    { "title": "프린트 대응 컬러 토큰",         "body": "팬톤·CMYK·RGB·HEX가 브랜드별로 정의되어 있어 인쇄·디지털 제작이 즉시 가능.",                                                "ref": "필러 01" },
+    { "title": "Pretendard + Montserrat 페어", "body": "Pretendard가 한글을 native metric으로 처리하고, Montserrat가 라틴 파리티를 제공. 둘 다 오픈소스에 임베드 안전.",         "ref": "필러 07" },
+    { "title": "클리어 스페이스 + 최소 크기 규칙", "body": "명시적 비율과 12mm/40px 최소 크기로 가장 흔한 오용 케이스를 부스·디지털 제작 단계에서 사전 차단.",                          "ref": "필러 04" }
   ],
   "gaps": [
-    { "title": "No motion / animation specification", "body": "No defined entry, loop, or transition for any wordmark. Arab Health 2024 and MEDICA ship Lottie/MP4 kits for sponsor reels and stage screens.", "ref": "PILLAR 03" },
-    { "title": "Accessibility tokens absent",         "body": "No documented contrast pairings; #E60012 on white is borderline (4.0:1). No minimum body-text size or focus-state guidance for digital surfaces.", "ref": "PILLAR 06" },
-    { "title": "Booth & signage system thin",         "body": "No exhibit hierarchy: hall banners, booth numbering, registration desk, wayfinding pictograms, or stage-screen lockup specs.", "ref": "PILLAR 04" },
-    { "title": "No social / OG asset templates",      "body": "1:1, 4:5, 9:16, and 1200×630 OG variants are required for LinkedIn, Instagram, KakaoTalk. None defined.", "ref": "PILLAR 03" },
-    { "title": "English-first parity untested",       "body": "Latin-only versions of MedicomteK and Beauty&Derma have not been pressure-tested for international press kits and overseas sponsors.", "ref": "PILLAR 07" },
-    { "title": "Governance documentation thin",       "body": "No contribution model, review cadence, change-log, or central DAM. Hard to scale across an event with 1,400+ exhibitors.", "ref": "PILLAR 05" }
+    { "title": "모션 / 애니메이션 스펙 부재",       "body": "어떤 워드마크에도 entry·loop·transition이 정의되어 있지 않음. Arab Health 2024와 MEDICA는 스폰서 릴·무대 스크린용 Lottie/MP4 키트를 제공.", "ref": "필러 03" },
+    { "title": "접근성 토큰 누락",                  "body": "명도 대비 페어링 문서 없음. #E60012 위 흰 배경은 4.0:1로 경계선. 본문 최소 크기·포커스 상태 가이드도 없음.",                                       "ref": "필러 06" },
+    { "title": "부스 & 사이니지 시스템 부족",       "body": "전시 위계 부재 — 홀 배너, 부스 번호 체계, 등록 데스크, 길찾기 픽토그램, 무대 스크린 락업 스펙이 없음.",                                          "ref": "필러 04" },
+    { "title": "소셜 / OG 자산 템플릿 없음",        "body": "1:1, 4:5, 9:16, 1200×630 OG 변형이 LinkedIn·Instagram·KakaoTalk에 필수지만 정의되지 않음.",                                              "ref": "필러 03" },
+    { "title": "영문-우선 패리티 미검증",           "body": "MedicomteK·Beauty&Derma의 라틴 전용 락업이 해외 프레스 키트·스폰서용으로 검증되지 않음.",                                                  "ref": "필러 07" },
+    { "title": "거버넌스 문서화 미흡",             "body": "기여 모델·리뷰 주기·체인지로그·중앙 DAM 부재. 1,400+ 참가업체 규모에서 확장이 어려움.",                                                       "ref": "필러 05" }
   ],
   "partials": [
-    { "title": "Iconography library",     "body": "A 24-icon set exists but lacks wayfinding category icons (parking, registration, halls A–E, accessibility). Peers ship 30–60 icons.", "ref": "PILLAR 05" },
-    { "title": "Photography direction",   "body": "Color and type defined but no art direction, lighting, or subject guidelines for booth photography or hero imagery.", "ref": "PILLAR 01" },
-    { "title": "Print production specs",  "body": "CMYK/Pantone present, but no spot-color override list, large-format dot-gain notes, or fabric/vinyl substrate guidance.", "ref": "PILLAR 04" }
+    { "title": "아이코노그래피 라이브러리",         "body": "24개 아이콘 세트는 있으나 길찾기 카테고리(주차·등록·홀 A–E·접근성)가 부족. 동급은 30–60개 운영.",                                                "ref": "필러 05" },
+    { "title": "사진 디렉션",                      "body": "컬러·타입은 정의됐지만 부스 사진·히어로 이미지의 아트 디렉션·라이팅·피사체 가이드라인 없음.",                                                  "ref": "필러 01" },
+    { "title": "인쇄 제작 사양",                  "body": "CMYK·팬톤은 있으나 별색 오버라이드 리스트, 대형 인쇄의 닷 게인 노트, 천·비닐 매체 가이드 없음.",                                                "ref": "필러 04" }
   ],
   "benchmark": {
-    "title": "17.3 — Peer benchmark",
-    "desc": "Twelve criteria scored across KIMES, the average of six peer events, and the category leader. ● full · ◐ partial · ○ none.",
-    "headers": { "criterion": "Criterion", "detail": "Detail", "kimes": "KIMES", "peerAvg": "Peer avg", "leader": "Leader", "note": "Note" }
+    "title": "17.3 — 동급 전시회 비교",
+    "desc": "12개 항목을 KIMES, 동급 6개 전시회 평균, 카테고리 리더 기준으로 평가. ● 충족 · ◐ 부분 · ○ 없음.",
+    "headers": { "criterion": "항목", "detail": "세부", "kimes": "KIMES", "peerAvg": "동급 평균", "leader": "리더", "note": "비고" }
   },
   "bench": [
-    { "criterion": "Bilingual logo lockups",     "detail": "KO + EN pairs",              "kimes": "full",    "peer": "partial", "leader": "full",    "note": "At parity with Arab Health; MEDICA still EN-primary." },
-    { "criterion": "Color tokens (4 systems)",   "detail": "Pantone/CMYK/RGB/HEX",       "kimes": "full",    "peer": "full",    "leader": "full",    "note": "Industry baseline. KIMES meets it." },
-    { "criterion": "Sub-brand architecture",     "detail": "Clear parent / family",      "kimes": "full",    "peer": "partial", "leader": "full",    "note": "CMEF and Hospitalar lack a true family system. KIMES leads peers." },
-    { "criterion": "Distinctive wordmark",       "detail": "Beyond geometric sans",      "kimes": "full",    "peer": "partial", "leader": "full",    "note": "Slash-cut i is memorable. Peers default to Helvetica." },
-    { "criterion": "Motion / animated lockups",  "detail": "Lottie or MP4 kit",          "kimes": "none",    "peer": "partial", "leader": "full",    "note": "Arab Health 2024 ships a 9-asset motion kit. KIMES has none." },
-    { "criterion": "Social/OG templates",        "detail": "1:1, 4:5, 9:16, OG",         "kimes": "none",    "peer": "full",    "leader": "full",    "note": "Universal among peers; not yet published." },
-    { "criterion": "Accessibility audit",        "detail": "WCAG AA contrast",           "kimes": "none",    "peer": "partial", "leader": "partial", "note": "Even leaders are inconsistent here. Opportunity to lead." },
-    { "criterion": "Booth/exhibit system",       "detail": "Hall, hierarchy, signage",   "kimes": "partial", "peer": "full",    "leader": "full",    "note": "Strong logo but missing booth-level hierarchy." },
-    { "criterion": "Iconography library",        "detail": "Wayfinding + utility",       "kimes": "partial", "peer": "full",    "leader": "full",    "note": "Has 24 icons; needs 30–60 for full wayfinding." },
-    { "criterion": "Photography guidelines",     "detail": "Direction + treatment",      "kimes": "partial", "peer": "partial", "leader": "full",    "note": "On-par with peers; HIMSS leads with full library." },
-    { "criterion": "Asset DAM / CDN",            "detail": "Single source of truth",     "kimes": "none",    "peer": "partial", "leader": "full",    "note": "No public DAM. Sponsors request via email." },
-    { "criterion": "Print production specs",     "detail": "Spot, substrate, dot-gain",  "kimes": "partial", "peer": "full",    "leader": "full",    "note": "CMYK present; substrate-specific overrides missing." }
+    { "criterion": "한·영 로고 락업",             "detail": "KO + EN 페어",                   "kimes": "full",    "peer": "partial", "leader": "full",    "note": "Arab Health와 동등. MEDICA는 여전히 EN-우선." },
+    { "criterion": "컬러 토큰 (4 시스템)",        "detail": "팬톤/CMYK/RGB/HEX",              "kimes": "full",    "peer": "full",    "leader": "full",    "note": "업계 기본선. KIMES 충족." },
+    { "criterion": "서브브랜드 아키텍처",         "detail": "본 브랜드 / 패밀리 명확",          "kimes": "full",    "peer": "partial", "leader": "full",    "note": "CMEF·Hospitalar는 진정한 패밀리 시스템 부재. KIMES가 동급보다 앞섬." },
+    { "criterion": "차별화된 워드마크",            "detail": "지오메트릭 산세리프 이상",        "kimes": "full",    "peer": "partial", "leader": "full",    "note": "슬래시컷 i가 기억성 강함. 동급은 헬베티카 디폴트." },
+    { "criterion": "모션 / 애니메이티드 락업",     "detail": "Lottie 또는 MP4 키트",            "kimes": "none",    "peer": "partial", "leader": "full",    "note": "Arab Health 2024는 9개 자산 모션 키트 제공. KIMES는 없음." },
+    { "criterion": "소셜 / OG 템플릿",            "detail": "1:1, 4:5, 9:16, OG",             "kimes": "none",    "peer": "full",    "leader": "full",    "note": "동급 모두 보유. 미공개." },
+    { "criterion": "접근성 감사",                "detail": "WCAG AA 명도",                   "kimes": "none",    "peer": "partial", "leader": "partial", "note": "리더도 일관성 없음. 선도할 기회." },
+    { "criterion": "부스 / 전시 시스템",         "detail": "홀, 위계, 사이니지",              "kimes": "partial", "peer": "full",    "leader": "full",    "note": "로고는 강하나 부스 단위 위계가 없음." },
+    { "criterion": "아이코노그래피 라이브러리",   "detail": "길찾기 + 유틸리티",              "kimes": "partial", "peer": "full",    "leader": "full",    "note": "24개 보유. 풀 길찾기에는 30–60개 필요." },
+    { "criterion": "사진 가이드라인",            "detail": "디렉션 + 처리",                  "kimes": "partial", "peer": "partial", "leader": "full",    "note": "동급과 비슷한 수준. HIMSS가 풀 라이브러리로 선두." },
+    { "criterion": "자산 DAM / CDN",             "detail": "단일 진실의 원천",                "kimes": "none",    "peer": "partial", "leader": "full",    "note": "공개 DAM 없음. 스폰서가 이메일 요청 중." },
+    { "criterion": "인쇄 제작 스펙",             "detail": "별색·매체·닷게인",               "kimes": "partial", "peer": "full",    "leader": "full",    "note": "CMYK 있음. 매체별 오버라이드 부재." }
   ],
   "peers": [
-    { "name": "Arab Health",     "city": "Dubai",       "year": "2024", "strength": "Motion kit, social templates" },
-    { "name": "MEDICA",          "city": "Düsseldorf",  "year": "2023", "strength": "Booth signage, exhibit hierarchy" },
-    { "name": "HIMSS Global",    "city": "Orlando",     "year": "2024", "strength": "Photography, DAM, governance" },
-    { "name": "FIME",            "city": "Miami",       "year": "2024", "strength": "Bilingual press kits" },
-    { "name": "CMEF",            "city": "Shanghai",    "year": "2024", "strength": "Print production system" },
-    { "name": "Hospitalar",      "city": "São Paulo",   "year": "2024", "strength": "Color tokens, accessibility" }
+    { "name": "Arab Health",     "city": "두바이",       "year": "2024", "strength": "모션 키트, 소셜 템플릿" },
+    { "name": "MEDICA",          "city": "뒤셀도르프",   "year": "2023", "strength": "부스 사이니지, 전시 위계" },
+    { "name": "HIMSS Global",    "city": "올랜도",       "year": "2024", "strength": "사진, DAM, 거버넌스" },
+    { "name": "FIME",            "city": "마이애미",     "year": "2024", "strength": "한·영 프레스 키트" },
+    { "name": "CMEF",            "city": "상하이",       "year": "2024", "strength": "인쇄 제작 시스템" },
+    { "name": "Hospitalar",      "city": "상파울루",     "year": "2024", "strength": "컬러 토큰, 접근성" }
   ],
-  "peersHead": "Peer set",
+  "peersHead": "비교 대상 전시회",
   "roadmap": {
-    "title": "17.4 — Remediation roadmap",
-    "desc": "Prioritized by impact and dependency. Now items unblock Next; Next items unblock Later.",
+    "title": "17.4 — 보완 로드맵",
+    "desc": "임팩트와 의존도 기준 우선순위. Now가 끝나야 Next가 풀리고, Next가 끝나야 Later가 풀림.",
     "phases": [
       {
-        "phase": "0–30 days", "tag": "Now",
+        "phase": "0–30일", "tag": "Now",
         "items": [
-          { "t": "AA contrast matrix",    "d": "Document #E60012 vs all approved backgrounds; flag white pairing as AAA for ≥18pt only." },
-          { "t": "Social/OG templates",   "d": "Eight templates: 1:1, 4:5, 9:16, OG 1200×630, plus Korean/English variants." },
-          { "t": "Motion baseline",       "d": "One Lottie + one MP4 per parent wordmark. 1.2s entry, brand-red glide on the slash-cut." }
+          { "t": "AA 명도 매트릭스",     "d": "#E60012 vs 모든 승인 배경 문서화. 흰 배경 페어링은 18pt+ 한정으로 AAA 표기." },
+          { "t": "소셜 / OG 템플릿",     "d": "8개 템플릿 — 1:1, 4:5, 9:16, OG 1200×630 + 한·영 변형." },
+          { "t": "모션 베이스라인",      "d": "본 워드마크당 Lottie 1 + MP4 1. 1.2초 entry, 슬래시컷 위 브랜드 레드 글라이드." }
         ]
       },
       {
-        "phase": "30–90 days", "tag": "Next",
+        "phase": "30–90일", "tag": "Next",
         "items": [
-          { "t": "Booth & wayfinding kit", "d": "Hall banners, booth-number system, 30 wayfinding pictograms, registration/stage lockups." },
-          { "t": "DAM rollout",            "d": "Public CDN with versioned SVG, AI, PNG, and PDF; per-asset license metadata." },
-          { "t": "English-first audit",    "d": "Validate Latin-only lockups for MedicomteK and Beauty&Derma against international press use cases." }
+          { "t": "부스 & 길찾기 키트",   "d": "홀 배너, 부스 번호 시스템, 길찾기 픽토그램 30개, 등록·무대 락업." },
+          { "t": "DAM 출시",            "d": "버전 관리되는 SVG·AI·PNG·PDF를 공개 CDN으로 제공. 자산별 라이선스 메타데이터." },
+          { "t": "영문-우선 감사",       "d": "MedicomteK·Beauty&Derma의 라틴 전용 락업을 해외 프레스 유스케이스로 검증." }
         ]
       },
       {
-        "phase": "90–180 days", "tag": "Later",
+        "phase": "90–180일", "tag": "Later",
         "items": [
-          { "t": "Photography direction",  "d": "Lighting, subject framing, post-production LUT for booth and hero imagery." },
-          { "t": "Print substrate guide",  "d": "Fabric, vinyl, large-format dot-gain, and spot-color overrides." },
-          { "t": "Governance v1",          "d": "Contribution model, quarterly review cadence, public change-log." }
+          { "t": "사진 디렉션",         "d": "라이팅, 피사체 프레이밍, 부스·히어로 이미지용 후보정 LUT." },
+          { "t": "인쇄 매체 가이드",     "d": "천·비닐·대형 닷게인 + 별색 오버라이드." },
+          { "t": "거버넌스 v1",         "d": "기여 모델, 분기별 리뷰 주기, 공개 체인지로그." }
         ]
       }
     ]
   },
   "methodology": {
-    "title": "17.5 — Methodology",
-    "desc": "Scoring framework, data sources, and limitations.",
+    "title": "17.5 — 방법론",
+    "desc": "평가 프레임워크, 데이터 출처, 한계.",
     "rows": [
-      { "key": "Pillars",     "val": "7 weighted pillars sum to 100%. Weights reflect typical importance for medical-trade exhibitions where exhibit, digital, and i18n are equally critical." },
-      { "key": "Scoring",     "val": "0–100 per pillar. Composite is weight-averaged. Grade thresholds: A ≥85, B+ ≥75, B ≥65, C+ ≥55, C ≥45." },
-      { "key": "Benchmarks",  "val": "Arab Health (Dubai), MEDICA (Düsseldorf), FIME (Miami), CMEF (Shanghai), Hospitalar (São Paulo), HIMSS Global (Orlando). Public brand assets, press kits, and on-site documentation as of 2024." },
-      { "key": "Limitations", "val": "External assessment from public materials. Internal governance documents, contracts, and unpublished assets are not visible and may shift Pillar 05 (Governance) upward." }
+      { "key": "평가 항목", "val": "7개 가중 항목, 합 100%. 가중치는 의료 트레이드 전시회의 일반적 중요도(전시·디지털·국제화 동등) 반영." },
+      { "key": "점수",     "val": "항목당 0–100. 합계는 가중 평균. 등급 기준: A ≥85, B+ ≥75, B ≥65, C+ ≥55, C ≥45." },
+      { "key": "기준선",   "val": "Arab Health(두바이), MEDICA(뒤셀도르프), FIME(마이애미), CMEF(상하이), Hospitalar(상파울루), HIMSS Global(올랜도). 2024년 기준 공개 브랜드 자산·프레스 키트·현장 문서." },
+      { "key": "한계",     "val": "공개 자료 기반의 외부 평가. 비공개 거버넌스 문서·계약·미공개 자산은 보이지 않으므로 필러 05(거버넌스) 점수가 상향될 수 있음." }
     ]
   }
 }
