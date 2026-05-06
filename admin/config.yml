@@ -36,7 +36,7 @@ collections:
   # =========================================================================
   - name: "foundations_en"
     label: "Brand foundations · English"
-    description: "English copy for each section on the public site. Edits commit on save."
+    description: "English copy for every section on the public site. Pick a section, edit, and Save — Sveltia commits to GitHub and Netlify rebuilds within ~30 seconds."
     files:
 
       - file: "content/intro.en.json"
@@ -234,12 +234,216 @@ collections:
                   - { name: "cols",  label: "Columns",   widget: "number" }
                   - { name: "meta",  label: "Meta line", widget: "string" }
 
+      # ---------- 04 Color proportion (header only) ----------
+      - file: "content/color-proportion.en.json"
+        name: "color_proportion_en"
+        label: "04 — Color proportion"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", hint: "Intro under the title. Inline HTML allowed.", widget: "text" }
+
+      # ---------- 05 Gradients (header only) ----------
+      - file: "content/gradients.en.json"
+        name: "gradients_en"
+        label: "05 — Gradients"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 07 Typography in use (header only) ----------
+      - file: "content/typography-in-use.en.json"
+        name: "typography_in_use_en"
+        label: "07 — Typography in use"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 09 Logo rules (header only) ----------
+      - file: "content/logo-rules.en.json"
+        name: "logo_rules_en"
+        label: "09 — Logo rules"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 10 Logo lockup (header only) ----------
+      - file: "content/logo-lockup.en.json"
+        name: "logo_lockup_en"
+        label: "10 — Logo lockup"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 11 Iconography (header only) ----------
+      - file: "content/iconography.en.json"
+        name: "iconography_en"
+        label: "11 — Iconography"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 13 Asset library ----------
+      - file: "content/asset-library.en.json"
+        name: "asset_library_en"
+        label: "13 — Asset library"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+          - name: "colors"
+            label: "Color values"
+            widget: "object"
+            fields:
+              - { name: "title",     label: "Sub-title",  widget: "string" }
+              - { name: "desc",      label: "Description", widget: "text" }
+              - { name: "copyLabel", label: "Copy button label", widget: "string" }
+              - name: "rows"
+                label: "Color rows"
+                label_singular: "Color"
+                widget: "list"
+                fields:
+                  - { name: "name",  label: "Name",  widget: "string" }
+                  - { name: "token", label: "Token", widget: "string" }
+                  - { name: "hex",   label: "HEX",   widget: "color" }
+                  - { name: "rgb",   label: "RGB",   widget: "string" }
+                  - { name: "cmyk",  label: "CMYK",  widget: "string" }
+          - name: "version"
+            label: "Version & legal"
+            widget: "object"
+            fields:
+              - { name: "title", label: "Sub-title", widget: "string" }
+              - { name: "fineprint", label: "Legal fineprint", widget: "text" }
+              - name: "rows"
+                label: "Meta rows"
+                label_singular: "Row"
+                widget: "list"
+                fields:
+                  - { name: "key",   label: "Key",        widget: "string" }
+                  - { name: "value", label: "Value",      widget: "string" }
+                  - { name: "mono",  label: "Monospace?", widget: "boolean", required: false, default: false }
+
+      # ---------- 14 Motion (header only) ----------
+      - file: "content/motion.en.json"
+        name: "motion_en"
+        label: "14 — Motion"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 15 Accessibility ----------
+      - file: "content/a11y.en.json"
+        name: "a11y_en"
+        label: "15 — Accessibility"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+          - name: "checklist"
+            label: "Reviewer checklist"
+            widget: "object"
+            fields:
+              - { name: "title", label: "Sub-title", widget: "string" }
+              - { name: "desc",  label: "Description", widget: "text" }
+              - name: "items"
+                label: "Checklist items"
+                label_singular: "Item"
+                widget: "list"
+                fields:
+                  - name: "kind"
+                    label: "Kind"
+                    widget: "select"
+                    options:
+                      - { label: "Do",    value: "do" }
+                      - { label: "Don't", value: "dont" }
+                  - { name: "title", label: "Title", widget: "string" }
+                  - { name: "body",  label: "Body",  widget: "text" }
+
+      # ---------- 16 Social templates (header only) ----------
+      - file: "content/social-templates.en.json"
+        name: "social_templates_en"
+        label: "16 — Social templates"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+
+      # ---------- 17 BI audit ----------
+      - file: "content/bi-audit.en.json"
+        name: "bi_audit_en"
+        label: "17 — BI audit"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede paragraph", widget: "text" }
+          - name: "pillars"
+            label: "Audit pillars"
+            label_singular: "Pillar"
+            widget: "list"
+            fields:
+              - { name: "id",     label: "ID",          widget: "string" }
+              - { name: "name",   label: "Name",        widget: "string" }
+              - { name: "sub",    label: "Sub-text",    widget: "string" }
+              - { name: "score",  label: "Score 0-100", widget: "number" }
+              - { name: "weight", label: "Weight %",    widget: "number" }
+              - { name: "grade",  label: "Grade (A/B/C)", widget: "string" }
+          - name: "strengths"
+            label: "Strengths"
+            label_singular: "Item"
+            widget: "list"
+            fields:
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "body",  label: "Body",  widget: "text" }
+              - { name: "ref",   label: "Pillar ref", widget: "string" }
+          - name: "gaps"
+            label: "Gaps"
+            label_singular: "Item"
+            widget: "list"
+            fields:
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "body",  label: "Body",  widget: "text" }
+              - { name: "ref",   label: "Pillar ref", widget: "string" }
+          - name: "partials"
+            label: "Partial / in progress"
+            label_singular: "Item"
+            widget: "list"
+            fields:
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "body",  label: "Body",  widget: "text" }
+              - { name: "ref",   label: "Pillar ref", widget: "string" }
+          - name: "peers"
+            label: "Peer benchmark set"
+            label_singular: "Peer"
+            widget: "list"
+            fields:
+              - { name: "name",     label: "Event name", widget: "string" }
+              - { name: "city",     label: "City",       widget: "string" }
+              - { name: "year",     label: "Year",       widget: "string" }
+              - { name: "strength", label: "Strength",   widget: "string" }
+
   # =========================================================================
   # Korean copy — same schema as English, edits the .ko.json files
   # =========================================================================
   - name: "foundations_ko"
     label: "Brand foundations · 한국어"
-    description: "각 섹션의 한국어 콘텐츠. 저장하면 즉시 커밋됩니다."
+    description: "공개 사이트 각 섹션의 한국어 콘텐츠. 섹션을 골라 수정한 뒤 Save를 누르면 Sveltia가 GitHub에 커밋하고 Netlify가 약 30초 안에 재배포합니다."
     files:
 
       - file: "content/intro.ko.json"
@@ -249,7 +453,7 @@ collections:
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
           - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
           - name: "meta"
             label: "메타 정보"
             label_singular: "항목"
@@ -265,7 +469,7 @@ collections:
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
           - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
           - name: "brands"
             label: "브랜드"
             label_singular: "브랜드"
@@ -301,7 +505,7 @@ collections:
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
           - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
           - name: "groups"
             label: "브랜드별 컬러 그룹"
             label_singular: "그룹"
@@ -338,7 +542,7 @@ collections:
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
           - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
           - name: "tabs"
             label: "탭 라벨"
             widget: "object"
@@ -375,7 +579,7 @@ collections:
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
           - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
           - name: "brands"
             label: "브랜드"
             label_singular: "브랜드"
@@ -408,7 +612,7 @@ collections:
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
           - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단 (HTML 가능)", widget: "text" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
           - name: "scale"
             label: "간격 스케일"
             widget: "object"
@@ -436,3 +640,196 @@ collections:
                   - { name: "label", label: "라벨",       widget: "string" }
                   - { name: "cols",  label: "컬럼 수",     widget: "number" }
                   - { name: "meta",  label: "메타 라인",   widget: "string" }
+
+      - file: "content/color-proportion.ko.json"
+        name: "color_proportion_ko"
+        label: "04 — Color proportion (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래 들어가는 도입 문단. 인라인 HTML 허용.", widget: "text" }
+
+      - file: "content/gradients.ko.json"
+        name: "gradients_ko"
+        label: "05 — Gradients (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/typography-in-use.ko.json"
+        name: "typography_in_use_ko"
+        label: "07 — Typography in use (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/logo-rules.ko.json"
+        name: "logo_rules_ko"
+        label: "09 — Logo rules (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/logo-lockup.ko.json"
+        name: "logo_lockup_ko"
+        label: "10 — Logo lockup (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/iconography.ko.json"
+        name: "iconography_ko"
+        label: "11 — Iconography (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/asset-library.ko.json"
+        name: "asset_library_ko"
+        label: "13 — Asset library (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+          - name: "colors"
+            label: "컬러 값"
+            widget: "object"
+            fields:
+              - { name: "title",     label: "서브 타이틀", widget: "string" }
+              - { name: "desc",      label: "설명",        widget: "text" }
+              - { name: "copyLabel", label: "Copy 버튼 라벨", widget: "string" }
+              - name: "rows"
+                label: "컬러 행"
+                label_singular: "컬러"
+                widget: "list"
+                fields:
+                  - { name: "name",  label: "이름",  widget: "string" }
+                  - { name: "token", label: "토큰", widget: "string" }
+                  - { name: "hex",   label: "HEX",  widget: "color" }
+                  - { name: "rgb",   label: "RGB",  widget: "string" }
+                  - { name: "cmyk",  label: "CMYK", widget: "string" }
+          - name: "version"
+            label: "버전 / 법적 고지"
+            widget: "object"
+            fields:
+              - { name: "title",     label: "서브 타이틀", widget: "string" }
+              - { name: "fineprint", label: "법적 문구", widget: "text" }
+              - name: "rows"
+                label: "메타 행"
+                label_singular: "행"
+                widget: "list"
+                fields:
+                  - { name: "key",   label: "키",            widget: "string" }
+                  - { name: "value", label: "값",            widget: "string" }
+                  - { name: "mono",  label: "모노스페이스?", widget: "boolean", required: false, default: false }
+
+      - file: "content/motion.ko.json"
+        name: "motion_ko"
+        label: "14 — Motion (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/a11y.ko.json"
+        name: "a11y_ko"
+        label: "15 — Accessibility (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+          - name: "checklist"
+            label: "리뷰어 체크리스트"
+            widget: "object"
+            fields:
+              - { name: "title", label: "서브 타이틀", widget: "string" }
+              - { name: "desc",  label: "설명",       widget: "text" }
+              - name: "items"
+                label: "체크리스트 항목"
+                label_singular: "항목"
+                widget: "list"
+                fields:
+                  - name: "kind"
+                    label: "구분"
+                    widget: "select"
+                    options:
+                      - { label: "Do (해야 할 것)",     value: "do" }
+                      - { label: "Don't (하지 말 것)", value: "dont" }
+                  - { name: "title", label: "제목", widget: "string" }
+                  - { name: "body",  label: "본문", widget: "text" }
+
+      - file: "content/social-templates.ko.json"
+        name: "social_templates_ko"
+        label: "16 — Social templates (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+
+      - file: "content/bi-audit.ko.json"
+        name: "bi_audit_ko"
+        label: "17 — BI audit (한국어)"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
+          - { name: "title",   label: "타이틀",   widget: "string" }
+          - { name: "lede",    label: "리드 문단", widget: "text" }
+          - name: "pillars"
+            label: "감사 필러 (Pillars)"
+            label_singular: "필러"
+            widget: "list"
+            fields:
+              - { name: "id",     label: "ID",        widget: "string" }
+              - { name: "name",   label: "이름",      widget: "string" }
+              - { name: "sub",    label: "보조 설명", widget: "string" }
+              - { name: "score",  label: "점수 0-100", widget: "number" }
+              - { name: "weight", label: "가중치 %",  widget: "number" }
+              - { name: "grade",  label: "등급 (A/B/C)", widget: "string" }
+          - name: "strengths"
+            label: "강점"
+            label_singular: "항목"
+            widget: "list"
+            fields:
+              - { name: "title", label: "제목", widget: "string" }
+              - { name: "body",  label: "본문", widget: "text" }
+              - { name: "ref",   label: "필러 참조", widget: "string" }
+          - name: "gaps"
+            label: "취약점"
+            label_singular: "항목"
+            widget: "list"
+            fields:
+              - { name: "title", label: "제목", widget: "string" }
+              - { name: "body",  label: "본문", widget: "text" }
+              - { name: "ref",   label: "필러 참조", widget: "string" }
+          - name: "partials"
+            label: "진행 중 / 부분 충족"
+            label_singular: "항목"
+            widget: "list"
+            fields:
+              - { name: "title", label: "제목", widget: "string" }
+              - { name: "body",  label: "본문", widget: "text" }
+              - { name: "ref",   label: "필러 참조", widget: "string" }
+          - name: "peers"
+            label: "비교 대상 전시회 세트"
+            label_singular: "전시회"
+            widget: "list"
+            fields:
+              - { name: "name",     label: "전시회 이름", widget: "string" }
+              - { name: "city",     label: "도시",       widget: "string" }
+              - { name: "year",     label: "연도",       widget: "string" }
+              - { name: "strength", label: "주요 강점",   widget: "string" }
