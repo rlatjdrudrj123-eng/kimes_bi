@@ -24,6 +24,9 @@
     'intro',
     'family',
     'color',
+    'typography',
+    'logo',
+    'spacing',
   ];
 
   window.CONTENT = {};

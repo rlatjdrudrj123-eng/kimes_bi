@@ -230,46 +230,23 @@ function ColorTokens() {
 }
 
 /* ---------- Typography ---------- */
-const TYPE_SCALE = [
-  { token: '--type-display', size: 56, weight: 800, lh: 1.05, label: 'Display', sample: 'Korea\'s largest medical exhibition' },
-  { token: '--type-h1', size: 40, weight: 800, lh: 1.1, label: 'H1', sample: 'KIMES 2026 — registration is open' },
-  { token: '--type-h2', size: 30, weight: 700, lh: 1.2, label: 'H2', sample: 'Exhibitor categories & floor plan' },
-  { token: '--type-h3', size: 22, weight: 700, lh: 1.3, label: 'H3', sample: 'Imaging & diagnostic equipment' },
-  { token: '--type-body-lg', size: 17, weight: 400, lh: 1.55, label: 'Body large', sample: 'KIMES brings together over 1,300 exhibitors and 80,000 trade visitors at COEX every March.' },
-  { token: '--type-body', size: 15, weight: 400, lh: 1.55, label: 'Body', sample: 'KIMES brings together over 1,300 exhibitors and 80,000 trade visitors at COEX every March.' },
-  { token: '--type-caption', size: 12, weight: 500, lh: 1.5, label: 'Caption', sample: 'COEX, Seoul · 19—22 March 2026' },
-];
-
-const TYPE_SCALE_KR = [
-  { token: '--type-display', size: 56, weight: 800, lh: 1.05, label: 'Display', sample: '한국 최대 의료기기·병원설비 전시회' },
-  { token: '--type-h1', size: 40, weight: 800, lh: 1.1, label: 'H1', sample: 'KIMES 2026 사전등록 개시' },
-  { token: '--type-h2', size: 30, weight: 700, lh: 1.2, label: 'H2', sample: '참가업체 카테고리 안내' },
-  { token: '--type-h3', size: 22, weight: 700, lh: 1.3, label: 'H3', sample: '영상진단 의료기기' },
-  { token: '--type-body-lg', size: 17, weight: 400, lh: 1.55, label: 'Body large', sample: 'KIMES는 매년 3월 코엑스에서 1,300여 개사 및 8만여 명의 전문 관람객이 참여하는 한국 최대의 의료·병원기기 전시회입니다.' },
-  { token: '--type-body', size: 15, weight: 400, lh: 1.55, label: 'Body', sample: 'KIMES는 매년 3월 코엑스에서 1,300여 개사 및 8만여 명의 전문 관람객이 참여하는 한국 최대의 의료·병원기기 전시회입니다.' },
-  { token: '--type-caption', size: 12, weight: 500, lh: 1.5, label: 'Caption', sample: '코엑스 · 2026년 3월 19일 — 22일' },
-];
-
 function Typography() {
+  const c = (window.CONTENT && window.CONTENT.typography) || {};
+  const tabs = c.tabs || { latin: 'Latin · Montserrat', kr: '한글 · Pretendard' };
   const [tab, setTab] = useState('latin');
-  const scale = tab === 'latin' ? TYPE_SCALE : TYPE_SCALE_KR;
+  const scale = tab === 'latin' ? (c.scaleLatin || []) : (c.scaleKr || []);
   const fontFamily = tab === 'latin' ? "'Montserrat', sans-serif" : "'Pretendard Variable', 'Pretendard', sans-serif";
   const fontLabel = tab === 'latin' ? 'Montserrat' : 'Pretendard';
 
   return (
     <section id="typography" className="section">
-      <div className="section-eyebrow">06 — Typography</div>
-      <h2>Typography</h2>
-      <p className="lede">
-        Latin text is set in <b>Montserrat</b> — the family used in the KIMES
-        and MedicomteK wordmarks. Korean text is set in <b>Pretendard</b>,
-        chosen for its harmonious metrics with Montserrat at matching sizes.
-        Numerals always use Montserrat Bold.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
 
       <div className="type-tabs" role="tablist">
-        <button className={tab === 'latin' ? 'active' : ''} onClick={() => setTab('latin')}>Latin · Montserrat</button>
-        <button className={tab === 'kr' ? 'active' : ''} onClick={() => setTab('kr')}>한글 · Pretendard</button>
+        <button className={tab === 'latin' ? 'active' : ''} onClick={() => setTab('latin')}>{tabs.latin}</button>
+        <button className={tab === 'kr' ? 'active' : ''} onClick={() => setTab('kr')}>{tabs.kr}</button>
       </div>
 
       <table className="type-table">
@@ -439,62 +416,25 @@ function LogoVariants() {
 }
 
 /* ---------- Logo catalog ---------- */
-const LOGO_CATALOG = [
-  {
-    id: 'kimes', name: 'KIMES', color: '#E60012',
-    items: [
-      { svg: 'kimes',      file: 'kimes-logo.svg',       label: 'Primary',   h: 32 },
-      { svg: 'kimes2026',  file: 'kimes-2026-logo.svg',  label: 'With year', h: 32 },
-      { svg: 'kimesWhite', file: 'kimes-white-logo.svg', label: 'White',     h: 26, dark: true },
-    ],
-  },
-  {
-    id: 'mc', name: 'MedicomteK', color: '#036EB8',
-    items: [
-      { svg: 'mc',      file: 'medicomtek-logo.svg',         label: 'Primary',   h: 22 },
-      { svg: 'mc2026',  file: 'medicomtek-2026-logo.svg',    label: 'With year', h: 28 },
-      { svg: 'mcWhite', file: 'medicomtek-white-logo.svg',   label: 'White',     h: 22, dark: true },
-    ],
-  },
-  {
-    id: 'bd', name: 'Beauty\u2009&\u2009Derma', color: '#5D3B8B',
-    items: [
-      { svg: 'bdSeoul', file: 'beautyderma-seoul-logo.svg',       label: 'Horizontal',   h: 14 },
-      { svg: 'bdStack', file: 'beautyderma-seoul-stack-logo.svg', label: '3-line stack', h: 60 },
-      { svg: 'bdWhite', file: 'beautyderma-busan-white-logo.svg', label: 'White',        h: 14, dark: true },
-    ],
-  },
-  {
-    id: 'in', name: 'INSPIRE Digital Health', color: '#595757',
-    items: [
-      { svg: 'inShort',       file: 'inspire-logo.svg',              label: 'Short',           h: 26 },
-      { svg: 'inStack',       file: 'inspire-stack-logo.svg',        label: '2-line stack',    h: 48 },
-      { svg: 'inTagline',     file: 'inspire-tagline-logo.svg',      label: 'Tagline (gray)',  h: 22 },
-      { svg: 'inLimeTagline', file: 'inspire-lime-tagline-logo.svg', label: 'Tagline (lime)',  h: 22, dark: true },
-    ],
-  },
-];
 
 function LogoCatalog() {
+  const c = (window.CONTENT && window.CONTENT.logo) || {};
+  const brands = c.brands || [];
+  const fs = c.familySignature || { title: '', body: '' };
   return (
     <section id="logo" className="section">
-      <div className="section-eyebrow">08 — Logo</div>
-      <h2>Logo</h2>
-      <p className="lede">
-        The complete catalog of approved logo files. Use only these SVGs from
-        <code> /assets/logos/</code> — never recreate the wordmarks in CSS or
-        set them as text. The slash-cut <code>i</code> only renders correctly
-        from the SVG.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
 
-      {LOGO_CATALOG.map(brand => (
+      {brands.map(brand => (
         <div className="logo-cat-row" key={brand.id}>
           <div className="logo-cat-head">
             <span className="dot" style={{ background: brand.color }}></span>
             <span className="brand">{brand.name}</span>
           </div>
           <div className="logo-cat-tiles">
-            {brand.items.map(item => (
+            {(brand.items || []).map(item => (
               <div key={item.file} className={`logo-cat-tile ${item.dark ? 'dark' : ''}`}>
                 <div className="logo-cat-art">
                   <InlineLogo name={item.svg} height={item.h} ariaLabel={`${brand.name} ${item.label}`} />
@@ -514,13 +454,8 @@ function LogoCatalog() {
           <InlineLogo name="kimes" height={120} ariaLabel="KIMES slash-cut detail" />
         </div>
         <div className="fs-body">
-          <h4>Family signature</h4>
-          <p>
-            KIMES and MedicomteK share a common slash-cut detail on the
-            <code> i</code> — the visual signature of the KIMES medical-equipment
-            family. Beauty&amp;Derma and INSPIRE Digital Health are independent
-            identities with their own visual systems.
-          </p>
+          <h4>{fs.title}</h4>
+          <p dangerouslySetInnerHTML={{ __html: fs.body || '' }} />
         </div>
       </div>
     </section>
@@ -528,35 +463,21 @@ function LogoCatalog() {
 }
 
 /* ---------- Spacing & grid ---------- */
-const SPACING = [
-  { token: '--space-1', value: 8 },
-  { token: '--space-2', value: 16 },
-  { token: '--space-3', value: 24 },
-  { token: '--space-4', value: 32 },
-  { token: '--space-5', value: 48 },
-  { token: '--space-6', value: 64 },
-  { token: '--space-7', value: 80 },
-];
-
 function SpacingGrid() {
+  const c = (window.CONTENT && window.CONTENT.spacing) || {};
+  const scale = c.scale || { title: '', desc: '', tokens: [] };
+  const grid  = c.grid  || { title: '', desc: '', breakpoints: [] };
   return (
     <section id="spacing" className="section">
-      <div className="section-eyebrow">12 — Spacing &amp; grid</div>
-      <h2>Spacing &amp; grid</h2>
-      <p className="lede">
-        A single 8-unit spacing scale governs all rhythm. The page grid is a
-        12-column track at desktop, scaling down to 8 columns on tablet and
-        4 on mobile.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
 
       <div className="subsection">
-        <h3>Spacing scale</h3>
-        <p className="desc">
-          Multiples of 8px. Use semantic tokens like <code>--space-3</code> rather
-          than raw pixel values — consistent rhythm across all surfaces.
-        </p>
+        <h3>{scale.title}</h3>
+        <p className="desc" dangerouslySetInnerHTML={{ __html: scale.desc || '' }} />
         <div>
-          {SPACING.map(s => (
+          {(scale.tokens || []).map(s => (
             <div key={s.token} className="spacing-row">
               <div className="name">{s.token}</div>
               <div className="value">{s.value}px</div>
@@ -567,26 +488,16 @@ function SpacingGrid() {
       </div>
 
       <div className="subsection">
-        <h3>Grid system</h3>
-        <p className="desc">
-          12-column responsive grid with a 1280px max width on desktop.
-        </p>
+        <h3>{grid.title}</h3>
+        <p className="desc" dangerouslySetInnerHTML={{ __html: grid.desc || '' }} />
         <div className="grid-spec">
-          <div className="card">
-            <div className="label">Desktop ≥ 1024px</div>
-            <div className="val">12</div>
-            <div className="meta">columns · 24px gutter · 1280px max</div>
-          </div>
-          <div className="card">
-            <div className="label">Tablet 640–1023px</div>
-            <div className="val">8</div>
-            <div className="meta">columns · 20px gutter</div>
-          </div>
-          <div className="card">
-            <div className="label">Mobile &lt; 640px</div>
-            <div className="val">4</div>
-            <div className="meta">columns · 16px gutter</div>
-          </div>
+          {(grid.breakpoints || []).map(bp => (
+            <div className="card" key={bp.label}>
+              <div className="label">{bp.label}</div>
+              <div className="val">{bp.cols}</div>
+              <div className="meta">{bp.meta}</div>
+            </div>
+          ))}
         </div>
         <div className="grid-vis">
           <div className="cols">

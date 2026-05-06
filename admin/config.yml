@@ -133,3 +133,112 @@ collections:
               - { name: "rgb",   label: "RGB col",    widget: "string", default: "RGB" }
               - { name: "cmyk",  label: "CMYK col",   widget: "string", default: "CMYK" }
               - { name: "usage", label: "Usage col",  widget: "string", default: "Usage" }
+
+      # ---------- 06 Typography ----------
+      - file: "content/typography.json"
+        name: "typography"
+        label: "06 — Typography"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
+          - name: "tabs"
+            label: "Tab labels"
+            widget: "object"
+            fields:
+              - { name: "latin", label: "Latin tab", widget: "string" }
+              - { name: "kr",    label: "Korean tab", widget: "string" }
+          - name: "scaleLatin"
+            label: "Latin (Montserrat) scale"
+            label_singular: "Step"
+            widget: "list"
+            fields:
+              - { name: "token",  label: "Token",        widget: "string" }
+              - { name: "size",   label: "Size (px)",    widget: "number" }
+              - { name: "weight", label: "Weight",       widget: "number" }
+              - { name: "lh",     label: "Line height",  widget: "number", value_type: "float" }
+              - { name: "label",  label: "Label",        widget: "string" }
+              - { name: "sample", label: "Sample text",  widget: "text" }
+          - name: "scaleKr"
+            label: "Korean (Pretendard) scale"
+            label_singular: "Step"
+            widget: "list"
+            fields:
+              - { name: "token",  label: "Token",        widget: "string" }
+              - { name: "size",   label: "Size (px)",    widget: "number" }
+              - { name: "weight", label: "Weight",       widget: "number" }
+              - { name: "lh",     label: "Line height",  widget: "number", value_type: "float" }
+              - { name: "label",  label: "Label",        widget: "string" }
+              - { name: "sample", label: "Sample text",  widget: "text" }
+
+      # ---------- 08 Logo catalog ----------
+      - file: "content/logo.json"
+        name: "logo"
+        label: "08 — Logo catalog"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
+          - name: "brands"
+            label: "Brands"
+            label_singular: "Brand"
+            widget: "list"
+            fields:
+              - { name: "id",    label: "ID",                widget: "string" }
+              - { name: "name",  label: "Brand name",        widget: "string" }
+              - { name: "color", label: "Indicator color",   widget: "color" }
+              - name: "items"
+                label: "Logo files"
+                label_singular: "File"
+                widget: "list"
+                fields:
+                  - { name: "svg",   label: "SVG ref (LogoSvgs.js key)", widget: "string" }
+                  - { name: "file",  label: "Filename",                  widget: "string" }
+                  - { name: "label", label: "Label",                     widget: "string" }
+                  - { name: "h",     label: "Display height (px)",       widget: "number" }
+                  - { name: "dark",  label: "Dark tile",                 widget: "boolean", required: false, default: false }
+          - name: "familySignature"
+            label: "Family signature footer"
+            widget: "object"
+            fields:
+              - { name: "title", label: "Title",              widget: "string" }
+              - { name: "body",  label: "Body (HTML allowed)", widget: "text" }
+
+      # ---------- 12 Spacing & grid ----------
+      - file: "content/spacing.json"
+        name: "spacing"
+        label: "12 — Spacing & grid"
+        format: "json"
+        fields:
+          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
+          - { name: "title",   label: "Title",   widget: "string" }
+          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
+          - name: "scale"
+            label: "Spacing scale"
+            widget: "object"
+            fields:
+              - { name: "title", label: "Sub-title",   widget: "string" }
+              - { name: "desc",  label: "Description (HTML allowed)", widget: "text" }
+              - name: "tokens"
+                label: "Tokens"
+                label_singular: "Step"
+                widget: "list"
+                fields:
+                  - { name: "token", label: "Token",        widget: "string" }
+                  - { name: "value", label: "Value (px)",   widget: "number" }
+          - name: "grid"
+            label: "Grid system"
+            widget: "object"
+            fields:
+              - { name: "title", label: "Sub-title",   widget: "string" }
+              - { name: "desc",  label: "Description (HTML allowed)", widget: "text" }
+              - name: "breakpoints"
+                label: "Breakpoints"
+                label_singular: "Breakpoint"
+                widget: "list"
+                fields:
+                  - { name: "label", label: "Label",          widget: "string" }
+                  - { name: "cols",  label: "Columns",        widget: "number" }
+                  - { name: "meta",  label: "Meta line",      widget: "string" }

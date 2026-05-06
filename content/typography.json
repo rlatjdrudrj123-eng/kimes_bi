@@ -1,0 +1,27 @@
+{
+  "eyebrow": "06 — Typography",
+  "title": "Typography",
+  "lede": "Latin text is set in <b>Montserrat</b> — the family used in the KIMES and MedicomteK wordmarks. Korean text is set in <b>Pretendard</b>, chosen for its harmonious metrics with Montserrat at matching sizes. Numerals always use Montserrat Bold.",
+  "tabs": {
+    "latin": "Latin · Montserrat",
+    "kr": "한글 · Pretendard"
+  },
+  "scaleLatin": [
+    { "token": "--type-display", "size": 56, "weight": 800, "lh": 1.05, "label": "Display",    "sample": "Korea's largest medical exhibition" },
+    { "token": "--type-h1",      "size": 40, "weight": 800, "lh": 1.1,  "label": "H1",         "sample": "KIMES 2026 — registration is open" },
+    { "token": "--type-h2",      "size": 30, "weight": 700, "lh": 1.2,  "label": "H2",         "sample": "Exhibitor categories & floor plan" },
+    { "token": "--type-h3",      "size": 22, "weight": 700, "lh": 1.3,  "label": "H3",         "sample": "Imaging & diagnostic equipment" },
+    { "token": "--type-body-lg", "size": 17, "weight": 400, "lh": 1.55, "label": "Body large", "sample": "KIMES brings together over 1,300 exhibitors and 80,000 trade visitors at COEX every March." },
+    { "token": "--type-body",    "size": 15, "weight": 400, "lh": 1.55, "label": "Body",       "sample": "KIMES brings together over 1,300 exhibitors and 80,000 trade visitors at COEX every March." },
+    { "token": "--type-caption", "size": 12, "weight": 500, "lh": 1.5,  "label": "Caption",    "sample": "COEX, Seoul · 19—22 March 2026" }
+  ],
+  "scaleKr": [
+    { "token": "--type-display", "size": 56, "weight": 800, "lh": 1.05, "label": "Display",    "sample": "한국 최대 의료기기·병원설비 전시회" },
+    { "token": "--type-h1",      "size": 40, "weight": 800, "lh": 1.1,  "label": "H1",         "sample": "KIMES 2026 사전등록 개시" },
+    { "token": "--type-h2",      "size": 30, "weight": 700, "lh": 1.2,  "label": "H2",         "sample": "참가업체 카테고리 안내" },
+    { "token": "--type-h3",      "size": 22, "weight": 700, "lh": 1.3,  "label": "H3",         "sample": "영상진단 의료기기" },
+    { "token": "--type-body-lg", "size": 17, "weight": 400, "lh": 1.55, "label": "Body large", "sample": "KIMES는 매년 3월 코엑스에서 1,300여 개사 및 8만여 명의 전문 관람객이 참여하는 한국 최대의 의료·병원기기 전시회입니다." },
+    { "token": "--type-body",    "size": 15, "weight": 400, "lh": 1.55, "label": "Body",       "sample": "KIMES는 매년 3월 코엑스에서 1,300여 개사 및 8만여 명의 전문 관람객이 참여하는 한국 최대의 의료·병원기기 전시회입니다." },
+    { "token": "--type-caption", "size": 12, "weight": 500, "lh": 1.5,  "label": "Caption",    "sample": "코엑스 · 2026년 3월 19일 — 22일" }
+  ]
+}

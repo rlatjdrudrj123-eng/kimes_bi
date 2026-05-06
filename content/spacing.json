@@ -1,0 +1,27 @@
+{
+  "eyebrow": "12 — Spacing & grid",
+  "title": "Spacing & grid",
+  "lede": "A single 8-unit spacing scale governs all rhythm. The page grid is a 12-column track at desktop, scaling down to 8 columns on tablet and 4 on mobile.",
+  "scale": {
+    "title": "Spacing scale",
+    "desc": "Multiples of 8px. Use semantic tokens like <code>--space-3</code> rather than raw pixel values — consistent rhythm across all surfaces.",
+    "tokens": [
+      { "token": "--space-1", "value": 8 },
+      { "token": "--space-2", "value": 16 },
+      { "token": "--space-3", "value": 24 },
+      { "token": "--space-4", "value": 32 },
+      { "token": "--space-5", "value": 48 },
+      { "token": "--space-6", "value": 64 },
+      { "token": "--space-7", "value": 80 }
+    ]
+  },
+  "grid": {
+    "title": "Grid system",
+    "desc": "12-column responsive grid with a 1280px max width on desktop.",
+    "breakpoints": [
+      { "label": "Desktop ≥ 1024px",   "cols": 12, "meta": "columns · 24px gutter · 1280px max" },
+      { "label": "Tablet 640–1023px",  "cols": 8,  "meta": "columns · 20px gutter" },
+      { "label": "Mobile < 640px",     "cols": 4,  "meta": "columns · 16px gutter" }
+    ]
+  }
+}
