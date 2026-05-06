@@ -23,6 +23,46 @@ function wordmarkFromRef(ref, height) {
   }
 }
 
+/* ---------- i18n hooks ---------- */
+// Subscribes to the global SITE_LANG. Re-renders any component using it
+// whenever window.setSiteLang() fires the 'site-lang-change' event.
+function useSiteLang() {
+  const [lang, setLang] = useState(window.SITE_LANG || 'en');
+  useEffect(() => {
+    function onChange(e) { setLang(e.detail.lang); }
+    window.addEventListener('site-lang-change', onChange);
+    return () => window.removeEventListener('site-lang-change', onChange);
+  }, []);
+  return lang;
+}
+
+// Returns the current-locale data for a section. Falls back to the other
+// locale if the current one is missing — preferable to rendering blanks.
+function useSectionContent(id) {
+  const lang = useSiteLang();
+  const sec = (window.CONTENT && window.CONTENT[id]) || {};
+  return sec[lang] || sec.en || sec.ko || {};
+}
+
+// Two-button language toggle, shown in the sidebar below the brand mark.
+function LangToggle() {
+  const lang = useSiteLang();
+  return (
+    <div className="lang-toggle" role="group" aria-label="Language">
+      <button
+        className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+        onClick={() => window.setSiteLang('en')}
+        aria-pressed={lang === 'en'}
+      >EN</button>
+      <button
+        className={`lang-btn ${lang === 'ko' ? 'active' : ''}`}
+        onClick={() => window.setSiteLang('ko')}
+        aria-pressed={lang === 'ko'}
+      >한국어</button>
+    </div>
+  );
+}
+
 /* ---------- Sidebar ---------- */
 const NAV = [
   {
@@ -97,6 +137,7 @@ function Sidebar({ active }) {
           <div className="sub">v 2026.0</div>
         </div>
       </div>
+      <LangToggle />
       {NAV.map(group => {
         const onThisPage = group.page === here;
         return (
@@ -129,7 +170,7 @@ function Sidebar({ active }) {
 
 /* ---------- Hero / Intro ---------- */
 function Hero() {
-  const c = (window.CONTENT && window.CONTENT.intro) || {};
+  const c = useSectionContent('intro');
   return (
     <section id="intro" className="section hero">
       <div className="section-eyebrow">{c.eyebrow}</div>
@@ -146,7 +187,7 @@ function Hero() {
 
 /* ---------- Brand family ---------- */
 function BrandFamily() {
-  const c = (window.CONTENT && window.CONTENT.family) || {};
+  const c = useSectionContent('family');
   const brands = c.brands || [];
   const badges = c.badges || { signature: 'Slash-cut family', independent: 'Independent identity' };
   return (
@@ -184,7 +225,7 @@ function BrandFamily() {
 
 /* ---------- Color tokens ---------- */
 function ColorTokens() {
-  const c = (window.CONTENT && window.CONTENT.color) || {};
+  const c = useSectionContent('color');
   const groups = c.groups || [];
   const h = c.tableHeaders || { token: 'Token', hex: 'HEX', rgb: 'RGB', cmyk: 'CMYK', usage: 'Usage' };
   return (
@@ -231,7 +272,7 @@ function ColorTokens() {
 
 /* ---------- Typography ---------- */
 function Typography() {
-  const c = (window.CONTENT && window.CONTENT.typography) || {};
+  const c = useSectionContent('typography');
   const tabs = c.tabs || { latin: 'Latin · Montserrat', kr: '한글 · Pretendard' };
   const [tab, setTab] = useState('latin');
   const scale = tab === 'latin' ? (c.scaleLatin || []) : (c.scaleKr || []);
@@ -418,7 +459,7 @@ function LogoVariants() {
 /* ---------- Logo catalog ---------- */
 
 function LogoCatalog() {
-  const c = (window.CONTENT && window.CONTENT.logo) || {};
+  const c = useSectionContent('logo');
   const brands = c.brands || [];
   const fs = c.familySignature || { title: '', body: '' };
   return (
@@ -464,7 +505,7 @@ function LogoCatalog() {
 
 /* ---------- Spacing & grid ---------- */
 function SpacingGrid() {
-  const c = (window.CONTENT && window.CONTENT.spacing) || {};
+  const c = useSectionContent('spacing');
   const scale = c.scale || { title: '', desc: '', tokens: [] };
   const grid  = c.grid  || { title: '', desc: '', breakpoints: [] };
   return (

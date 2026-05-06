@@ -1,0 +1,55 @@
+{
+  "eyebrow": "02 — 브랜드 패밀리",
+  "title": "Brand family",
+  "lede": "네 개의 독립적인 서브브랜드가 KIMES 전시회의 기반을 공유합니다. KIMES와 MedicomteK는 의료기기 패밀리를 이루며 — 둘 다 시그니처인 슬래시컷 <code>i</code>를 가지고 있습니다. Beauty&Derma와 INSPIRE Digital Health는 각자의 비주얼 시스템을 갖춘 독립 이벤트 아이덴티티입니다.",
+  "brands": [
+    {
+      "id": "kimes",
+      "name": "KIMES",
+      "desc": "Korea International Medical & Hospital Equipment Show — KIMES의 대표 전시 브랜드입니다.",
+      "primary": "#E60012",
+      "secondary": "#231815",
+      "signature": true,
+      "bgClass": "bg-white",
+      "wordmark": "kimes",
+      "wordmarkSize": 64
+    },
+    {
+      "id": "mc",
+      "name": "MedicomteK",
+      "desc": "의료 커뮤니케이션 기술 및 커넥티드 디바이스에 집중하는 자매 전시회입니다.",
+      "primary": "#036EB8",
+      "secondary": "#231815",
+      "signature": true,
+      "bgClass": "bg-white",
+      "wordmark": "medicomtek",
+      "wordmarkSize": 36
+    },
+    {
+      "id": "bd",
+      "name": "Beauty&Derma",
+      "desc": "서울·부산 에디션으로 개최되는 미용 의학 및 피부과 전시 라인입니다.",
+      "primary": "#5D3B8B",
+      "secondary": "#BAB1D7",
+      "signature": false,
+      "bgClass": "bg-white",
+      "wordmark": "beautyderma-stack",
+      "wordmarkSize": 80
+    },
+    {
+      "id": "in",
+      "name": "INSPIRE Digital Health",
+      "desc": "디지털 헬스 혁신을 탐구하는 미래 지향형 컨퍼런스. 태그라인: HEALTH MEETS INNOVATION.",
+      "primary": "#595757",
+      "secondary": "#BFD633",
+      "signature": false,
+      "bgClass": "bg-in-gray",
+      "wordmark": "inspire-tagline-lime",
+      "wordmarkSize": 36
+    }
+  ],
+  "badges": {
+    "signature": "슬래시컷 패밀리",
+    "independent": "독립 아이덴티티"
+  }
+}

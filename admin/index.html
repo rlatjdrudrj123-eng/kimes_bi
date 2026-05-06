@@ -15,10 +15,15 @@
 <body>
 
 <!--
-  Decap CMS (formerly Netlify CMS) — the admin UI mounts itself into <body>.
-  Configuration is read from admin/config.yml in the same folder.
+  Sveltia CMS — a modern, drop-in replacement for Decap CMS. Reads the same
+  admin/config.yml so collections, fields, widgets, and backends carry over
+  unchanged. UX is significantly more polished (dark mode, fast search, real
+  media library, keyboard shortcuts).
+
+  To switch back to Decap, replace this script with:
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 -->
-<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
 
 <script>
   // After signing out, kick the user back to the public site root.
