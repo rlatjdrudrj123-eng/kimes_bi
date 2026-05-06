@@ -1,5 +1,7 @@
 /* KIMES Design System — Accessibility (Section 16) */
 
+const useSectionContent = window.useSectionContent;
+
 /* ---------- Contrast helper (WCAG 2.1) ---------- */
 function hexToRgb(h) {
   const x = h.replace('#', '');
@@ -29,67 +31,23 @@ function bestGrade(r) {
   return 'FAIL';
 }
 
-const FOREGROUNDS = [
-  { token: '--ink',     hex: '#231815', label: 'Ink' },
-  { token: '--white',   hex: '#FFFFFF', label: 'White' },
-  { token: '--kimes-red', hex: '#E60012', label: 'KIMES red' },
-  { token: '--mc-blue',   hex: '#036EB8', label: 'Medicomtek blue' },
-  { token: '--bd-pink',   hex: '#E5006A', label: 'Beauty&Derma pink' },
-  { token: '--in-lime',   hex: '#C4E600', label: 'INSPIRE lime' },
-];
-const BACKGROUNDS = [
-  { token: '--bg',     hex: '#FFFFFF', label: 'White' },
-  { token: '--bg-subtle', hex: '#FAFAFA', label: 'Subtle' },
-  { token: '--bg-muted',  hex: '#F4F4F5', label: 'Muted' },
-  { token: '--ink',    hex: '#231815', label: 'Ink' },
-  { token: '--kimes-red', hex: '#E60012', label: 'KIMES red' },
-];
-
-const PAIRS = [
-  { fg: '#231815', bg: '#FFFFFF', name: 'Ink on White',          note: 'Default body and headline pairing. Highest contrast.' },
-  { fg: '#FFFFFF', bg: '#231815', name: 'White on Ink',          note: 'Inverse — used for dark hero, sponsor reels.' },
-  { fg: '#FFFFFF', bg: '#E60012', name: 'White on KIMES Red',    note: 'Primary CTA. Passes AA for ≥18pt; borderline for body.' },
-  { fg: '#E60012', bg: '#FFFFFF', name: 'KIMES Red on White',    note: 'Headlines only — fails AA for body. Use ≥24pt or bold ≥18pt.' },
-  { fg: '#FFFFFF', bg: '#036EB8', name: 'White on MC Blue',      note: 'Medicomtek primary. Strong AA on all sizes.' },
-  { fg: '#231815', bg: '#C4E600', name: 'Ink on INSPIRE Lime',   note: 'Inspire combo — passes AAA, the highest-contrast brand pair.' },
-];
-
-const TYPE_MINS = [
-  { token: '--text-body',     min: '16 / 14px',  use: 'Body text on web. 16px minimum on digital surfaces; 14px allowed for dense tables.', sample: 16, weight: 400 },
-  { token: '--text-caption',  min: '12px',       use: 'Captions, metadata, timestamps. Below 12px is reserved for monospace tokens only.', sample: 12, weight: 500 },
-  { token: '--text-button',   min: '14px',       use: 'Buttons and tab labels. Always paired with min 44×44 hit target.', sample: 14, weight: 600 },
-  { token: '--text-stage',    min: '24pt',       use: 'Stage screens, large-format signage. Anything below 24pt is illegible from row 5.', sample: 24, weight: 700 },
-  { token: '--text-hero',     min: '32pt',       use: 'Hero, on-stage headlines. Always Montserrat 700 / Pretendard 800.', sample: 28, weight: 800 },
-  { token: '--text-print-min', min: '9 pt',      use: 'Print collateral floor. Below 9 pt requires regulatory approval (legal, citations).', sample: 12, weight: 400 },
-];
-
-const CHECKLIST = [
-  { kind: 'do',   title: 'Use Ink on White by default', body: 'The 13.6:1 pairing is your most reliable surface. Everything else needs justification.' },
-  { kind: 'dont', title: 'Don\'t set body in KIMES red',   body: 'Red on white is 4.0:1 — fails AA for normal body. Use red only for headlines ≥18pt or bold ≥14pt.' },
-  { kind: 'do',   title: 'Add a focus ring to every interactive element', body: '2px solid #E60012, 2px offset. Visible in keyboard tab order; never rely on hover state alone.' },
-  { kind: 'dont', title: 'Don\'t use color alone to convey state', body: 'Pair red error states with an icon and text label. Pair green success states the same way.' },
-  { kind: 'do',   title: 'Provide alt text on every wordmark instance', body: 'Decorative SVGs should be aria-hidden. Brand wordmarks must announce the brand name.' },
-  { kind: 'dont', title: 'Don\'t auto-play motion above 2 cycles', body: 'Provide a pause control on any loop. Respect prefers-reduced-motion.' },
-  { kind: 'do',   title: 'Maintain 44×44 minimum hit targets', body: 'On mobile, any tappable element must be ≥44×44. Match WCAG 2.5.5.' },
-  { kind: 'dont', title: 'Don\'t place text over busy imagery without a scrim', body: 'Add a 60% black scrim or 92% white overlay so the text-to-bg contrast holds.' },
-];
-
 /* ============ Sections ============ */
 
 function A11yMatrix() {
+  const c = useSectionContent('a11y');
+  const matrix = c.matrix || {};
+  const foregrounds = c.foregrounds || [];
+  const backgrounds = c.backgrounds || [];
   return (
     <div id="a11y-matrix" className="subsection">
-      <h3>16.1 — Contrast ratio matrix</h3>
-      <p className="desc">
-        Every brand color paired against every background. Numbers are WCAG
-        2.1 contrast ratios; pills mark the highest passing grade.
-      </p>
+      <h3>{matrix.title}</h3>
+      <p className="desc">{matrix.desc}</p>
       <div className="a11y-matrix-wrap">
         <table className="a11y-matrix">
           <thead>
             <tr>
-              <th>Foreground ↓ / Background →</th>
-              {BACKGROUNDS.map(b => (
+              <th>{matrix.rowHeader}</th>
+              {backgrounds.map(b => (
                 <th key={b.token}>
                   <div>{b.label}</div>
                   <small style={{ display:'block', fontFamily:'var(--font-mono)', color:'var(--ink-faint)', fontWeight:500 }}>{b.hex}</small>
@@ -98,10 +56,10 @@ function A11yMatrix() {
             </tr>
           </thead>
           <tbody>
-            {FOREGROUNDS.map(fg => (
+            {foregrounds.map(fg => (
               <tr key={fg.token}>
                 <td className="row-label">{fg.label}<small>{fg.hex}</small></td>
-                {BACKGROUNDS.map(bg => {
+                {backgrounds.map(bg => {
                   const r = contrast(fg.hex, bg.hex);
                   const grade = bestGrade(r);
                   const failBg = grade === 'FAIL';
@@ -124,24 +82,22 @@ function A11yMatrix() {
 }
 
 function A11yPairs() {
+  const c = useSectionContent('a11y');
+  const pairs = c.pairs || {};
+  const items = pairs.items || [];
   return (
     <div id="a11y-pairs" className="subsection">
-      <h3>16.2 — Approved pairings</h3>
-      <p className="desc">
-        Six recommended foreground / background pairs with usage notes. Three
-        more pairs (KIMES red on white for body, Beauty&amp;Derma pink on
-        white, INSPIRE lime on white) are <b>flagged</b> and must not be used
-        for body copy.
-      </p>
+      <h3>{pairs.title}</h3>
+      <p className="desc" dangerouslySetInnerHTML={{ __html: pairs.desc || '' }} />
       <div className="a11y-pairs">
-        {PAIRS.map(p => {
+        {items.map(p => {
           const r = contrast(p.fg, p.bg);
           const g = gradesFor(r);
           return (
             <div className="a11y-pair" key={p.name}>
               <div className="a11y-pair-stage" style={{ background: p.bg, color: p.fg }}>
-                <div className="h">Aa Bb 가나</div>
-                <div className="b">The KIMES brand at 13px body — does this pairing hold up at the smallest size we ship?</div>
+                <div className="h">{pairs.sampleHead}</div>
+                <div className="b">{pairs.sampleBody}</div>
               </div>
               <div className="a11y-pair-meta">
                 <div>
@@ -166,26 +122,27 @@ function A11yPairs() {
 }
 
 function A11yTypes() {
+  const c = useSectionContent('a11y');
+  const types = c.types || {};
+  const headers = types.headers || {};
+  const items = types.items || [];
+  const sampleText = c.sampleText || 'The KIMES brand · 가나다라마';
   return (
     <div id="a11y-types" className="subsection">
-      <h3>16.3 — Type minimums</h3>
-      <p className="desc">
-        Minimum sizes for digital, signage, and print surfaces. Always pair
-        size with appropriate weight — light weights need more size to remain
-        legible.
-      </p>
+      <h3>{types.title}</h3>
+      <p className="desc">{types.desc}</p>
       <div className="a11y-types">
         <div className="a11y-type-row is-head">
-          <span>Token</span>
-          <span>Minimum</span>
-          <span>Sample</span>
-          <span>Use</span>
+          <span>{headers.token}</span>
+          <span>{headers.min}</span>
+          <span>{headers.sample}</span>
+          <span>{headers.use}</span>
         </div>
-        {TYPE_MINS.map(t => (
+        {items.map(t => (
           <div className="a11y-type-row" key={t.token}>
             <span className="a11y-type-name">{t.token}</span>
             <span className="a11y-type-min">{t.min}</span>
-            <span className="a11y-type-sample" style={{ fontSize: t.sample, fontWeight: t.weight, lineHeight: 1.3 }}>The KIMES brand · 가나다라마</span>
+            <span className="a11y-type-sample" style={{ fontSize: t.sample, fontWeight: t.weight, lineHeight: 1.3 }}>{sampleText}</span>
             <span className="a11y-type-use">{t.use}</span>
           </div>
         ))}
@@ -195,18 +152,18 @@ function A11yTypes() {
 }
 
 function A11yChecklist() {
+  const c = useSectionContent('a11y');
+  const checklist = c.checklist || {};
+  const items = checklist.items || [];
   return (
     <div id="a11y-checklist" className="subsection">
-      <h3>16.4 — Reviewer checklist</h3>
-      <p className="desc">
-        Eight items to validate before shipping any brand surface. Mix of
-        do's (green) and don'ts (red).
-      </p>
+      <h3>{checklist.title}</h3>
+      <p className="desc">{checklist.desc}</p>
       <div className="a11y-checklist">
-        {CHECKLIST.map(c => (
-          <div key={c.title} className={`a11y-check ${c.kind}`}>
-            <b>{c.title}</b>
-            <small>{c.body}</small>
+        {items.map(item => (
+          <div key={item.title} className={`a11y-check ${item.kind}`}>
+            <b>{item.title}</b>
+            <small>{item.body}</small>
           </div>
         ))}
       </div>
@@ -216,14 +173,12 @@ function A11yChecklist() {
 
 /* ---------- Page wrapper ---------- */
 function Accessibility() {
+  const c = useSectionContent('a11y');
   return (
     <section id="a11y" className="section">
-      <div className="section-eyebrow">16 — Accessibility</div>
-      <h2>Accessibility</h2>
-      <p className="lede">
-        WCAG 2.1 contrast for every brand color, approved pairings, type
-        minimums for digital and print, and a reviewer checklist.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <A11yMatrix />
       <A11yPairs />
       <A11yTypes />

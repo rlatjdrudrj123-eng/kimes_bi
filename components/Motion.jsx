@@ -1,5 +1,7 @@
 /* KIMES Design System — Motion & animation kit (Section 15) */
 
+const useSectionContent = window.useSectionContent;
+
 const EASINGS = [
   { name: 'Brand Out',    spec: 'cubic-bezier(0.22, 0.61, 0.36, 1)', use: 'Default for entries, reveals, and brand wordmark loops.', path: 'M 4 76 C 25 76, 60 14, 116 14' },
   { name: 'Standard',     spec: 'cubic-bezier(0.4, 0.0, 0.2, 1)',     use: 'UI transitions inside product surfaces.',                 path: 'M 4 76 C 50 76, 70 14, 116 14' },
@@ -306,15 +308,12 @@ function MotionDonts() {
 
 /* ---------- Page wrapper ---------- */
 function Motion() {
+  const c = useSectionContent('motion');
   return (
     <section id="motion" className="section">
-      <div className="section-eyebrow">15 — Motion</div>
-      <h2>Motion &amp; animation kit</h2>
-      <p className="lede">
-        How the KIMES brand moves. One signature loop, six variant animations,
-        a duration scale, and the three delivery formats every sponsor and
-        stage screen needs.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <MotionSignature />
       <MotionVariants />
       <MotionEasings />

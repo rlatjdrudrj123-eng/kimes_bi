@@ -1,0 +1,5 @@
+{
+  "eyebrow": "11 — Iconography",
+  "title": "Iconography",
+  "lede": "KIMES iconography covers the 14 official exhibition categories plus a small set of UI utilities. Icons are 1.5px stroke on a 24×24 grid, geometric, single-color via <code>currentColor</code> — they inherit from their parent context."
+}

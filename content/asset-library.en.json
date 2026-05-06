@@ -1,0 +1,143 @@
+{
+  "eyebrow": "13 — Asset library",
+  "title": "Asset library",
+  "lede": "Official KIMES brand assets for download. External use requires prior approval from the KIMES brand team.",
+  "logos": {
+    "title": "13.1 — Logo files",
+    "desc": "Vector wordmarks for all four KIMES sub-brands. SVG is the default for digital; AI files are reserved for print production.",
+    "countSuffix": "variants",
+    "brands": [
+      {
+        "id": "kimes",
+        "label": "KIMES",
+        "dot": "#E60012",
+        "variants": [
+          { "logo": "kimes",      "label": "Primary",          "file": "kimes-logo.svg" },
+          { "logo": "kimes2026",  "label": "With year (2026)", "file": "kimes-logo-2026.svg" },
+          { "logo": "kimesWhite", "label": "White",            "file": "kimes-logo-white.svg", "bg": "#231815" },
+          { "logo": "kimesBlack", "label": "Black",            "file": "kimes-logo-black.svg" },
+          { "logo": "kimesGray",  "label": "Gray",             "file": "kimes-logo-gray.svg" }
+        ]
+      },
+      {
+        "id": "mc",
+        "label": "MedicomteK",
+        "dot": "#036EB8",
+        "variants": [
+          { "logo": "mc",      "label": "Primary",          "file": "medicomtek-logo.svg" },
+          { "logo": "mc2026",  "label": "With year (2026)", "file": "medicomtek-logo-2026.svg" },
+          { "logo": "mcWhite", "label": "White",            "file": "medicomtek-logo-white.svg", "bg": "#036EB8" },
+          { "logo": "mcBlack", "label": "Black",            "file": "medicomtek-logo-black.svg" },
+          { "logo": "mcGray",  "label": "Gray",             "file": "medicomtek-logo-gray.svg" }
+        ]
+      },
+      {
+        "id": "bd",
+        "label": "Beauty&Derma",
+        "dot": "#5D3B8B",
+        "variants": [
+          { "logo": "bdSeoul", "label": "Horizontal",   "file": "beauty-derma-logo.svg" },
+          { "logo": "bdStack", "label": "3-line stack", "file": "beauty-derma-logo-stack.svg" },
+          { "logo": "bdWhite", "label": "White",        "file": "beauty-derma-logo-white.svg", "bg": "#5D3B8B" },
+          { "logo": "bdBlack", "label": "Black",        "file": "beauty-derma-logo-black.svg" },
+          { "logo": "bdGray",  "label": "Gray",         "file": "beauty-derma-logo-gray.svg" }
+        ]
+      },
+      {
+        "id": "in",
+        "label": "INSPIRE Digital Health",
+        "dot": "#BFD633",
+        "variants": [
+          { "logo": "inShort",         "label": "Short",          "file": "inspire-logo-short.svg" },
+          { "logo": "inStack",         "label": "2-line",         "file": "inspire-logo-stack.svg" },
+          { "logo": "inTagline",       "label": "With tagline",   "file": "inspire-logo-tagline.svg" },
+          { "logo": "inLimeShort",     "label": "Lime — short",   "file": "inspire-logo-lime-short.svg",   "bg": "#231815" },
+          { "logo": "inLimeStack",     "label": "Lime — stack",   "file": "inspire-logo-lime-stack.svg",   "bg": "#231815" },
+          { "logo": "inLimeTagline",   "label": "Lime — tagline", "file": "inspire-logo-lime-tagline.svg", "bg": "#231815" },
+          { "logo": "inTaglineBlack",  "label": "Black",          "file": "inspire-logo-black.svg" },
+          { "logo": "inTaglineGray",   "label": "Gray",           "file": "inspire-logo-gray.svg" }
+        ]
+      }
+    ],
+    "formats": ["SVG", "PNG", "AI"]
+  },
+  "colors": {
+    "title": "13.2 — Color values",
+    "desc": "Reference values for digital and print production. HEX and RGB are primary for screen; CMYK for offset and large-format printing.",
+    "headers": { "name": "Brand color", "token": "Token", "hex": "HEX", "rgb": "RGB", "cmyk": "CMYK" },
+    "copyLabel": "Copy HEX",
+    "rows": [
+      { "name": "KIMES Red",           "token": "--kimes-red",        "hex": "#E60012", "rgb": "230, 0, 18",     "cmyk": "0 / 100 / 100 / 0" },
+      { "name": "KIMES Black",         "token": "--kimes-black",      "hex": "#231815", "rgb": "35, 24, 21",     "cmyk": "0 / 0 / 0 / 100" },
+      { "name": "MedicomteK Blue",     "token": "--mc-blue",          "hex": "#036EB8", "rgb": "3, 110, 184",    "cmyk": "85 / 50 / 0 / 0" },
+      { "name": "Beauty&Derma Purple", "token": "--bd-purple",        "hex": "#5D3B8B", "rgb": "93, 59, 139",    "cmyk": "78 / 90 / 0 / 0" },
+      { "name": "Beauty&Derma Light",  "token": "--bd-light-purple",  "hex": "#BAB1D7", "rgb": "186, 177, 215",  "cmyk": "30 / 30 / 0 / 0" },
+      { "name": "INSPIRE Gray",        "token": "--in-gray",          "hex": "#595757", "rgb": "89, 87, 87",     "cmyk": "0 / 0 / 0 / 80" },
+      { "name": "INSPIRE Lime",        "token": "--in-lime",          "hex": "#BFD633", "rgb": "191, 214, 51",   "cmyk": "30 / 0 / 90 / 0" },
+      { "name": "Neutral Black",       "token": "--neutral-black",    "hex": "#231815", "rgb": "35, 24, 21",     "cmyk": "0 / 0 / 0 / 100" },
+      { "name": "Neutral Gray K40",    "token": "--neutral-gray",     "hex": "#A7A9AC", "rgb": "167, 169, 172",  "cmyk": "0 / 0 / 0 / 40" }
+    ]
+  },
+  "typography": {
+    "title": "13.3 — Typography",
+    "desc": "Both KIMES brand typefaces are open-source and freely available. Use the variable font versions wherever possible.",
+    "fonts": [
+      {
+        "name": "Montserrat",
+        "fontVar": "sans",
+        "sample": "Aa Bb 123",
+        "sampleWeight": 900,
+        "role": "Latin · Numerals · Brand wordmarks",
+        "desc": "Open-source font available from Google Fonts.",
+        "link": "https://fonts.google.com/specimen/Montserrat",
+        "linkLabel": "Download Montserrat ↗",
+        "weights": [
+          { "label": "Regular",    "weight": 400 },
+          { "label": "Medium",     "weight": 500 },
+          { "label": "SemiBold",   "weight": 600 },
+          { "label": "Bold",       "weight": 700 },
+          { "label": "ExtraBold",  "weight": 800 },
+          { "label": "Black",      "weight": 900 }
+        ]
+      },
+      {
+        "name": "Pretendard",
+        "fontVar": "kr",
+        "sample": "한글 Aa 123",
+        "sampleWeight": 800,
+        "role": "Korean · Hangul · Mixed body",
+        "desc": "Open-source font available on GitHub.",
+        "link": "https://github.com/orioncactus/pretendard",
+        "linkLabel": "Download Pretendard ↗",
+        "weights": [
+          { "label": "Regular",    "weight": 400 },
+          { "label": "Medium",     "weight": 500 },
+          { "label": "SemiBold",   "weight": 600 },
+          { "label": "Bold",       "weight": 700 },
+          { "label": "ExtraBold",  "weight": 800 },
+          { "label": "Black",      "weight": 900 }
+        ]
+      }
+    ]
+  },
+  "approval": {
+    "title": "13.4 — Asset request & approval",
+    "calloutTitleKr": "외부 사용 시 사전 승인",
+    "calloutTitleEn": "External use requires approval",
+    "bodyKr": "본 시스템의 자산은 KIMES 브랜드팀의 승인 후 사용 가능합니다.",
+    "bodyEn": "KIMES brand assets are available for use only after approval from the KIMES brand team.",
+    "rows": [
+      { "keyKr": "문의",          "keyEn": "Contact",          "val": "brand@kimes.kr", "isMail": true },
+      { "keyKr": "승인 검토 기간", "keyEn": "Review timeline", "valKr": "영업일 기준 3–5일", "valEn": "3–5 business days" }
+    ]
+  },
+  "version": {
+    "title": "13.5 — Version & legal",
+    "rows": [
+      { "key": "Brand System",   "value": "v2026.0",         "mono": true },
+      { "key": "Last updated",   "value": "2026-05-04",      "mono": true },
+      { "key": "Maintained by",  "value": "KIMES Brand Team" }
+    ],
+    "fineprint": "© KIMES Brand Team. All trademarks are property of their respective owners. KIMES, MedicomteK, Beauty&Derma, and INSPIRE Digital Health are trademarks of the Korea Medical Devices Industry Association."
+  }
+}

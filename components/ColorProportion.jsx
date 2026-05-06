@@ -1,4 +1,6 @@
 /* eslint-disable */
+const useSectionContent = window.useSectionContent;
+
 /**
  * Color proportion — section 04.
  *
@@ -420,15 +422,12 @@ function ColorProportionDonts() {
    Page wrapper
    ============================================================ */
 function ColorProportion() {
+  const c = useSectionContent('color-proportion');
   return (
     <section id="color-proportion" className="section">
-      <div className="section-eyebrow">04 — Color proportion</div>
-      <h2>Color proportion</h2>
-      <p className="lede">
-        Each KIMES sub-brand has a recommended color proportion that defines
-        its visual character. Follow these proportions to keep brand expression
-        consistent across all materials.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <BrandByBrand />
       <ComparisonView />
       <ApplicationMocks />

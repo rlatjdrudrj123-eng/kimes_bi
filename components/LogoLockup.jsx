@@ -1,4 +1,6 @@
 /* eslint-disable */
+const useSectionContent = window.useSectionContent;
+
 /**
  * Logo lockup — section 07.
  *
@@ -492,15 +494,12 @@ function ApprovalCallout() {
    Page wrapper
    ============================================================ */
 function LogoLockup() {
+  const c = useSectionContent('logo-lockup');
   return (
     <section id="logo-lockup" className="section">
-      <div className="section-eyebrow">10 — Logo lockup</div>
-      <h2>Logo lockup</h2>
-      <p className="lede">
-        Lockups govern how the KIMES logo combines with sub-brands and external
-        partners. Always preserve hierarchy, alignment, and clear space. Use only
-        approved lockup patterns — do not invent new combinations.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <KimesSubBrandLockups />
       <ExternalPartnerLockups />
       <LockupRulesTable />

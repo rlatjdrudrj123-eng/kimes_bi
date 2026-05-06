@@ -1,4 +1,6 @@
 /* eslint-disable */
+const useSectionContent = window.useSectionContent;
+
 /**
  * Logo rules — slimmed-down usage guide.
  *
@@ -400,15 +402,12 @@ function Misuse() {
    Page wrapper
    ============================================================ */
 function LogoRules() {
+  const c = useSectionContent('logo-rules');
   return (
     <section id="logo-rules" className="section">
-      <div className="section-eyebrow">09 — Logo rules</div>
-      <h2>Logo rules</h2>
-      <p className="lede">
-        How to use each brand mark correctly across every surface — clear
-        space, background contexts, photographs, and the things you must
-        never do.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <ClearSpaceAndMin />
       <BackgroundUsage />
       <PhotographicUsage />

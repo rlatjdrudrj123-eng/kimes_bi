@@ -29,6 +29,16 @@
     'logo',
     'spacing',
     'bi-audit',
+    'a11y',
+    'asset-library',
+    'color-proportion',
+    'gradients',
+    'typography-in-use',
+    'logo-rules',
+    'logo-lockup',
+    'iconography',
+    'motion',
+    'social-templates',
   ];
 
   const LOCALES = ['en', 'ko'];

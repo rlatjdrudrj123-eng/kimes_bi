@@ -1,4 +1,6 @@
 /* eslint-disable */
+const useSectionContent = window.useSectionContent;
+
 /**
  * Typography in use — section 06.
  *
@@ -569,15 +571,12 @@ function TypographyDonts() {
    Page wrapper
    ============================================================ */
 function TypographyInUse() {
+  const c = useSectionContent('typography-in-use');
   return (
     <section id="typography-in-use" className="section">
-      <div className="section-eyebrow">07 — Typography in use</div>
-      <h2>Typography in use</h2>
-      <p className="lede">
-        KIMES content is heavily mixed-language Korean + Latin + numerals.
-        These rules keep typography consistent across press releases, signage,
-        web, and print.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <HierarchyMocks />
       <MixingRules />
       <NumberFormats />

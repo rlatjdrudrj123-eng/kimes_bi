@@ -1,5 +1,7 @@
 /* KIMES Design System — Social / OG templates (Section 17) */
 
+const useSectionContent = window.useSectionContent;
+
 const SOCIAL_FORMATS = [
 { aspect: '1:1', dims: '1080×1080', pixel: '1:1', shape: { w: 110, h: 110 }, platforms: ['Instagram', 'Threads', 'LinkedIn', 'KakaoCh.'] },
 { aspect: '4:5', dims: '1080×1350', pixel: '4:5', shape: { w: 96, h: 120 }, platforms: ['Instagram (feed)', 'LinkedIn'] },
@@ -267,15 +269,12 @@ function SocialSpecs() {
 
 /* ---------- Page wrapper ---------- */
 function SocialTemplates() {
+  const c = useSectionContent('social-templates');
   return (
     <section id="social-templates" className="section">
-      <div className="section-eyebrow">17 — Social templates</div>
-      <h2>Social &amp; OG templates</h2>
-      <p className="lede">
-        Eight master templates across four canvas sizes, covering the full
-        sub-brand family and bilingual KO/EN copy. Plus safe-zone diagrams
-        and per-platform asset specs.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <SocialFormats />
       <SocialGallery />
       <SocialSafezone />

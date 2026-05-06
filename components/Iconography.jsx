@@ -1,4 +1,6 @@
 /* eslint-disable */
+const useSectionContent = window.useSectionContent;
+
 /**
  * Iconography — section 11.
  *
@@ -524,16 +526,12 @@ function IconDonts() {
    Page wrapper
    ============================================================ */
 function Iconography() {
+  const c = useSectionContent('iconography');
   return (
     <section id="iconography" className="section">
-      <div className="section-eyebrow">11 — Iconography</div>
-      <h2>Iconography</h2>
-      <p className="lede">
-        KIMES iconography covers the 14 official exhibition categories plus
-        a small set of UI utilities. Icons are 1.5px stroke on a 24×24 grid,
-        geometric, single-color via <code>currentColor</code> — they inherit
-        from their parent context.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <Construction />
       <CategoryIcons />
       <UtilityIcons />

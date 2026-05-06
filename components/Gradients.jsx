@@ -1,4 +1,6 @@
 /* eslint-disable */
+const useSectionContent = window.useSectionContent;
+
 /**
  * Gradients — section 05.
  * Digital-only auxiliary surface treatment.
@@ -253,17 +255,12 @@ function GradientDonts() {
    Page wrapper
    ============================================================ */
 function Gradients() {
+  const c = useSectionContent('gradients');
   return (
     <section id="gradients" className="section">
-      <div className="section-eyebrow">05 — Gradients</div>
-      <h2>Gradients</h2>
-      <p className="lede">
-        KIMES gradients are a digital-only auxiliary surface treatment. They
-        appear on web hero sections, app backgrounds, video intros, and
-        animated SNS thumbnails. Gradients are forbidden on print materials,
-        logos, typography, and brand-color application — the flat-graphic
-        identity of KIMES print remains unchanged.
-      </p>
+      <div className="section-eyebrow">{c.eyebrow}</div>
+      <h2>{c.title}</h2>
+      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
       <GradientSet />
       <GradientApplications />
       <AllowedContexts />
