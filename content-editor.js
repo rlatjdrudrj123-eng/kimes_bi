@@ -43,9 +43,16 @@
   function loadStore() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : { auth: null, content: {} };
+      const s = raw ? JSON.parse(raw) : {};
+      return {
+        auth:       s.auth       || null,
+        content:    s.content    || {},   // text / image / link overrides
+        styles:     s.styles     || {},   // per-element inline-style overrides
+        dimensions: s.dimensions || {},   // per-image width / height (px)
+        pat:        s.pat        || null, // GitHub Personal Access Token (for Publish)
+      };
     } catch (e) {
-      return { auth: null, content: {} };
+      return { auth: null, content: {}, styles: {}, dimensions: {}, pat: null };
     }
   }
   function saveStore(store) {
@@ -205,21 +212,33 @@
       const tag = el.tagName.toLowerCase();
 
       // --- Text leaves ---
+      // Save format: each value may be plain text OR HTML (containing <br>,
+      // <strong>, <em>). On apply, we route to innerHTML if the value contains
+      // an angle bracket and to textContent otherwise. This preserves line
+      // breaks and inline formatting added through the format toolbar without
+      // breaking older plain-text entries.
       if (TEXT_TAGS.has(tag) && isLeafText(el) && !el.dataset.ceEditable) {
         const k = pathKey(el);
         el.dataset.ceEditable = 'text';
         el.dataset.ceKey = k;
-        if (content[k] && content[k].type === 'text') {
-          el.textContent = content[k].value;
+        const v = content[k];
+        if (v && v.type === 'text') {
+          if (typeof v.value === 'string' && /<[a-z][^>]*>/i.test(v.value)) el.innerHTML = v.value;
+          else el.textContent = v.value;
         }
       } else if (el.dataset.ceEditable === 'text' && isLeafText(el)) {
-        // Re-apply override after React re-render (React resets textContent).
-        // Skip if the user is actively editing this node — we'd clobber their
-        // in-progress typing, since saves only happen on blur.
+        // Re-apply override after React re-render. Skip if the user is
+        // actively editing this node — we'd clobber their in-progress typing.
         if (document.activeElement === el) continue;
         const k = el.dataset.ceKey;
-        if (content[k] && content[k].type === 'text' && el.textContent !== content[k].value) {
-          el.textContent = content[k].value;
+        const v = content[k];
+        if (v && v.type === 'text') {
+          const isHtml = typeof v.value === 'string' && /<[a-z][^>]*>/i.test(v.value);
+          const cur = isHtml ? el.innerHTML : el.textContent;
+          if (cur !== v.value) {
+            if (isHtml) el.innerHTML = v.value;
+            else el.textContent = v.value;
+          }
         }
       }
 
@@ -248,6 +267,40 @@
           if (content[k] && content[k].type === 'link') {
             el.href = content[k].value;
           }
+        }
+      }
+
+      // --- Style overrides (font family / size / weight / italic / align) ---
+      // Applied to any element with a ce-key — set per-property to avoid
+      // clobbering React's existing inline styles.
+      if (el.dataset.ceKey) {
+        const k = el.dataset.ceKey;
+        const s = (store.styles || {})[k];
+        if (s) {
+          if (s.fontFamily) el.style.fontFamily = s.fontFamily;
+          if (s.fontSize)   el.style.fontSize   = s.fontSize;
+          if (s.fontWeight) el.style.fontWeight = s.fontWeight;
+          if (s.fontStyle)  el.style.fontStyle  = s.fontStyle;
+          if (s.textAlign)  el.style.textAlign  = s.textAlign;
+        }
+      }
+
+      // --- Dimensions (images and SVGs) ---
+      if ((tag === 'img' || tag === 'svg') && el.dataset.ceKey) {
+        const d = (store.dimensions || {})[el.dataset.ceKey];
+        if (d) {
+          if (d.width)  el.style.width  = typeof d.width  === 'number' ? d.width  + 'px' : d.width;
+          if (d.height) el.style.height = typeof d.height === 'number' ? d.height + 'px' : d.height;
+        }
+      }
+
+      // --- Mark all SVGs with a key so they can be resized ---
+      if (tag === 'svg' && !el.dataset.ceKey && !isSkipped(el)) {
+        // Only top-level SVGs (not nested inside another marked SVG) — also
+        // skip the wordmark SVGs in the sidebar (they're structural).
+        if (!el.closest('[data-ce-key]') && !el.closest('.sidebar')) {
+          el.dataset.ceKey = pathKey(el);
+          el.dataset.ceSvg = '1';
         }
       }
     }
@@ -283,18 +336,20 @@
     }
   }
 
-  // Capture text edits — save on blur.
+  // Capture text edits — save on blur. Save innerHTML so that line breaks
+  // (Enter → <br>) and inline formatting from the format toolbar (B / I)
+  // round-trip across reloads. If the value is plain text without tags, we
+  // still store it as a plain string for cleanliness.
   document.addEventListener('blur', function (e) {
     if (!editMode) return;
     const el = e.target;
     if (!el.dataset || el.dataset.ceEditable !== 'text') return;
     const k = el.dataset.ceKey;
-    const newVal = el.textContent;
+    const html = el.innerHTML;
+    const text = el.textContent;
+    const newVal = /<[a-z][^>]*>/i.test(html) ? html : text;
     const store = loadStore();
     store.content = store.content || {};
-    // Compare against current default: trick is, we don't have the default
-    // anymore if the override was already applied. Just always save if
-    // changed from what's stored, or save anyway (user explicitly edited).
     const existing = store.content[k];
     if (existing && existing.value === newVal) return;
     store.content[k] = { type: 'text', value: newVal };
@@ -534,6 +589,7 @@
     toolbarEl.className = 'ce-toolbar';
     toolbarEl.innerHTML = `
       <span class="ce-mode-pill">Editing</span>
+      <button class="ce-tool-btn primary" id="ce-publish" title="Push your edits to the live site (commits to GitHub, redeploys via Netlify)">Publish to site</button>
       <button class="ce-tool-btn" id="ce-export">Export JSON</button>
       <button class="ce-tool-btn" id="ce-import">Import JSON</button>
       <button class="ce-tool-btn" id="ce-changepw">Change password</button>
@@ -541,6 +597,7 @@
       <button class="ce-tool-btn exit" id="ce-exit">Done</button>
     `;
     document.body.appendChild(toolbarEl);
+    toolbarEl.querySelector('#ce-publish').onclick = publishToGitHub;
     toolbarEl.querySelector('#ce-exit').onclick = exitEditMode;
     toolbarEl.querySelector('#ce-export').onclick = exportEdits;
     toolbarEl.querySelector('#ce-import').onclick = importEditsDialog;
@@ -549,6 +606,8 @@
       if (confirm('Reset ALL content edits on this site? This cannot be undone.')) {
         const store = loadStore();
         store.content = {};
+        store.styles = {};
+        store.dimensions = {};
         saveStore(store);
         location.reload();
       }
@@ -681,10 +740,351 @@
   }
 
   /* ------------------------------------------------------------------------
+   * Server overrides — content/overrides.json published from this editor.
+   * Loaded once at boot; merged INTO localStorage so every visitor (not just
+   * the editor) sees the published changes. The editor's local edits then
+   * stack on top until the next Publish.
+   * --------------------------------------------------------------------- */
+  let serverOverridesLoaded = false;
+  async function loadServerOverrides() {
+    if (serverOverridesLoaded) return;
+    serverOverridesLoaded = true;
+    try {
+      const r = await fetch('content/overrides.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const remote = await r.json();
+      if (!remote || typeof remote !== 'object') return;
+      const local = loadStore();
+      // Merge: server is the baseline, local edits stack on top per-key.
+      const merge = (a, b) => Object.assign({}, a || {}, b || {});
+      const merged = {
+        auth: local.auth,
+        pat:  local.pat,
+        content:    merge(remote.content,    local.content),
+        styles:     merge(remote.styles,     local.styles),
+        dimensions: merge(remote.dimensions, local.dimensions),
+      };
+      saveStore(merged);
+      scanAndApply();
+    } catch (e) { /* missing or invalid overrides.json — fine */ }
+  }
+
+  /* ------------------------------------------------------------------------
+   * Format toolbar — shown above text selection in edit mode. Lets the
+   * editor change font family, size, weight, italic, and reset styles for
+   * the surrounding leaf text element.
+   * --------------------------------------------------------------------- */
+  let formatToolbarEl = null;
+  let formatTargetEl  = null;
+
+  const FONT_FAMILIES = [
+    { label: 'Default',    value: '' },
+    { label: 'Montserrat', value: "'Montserrat', sans-serif" },
+    { label: 'Pretendard', value: "'Pretendard Variable', 'Pretendard', sans-serif" },
+    { label: 'Serif',      value: 'Georgia, serif' },
+    { label: 'Mono',       value: "'JetBrains Mono', ui-monospace, monospace" },
+  ];
+
+  function ensureFormatToolbar() {
+    if (formatToolbarEl) return formatToolbarEl;
+    formatToolbarEl = document.createElement('div');
+    formatToolbarEl.className = 'ce-format-toolbar';
+    formatToolbarEl.innerHTML = `
+      <select class="ce-fmt-family" title="Font family">
+        ${FONT_FAMILIES.map(f => `<option value="${f.value}">${f.label}</option>`).join('')}
+      </select>
+      <input class="ce-fmt-size" type="number" min="8" max="200" step="1" title="Font size (px)" placeholder="px" />
+      <button class="ce-fmt-btn" data-act="bold"   title="Bold (Ctrl+B)"><b>B</b></button>
+      <button class="ce-fmt-btn" data-act="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+      <button class="ce-fmt-btn" data-act="break"  title="Insert line break">↵</button>
+      <button class="ce-fmt-btn" data-act="reset"  title="Reset font to design default">×</button>
+    `;
+    document.body.appendChild(formatToolbarEl);
+
+    // Prevent the toolbar from stealing focus / blur from contentEditable.
+    formatToolbarEl.addEventListener('mousedown', (e) => e.preventDefault());
+
+    formatToolbarEl.querySelector('.ce-fmt-family').onchange = (e) => {
+      applyTextStyle({ fontFamily: e.target.value });
+    };
+    formatToolbarEl.querySelector('.ce-fmt-size').onchange = (e) => {
+      const v = parseInt(e.target.value, 10);
+      applyTextStyle({ fontSize: v ? v + 'px' : '' });
+    };
+    formatToolbarEl.querySelectorAll('.ce-fmt-btn').forEach(btn => {
+      btn.onclick = () => {
+        const a = btn.dataset.act;
+        if (a === 'bold')   applyTextStyle({ fontWeight: weightToggle() });
+        if (a === 'italic') applyTextStyle({ fontStyle:  italicToggle() });
+        if (a === 'break')  insertLineBreak();
+        if (a === 'reset')  applyTextStyle({ fontFamily: '', fontSize: '', fontWeight: '', fontStyle: '' });
+      };
+    });
+    return formatToolbarEl;
+  }
+
+  function weightToggle() {
+    if (!formatTargetEl) return '700';
+    const cur = (loadStore().styles[formatTargetEl.dataset.ceKey] || {}).fontWeight || '';
+    return (cur === '700' || cur === 'bold') ? '' : '700';
+  }
+  function italicToggle() {
+    if (!formatTargetEl) return 'italic';
+    const cur = (loadStore().styles[formatTargetEl.dataset.ceKey] || {}).fontStyle || '';
+    return cur === 'italic' ? '' : 'italic';
+  }
+
+  function applyTextStyle(patch) {
+    if (!formatTargetEl) return;
+    const k = formatTargetEl.dataset.ceKey;
+    if (!k) return;
+    const store = loadStore();
+    store.styles = store.styles || {};
+    const cur = Object.assign({}, store.styles[k] || {});
+    Object.keys(patch).forEach(p => {
+      if (patch[p]) cur[p] = patch[p]; else delete cur[p];
+    });
+    if (Object.keys(cur).length === 0) delete store.styles[k];
+    else store.styles[k] = cur;
+    saveStore(store);
+    // Apply to the live element immediately (don't wait for next scan).
+    if (patch.fontFamily !== undefined) formatTargetEl.style.fontFamily = patch.fontFamily || '';
+    if (patch.fontSize   !== undefined) formatTargetEl.style.fontSize   = patch.fontSize   || '';
+    if (patch.fontWeight !== undefined) formatTargetEl.style.fontWeight = patch.fontWeight || '';
+    if (patch.fontStyle  !== undefined) formatTargetEl.style.fontStyle  = patch.fontStyle  || '';
+    flashToast('Style saved');
+  }
+
+  function insertLineBreak() {
+    if (!formatTargetEl) return;
+    formatTargetEl.focus();
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    const br = document.createElement('br');
+    range.insertNode(br);
+    // Move caret after the <br>.
+    range.setStartAfter(br);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    // Trigger save by blurring → re-focusing won't fire blur, so save manually.
+    const k = formatTargetEl.dataset.ceKey;
+    const html = formatTargetEl.innerHTML;
+    const store = loadStore();
+    store.content = store.content || {};
+    store.content[k] = { type: 'text', value: html };
+    saveStore(store);
+    flashToast('Saved');
+  }
+
+  function positionFormatToolbar(targetEl) {
+    if (!formatToolbarEl) return;
+    const rect = targetEl.getBoundingClientRect();
+    const tbW = formatToolbarEl.offsetWidth || 360;
+    let top  = window.scrollY + rect.top - 48;
+    let left = window.scrollX + rect.left;
+    if (top < window.scrollY + 8) top = window.scrollY + rect.bottom + 8;
+    if (left + tbW > window.scrollX + window.innerWidth) {
+      left = window.scrollX + window.innerWidth - tbW - 16;
+    }
+    formatToolbarEl.style.top  = top  + 'px';
+    formatToolbarEl.style.left = left + 'px';
+  }
+
+  function showFormatToolbar(targetEl) {
+    formatTargetEl = targetEl;
+    const tb = ensureFormatToolbar();
+    // Sync controls to current style for this element.
+    const store = loadStore();
+    const k = targetEl.dataset.ceKey;
+    const s = (store.styles[k] || {});
+    tb.querySelector('.ce-fmt-family').value = s.fontFamily || '';
+    tb.querySelector('.ce-fmt-size').value   = s.fontSize ? parseInt(s.fontSize, 10) : '';
+    tb.style.display = 'flex';
+    positionFormatToolbar(targetEl);
+  }
+  function hideFormatToolbar() {
+    if (formatToolbarEl) formatToolbarEl.style.display = 'none';
+    formatTargetEl = null;
+  }
+
+  // Show toolbar when an editable text element gains focus.
+  document.addEventListener('focusin', (e) => {
+    if (!editMode) return;
+    if (e.target.dataset && e.target.dataset.ceEditable === 'text') {
+      showFormatToolbar(e.target);
+    }
+  });
+  // Hide when focus leaves both the text element AND the toolbar.
+  document.addEventListener('focusout', (e) => {
+    setTimeout(() => {
+      const a = document.activeElement;
+      if (!a) { hideFormatToolbar(); return; }
+      const inText = a.dataset && a.dataset.ceEditable === 'text';
+      const inToolbar = formatToolbarEl && formatToolbarEl.contains(a);
+      if (!inText && !inToolbar) hideFormatToolbar();
+    }, 0);
+  });
+
+  /* ------------------------------------------------------------------------
+   * Image / SVG resize dialog
+   * --------------------------------------------------------------------- */
+  function openSizeDialog(el) {
+    const k = el.dataset.ceKey;
+    const isSvg = el.tagName.toLowerCase() === 'svg';
+    const rect = el.getBoundingClientRect();
+    const curW = Math.round(rect.width);
+    const curH = Math.round(rect.height);
+    const store = loadStore();
+    const existing = (store.dimensions || {})[k] || {};
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'ce-modal-backdrop';
+    backdrop.innerHTML = `
+      <div class="ce-modal" role="dialog" aria-modal="true">
+        <h3>Resize ${isSvg ? 'SVG' : 'image'}</h3>
+        <p>Current: ${curW} × ${curH} px. Leave blank to use the design default.</p>
+        <div class="ce-size-row">
+          <label>Width <input type="number" id="ce-sz-w" min="8" max="4096" value="${existing.width || ''}" placeholder="${curW}" /> px</label>
+          <label>Height <input type="number" id="ce-sz-h" min="8" max="4096" value="${existing.height || ''}" placeholder="${curH}" /> px</label>
+        </div>
+        <p class="ce-modal-hint">Lock aspect ratio: enter only one dimension and the other auto-scales.</p>
+        <div class="ce-modal-actions">
+          <button class="ce-btn ce-btn-danger" id="ce-reset" title="Reset to design default">Reset</button>
+          <button class="ce-btn" id="ce-cancel">Cancel</button>
+          <button class="ce-btn ce-btn-primary" id="ce-ok">Save</button>
+        </div>
+      </div>`;
+    document.body.appendChild(backdrop);
+    const wIn = backdrop.querySelector('#ce-sz-w');
+    const hIn = backdrop.querySelector('#ce-sz-h');
+    setTimeout(() => wIn.focus(), 30);
+
+    backdrop.querySelector('#ce-cancel').onclick = () => backdrop.remove();
+    backdrop.querySelector('#ce-reset').onclick  = () => {
+      const s = loadStore();
+      if (s.dimensions && s.dimensions[k]) {
+        delete s.dimensions[k];
+        saveStore(s);
+        location.reload();
+      } else { backdrop.remove(); }
+    };
+    backdrop.querySelector('#ce-ok').onclick = () => {
+      const w = parseInt(wIn.value, 10);
+      const h = parseInt(hIn.value, 10);
+      const aspect = curW / Math.max(1, curH);
+      let dim = {};
+      if (w && h) dim = { width: w, height: h };
+      else if (w) dim = { width: w, height: Math.round(w / aspect) };
+      else if (h) dim = { width: Math.round(h * aspect), height: h };
+      const s = loadStore();
+      s.dimensions = s.dimensions || {};
+      if (Object.keys(dim).length === 0) delete s.dimensions[k];
+      else s.dimensions[k] = dim;
+      saveStore(s);
+      el.style.width  = dim.width  ? dim.width  + 'px' : '';
+      el.style.height = dim.height ? dim.height + 'px' : '';
+      backdrop.remove();
+      flashToast('Size saved');
+    };
+  }
+
+  // Click on an image OR SVG (in edit mode) → open size dialog. Plain image
+  // click was already handled above for src replacement; we tee off here for
+  // SVGs and also offer a "resize" affordance via Alt+click on images.
+  document.addEventListener('click', function (e) {
+    if (!editMode) return;
+    const svg = e.target.closest && e.target.closest('svg[data-ce-svg]');
+    if (svg) {
+      e.preventDefault(); e.stopPropagation();
+      openSizeDialog(svg);
+      return;
+    }
+    const img = e.target.closest && e.target.closest('[data-ce-image]');
+    if (img && e.altKey) {
+      e.preventDefault(); e.stopPropagation();
+      openSizeDialog(img);
+    }
+  }, true);
+
+  /* ------------------------------------------------------------------------
+   * Publish — push the localStorage store to content/overrides.json on
+   * GitHub, so every visitor sees the changes. Uses a Personal Access Token
+   * (Contents: Read & Write on the repo).
+   * --------------------------------------------------------------------- */
+  // Hardcoded for now — change if you fork into another repo.
+  const PUBLISH_REPO   = 'rlatjdrudrj123-eng/kimes_bi';
+  const PUBLISH_BRANCH = 'main';
+  const PUBLISH_PATH   = 'content/overrides.json';
+
+  function utf8ToBase64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  async function publishToGitHub() {
+    const store = loadStore();
+    let pat = store.pat;
+    if (!pat) {
+      pat = prompt(
+        'Paste a GitHub Personal Access Token with Contents: Read & Write on this repo.\n' +
+        'Generate one at: https://github.com/settings/personal-access-tokens/new'
+      );
+      if (!pat) return;
+      store.pat = pat;
+      saveStore(store);
+    }
+
+    const url = `https://api.github.com/repos/${PUBLISH_REPO}/contents/${PUBLISH_PATH}`;
+    const headers = {
+      'Authorization': `Bearer ${pat}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    };
+
+    flashToast('Publishing…');
+
+    // Fetch existing SHA (required by GitHub PUT to update vs create).
+    let sha = null;
+    try {
+      const r = await fetch(`${url}?ref=${PUBLISH_BRANCH}`, { headers });
+      if (r.ok) { const data = await r.json(); sha = data.sha; }
+    } catch (e) { /* file doesn't exist yet — sha stays null, GitHub creates */ }
+
+    const payload = {
+      content:    store.content    || {},
+      styles:     store.styles     || {},
+      dimensions: store.dimensions || {},
+    };
+    const fileBody = JSON.stringify(payload, null, 2) + '\n';
+    const body = JSON.stringify({
+      message: 'Update overrides via in-place editor',
+      content: utf8ToBase64(fileBody),
+      sha: sha || undefined,
+      branch: PUBLISH_BRANCH,
+    });
+
+    const put = await fetch(url, { method: 'PUT', headers, body });
+    if (put.ok) {
+      flashToast('Published — site rebuilds in ~30s');
+    } else {
+      let msg = put.statusText;
+      try { const j = await put.json(); msg = j.message || msg; } catch (e) {}
+      // Bad token? Forget it so the next attempt re-prompts.
+      if (put.status === 401 || put.status === 403) {
+        const s = loadStore(); delete s.pat; saveStore(s);
+      }
+      alert('Publish failed: ' + msg);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
    * Boot
    * --------------------------------------------------------------------- */
   function boot() {
     scanAndApply();
+    loadServerOverrides();
     startObserver();
     setupHiddenTrigger();
     checkAdminTrigger();
@@ -696,6 +1096,7 @@
       exit: exitEditMode,
       reset: () => { localStorage.removeItem(STORAGE_KEY); location.reload(); },
       export: exportEdits,
+      publish: publishToGitHub,
     };
   }
 

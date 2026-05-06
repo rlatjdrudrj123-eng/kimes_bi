@@ -152,6 +152,97 @@
 .ce-toolbar .ce-tool-btn.exit:hover {
   background: #f4f4f5;
 }
+.ce-toolbar .ce-tool-btn.primary {
+  background: #E60012;
+  color: #fff;
+  border-color: #E60012;
+}
+.ce-toolbar .ce-tool-btn.primary:hover {
+  background: #b9000e;
+  border-color: #b9000e;
+}
+
+/* Format mini-toolbar — shown above the focused contenteditable text. */
+.ce-format-toolbar {
+  position: absolute;
+  display: none;
+  align-items: center;
+  gap: 4px;
+  background: #18181b;
+  padding: 4px 6px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px -4px rgba(0,0,0,0.4);
+  z-index: 99997;
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+.ce-format-toolbar select.ce-fmt-family,
+.ce-format-toolbar input.ce-fmt-size {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+}
+.ce-format-toolbar select.ce-fmt-family { min-width: 110px; }
+.ce-format-toolbar input.ce-fmt-size    { width: 56px; }
+.ce-format-toolbar .ce-fmt-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  min-width: 28px;
+}
+.ce-format-toolbar .ce-fmt-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* Resize dialog — shared modal layout, custom rows */
+.ce-size-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.ce-size-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #18181b;
+}
+.ce-size-row input[type="number"] {
+  width: 90px;
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  font-family: inherit;
+  outline: none;
+}
+.ce-modal-hint {
+  font-size: 11px;
+  color: #a1a1aa;
+  margin: 0 0 16px;
+}
+
+/* SVG edit affordance — outlined when hovered in edit mode */
+body.ce-edit-mode svg[data-ce-svg] {
+  outline: 1px dashed rgba(89, 87, 87, 0.4);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+body.ce-edit-mode svg[data-ce-svg]:hover {
+  outline-color: #595757;
+}
 
 /* "Edit this page" pill (when not in edit mode but in admin URL) */
 .ce-enter-edit-pill {

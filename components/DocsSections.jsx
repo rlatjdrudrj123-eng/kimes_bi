@@ -89,6 +89,15 @@ const NAV = [
     ],
   },
   {
+    title: 'Co-events',
+    page: 'Co-events.html',
+    items: [
+      { id: 'medicomtek',  label: 'MedicomteK' },
+      { id: 'beautyderma', label: 'Beauty&Derma' },
+      { id: 'inspire',     label: 'INSPIRE Digital Health' },
+    ],
+  },
+  {
     title: 'Components',
     page: 'Components.html',
     items: [
