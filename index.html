@@ -83,33 +83,37 @@
 
 <script type="text/babel">
 function App() {
-  // Each section is a window-exported component. We render every section in
-  // the order given by the design's NAV (Foundations group), matching the
-  // prototype 1:1. The Sidebar uses NAV + useActiveSection to highlight
-  // whichever section is currently in the viewport.
+  // Sidebar uses NAV + useActiveSection to highlight whichever section is
+  // currently in the viewport. The set of sections that render depends on
+  // SITE_BRAND: KIMES (main) shows the full 17-section guide; co-events
+  // (mc / bd / in) show only the compact subset listed in COEVENT_VIEW_IDS
+  // — a focused brand summary (intro, family, color, gradient, logo,
+  // logo rules, asset library).
   const ids = NAV.flatMap(g => g.items.map(i => i.id));
   const active = useActiveSection(ids);
+  const brand  = useSiteBrand();
+  const visible = (id) => brand === 'kimes' || COEVENT_VIEW_IDS.has(id);
   return (
     <div className="app">
       <Sidebar active={active} />
       <main className="main">
-        {/* 01 */}<Hero />
-        {/* 02 */}<BrandFamily />
-        {/* 03 */}<ColorTokens />
-        {/* 04 */}<ColorProportion />
-        {/* 05 */}<Gradients />
-        {/* 06 */}<Typography />
-        {/* 07 */}<TypographyInUse />
-        {/* 08 */}<LogoCatalog />
-        {/* 09 — Logo rules */}<LogoRules />
-        {/* 10 */}<LogoLockup />
-        {/* 11 */}<Iconography />
-        {/* 12 */}<SpacingGrid />
-        {/* 13 */}<AssetLibrary />
-        {/* 14 */}<Motion />
-        {/* 15 */}<Accessibility />
-        {/* 16 */}<SocialTemplates />
-        {/* 17 */}<BIAudit />
+        {visible('intro')             && <Hero />}
+        {visible('family')            && <BrandFamily />}
+        {visible('color')             && <ColorTokens />}
+        {visible('color-proportion')  && <ColorProportion />}
+        {visible('gradients')         && <Gradients />}
+        {visible('typography')        && <Typography />}
+        {visible('typography-in-use') && <TypographyInUse />}
+        {visible('logo')              && <LogoCatalog />}
+        {visible('logo-rules')        && <LogoRules />}
+        {visible('logo-lockup')       && <LogoLockup />}
+        {visible('iconography')       && <Iconography />}
+        {visible('spacing')           && <SpacingGrid />}
+        {visible('asset-library')     && <AssetLibrary />}
+        {visible('motion')            && <Motion />}
+        {visible('a11y')              && <Accessibility />}
+        {visible('social-templates')  && <SocialTemplates />}
+        {visible('bi-audit')          && <BIAudit />}
       </main>
     </div>
   );

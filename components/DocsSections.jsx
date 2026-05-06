@@ -56,6 +56,27 @@ const NAV_BRAND_MAP = {
   inspire:     'in',
 };
 
+// Co-event pages render only this small subset of sections — a focused
+// summary of brand identity (logo, color, gradient, basic logo rules,
+// downloadable assets). The KIMES main page renders the full 17-section
+// guide. To add a section to the co-event summary, append its id here.
+const COEVENT_VIEW_IDS = new Set([
+  'intro',
+  'family',
+  'color',
+  'gradients',
+  'logo',
+  'logo-rules',
+  'asset-library',
+]);
+
+// Hook: should the given section render in the current brand view?
+function useSectionVisible(id) {
+  const brand = useSiteBrand();
+  if (brand === 'kimes') return true;       // main page = full guide
+  return COEVENT_VIEW_IDS.has(id);          // co-event = compact summary
+}
+
 // Returns the current-locale data for a section. Falls back to the other
 // locale if the current one is missing — preferable to rendering blanks.
 function useSectionContent(id) {
@@ -182,10 +203,17 @@ function Sidebar({ active }) {
       {NAV.map(group => {
         const onThisPage = group.page === here;
         const isCoEvents = group.title === 'Co-events';
+        const isFoundations = group.title === 'Foundations';
+        // On co-event views, the Foundations group collapses to just the
+        // sections that belong on a brand summary page.
+        const items = (isFoundations && brand !== 'kimes')
+          ? group.items.filter(i => COEVENT_VIEW_IDS.has(i.id))
+          : group.items;
+        if (items.length === 0) return null;
         return (
           <div className="nav-group" key={group.title}>
             <h6>{group.title}</h6>
-            {group.items.map(item => {
+            {items.map(item => {
               const inert = !onThisPage && !isCoEvents;
               const showSoon = item.soon || inert;
               let isActive = onThisPage && active === item.id;
@@ -668,9 +696,14 @@ Object.assign(window, {
   LogoUsage: LogoCatalog,
   SpacingGrid,
   useActiveSection,
-  // Shared i18n hooks — every <section>.jsx grabs these off window so it
-  // can read content via useSectionContent('<id>') and re-render on toggle.
+  // Shared hooks — every <section>.jsx grabs these off window so it can
+  // read content (useSectionContent), react to language (useSiteLang) /
+  // brand (useSiteBrand) changes, and gate rendering on the current brand
+  // view (useSectionVisible).
   useSiteLang,
+  useSiteBrand,
   useSectionContent,
+  useSectionVisible,
+  COEVENT_VIEW_IDS,
   NAV,
 });
