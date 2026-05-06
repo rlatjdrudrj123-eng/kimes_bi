@@ -1,16 +1,16 @@
 {
-  "eyebrow": "08 — Logo",
+  "eyebrow": "08 — 로고",
   "title": "Logo",
-  "lede": "The complete catalog of approved logo files. Use only these SVGs from <code>/assets/logos/</code> — never recreate the wordmarks in CSS or set them as text. The slash-cut <code>i</code> only renders correctly from the SVG.",
+  "lede": "승인된 로고 파일의 전체 카탈로그입니다. <code>/assets/logos/</code> 폴더의 SVG만 사용하세요 — CSS로 워드마크를 다시 만들거나 텍스트로 조판하지 마세요. 슬래시컷 <code>i</code>는 SVG에서만 정확히 렌더링됩니다.",
   "brands": [
     {
       "id": "kimes",
       "name": "KIMES",
       "color": "#E60012",
       "items": [
-        { "svg": "kimes",      "file": "kimes-logo.svg",       "label": "Primary",   "h": 32 },
-        { "svg": "kimes2026",  "file": "kimes-2026-logo.svg",  "label": "With year", "h": 32 },
-        { "svg": "kimesWhite", "file": "kimes-white-logo.svg", "label": "White",     "h": 26, "dark": true }
+        { "svg": "kimes",      "file": "kimes-logo.svg",       "label": "기본",      "h": 32 },
+        { "svg": "kimes2026",  "file": "kimes-2026-logo.svg",  "label": "연도 포함", "h": 32 },
+        { "svg": "kimesWhite", "file": "kimes-white-logo.svg", "label": "화이트",    "h": 26, "dark": true }
       ]
     },
     {
@@ -18,19 +18,19 @@
       "name": "MedicomteK",
       "color": "#036EB8",
       "items": [
-        { "svg": "mc",      "file": "medicomtek-logo.svg",       "label": "Primary",   "h": 22 },
-        { "svg": "mc2026",  "file": "medicomtek-2026-logo.svg",  "label": "With year", "h": 28 },
-        { "svg": "mcWhite", "file": "medicomtek-white-logo.svg", "label": "White",     "h": 22, "dark": true }
+        { "svg": "mc",      "file": "medicomtek-logo.svg",       "label": "기본",      "h": 22 },
+        { "svg": "mc2026",  "file": "medicomtek-2026-logo.svg",  "label": "연도 포함", "h": 28 },
+        { "svg": "mcWhite", "file": "medicomtek-white-logo.svg", "label": "화이트",    "h": 22, "dark": true }
       ]
     },
     {
       "id": "bd",
-      "name": "Beauty & Derma",
+      "name": "Beauty & Derma",
       "color": "#5D3B8B",
       "items": [
-        { "svg": "bdSeoul", "file": "beautyderma-seoul-logo.svg",       "label": "Horizontal",   "h": 14 },
-        { "svg": "bdStack", "file": "beautyderma-seoul-stack-logo.svg", "label": "3-line stack", "h": 60 },
-        { "svg": "bdWhite", "file": "beautyderma-busan-white-logo.svg", "label": "White",        "h": 14, "dark": true }
+        { "svg": "bdSeoul", "file": "beautyderma-seoul-logo.svg",       "label": "수평형",      "h": 14 },
+        { "svg": "bdStack", "file": "beautyderma-seoul-stack-logo.svg", "label": "3행 스택",    "h": 60 },
+        { "svg": "bdWhite", "file": "beautyderma-busan-white-logo.svg", "label": "화이트",       "h": 14, "dark": true }
       ]
     },
     {
@@ -38,15 +38,15 @@
       "name": "INSPIRE Digital Health",
       "color": "#595757",
       "items": [
-        { "svg": "inShort",       "file": "inspire-logo.svg",              "label": "Short",          "h": 26 },
-        { "svg": "inStack",       "file": "inspire-stack-logo.svg",        "label": "2-line stack",   "h": 48 },
-        { "svg": "inTagline",     "file": "inspire-tagline-logo.svg",      "label": "Tagline (gray)", "h": 22 },
-        { "svg": "inLimeTagline", "file": "inspire-lime-tagline-logo.svg", "label": "Tagline (lime)", "h": 22, "dark": true }
+        { "svg": "inShort",       "file": "inspire-logo.svg",              "label": "짧은형",          "h": 26 },
+        { "svg": "inStack",       "file": "inspire-stack-logo.svg",        "label": "2행 스택",        "h": 48 },
+        { "svg": "inTagline",     "file": "inspire-tagline-logo.svg",      "label": "태그라인 (그레이)", "h": 22 },
+        { "svg": "inLimeTagline", "file": "inspire-lime-tagline-logo.svg", "label": "태그라인 (라임)",   "h": 22, "dark": true }
       ]
     }
   ],
   "familySignature": {
-    "title": "Family signature",
-    "body": "KIMES and MedicomteK share a common slash-cut detail on the <code>i</code> — the visual signature of the KIMES medical-equipment family. Beauty&Derma and INSPIRE Digital Health are independent identities with their own visual systems."
+    "title": "패밀리 시그니처",
+    "body": "KIMES와 MedicomteK는 <code>i</code>의 슬래시컷 디테일을 공유합니다 — KIMES 의료기기 패밀리의 비주얼 시그니처입니다. Beauty&Derma와 INSPIRE Digital Health는 각자의 비주얼 시스템을 갖춘 독립 아이덴티티입니다."
   }
 }

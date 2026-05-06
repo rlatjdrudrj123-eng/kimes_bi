@@ -1,10 +1,10 @@
 {
-  "eyebrow": "12 — Spacing & grid",
+  "eyebrow": "12 — 간격 & 그리드",
   "title": "Spacing & grid",
-  "lede": "A single 8-unit spacing scale governs all rhythm. The page grid is a 12-column track at desktop, scaling down to 8 columns on tablet and 4 on mobile.",
+  "lede": "8픽셀 단위의 단일 간격 스케일이 모든 리듬을 지배합니다. 페이지 그리드는 데스크톱에서 12 컬럼이며, 태블릿 8 컬럼, 모바일 4 컬럼으로 줄어듭니다.",
   "scale": {
-    "title": "Spacing scale",
-    "desc": "Multiples of 8px. Use semantic tokens like <code>--space-3</code> rather than raw pixel values — consistent rhythm across all surfaces.",
+    "title": "간격 스케일",
+    "desc": "8px의 배수. 원시 픽셀 값 대신 <code>--space-3</code> 같은 시맨틱 토큰을 사용하세요 — 모든 표면에서 일관된 리듬.",
     "tokens": [
       { "token": "--space-1", "value": 8 },
       { "token": "--space-2", "value": 16 },
@@ -16,12 +16,12 @@
     ]
   },
   "grid": {
-    "title": "Grid system",
-    "desc": "12-column responsive grid with a 1280px max width on desktop.",
+    "title": "그리드 시스템",
+    "desc": "데스크톱 최대 너비 1280px의 12 컬럼 반응형 그리드.",
     "breakpoints": [
-      { "label": "Desktop ≥ 1024px",   "cols": 12, "meta": "columns · 24px gutter · 1280px max" },
-      { "label": "Tablet 640–1023px",  "cols": 8,  "meta": "columns · 20px gutter" },
-      { "label": "Mobile < 640px",     "cols": 4,  "meta": "columns · 16px gutter" }
+      { "label": "데스크톱 ≥ 1024px",   "cols": 12, "meta": "컬럼 · 24px 거터 · 최대 1280px" },
+      { "label": "태블릿 640–1023px",   "cols": 8,  "meta": "컬럼 · 20px 거터" },
+      { "label": "모바일 < 640px",      "cols": 4,  "meta": "컬럼 · 16px 거터" }
     ]
   }
 }
