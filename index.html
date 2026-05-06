@@ -22,6 +22,12 @@
 <link rel="stylesheet" href="components/audit.css" />
 
 
+<!-- Editor overlay CSS (lightweight in-place editor; trigger: 5x click on the
+     KIMES wordmark in the sidebar, or visit /#admin). Sveltia CMS at /admin/
+     is the canonical editor — this localStorage one is for quick visual
+     tweaks (font, size, line breaks, image dimensions) without a commit. -->
+<link rel="stylesheet" href="content-editor.css" />
+
 <!-- React + Babel from CDN. The prototype was built against these exact versions. -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
@@ -114,6 +120,11 @@ window.CONTENT_READY.then(() => {
   ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 });
 </script>
+
+<!-- Lightweight in-place editor (localStorage-backed). Triggered by 5x click
+     on the KIMES wordmark in the sidebar, or visiting /#admin. Sveltia at
+     /admin/ remains the canonical editor for content commits. -->
+<script src="content-editor.js"></script>
 
 </body>
 </html>
