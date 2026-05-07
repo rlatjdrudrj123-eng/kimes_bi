@@ -139,15 +139,17 @@ const NAV = [
       { id: 'cards',      label: 'Cards' },
       { id: 'forms',      label: 'Forms' },
       { id: 'navigation', label: 'Navigation' },
+      { id: 'badges',     label: 'Badges' },
+      { id: 'banners',    label: 'Banners' },
     ],
   },
   {
     title: 'Applications',
-    page: 'Applications - Social Media.html',
+    page: 'Brand Foundations.html',
     items: [
-      { id: 'social', label: 'Social media templates' },
-      { id: 'print', label: 'Print collateral', soon: true },
-      { id: 'signage', label: 'Event signage', soon: true },
+      { id: 'social-templates', label: 'Social media templates' },
+      { id: 'print',            label: 'Print collateral' },
+      { id: 'signage',          label: 'Event signage' },
     ],
   },
 ];

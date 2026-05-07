@@ -24,6 +24,10 @@
 <link rel="stylesheet" href="components/cards.css" />
 <link rel="stylesheet" href="components/forms.css" />
 <link rel="stylesheet" href="components/navigation.css" />
+<link rel="stylesheet" href="components/badges.css" />
+<link rel="stylesheet" href="components/banners.css" />
+<link rel="stylesheet" href="components/print-collateral.css" />
+<link rel="stylesheet" href="components/event-signage.css" />
 
 
 <!-- Editor overlay CSS (lightweight in-place editor; trigger: 5x click on the
@@ -88,6 +92,10 @@
 <script type="text/babel" src="components/Cards.jsx"></script>
 <script type="text/babel" src="components/Forms.jsx"></script>
 <script type="text/babel" src="components/Navigation.jsx"></script>
+<script type="text/babel" src="components/Badges.jsx"></script>
+<script type="text/babel" src="components/Banners.jsx"></script>
+<script type="text/babel" src="components/PrintCollateral.jsx"></script>
+<script type="text/babel" src="components/EventSignage.jsx"></script>
 
 <script type="text/babel">
 function App() {
@@ -127,11 +135,17 @@ function App() {
         <CoEventPage brandId="bd" navId="beautyderma" />
         <CoEventPage brandId="in" navId="inspire" />
 
-        {/* Components group — buttons / cards / forms / navigation */}
+        {/* Components group — buttons / cards / forms / navigation / badges / banners */}
         <Buttons />
         <Cards />
         <Forms />
         <Navigation />
+        <Badges />
+        <Banners />
+
+        {/* Applications group — trade-show specific surfaces */}
+        <PrintCollateral />
+        <EventSignage />
       </main>
     </div>
   );
