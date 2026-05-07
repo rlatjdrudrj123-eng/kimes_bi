@@ -1,8 +1,10 @@
-# KIMES Design System
+# KIMES 2027 BI 가이드
 
-A multi-brand identity documentation site for KIMES 2026 — Korea's largest medical device and hospital equipment exhibition. Covers four sub-brands (KIMES, Beauty&Derma, MedicomteK, INSPIRE Digital Health) across 17 sections of brand foundations: colors, typography, logos, spacing, gradients, iconography, motion, accessibility, social templates, and a BI audit benchmarking the system against international peers.
+KIMES 2027 (제42회 국제 의료기기·병원설비 전시회, 2027-03-18~21 · COEX) 참가업체용 브랜드 가이드. 보도자료·부스·초청장·SNS·이메일 등 KIMES와 함께하는 자료에서 브랜드를 정확하게 표기하는 방법을 한 곳에 모은 권리 관계 문서입니다.
 
-The site is a fully static React+Babel-standalone page. Content lives in JSON files under `content/`. A bilingual (EN / 한국어) toggle is built into the sidebar. Editorial updates go through **Sveltia CMS** at `/admin/` and commit straight to GitHub.
+사이트는 정적 React+Babel-standalone 페이지로, 콘텐츠는 `content/`의 JSON에 있습니다. 콘텐츠 갱신은 `/admin/`의 **Sveltia CMS** 또는 헤더 KIMES 로고 5x 클릭으로 열리는 인플레이스 에디터를 통해 GitHub 커밋으로 반영됩니다.
+
+행사 메타데이터(회차·일정·장소·버전·핵심 숫자)는 [components/config.js](components/config.js)의 `window.KIMES_EVENT` 단일 출처에서 관리됩니다. 매년 회차 갱신 시 이 파일 한 곳만 수정하면 헤더·푸터·랜딩·overview 등 모든 페이지에 반영됩니다.
 
 ## Quick start (local)
 
@@ -12,6 +14,20 @@ python -m http.server 8765
 ```
 
 Run from the directory containing `index.html`. Any static-file server works (Python, `npx serve`, `caddy`, nginx). Opening `index.html` directly via `file://` will not work because Babel-standalone fetches the `.jsx` files over HTTP.
+
+## §22 톤 검수 (자동)
+
+명세 §22가 정한 금지 표현(프라이머리/세컨더리/베리언트/컨텍스트/디자인 시스템 자칭/~을 가집니다 등)을 페이지 본문에서 자동 검출:
+
+```powershell
+node scripts/check-tone.js
+```
+
+모든 `components/*.jsx`, `components/config.js`, `content/*.json`을 훑어 위반 위치(파일:줄:칸)와 권장 대체를 출력합니다. 위반이 있으면 종료 코드 1, 없으면 0. 매 페이지 작업 끝에 돌리면 Phase 2 막바지의 일괄 검수 부담이 줄어듭니다.
+
+규칙 추가·완화는 [scripts/check-tone.js](scripts/check-tone.js)의 `FORBIDDEN` 배열을 직접 편집하세요.
+
+[정정·변경 이력](docs/ERRATA.md) — 명세서 inline 수정의 추적 기록.
 
 ## Deploy
 
