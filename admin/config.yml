@@ -162,42 +162,6 @@ collections:
               - { name: "title", label: "Title",               widget: "string" }
               - { name: "body",  label: "Body (HTML allowed)", widget: "text" }
 
-      - file: "content/spacing.en.json"
-        name: "spacing_en"
-        label: "12 — Spacing & grid"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
-          - name: "scale"
-            label: "Spacing scale"
-            widget: "object"
-            fields:
-              - { name: "title", label: "Sub-title", widget: "string" }
-              - { name: "desc",  label: "Description (HTML allowed)", widget: "text" }
-              - name: "tokens"
-                label: "Tokens"
-                label_singular: "Step"
-                widget: "list"
-                fields:
-                  - { name: "token", label: "Token",      widget: "string" }
-                  - { name: "value", label: "Value (px)", widget: "number" }
-          - name: "grid"
-            label: "Grid system"
-            widget: "object"
-            fields:
-              - { name: "title", label: "Sub-title", widget: "string" }
-              - { name: "desc",  label: "Description (HTML allowed)", widget: "text" }
-              - name: "breakpoints"
-                label: "Breakpoints"
-                label_singular: "Breakpoint"
-                widget: "list"
-                fields:
-                  - { name: "label", label: "Label",     widget: "string" }
-                  - { name: "cols",  label: "Columns",   widget: "number" }
-                  - { name: "meta",  label: "Meta line", widget: "string" }
-
       # ---------- 07 Typography in use (header only) ----------
       - file: "content/typography-in-use.en.json"
         name: "typography_in_use_en"
@@ -222,16 +186,6 @@ collections:
       - file: "content/logo-lockup.en.json"
         name: "logo_lockup_en"
         label: "10 — Logo lockup"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
-
-      # ---------- 11 Iconography (header only) ----------
-      - file: "content/iconography.en.json"
-        name: "iconography_en"
-        label: "11 — Iconography"
         format: "json"
         fields:
           - { name: "eyebrow", label: "Eyebrow", widget: "string" }
@@ -278,16 +232,6 @@ collections:
                   - { name: "key",   label: "Key",        widget: "string" }
                   - { name: "value", label: "Value",      widget: "string" }
                   - { name: "mono",  label: "Monospace?", widget: "boolean", required: false, default: false }
-
-      # ---------- 16 Social templates (header only) ----------
-      - file: "content/social-templates.en.json"
-        name: "social_templates_en"
-        label: "16 — Social templates"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
 
   # =========================================================================
   # Korean copy — same schema as English, edits the .ko.json files
@@ -420,42 +364,6 @@ collections:
               - { name: "title", label: "타이틀",            widget: "string" }
               - { name: "body",  label: "본문 (HTML 가능)", widget: "text" }
 
-      - file: "content/spacing.ko.json"
-        name: "spacing_ko"
-        label: "12 — Spacing & grid (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
-          - name: "scale"
-            label: "간격 스케일"
-            widget: "object"
-            fields:
-              - { name: "title", label: "서브 타이틀", widget: "string" }
-              - { name: "desc",  label: "설명 (HTML 가능)", widget: "text" }
-              - name: "tokens"
-                label: "토큰"
-                label_singular: "단계"
-                widget: "list"
-                fields:
-                  - { name: "token", label: "토큰",     widget: "string" }
-                  - { name: "value", label: "값 (px)", widget: "number" }
-          - name: "grid"
-            label: "그리드 시스템"
-            widget: "object"
-            fields:
-              - { name: "title", label: "서브 타이틀",   widget: "string" }
-              - { name: "desc",  label: "설명 (HTML 가능)", widget: "text" }
-              - name: "breakpoints"
-                label: "브레이크포인트"
-                label_singular: "브레이크포인트"
-                widget: "list"
-                fields:
-                  - { name: "label", label: "라벨",       widget: "string" }
-                  - { name: "cols",  label: "컬럼 수",     widget: "number" }
-                  - { name: "meta",  label: "메타 라인",   widget: "string" }
-
       - file: "content/typography-in-use.ko.json"
         name: "typography_in_use_ko"
         label: "07 — Typography in use (한국어)"
@@ -477,15 +385,6 @@ collections:
       - file: "content/logo-lockup.ko.json"
         name: "logo_lockup_ko"
         label: "10 — Logo lockup (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
-
-      - file: "content/iconography.ko.json"
-        name: "iconography_ko"
-        label: "11 — Iconography (한국어)"
         format: "json"
         fields:
           - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
@@ -531,13 +430,4 @@ collections:
                   - { name: "key",   label: "키",            widget: "string" }
                   - { name: "value", label: "값",            widget: "string" }
                   - { name: "mono",  label: "모노스페이스?", widget: "boolean", required: false, default: false }
-
-      - file: "content/social-templates.ko.json"
-        name: "social_templates_ko"
-        label: "16 — Social templates (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
 

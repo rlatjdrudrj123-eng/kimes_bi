@@ -88,10 +88,7 @@ const NAV = [
       { id: 'logo', label: 'Logo' },
       { id: 'logo-rules', label: 'Logo rules' },
       { id: 'logo-lockup', label: 'Logo lockup' },
-      { id: 'iconography', label: 'Iconography' },
-      { id: 'spacing', label: 'Spacing & grid' },
       { id: 'asset-library', label: 'Asset library' },
-      { id: 'social-templates', label: 'Social templates' },
     ],
   },
 ];
@@ -455,53 +452,6 @@ function LogoCatalog() {
   );
 }
 
-/* ---------- Spacing & grid ---------- */
-function SpacingGrid() {
-  const c = useSectionContent('spacing');
-  const scale = c.scale || { title: '', desc: '', tokens: [] };
-  const grid  = c.grid  || { title: '', desc: '', breakpoints: [] };
-  return (
-    <section id="spacing" className="section">
-      <div className="section-eyebrow">{c.eyebrow}</div>
-      <h2>{c.title}</h2>
-      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
-
-      <div className="subsection">
-        <h3>{scale.title}</h3>
-        <p className="desc" dangerouslySetInnerHTML={{ __html: scale.desc || '' }} />
-        <div>
-          {(scale.tokens || []).map(s => (
-            <div key={s.token} className="spacing-row">
-              <div className="name">{s.token}</div>
-              <div className="value">{s.value}px</div>
-              <div className="bar" style={{ width: `${s.value}px` }} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="subsection">
-        <h3>{grid.title}</h3>
-        <p className="desc" dangerouslySetInnerHTML={{ __html: grid.desc || '' }} />
-        <div className="grid-spec">
-          {(grid.breakpoints || []).map(bp => (
-            <div className="card" key={bp.label}>
-              <div className="label">{bp.label}</div>
-              <div className="val">{bp.cols}</div>
-              <div className="meta">{bp.meta}</div>
-            </div>
-          ))}
-        </div>
-        <div className="grid-vis">
-          <div className="cols">
-            {Array.from({ length: 12 }).map((_, i) => <div key={i} className="col" />)}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ---------- Co-event summary page ----------------------------
  * Each <CoEventPage brandId="mc"> renders a focused brand profile at the
  * bottom of the main page, anchored at #medicomtek / #beautyderma /
@@ -580,7 +530,6 @@ Object.assign(window, {
   LogoCatalog,
   // Back-compat: previous render call used <LogoUsage />.
   LogoUsage: LogoCatalog,
-  SpacingGrid,
   CoEventPage,
   useActiveSection,
   useSiteLang,
