@@ -16,9 +16,8 @@ const useSectionContent = window.useSectionContent;
  * labels — never invent fake partner brands.
  */
 
-const InlineLogo        = window.InlineLogo;
-const useSectionContent = window.useSectionContent;
-const useSiteLang       = window.useSiteLang;
+const InlineLogo  = window.InlineLogo;
+const useSiteLang = window.useSiteLang;
 function trL(en, ko, lang) { return lang === 'ko' && ko ? ko : en; }
 
 /* --- Reusable helpers ----------------------------------------- */
