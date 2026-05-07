@@ -81,6 +81,94 @@
   min-width: 90px;
 }
 
+/* ---------- §5.3.3 보일러플레이트 ---------- */
+.bp-section {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--surface-line);
+}
+.bp-section:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: var(--space-2);
+}
+.bp-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+}
+.bp-section-title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text-primary);
+}
+.bp-section-use {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+.bp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+@media (max-width: 800px) {
+  .bp-grid { grid-template-columns: 1fr; }
+}
+.bp-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.bp-box.is-over {
+  border-color: var(--status-warn);
+  background: rgba(185, 28, 28, 0.04);
+}
+.bp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+.bp-tag {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.bp-text {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-primary);
+  user-select: text;
+  white-space: pre-wrap;
+}
+.bp-foot {
+  display: flex;
+  justify-content: flex-start;
+}
+.bp-count {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+.bp-box.is-over .bp-count {
+  color: var(--status-warn);
+  font-weight: 700;
+}
+
 /* 모바일 — 표를 카드 리스트로 풀어서 가로 스크롤 회피 */
 @media (max-width: 720px) {
   .ov-table thead { display: none; }
