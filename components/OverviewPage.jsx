@@ -52,6 +52,44 @@ function OverviewPage() {
   };
   const LENGTHS = [40, 100, 200, 400];
 
+  // §5.3.4 — 핵심 숫자 4장. config.js의 numbers에서 출처 표기까지 함께.
+  const numbers = window.KIMES_EVENT.numbers;
+  const NUM_CARDS = [
+    { value: numbers.exhibitors.value, label: '참가업체',      source: numbers.exhibitors.source },
+    { value: numbers.countries.value,  label: '참가국',         source: numbers.countries.source },
+    { value: numbers.visitors.value,   label: '관람객',         source: numbers.visitors.source },
+    { value: numbers.categories.value, label: '전시 카테고리',  source: numbers.categories.source },
+  ];
+
+  // §5.3.5 — 14개 전시 카테고리. 명세 §5.3.5의 한·영 병기 그대로.
+  const CATEGORIES = [
+    { n: '01', ko: '영상진단기기 및 용품',  en: 'Imaging diagnostics' },
+    { n: '02', ko: '진찰 및 진단 관련기기', en: 'Examination & diagnosis' },
+    { n: '03', ko: '수술 관련 기기',        en: 'Surgical instruments' },
+    { n: '04', ko: '병원설비 및 응급장비',  en: 'Hospital & emergency' },
+    { n: '05', ko: '피부미용 / 뷰티케어',    en: 'Beauty & skincare' },
+    { n: '06', ko: '치료 관련 기기',         en: 'Therapeutic devices' },
+    { n: '07', ko: '물리치료 / 재활 / 예방', en: 'Rehabilitation' },
+    { n: '08', ko: '한의학 관련',           en: 'Oriental medicine' },
+    { n: '09', ko: '의료 IT 시스템',        en: 'Medical IT systems' },
+    { n: '10', ko: '부품 / 소재',           en: 'Parts & materials' },
+    { n: '11', ko: '일회용 의료용품',        en: 'Disposable supplies' },
+    { n: '12', ko: '서비스 및 비즈니스',     en: 'Services & business' },
+    { n: '13', ko: '임상 및 검사',          en: 'Clinical & testing' },
+    { n: '14', ko: '바이오 / 제약',         en: 'Bio & pharmaceuticals' },
+  ];
+
+  // §5.3.6 — 공식 채널. 사이트·SNS는 [열기], 이메일은 [복사]
+  // (수신자 필드에 붙여 넣기 편하게).
+  const CHANNELS = [
+    { label: '공식 사이트', display: 'kimes.kr',          url: 'https://kimes.kr',                       action: 'open' },
+    { label: '브랜드 문의', display: 'brand@kimes.kr',    value: 'brand@kimes.kr',                        action: 'copy' },
+    { label: '참가 문의',   display: 'visit@kimes.kr',    value: 'visit@kimes.kr',                        action: 'copy' },
+    { label: '인스타그램', display: '@kimes_official',   url: 'https://instagram.com/kimes_official',   action: 'open' },
+    { label: '링크드인',   display: '/company/kimes',    url: 'https://linkedin.com/company/kimes',     action: 'open' },
+    { label: '유튜브',     display: '/@kimes',           url: 'https://youtube.com/@kimes',             action: 'open' },
+  ];
+
   return (
     <PageShell
       eyebrow="01"
@@ -92,9 +130,74 @@ function OverviewPage() {
         />
       ))}
 
-      {/* §5.3.4 핵심 숫자        — 다음 sub-commit에서 작성 */}
-      {/* §5.3.5 14개 카테고리     — 다음 sub-commit에서 작성 */}
-      {/* §5.3.6 공식 채널        — 다음 sub-commit에서 작성 */}
+      {/* §5.3.4 핵심 숫자 ----------------------------------------- */}
+      <h2 id="numbers">핵심 숫자</h2>
+      <p>
+        보도자료·홈페이지에 KIMES 규모를 표기할 때 다음 숫자를 그대로
+        사용합니다. 잠정 수치와 직전 회차 실적이 섞여 있으니 출처 표기를
+        함께 옮겨 적어주세요.
+      </p>
+      <div className="ov-num-grid" role="list">
+        {NUM_CARDS.map(card => (
+          <div key={card.label} className="ov-num" role="listitem">
+            <div className="ov-num-value">{card.value}</div>
+            <div className="ov-num-label">{card.label}</div>
+            <div className="ov-num-source">
+              {card.source ? `(${card.source})` : ' '}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* §5.3.5 14개 전시 카테고리 ----------------------------------- */}
+      <h2 id="categories">14개 전시 카테고리</h2>
+      <p>
+        KIMES는 영상진단부터 바이오·제약까지 14개 전시 카테고리로 구성됩니다.
+        각 카테고리별 부스 위치와 참가업체 명단은 행사 직전 공식 사이트에
+        공개됩니다.
+      </p>
+      <ol className="ov-cat-list">
+        {CATEGORIES.map(c => (
+          <li key={c.n} className="ov-cat">
+            <span className="ov-cat-num">{c.n}</span>
+            <span className="ov-cat-ko">{c.ko}</span>
+            <span className="ov-cat-en">{c.en}</span>
+          </li>
+        ))}
+      </ol>
+
+      {/* §5.3.6 공식 채널 -------------------------------------------- */}
+      <h2 id="channels">공식 채널</h2>
+      <p>
+        KIMES 사무국과 직접 연결되는 채널입니다. 이메일은 [복사]로 수신자
+        필드에 붙여 넣고, 사이트·SNS는 [열기]로 새 탭에서 확인하세요.
+      </p>
+      <ul className="ov-channels">
+        {CHANNELS.map(ch => (
+          <li key={ch.label} className="ov-ch">
+            <span className="ov-ch-label">{ch.label}</span>
+            <span className="ov-ch-value">{ch.display}</span>
+            <span className="ov-ch-action">
+              {ch.action === 'open' ? (
+                <a
+                  href={ch.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-sm btn-outline"
+                >
+                  열기 ↗
+                </a>
+              ) : (
+                <CopyButton
+                  value={ch.value}
+                  label="복사"
+                  ariaLabel={`${ch.label} ${ch.value} 복사`}
+                />
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
     </PageShell>
   );
 }

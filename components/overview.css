@@ -169,6 +169,118 @@
   font-weight: 700;
 }
 
+/* ---------- §5.3.4 핵심 숫자 ---------- */
+.ov-num-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-5);
+}
+@media (max-width: 900px) { .ov-num-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .ov-num-grid { grid-template-columns: 1fr; } }
+.ov-num {
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ov-num-value {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.ov-num-label {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+.ov-num-source {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ---------- §5.3.5 14개 카테고리 ---------- */
+.ov-cat-list {
+  list-style: none;
+  margin: var(--space-2) 0 var(--space-5);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--surface-line);
+}
+@media (max-width: 720px) { .ov-cat-list { grid-template-columns: 1fr; } }
+.ov-cat {
+  display: grid;
+  grid-template-columns: 36px 1fr 1fr;
+  gap: var(--space-2);
+  padding: 10px var(--space-2);
+  border-bottom: 1px solid var(--surface-line);
+  align-items: center;
+}
+.ov-cat-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+.ov-cat-ko {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.ov-cat-en {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+@media (max-width: 480px) {
+  .ov-cat { grid-template-columns: 32px 1fr; gap: var(--space-1); padding: 10px var(--space-1); }
+  .ov-cat-en { grid-column: 2 / -1; margin-top: 2px; }
+}
+
+/* ---------- §5.3.6 공식 채널 ---------- */
+.ov-channels {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--surface-line);
+}
+.ov-ch {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: var(--space-2);
+  padding: 12px var(--space-2);
+  border-bottom: 1px solid var(--surface-line);
+  align-items: center;
+}
+.ov-ch-label {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.ov-ch-value {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+}
+.ov-ch-action { display: inline-flex; }
+@media (max-width: 600px) {
+  .ov-ch { grid-template-columns: 1fr auto; }
+  .ov-ch-label { grid-column: 1 / -1; }
+  .ov-ch-value { grid-column: 1 / 2; }
+}
+
 /* 모바일 — 표를 카드 리스트로 풀어서 가로 스크롤 회피 */
 @media (max-width: 720px) {
   .ov-table thead { display: none; }
