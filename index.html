@@ -12,8 +12,6 @@
 <!-- Component stylesheets -->
 <link rel="stylesheet" href="components/logo-on-backgrounds.css" />
 <link rel="stylesheet" href="components/logo-lockup.css" />
-<link rel="stylesheet" href="components/color-proportion.css" />
-<link rel="stylesheet" href="components/gradients.css" />
 <link rel="stylesheet" href="components/typography-in-use.css" />
 <link rel="stylesheet" href="components/iconography.css" />
 <link rel="stylesheet" href="components/motion.css" />
@@ -71,8 +69,6 @@
 <script src="components/LogoSvgs.js"></script>
 <script type="text/babel" src="components/Wordmarks.jsx"></script>
 <script type="text/babel" src="components/DocsSections.jsx"></script>
-<script type="text/babel" src="components/ColorProportion.jsx"></script>
-<script type="text/babel" src="components/Gradients.jsx"></script>
 <script type="text/babel" src="components/TypographyInUse.jsx"></script>
 <script type="text/babel" src="components/LogoOnBackgrounds.jsx"></script>
 <script type="text/babel" src="components/LogoLockup.jsx"></script>
@@ -88,12 +84,7 @@
 <script type="text/babel">
 function App() {
   // Sidebar uses NAV + useActiveSection to highlight whichever section is
-  // currently in the viewport. The 17 KIMES sections render first (each
-  // brand-keyed section filters to KIMES via the default BrandContext),
-  // then 3 <CoEventPage> blocks — anchored at #medicomtek / #beautyderma
-  // / #inspire — render compact brand summaries. Each summary re-uses the
-  // same section components inside a BrandContext.Provider that overrides
-  // the filter brand.
+  // currently in the viewport.
   const ids = NAV.flatMap(g => g.items.map(i => i.id));
   const active = useActiveSection(ids);
   return (
@@ -101,10 +92,7 @@ function App() {
       <Sidebar active={active} />
       <main className="main">
         {/* 01 */}<Hero />
-        {/* 02 */}<BrandFamily />
         {/* 03 */}<ColorTokens />
-        {/* 04 */}<ColorProportion />
-        {/* 05 */}<Gradients />
         {/* 06 */}<Typography />
         {/* 07 */}<TypographyInUse />
         {/* 08 */}<LogoCatalog />
@@ -117,11 +105,6 @@ function App() {
         {/* 15 */}<Accessibility />
         {/* 16 */}<SocialTemplates />
         {/* 17 */}<BIAudit />
-
-        {/* Co-events — compact brand summaries appended to main */}
-        <CoEventPage brandId="mc" navId="medicomtek" />
-        <CoEventPage brandId="bd" navId="beautyderma" />
-        <CoEventPage brandId="in" navId="inspire" />
 
         {/* Applications group — trade-show specific surfaces */}
         <PrintCollateral />

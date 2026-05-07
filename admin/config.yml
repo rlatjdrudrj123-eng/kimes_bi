@@ -55,42 +55,6 @@ collections:
               - { name: "label", label: "Label", widget: "string" }
               - { name: "value", label: "Value", widget: "string" }
 
-      - file: "content/family.en.json"
-        name: "family_en"
-        label: "02 — Brand family"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
-          - name: "brands"
-            label: "Brands"
-            label_singular: "Brand"
-            widget: "list"
-            fields:
-              - { name: "id",            label: "ID",                  widget: "string" }
-              - { name: "name",          label: "Name",                widget: "string" }
-              - { name: "desc",          label: "Description",         widget: "text" }
-              - { name: "primary",       label: "Primary color (hex)", widget: "color" }
-              - { name: "secondary",     label: "Secondary color (hex)", widget: "color" }
-              - { name: "signature",     label: "Slash-cut family",    widget: "boolean", required: false }
-              - { name: "bgClass",       label: "Preview bg class",    widget: "string", default: "bg-white" }
-              - name: "wordmark"
-                label: "Wordmark"
-                widget: "select"
-                options:
-                  - { label: "KIMES",                  value: "kimes" }
-                  - { label: "MedicomteK",             value: "medicomtek" }
-                  - { label: "Beauty&Derma — stack",   value: "beautyderma-stack" }
-                  - { label: "INSPIRE — tagline lime", value: "inspire-tagline-lime" }
-              - { name: "wordmarkSize", label: "Wordmark height (px)", widget: "number", default: 64 }
-          - name: "badges"
-            label: "Badge labels"
-            widget: "object"
-            fields:
-              - { name: "signature",   label: "Slash-cut family badge", widget: "string" }
-              - { name: "independent", label: "Independent badge",      widget: "string" }
-
       - file: "content/color.en.json"
         name: "color_en"
         label: "03 — Color tokens"
@@ -233,26 +197,6 @@ collections:
                   - { name: "label", label: "Label",     widget: "string" }
                   - { name: "cols",  label: "Columns",   widget: "number" }
                   - { name: "meta",  label: "Meta line", widget: "string" }
-
-      # ---------- 04 Color proportion (header only) ----------
-      - file: "content/color-proportion.en.json"
-        name: "color_proportion_en"
-        label: "04 — Color proportion"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", hint: "Intro under the title. Inline HTML allowed.", widget: "text" }
-
-      # ---------- 05 Gradients (header only) ----------
-      - file: "content/gradients.en.json"
-        name: "gradients_en"
-        label: "05 — Gradients"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
 
       # ---------- 07 Typography in use (header only) ----------
       - file: "content/typography-in-use.en.json"
@@ -462,42 +406,6 @@ collections:
               - { name: "label", label: "라벨",  widget: "string" }
               - { name: "value", label: "값",    widget: "string" }
 
-      - file: "content/family.ko.json"
-        name: "family_ko"
-        label: "02 — Brand family (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
-          - name: "brands"
-            label: "브랜드"
-            label_singular: "브랜드"
-            widget: "list"
-            fields:
-              - { name: "id",            label: "ID",              widget: "string" }
-              - { name: "name",          label: "이름",            widget: "string" }
-              - { name: "desc",          label: "설명",            widget: "text" }
-              - { name: "primary",       label: "프라이머리 (hex)", widget: "color" }
-              - { name: "secondary",     label: "세컨더리 (hex)",   widget: "color" }
-              - { name: "signature",     label: "슬래시컷 패밀리",  widget: "boolean", required: false }
-              - { name: "bgClass",       label: "프리뷰 배경 클래스", widget: "string", default: "bg-white" }
-              - name: "wordmark"
-                label: "워드마크"
-                widget: "select"
-                options:
-                  - { label: "KIMES",                  value: "kimes" }
-                  - { label: "MedicomteK",             value: "medicomtek" }
-                  - { label: "Beauty&Derma — stack",   value: "beautyderma-stack" }
-                  - { label: "INSPIRE — tagline lime", value: "inspire-tagline-lime" }
-              - { name: "wordmarkSize", label: "워드마크 높이 (px)", widget: "number", default: 64 }
-          - name: "badges"
-            label: "배지 라벨"
-            widget: "object"
-            fields:
-              - { name: "signature",   label: "슬래시컷 배지",  widget: "string" }
-              - { name: "independent", label: "독립 배지",      widget: "string" }
-
       - file: "content/color.ko.json"
         name: "color_ko"
         label: "03 — Color tokens (한국어)"
@@ -640,24 +548,6 @@ collections:
                   - { name: "label", label: "라벨",       widget: "string" }
                   - { name: "cols",  label: "컬럼 수",     widget: "number" }
                   - { name: "meta",  label: "메타 라인",   widget: "string" }
-
-      - file: "content/color-proportion.ko.json"
-        name: "color_proportion_ko"
-        label: "04 — Color proportion (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래 들어가는 도입 문단. 인라인 HTML 허용.", widget: "text" }
-
-      - file: "content/gradients.ko.json"
-        name: "gradients_ko"
-        label: "05 — Gradients (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
 
       - file: "content/typography-in-use.ko.json"
         name: "typography_in_use_ko"

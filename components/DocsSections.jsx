@@ -4,24 +4,8 @@ const { useState, useEffect, useRef } = React;
 // Component refs from Wordmarks.jsx — read off window because each Babel
 // script gets its own scope and top-level identifiers from another file
 // aren't visible here without an explicit handoff.
-const KimesWordmark      = window.KimesWordmark;
-const MedicomtekWordmark = window.MedicomtekWordmark;
-const BeautyDermaWordmark = window.BeautyDermaWordmark;
-const InspireWordmark    = window.InspireWordmark;
-const InlineLogo         = window.InlineLogo;
-
-// Maps a content/*.json `wordmark` string to the corresponding wordmark
-// React element. The mapping lives in JSX (not JSON) because each variant
-// requires React props that can't be expressed cleanly in JSON.
-function wordmarkFromRef(ref, height) {
-  switch (ref) {
-    case 'kimes':                return <KimesWordmark height={height} />;
-    case 'medicomtek':           return <MedicomtekWordmark height={height} />;
-    case 'beautyderma-stack':    return <BeautyDermaWordmark height={height} variant="stack" />;
-    case 'inspire-tagline-lime': return <InspireWordmark height={height} variant="tagline" tone="lime" />;
-    default:                     return <KimesWordmark height={height} />;
-  }
-}
+const KimesWordmark = window.KimesWordmark;
+const InlineLogo    = window.InlineLogo;
 
 /* ---------- i18n hooks ---------- */
 // Subscribes to the global SITE_LANG. Re-renders any component using it
@@ -48,13 +32,11 @@ function useSiteBrand() {
   return brand;
 }
 
-// Brand context — every brand-keyed section (BrandFamily, ColorTokens,
-// ColorProportion, Gradients, LogoCatalog, LogoOnBackgrounds, AssetLibrary)
-// filters its data by the current Context value. The default is 'kimes',
-// so the main page shows only KIMES content. Each <CoEventPage> renders
-// inside a Provider that overrides the brand to mc / bd / in, so the same
-// section components render that brand's content inside the co-event
-// summary blocks at the bottom of the page.
+// Brand context — every brand-keyed section (ColorTokens, LogoCatalog,
+// LogoOnBackgrounds, AssetLibrary) filters its data by the current Context
+// value. The default is 'kimes', so the KIMES main guide shows only KIMES
+// content. The /special-zones routes (Phase 3) will override the brand
+// via a Provider to render mc / bd / in summary pages.
 const BrandContext = React.createContext('kimes');
 function useBrandFilter() { return React.useContext(BrandContext); }
 
@@ -100,10 +82,7 @@ const NAV = [
     page: 'Brand Foundations.html',
     items: [
       { id: 'intro', label: 'Introduction' },
-      { id: 'family', label: 'Brand family' },
       { id: 'color', label: 'Color tokens' },
-      { id: 'color-proportion', label: 'Color proportion' },
-      { id: 'gradients', label: 'Gradients' },
       { id: 'typography', label: 'Typography' },
       { id: 'typography-in-use', label: 'Typography in use' },
       { id: 'logo', label: 'Logo' },
@@ -116,16 +95,6 @@ const NAV = [
       { id: 'a11y', label: 'Accessibility' },
       { id: 'social-templates', label: 'Social templates' },
       { id: 'bi-audit', label: 'BI audit' },
-    ],
-  },
-  {
-    title: 'Co-events',
-    // Same page as Foundations — items are in-page anchors, not inert.
-    page: 'Brand Foundations.html',
-    items: [
-      { id: 'medicomtek',  label: 'MedicomteK' },
-      { id: 'beautyderma', label: 'Beauty&Derma' },
-      { id: 'inspire',     label: 'INSPIRE Digital Health' },
     ],
   },
   {
@@ -208,45 +177,6 @@ function Hero() {
       <div className="meta">
         {(c.meta || []).map((m, i) => (
           <div key={i}><span>{m.label}</span><span>{m.value}</span></div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Brand family ---------- */
-function BrandFamily() {
-  const c = useSectionContent('family');
-  const brand = useBrandFilter();
-  const brands = (c.brands || []).filter(b => b.id === brand);
-  const badges = c.badges || { signature: 'Slash-cut family', independent: 'Independent identity' };
-  return (
-    <section id="family" className="section">
-      <div className="section-eyebrow">{c.eyebrow}</div>
-      <h2>{c.title}</h2>
-      <p className="lede" dangerouslySetInnerHTML={{ __html: c.lede || '' }} />
-      <div className="family-grid">
-        {brands.map(b => (
-          <div key={b.id} className="family-card">
-            <div className={`preview ${b.bgClass || 'bg-white'}`}>
-              {wordmarkFromRef(b.wordmark, b.wordmarkSize)}
-            </div>
-            <div className="body">
-              <div className="head">
-                <span className="name">{b.name}</span>
-                {b.signature ? (
-                  <span className="badge signature">{badges.signature}</span>
-                ) : (
-                  <span className="badge">{badges.independent}</span>
-                )}
-              </div>
-              <p className="desc-line">{b.desc}</p>
-              <div className="swatches">
-                <span className="dot" style={{ background: b.primary }} title={b.primary} />
-                <span className="dot" style={{ background: b.secondary }} title={b.secondary} />
-              </div>
-            </div>
-          </div>
         ))}
       </div>
     </section>
@@ -598,19 +528,14 @@ function CoEventPage({ brandId, navId, sections }) {
   if (!brandData) return null;
 
   // Page header already shows brand name / description; the inner sections
-  // pick up the design specifics. Override `sections` prop if a co-event
-  // needs a different ordering.
-  const SECTIONS = sections || ['color', 'color-proportion', 'gradients', 'logo', 'logo-rules', 'asset-library'];
-  // Look up each section component by name on window. AssetLibrary,
-  // ColorProportion, Gradients, LogoRules etc. live in their own .jsx
-  // files and self-register on window when they load.
+  // pick up the design specifics. Override `sections` prop if a special-zone
+  // route needs a different ordering. (Phase 3: /special-zones)
+  const SECTIONS = sections || ['color', 'logo', 'logo-rules', 'asset-library'];
   const COMPS = {
-    'color':            window.ColorTokens,
-    'color-proportion': window.ColorProportion,
-    'gradients':        window.Gradients,
-    'logo':             window.LogoCatalog,
-    'logo-rules':       window.LogoRules,
-    'asset-library':    window.AssetLibrary,
+    'color':         window.ColorTokens,
+    'logo':          window.LogoCatalog,
+    'logo-rules':    window.LogoRules,
+    'asset-library': window.AssetLibrary,
   };
 
   return (
@@ -662,7 +587,6 @@ function useActiveSection(ids) {
 Object.assign(window, {
   Sidebar,
   Hero,
-  BrandFamily,
   ColorTokens,
   Typography,
   LogoCatalog,
