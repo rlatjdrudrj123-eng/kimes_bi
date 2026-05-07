@@ -250,14 +250,26 @@
   color: var(--text-muted);
   margin-bottom: var(--space-1);
 }
+/* §22.5 영문 H1 — Montserrat 800/900 (--font-display) 큰 사이즈 */
 .page-title {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: var(--fs-h1);
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.1;
   margin: 0;
   color: var(--text-primary);
+}
+/* §22.5 한글 서브 — Pretendard 500 (--font-body) 작은 사이즈, KIMES Gray.
+   영문 H1 바로 아래 시각 위계: 영문 메인, 한글 보조. */
+.page-subtitle {
+  margin: 4px 0 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  font-weight: 500;
+  color: var(--kimes-gray);
+  letter-spacing: -0.005em;
+  line-height: 1.4;
 }
 .page-lede {
   margin: var(--space-2) 0 0;

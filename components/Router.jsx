@@ -52,23 +52,25 @@ function useHashRoute() {
 // Route table. Routes with a numeric `nav` value appear in the global
 // header in that order. `cta: true` marks the "자산 다운로드" CTA pinned
 // to the right end of the header.
+// 라벨은 §22.5 영문/한글 사용 규칙에 따라 영문. 글로벌 nav, CTA 버튼,
+// 라우트 매핑 모두 단일 출처. 한글 서브타이틀은 PageShell에서 별도 prop.
 const ROUTES = [
   { path: '/',                           page: 'LandingPage' },
-  { path: '/overview',                   page: 'OverviewPage',           label: '한눈에',      nav: 1 },
-  { path: '/logo',                       page: 'LogoPage',               label: '로고',        nav: 2 },
-  { path: '/color',                      page: 'ColorPage',              label: '컬러',        nav: 3 },
-  { path: '/co-branding',                page: 'CoBrandingPage',         label: '함께쓰기',    nav: 4 },
-  { path: '/notation',                   page: 'NotationPage',           label: '표기',        nav: 5 },
-  { path: '/applications',               page: 'ApplicationsPage',       label: '적용예시',    nav: 6 },
-  { path: '/digital',                    page: 'DigitalPage',            label: '디지털',      nav: 7 },
-  { path: '/special-zones',              page: 'SpecialZonesIndex',      label: '특별관',      nav: 8 },
+  { path: '/overview',                   page: 'OverviewPage',           label: 'Overview',       nav: 1 },
+  { path: '/logo',                       page: 'LogoPage',               label: 'Logo',           nav: 2 },
+  { path: '/color',                      page: 'ColorPage',              label: 'Color',          nav: 3 },
+  { path: '/co-branding',                page: 'CoBrandingPage',         label: 'Co-branding',    nav: 4 },
+  { path: '/notation',                   page: 'NotationPage',           label: 'Writing Style',  nav: 5 },
+  { path: '/applications',               page: 'ApplicationsPage',       label: 'Applications',   nav: 6 },
+  { path: '/digital',                    page: 'DigitalPage',            label: 'Digital',        nav: 7 },
+  { path: '/special-zones',              page: 'SpecialZonesIndex',      label: 'Special Zones',  nav: 8 },
   { path: '/special-zones/medicomtek',   page: 'SpecialZoneMedicomtek' },
   { path: '/special-zones/beauty-derma', page: 'SpecialZoneBeautyDerma' },
   { path: '/special-zones/inspire',      page: 'SpecialZoneInspire' },
-  { path: '/permissions',                page: 'PermissionsPage',        label: '권한',        nav: 9 },
-  { path: '/faq',                        page: 'FaqPage',                label: 'FAQ',         nav: 10 },
+  { path: '/permissions',                page: 'PermissionsPage',        label: 'Usage Rights',   nav: 9 },
+  { path: '/faq',                        page: 'FaqPage',                label: 'FAQ',            nav: 10 },
   { path: '/typography',                 page: 'TypographyPage' },
-  { path: '/downloads',                  page: 'DownloadsPage',          label: '자산 다운로드', cta: true },
+  { path: '/downloads',                  page: 'DownloadsPage',          label: 'Downloads',      cta: true },
   { path: '/contact',                    page: 'ContactPage' },
   { path: '/changelog',                  page: 'ChangelogPage' },
 ];

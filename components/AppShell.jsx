@@ -23,7 +23,7 @@ function Header() {
       <div className="shell-header-inner">
         <Link to="/" className="shell-logo brand-mark" ariaLabel={`${window.KIMES_EVENT.event.nameKo} BI 가이드 — 시작 페이지`}>
           <KimesWordmark height={20} />
-          <span className="shell-logo-sub">{window.KIMES_EVENT.event.year} BI 가이드</span>
+          <span className="shell-logo-sub">{window.KIMES_EVENT.event.year} BI Guide</span>
         </Link>
 
         <nav className={`shell-nav ${open ? 'is-open' : ''}`} aria-label="주 메뉴">
@@ -88,16 +88,19 @@ function Footer() {
   );
 }
 
-// PageShell — every page wraps its body in this. `eyebrow` shows above the
-// title (e.g., "02"), `title` is the H1, `lede` is an optional intro line.
-// `toc` defaults to true; pages without H2 sections (stubs, landing) pass
-// false. The TOC scans the rendered DOM for H2s on mount.
-function PageShell({ eyebrow, title, lede, children, toc = true }) {
+// PageShell — every page wraps its body in this. §22.5 영문/한글 패턴:
+// `title` = English H1 (Montserrat 800/900, big), `subtitle` = Korean sub
+// (Pretendard 500, KIMES Gray, smaller). `eyebrow` is the small section
+// number above the title (e.g., "02"). `lede` is the intro paragraph.
+// `toc` defaults to true; landing/stub pages pass false. TOC scans the
+// rendered DOM for H2s on mount.
+function PageShell({ eyebrow, title, subtitle, lede, children, toc = true }) {
   return (
     <div className="page-shell">
       <header className="page-header">
         {eyebrow && <div className="page-eyebrow">{eyebrow}</div>}
         <h1 className="page-title">{title}</h1>
+        {subtitle && <div className="page-subtitle">{subtitle}</div>}
         {lede && <p className="page-lede">{lede}</p>}
       </header>
       <div className={`page-body ${toc ? 'with-toc' : ''}`}>
