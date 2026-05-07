@@ -1,4 +1,7 @@
-// Sections for the KIMES Design System docs site
+// Sections for the KIMES BI 가이드 docs site. Phase 2 reattaches each
+// surviving section component to a specific route page (e.g., ColorTokens
+// → /color, LogoCatalog → /logo). For now they remain registered on
+// window so phase-2 page commits can pull them in one at a time.
 
 const { useState, useEffect, useRef } = React;
 // Component refs from Wordmarks.jsx — read off window because each Babel
@@ -8,10 +11,12 @@ const KimesWordmark = window.KimesWordmark;
 const InlineLogo    = window.InlineLogo;
 
 /* ---------- i18n hooks ---------- */
-// Subscribes to the global SITE_LANG. Re-renders any component using it
-// whenever window.setSiteLang() fires the 'site-lang-change' event.
+// Single-language site (Korean) per spec §21. Inline EN boilerplate lives
+// only inside /overview tables, not as a UI toggle. The hook still exists
+// because surviving components call it; it now defaults to 'ko' and the
+// site-lang-change event listener stays for potential future use.
 function useSiteLang() {
-  const [lang, setLang] = useState(window.SITE_LANG || 'en');
+  const [lang, setLang] = useState(window.SITE_LANG || 'ko');
   useEffect(() => {
     function onChange(e) { setLang(e.detail.lang); }
     window.addEventListener('site-lang-change', onChange);
@@ -40,115 +45,12 @@ function useSiteBrand() {
 const BrandContext = React.createContext('kimes');
 function useBrandFilter() { return React.useContext(BrandContext); }
 
-// NAV id → family/color/logo data id, used by CoEventPage to wire each
-// summary section (#medicomtek / #beautyderma / #inspire) to its data.
-const NAV_BRAND_MAP = {
-  medicomtek:  'mc',
-  beautyderma: 'bd',
-  inspire:     'in',
-};
-
 // Returns the current-locale data for a section. Falls back to the other
 // locale if the current one is missing — preferable to rendering blanks.
 function useSectionContent(id) {
   const lang = useSiteLang();
   const sec = (window.CONTENT && window.CONTENT[id]) || {};
   return sec[lang] || sec.en || sec.ko || {};
-}
-
-// Two-button language toggle, shown in the sidebar below the brand mark.
-function LangToggle() {
-  const lang = useSiteLang();
-  return (
-    <div className="lang-toggle" role="group" aria-label="Language">
-      <button
-        className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-        onClick={() => window.setSiteLang('en')}
-        aria-pressed={lang === 'en'}
-      >EN</button>
-      <button
-        className={`lang-btn ${lang === 'ko' ? 'active' : ''}`}
-        onClick={() => window.setSiteLang('ko')}
-        aria-pressed={lang === 'ko'}
-      >한국어</button>
-    </div>
-  );
-}
-
-/* ---------- Sidebar ---------- */
-const NAV = [
-  {
-    title: 'Foundations',
-    page: 'Brand Foundations.html',
-    items: [
-      { id: 'intro', label: 'Introduction' },
-      { id: 'color', label: 'Color tokens' },
-      { id: 'typography', label: 'Typography' },
-      { id: 'typography-in-use', label: 'Typography in use' },
-      { id: 'logo', label: 'Logo' },
-      { id: 'logo-rules', label: 'Logo rules' },
-      { id: 'logo-lockup', label: 'Logo lockup' },
-      { id: 'asset-library', label: 'Asset library' },
-    ],
-  },
-];
-
-// The page each NAV group lives on, computed from the current location so
-// in-page anchor links stay relative and cross-page links hop to the right file.
-// Aliases: when deployed as index.html (or root '/'), treat the page as
-// 'Brand Foundations.html' so sidebar anchors work without rewriting NAV.
-function currentPage() {
-  const f = (location.pathname.split('/').pop() || '').replace(/[?#].*$/, '');
-  const decoded = decodeURIComponent(f);
-  if (!decoded || decoded === 'index.html' || decoded === 'index.htm') {
-    return 'Brand Foundations.html';
-  }
-  return decoded;
-}
-
-function Sidebar({ active }) {
-  const here = currentPage();
-  // Foundations and Co-events both live on the main page. Co-events items
-  // are in-page anchors to the compact brand summary sections rendered at
-  // the bottom of <main> (#medicomtek / #beautyderma / #inspire).
-  return (
-    <aside className="sidebar">
-      <div className="brand-mark">
-        <KimesWordmark height={24} />
-        <div>
-          <div className="name">Design System</div>
-          <div className="sub">v 2026.0</div>
-        </div>
-      </div>
-      <LangToggle />
-      {NAV.map(group => {
-        const onThisPage = group.page === here;
-        return (
-          <div className="nav-group" key={group.title}>
-            <h6>{group.title}</h6>
-            {group.items.map(item => {
-              const inert = !onThisPage;
-              const showSoon = item.soon || inert;
-              const href = onThisPage ? `#${item.id}` : 'javascript:void(0)';
-              const isActive = onThisPage && active === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={href}
-                  className={`nav-link ${isActive ? 'active' : ''} ${showSoon ? 'soon' : ''}`}
-                  onClick={inert ? (e) => e.preventDefault() : undefined}
-                  title={inert ? 'Available in extended deployment' : undefined}
-                >
-                  <span>{item.label}</span>
-                  {showSoon && <span className="soon-pill">Soon</span>}
-                </a>
-              );
-            })}
-          </div>
-        );
-      })}
-    </aside>
-  );
 }
 
 /* ---------- Hero / Intro ---------- */
@@ -500,30 +402,7 @@ function CoEventPage({ brandId, navId, sections }) {
   );
 }
 
-/* ---------- Active section tracker ---------- */
-function useActiveSection(ids) {
-  const [active, setActive] = useState(ids[0]);
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      entries => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5, 1] }
-    );
-    ids.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, [ids.join(',')]);
-  return active;
-}
-
 Object.assign(window, {
-  Sidebar,
   Hero,
   ColorTokens,
   Typography,
@@ -531,13 +410,10 @@ Object.assign(window, {
   // Back-compat: previous render call used <LogoUsage />.
   LogoUsage: LogoCatalog,
   CoEventPage,
-  useActiveSection,
   useSiteLang,
   useSectionContent,
   // Brand filter — section components below DocsSections.jsx grab these
   // off window so they can join the same Context as the local sections.
   BrandContext,
   useBrandFilter,
-  NAV_BRAND_MAP,
-  NAV,
 });

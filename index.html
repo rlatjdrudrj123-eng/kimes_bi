@@ -1,15 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KIMES Design System — Brand Foundations</title>
-<meta name="description" content="The official KIMES Design System — multi-brand identity foundations for KIMES, Beauty&Derma, MedicomteK, and INSPIRE Digital Health." />
+<title>KIMES 2026 BI 가이드</title>
+<meta name="description" content="KIMES 2026 참가업체용 브랜드 가이드. 보도자료, 부스, 초청장, SNS 등 KIMES와 함께하는 모든 자료에서 브랜드를 정확하게 표기하는 방법입니다." />
 
 <!-- Fonts + base CSS -->
 <link rel="stylesheet" href="docs.css" />
 
-<!-- Component stylesheets -->
+<!-- Global app shell (§3 IA: header / footer / page shell + §19 tokens) -->
+<link rel="stylesheet" href="components/app-shell.css" />
+
+<!-- Legacy section stylesheets (still loaded; surviving Foundations
+     components reference them. Phase 2 reattaches each component to its
+     destination route, then we'll prune.) -->
 <link rel="stylesheet" href="components/logo-on-backgrounds.css" />
 <link rel="stylesheet" href="components/logo-lockup.css" />
 <link rel="stylesheet" href="components/typography-in-use.css" />
@@ -55,10 +60,17 @@
 <!-- Pre-mount loading indicator (hidden once #root has children) -->
 <div id="__pre_mount"><div class="lp">Loading KIMES Design System…</div></div>
 
-<!-- Shared SVG / wordmark library, then the docs shell, then per-section components.
-     Order matters: LogoSvgs.js populates window.LOGO_SVGS first; Wordmarks.jsx
-     reads it; then DocsSections.jsx defines the shell + sidebar; then each
-     content section. The final inline script at the bottom mounts <App />. -->
+<!-- Load order:
+     1. LogoSvgs.js → window.LOGO_SVGS
+     2. Wordmarks.jsx → KimesWordmark, InlineLogo, etc. (reads LOGO_SVGS)
+     3. DocsSections.jsx → exports surviving Foundations components
+        (Hero, ColorTokens, Typography, LogoCatalog, CoEventPage, hooks)
+     4. Per-section components (TypographyInUse, LogoOnBackgrounds,
+        LogoLockup, AssetLibrary) — registered on window for Phase 2 use
+     5. Router.jsx → useHashRoute + ROUTES + matchRoute + Link
+     6. AppShell.jsx → Header + Footer + PageShell + TocSidebar
+     7. Pages.jsx → 18 placeholder pages (incl. NotFound) on window
+     8. Inline App mount below -->
 <script src="components/LogoSvgs.js"></script>
 <script type="text/babel" src="components/Wordmarks.jsx"></script>
 <script type="text/babel" src="components/DocsSections.jsx"></script>
@@ -66,31 +78,30 @@
 <script type="text/babel" src="components/LogoOnBackgrounds.jsx"></script>
 <script type="text/babel" src="components/LogoLockup.jsx"></script>
 <script type="text/babel" src="components/AssetLibrary.jsx"></script>
+<script type="text/babel" src="components/Router.jsx"></script>
+<script type="text/babel" src="components/AppShell.jsx"></script>
+<script type="text/babel" src="components/Pages.jsx"></script>
 
 <script type="text/babel">
 function App() {
-  // Sidebar uses NAV + useActiveSection to highlight whichever section is
-  // currently in the viewport.
-  const ids = NAV.flatMap(g => g.items.map(i => i.id));
-  const active = useActiveSection(ids);
+  const path = window.useHashRoute();
+  const route = window.matchRoute(path);
+  const Page = route ? window[route.page] : window.NotFoundPage;
   return (
-    <div className="app">
-      <Sidebar active={active} />
-      <main className="main">
-        {/* 01 */}<Hero />
-        {/* 03 */}<ColorTokens />
-        {/* 06 */}<Typography />
-        {/* 07 */}<TypographyInUse />
-        {/* 08 */}<LogoCatalog />
-        {/* 09 — Logo rules */}<LogoRules />
-        {/* 10 */}<LogoLockup />
-        {/* 13 */}<AssetLibrary />
+    <div className="app-shell">
+      <window.Header />
+      <main className="shell-main">
+        {/* key={path} forces a clean remount on navigation so per-page
+            effects (TocSidebar's H2 scan) re-run reliably. */}
+        <Page key={path} />
       </main>
+      <window.Footer />
     </div>
   );
 }
-// Defer the mount until content/*.json files have loaded — components read
-// from window.CONTENT at render time, so we want the data on hand first.
+// Defer the mount until content/*.json files have loaded — surviving
+// Foundations components read from window.CONTENT at render time, so we
+// want the data on hand before any page tries to render them.
 window.CONTENT_READY.then(() => {
   ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 });
