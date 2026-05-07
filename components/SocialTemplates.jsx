@@ -148,13 +148,12 @@ const TEMPLATES = [
 /* ============ Sections ============ */
 
 function SocialFormats() {
+  const c = useSectionContent('social-templates');
+  const sub = (c.subsections && c.subsections.formats) || {};
   return (
     <div id="so-formats" className="subsection">
-      <h3>17.1 — Format inventory</h3>
-      <p className="desc">
-        Four canvas sizes cover every distribution surface. Always master at
-        the listed pixel dimensions; downscale for smaller targets.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="so-formats">
         {SOCIAL_FORMATS.map((f) =>
         <div className="so-format" key={f.aspect}>
@@ -174,15 +173,12 @@ function SocialFormats() {
 }
 
 function SocialGallery() {
+  const c = useSectionContent('social-templates');
+  const sub = (c.subsections && c.subsections.gallery) || {};
   return (
     <div id="so-gallery" className="subsection">
-      <h3>17.2 — Template gallery</h3>
-      <p className="desc">
-        Eight master templates: hero poster, pull quote, daily countdown, OG
-        share card, plus one variant for each sub-brand (MedicomteK,
-        Beauty&amp;Derma, INSPIRE). Korean and English copy slots are
-        interchangeable.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="so-gallery">
         {TEMPLATES.map((t) =>
         <div className="so-template-card" key={t.id}>
@@ -202,33 +198,24 @@ function SocialGallery() {
 }
 
 function SocialSafezone() {
+  const c = useSectionContent('social-templates');
+  const sub = (c.subsections && c.subsections.safezone) || {};
+  const rules = sub.rules || [];
   return (
     <div id="so-safezone" className="subsection">
-      <h3>17.3 — Safe zones</h3>
-      <p className="desc">
-        Stories and Reels surfaces have client-side UI that crops the canvas.
-        Reserve top and bottom bands; the dashed lime area is the only
-        guaranteed-visible region.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="so-safezone">
         <div className="so-safezone-diagram">
-          <div className="top-band">Username</div>
+          <div className="top-band">{sub.topBand}</div>
           <div className="safe-area"></div>
-          <div className="bottom-band">Reply UI</div>
+          <div className="bottom-band">{sub.bottomBand}</div>
         </div>
         <div className="so-safezone-content">
-          <h4>9:16 safe zone</h4>
-          <p>
-            All critical content — wordmark, headline, dates, URL — must sit
-            inside the dashed lime rectangle. The two red bands are
-            consistently obscured by client UI on Instagram, TikTok, and
-            YouTube Shorts.
-          </p>
+          <h4>{sub.heading}</h4>
+          <p>{sub.body}</p>
           <ul>
-            <li>Top band: 0–16% reserved for username and reaction stack</li>
-            <li>Bottom band: 84–100% reserved for caption and reply UI</li>
-            <li>Side margins: 8% each side, accommodating curved-screen edge fade</li>
-            <li>Center safe area: 84% wide × 68% tall guaranteed visible</li>
+            {rules.map((r, i) => <li key={i}>{r}</li>)}
           </ul>
         </div>
       </div>
@@ -237,21 +224,20 @@ function SocialSafezone() {
 }
 
 function SocialSpecs() {
+  const c = useSectionContent('social-templates');
+  const sub = (c.subsections && c.subsections.specs) || {};
+  const headers = sub.headers || {};
   return (
     <div id="so-specs" className="subsection">
-      <h3>17.4 — Asset specifications</h3>
-      <p className="desc">
-        Master dimensions, safe-zone allowances, and platform-specific
-        notes for every output. Hand to design ops when commissioning new
-        assets.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="so-specs">
         <div className="so-specs-row is-head">
-          <span>Surface</span>
-          <span>Aspect</span>
-          <span>Master px</span>
-          <span>Safe</span>
-          <span>Note</span>
+          <span>{headers.name}</span>
+          <span>{headers.aspect}</span>
+          <span>{headers.px}</span>
+          <span>{headers.safe}</span>
+          <span>{headers.note}</span>
         </div>
         {SPECS.map((s) =>
         <div className="so-specs-row" key={s.name}>

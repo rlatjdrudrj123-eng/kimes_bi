@@ -1,5 +1,40 @@
 {
   "eyebrow": "11 — Iconography",
   "title": "Iconography",
-  "lede": "KIMES iconography covers the 14 official exhibition categories plus a small set of UI utilities. Icons are 1.5px stroke on a 24×24 grid, geometric, single-color via <code>currentColor</code> — they inherit from their parent context."
+  "lede": "KIMES iconography covers the 14 official exhibition categories plus a small set of UI utilities. Icons are 1.5px stroke on a 24×24 grid, geometric, single-color via <code>currentColor</code> — they inherit from their parent context.",
+  "subsections": {
+    "construction": {
+      "title": "11.1 — Construction principles",
+      "desc": "All KIMES icons share one geometry: a 24×24 grid, 1.5px stroke, rounded caps and joins, single-color via <code>currentColor</code>.",
+      "rows": [
+        { "k": "Grid",    "v": "24×24 (scalable to any size)" },
+        { "k": "Stroke",  "v": "1.5px · rounded caps and joins" },
+        { "k": "Style",   "v": "Outline default · filled for active state" },
+        { "k": "Color",   "v": "<code>currentColor</code> — inherits from parent" },
+        { "k": "Padding", "v": "1px on all sides (22×22 visual area)" },
+        { "k": "Corners", "v": "Rounded — match overall geometry" }
+      ]
+    },
+    "categories": {
+      "title": "11.2 — Exhibition category icons",
+      "desc": "KIMES 2026 spans 14 official exhibition categories. Each has a dedicated icon used on signage, floor plans, the website, and the printed catalog index."
+    },
+    "utility": {
+      "title": "11.3 — UI utility icons",
+      "desc": "Ten utility icons cover the most common interface affordances — search, navigation, action, and feedback. Same construction rules as category icons."
+    },
+    "color": {
+      "title": "11.4 — Color application",
+      "desc": "Icons inherit color from their parent text or active brand theme. No gradients, shadows, or multi-color fills.",
+      "ruleHtml": "Rule — single-color fill via <code>currentColor</code>. No gradients, no shadows, no multi-color illustration."
+    },
+    "sizing": {
+      "title": "11.5 — Sizing scale",
+      "desc": "Six standard sizes from inline (16px) to hero (64px+). The same SVG scales without retracing — that's the value of the 24×24 grid."
+    },
+    "donts": {
+      "title": "11.6 — Don'ts",
+      "desc": "Six common mistakes. Stay flat, stay single-color, stay 16px+."
+    }
+  }
 }

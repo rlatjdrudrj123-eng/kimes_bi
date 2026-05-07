@@ -27,13 +27,12 @@ function Anno({ children }) {
 }
 
 function HierarchyMocks() {
+  const c = useSectionContent('typography-in-use');
+  const sub = (c.subsections && c.subsections.hierarchy) || {};
   return (
     <div id="tu-hierarchy" className="subsection">
-      <h3>07.1 — Hierarchy in use</h3>
-      <p className="desc">
-        Three realistic mock layouts demonstrating how type tokens combine in
-        published KIMES content. Annotations show which token drives each line.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
 
       <div className="tu-mock-grid">
         {/* Mock 1 — Event header (English) */}
@@ -182,14 +181,12 @@ function MixingRules() {
   const enRight = { fontFamily: FM };
   const enWrong = { fontFamily: FK };
 
+  const c = useSectionContent('typography-in-use');
+  const sub = (c.subsections && c.subsections.mixing) || {};
   return (
     <div id="tu-mixing" className="subsection">
-      <h3>07.2 — Mixing Korean and Latin</h3>
-      <p className="desc">
-        Pretendard handles Korean, Hangul punctuation, and most CJK glyphs.
-        Montserrat handles Latin letters, numerals, brand names, acronyms,
-        and date / measurement marks. Never let Pretendard render Latin.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
 
       <div className="tu-rule">
         <div className="tu-rule-head">
@@ -277,20 +274,20 @@ function NumberFormats() {
     { ctx: 'Price — KRW',           fmt: 'Won symbol + comma',              ex: '₩50,000' },
   ];
 
+  const c = useSectionContent('typography-in-use');
+  const sub = (c.subsections && c.subsections.numbers) || {};
+  const headers = sub.headers || {};
   return (
     <div id="tu-numbers" className="subsection">
-      <h3>07.3 — Number &amp; data display</h3>
-      <p className="desc">
-        Numerals and data formats stay consistent across all KIMES surfaces —
-        regardless of the surrounding language.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="tu-table-wrap">
         <table className="tu-table">
           <thead>
             <tr>
-              <th>Context</th>
-              <th>Format</th>
-              <th>Example</th>
+              <th>{headers.ctx}</th>
+              <th>{headers.fmt}</th>
+              <th>{headers.ex}</th>
             </tr>
           </thead>
           <tbody>
@@ -325,22 +322,22 @@ function PunctuationRules() {
     { mark: ',',  what: 'Comma in metadata sep', instead: 'Use middle dot ·' },
   ];
 
+  const c = useSectionContent('typography-in-use');
+  const sub = (c.subsections && c.subsections.punctuation) || {};
+  const headers = sub.headers || {};
   return (
     <div id="tu-punctuation" className="subsection">
-      <h3>07.4 — Punctuation &amp; dividers</h3>
-      <p className="desc">
-        KIMES uses a small, consistent set of marks to separate metadata,
-        bilingual labels, and ranges.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
 
       <div className="tu-table-wrap">
         <table className="tu-table">
           <thead>
             <tr>
-              <th style={{ width: 56 }}>Mark</th>
-              <th>Name</th>
-              <th>Use</th>
-              <th>Example</th>
+              <th style={{ width: 56 }}>{headers.mark}</th>
+              <th>{headers.name}</th>
+              <th>{headers.use}</th>
+              <th>{headers.ex}</th>
             </tr>
           </thead>
           <tbody>
@@ -357,7 +354,7 @@ function PunctuationRules() {
       </div>
 
       <div className="tu-avoid">
-        <span className="tu-avoid-label">Avoid</span>
+        <span className="tu-avoid-label">{sub.avoidLabel || 'Avoid'}</span>
         <div className="tu-avoid-list">
           {avoid.map(a => (
             <div className="tu-avoid-item" key={a.what}>
@@ -375,14 +372,12 @@ function PunctuationRules() {
    07.5 — Alignment & line breaks
    ============================================================ */
 function AlignmentRules() {
+  const c = useSectionContent('typography-in-use');
+  const sub = (c.subsections && c.subsections.alignment) || {};
   return (
     <div id="tu-alignment" className="subsection">
-      <h3>07.5 — Alignment &amp; line breaks</h3>
-      <p className="desc">
-        Korean creates uneven word-spacing when justified. Default to
-        left-aligned body, center only short headlines, break Korean at
-        word boundaries (어절).
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="tu-align-grid">
 
         {/* 1 — left vs justify */}
@@ -544,13 +539,12 @@ function TypographyDonts() {
     },
   ];
 
+  const c = useSectionContent('typography-in-use');
+  const sub = (c.subsections && c.subsections.donts) || {};
   return (
     <div id="tu-donts" className="subsection">
-      <h3>07.6 — Don&rsquo;ts</h3>
-      <p className="desc">
-        Eight typography mistakes to avoid. Each example deliberately breaks
-        a rule from the sections above.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="tu-donts-grid">
         {items.map(item => (
           <div className="tu-dont-cell" key={item.id}>

@@ -1,5 +1,34 @@
 {
   "eyebrow": "07 — Typography in use",
   "title": "Typography in use",
-  "lede": "KIMES content is heavily mixed-language Korean + Latin + numerals. These rules keep typography consistent across press releases, signage, web, and print."
+  "lede": "KIMES content is heavily mixed-language Korean + Latin + numerals. These rules keep typography consistent across press releases, signage, web, and print.",
+  "subsections": {
+    "hierarchy": {
+      "title": "07.1 — Hierarchy in use",
+      "desc": "Three realistic mock layouts demonstrating how type tokens combine in published KIMES content. Annotations show which token drives each line."
+    },
+    "mixing": {
+      "title": "07.2 — Mixing Korean and Latin",
+      "desc": "Pretendard handles Korean, Hangul punctuation, and most CJK glyphs. Montserrat handles Latin letters, numerals, brand names, acronyms, and date / measurement marks. Never let Pretendard render Latin."
+    },
+    "numbers": {
+      "title": "07.3 — Number & data display",
+      "desc": "Numerals and data formats stay consistent across all KIMES surfaces — regardless of the surrounding language.",
+      "headers": { "ctx": "Context", "fmt": "Format", "ex": "Example" }
+    },
+    "punctuation": {
+      "title": "07.4 — Punctuation & dividers",
+      "desc": "KIMES uses a small, consistent set of marks to separate metadata, bilingual labels, and ranges.",
+      "headers": { "mark": "Mark", "name": "Name", "use": "Use", "ex": "Example" },
+      "avoidLabel": "Avoid"
+    },
+    "alignment": {
+      "title": "07.5 — Alignment & line breaks",
+      "desc": "Korean creates uneven word-spacing when justified. Default to left-aligned body, center only short headlines, break Korean at word boundaries (어절)."
+    },
+    "donts": {
+      "title": "07.6 — Don'ts",
+      "desc": "Eight typography mistakes to avoid. Each example deliberately breaks a rule from the sections above."
+    }
+  }
 }

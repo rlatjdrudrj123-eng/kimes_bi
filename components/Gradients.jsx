@@ -58,15 +58,13 @@ const GR_BRANDS = [
    ============================================================ */
 function GradientSet() {
   const brand = useBrandFilter();
+  const c = useSectionContent('gradients');
+  const sub = (c.subsections && c.subsections.set) || {};
   const items = GR_BRANDS.filter(b => b.key === brand);
   return (
     <div id="gr-set" className="subsection">
-      <h3>05.1 — Brand gradient set</h3>
-      <p className="desc">
-        One official gradient per brand. All KIMES gradients are 2-stop linear
-        at 135°. Variations in angle, stop count, or color outside this set
-        are not approved.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="gr-set-grid">
         {items.map(b => (
           <div className="gr-card" key={b.key}>
@@ -93,15 +91,13 @@ function GradientSet() {
    ============================================================ */
 function GradientApplications() {
   const brand = useBrandFilter();
+  const c = useSectionContent('gradients');
+  const sub = (c.subsections && c.subsections.applications) || {};
   const items = GR_BRANDS.filter(b => b.key === brand);
   return (
     <div id="gr-applications" className="subsection">
-      <h3>05.2 — Application examples</h3>
-      <p className="desc">
-        How each gradient appears in a typical web-hero context. Treat the
-        gradient as a backdrop for white logo + headline + CTA — never as
-        the logo itself.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="gr-app-grid">
         {items.map(b => (
           <div className="gr-app" key={b.key}>
@@ -144,25 +140,26 @@ const GR_CONTEXTS = [
 ];
 
 function AllowedContexts() {
+  const c = useSectionContent('gradients');
+  const sub = (c.subsections && c.subsections.contexts) || {};
+  const headers = sub.headers || {};
+  const rows = c.contexts || [];
   return (
     <div id="gr-contexts" className="subsection">
-      <h3>05.3 — Allowed contexts</h3>
-      <p className="desc">
-        Gradients are reserved for digital surfaces with reliable color
-        reproduction. Print, signage, and logo applications stay flat.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="gr-ctx-table">
         <div className="gr-ctx-head">
-          <span>Context</span>
-          <span>Allowed</span>
-          <span>Note</span>
+          <span>{headers.context}</span>
+          <span>{headers.allowed}</span>
+          <span>{headers.note}</span>
         </div>
-        {GR_CONTEXTS.map(r => (
+        {rows.map(r => (
           <div className={`gr-ctx-row ${r.allowed ? 'ok' : 'no'}`} key={r.ctx}>
             <span className="gr-ctx-name">{r.ctx}</span>
             <span className="gr-ctx-allowed">
               <span className={`verdict ${r.allowed ? 'ok' : 'avoid'}`}>{r.allowed ? '✓' : '✗'}</span>
-              <span className="gr-ctx-allowed-text">{r.allowed ? 'Yes' : 'No'}</span>
+              <span className="gr-ctx-allowed-text">{r.allowed ? sub.yes : sub.no}</span>
             </span>
             <span className="gr-ctx-note">{r.note}</span>
           </div>
@@ -179,12 +176,13 @@ function GradientDonts() {
   const brand = useBrandFilter();
   // The wrong-gradient examples render KIMES red. Hide on co-events.
   if (brand !== 'kimes') return null;
+  const c = useSectionContent('gradients');
+  const sub = (c.subsections && c.subsections.donts) || {};
+  const donts = c.donts || [];
   return (
     <div id="gr-donts" className="subsection">
-      <h3>05.4 — Don&rsquo;ts</h3>
-      <p className="desc">
-        Four common mistakes. Stay within the official gradient set.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="gr-donts-grid">
         <div className="gr-dont-cell">
           <span className="tu-dont-x">✗</span>
@@ -192,8 +190,8 @@ function GradientDonts() {
             background: 'linear-gradient(135deg, #E60012 0%, #BFD633 50%, #036EB8 100%)',
           }}></div>
           <div className="gr-dont-meta">
-            <div className="vlabel">3+ colors</div>
-            <div className="vdesc">Use 2-color gradients only — no rainbow stops.</div>
+            <div className="vlabel">{(donts[0] && donts[0].label) || '3+ colors'}</div>
+            <div className="vdesc">{(donts[0] && donts[0].desc) || ''}</div>
           </div>
         </div>
 
@@ -203,8 +201,8 @@ function GradientDonts() {
             background: 'radial-gradient(circle at 30% 30%, #E60012 0%, #231815 80%)',
           }}></div>
           <div className="gr-dont-meta">
-            <div className="vlabel">Radial gradient</div>
-            <div className="vdesc">Linear at 135° only. No radial, conic, or mesh.</div>
+            <div className="vlabel">{(donts[1] && donts[1].label) || 'Radial gradient'}</div>
+            <div className="vdesc">{(donts[1] && donts[1].desc) || ''}</div>
           </div>
         </div>
 
@@ -225,8 +223,8 @@ function GradientDonts() {
             </span>
           </div>
           <div className="gr-dont-meta">
-            <div className="vlabel">Gradient on type</div>
-            <div className="vdesc">Type stays solid — never fill text with a gradient.</div>
+            <div className="vlabel">{(donts[2] && donts[2].label) || 'Gradient on type'}</div>
+            <div className="vdesc">{(donts[2] && donts[2].desc) || ''}</div>
           </div>
         </div>
 
@@ -250,8 +248,8 @@ function GradientDonts() {
             </svg>
           </div>
           <div className="gr-dont-meta">
-            <div className="vlabel">Gradient on logo</div>
-            <div className="vdesc">Logos always render in a single brand color.</div>
+            <div className="vlabel">{(donts[3] && donts[3].label) || 'Gradient on logo'}</div>
+            <div className="vdesc">{(donts[3] && donts[3].desc) || ''}</div>
           </div>
         </div>
       </div>

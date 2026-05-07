@@ -1,5 +1,44 @@
 {
   "eyebrow": "05 — Gradients",
   "title": "Gradients",
-  "lede": "KIMES gradients are a digital-only auxiliary surface treatment. They appear on web hero sections, app backgrounds, video intros, and animated SNS thumbnails. Gradients are forbidden on print materials, logos, typography, and brand-color application — the flat-graphic identity of KIMES print remains unchanged."
+  "lede": "KIMES gradients are a digital-only auxiliary surface treatment. They appear on web hero sections, app backgrounds, video intros, and animated SNS thumbnails. Gradients are forbidden on print materials, logos, typography, and brand-color application — the flat-graphic identity of KIMES print remains unchanged.",
+  "subsections": {
+    "set": {
+      "title": "05.1 — Brand gradient set",
+      "desc": "One official gradient per brand. All KIMES gradients are 2-stop linear at 135°. Variations in angle, stop count, or color outside this set are not approved."
+    },
+    "applications": {
+      "title": "05.2 — Application examples",
+      "desc": "How each gradient appears in a typical web-hero context. Treat the gradient as a backdrop for white logo + headline + CTA — never as the logo itself."
+    },
+    "contexts": {
+      "title": "05.3 — Allowed contexts",
+      "desc": "Gradients are reserved for digital surfaces with reliable color reproduction. Print, signage, and logo applications stay flat.",
+      "headers": { "context": "Context", "allowed": "Allowed", "note": "Note" },
+      "yes": "Yes",
+      "no": "No"
+    },
+    "donts": {
+      "title": "05.4 — Don'ts",
+      "desc": "Four common mistakes. Stay within the official gradient set."
+    }
+  },
+  "contexts": [
+    { "ctx": "Web hero / landing",          "allowed": true,  "note": "Primary surface for gradients" },
+    { "ctx": "App splash / background",     "allowed": true,  "note": "Behind logo, never on logo" },
+    { "ctx": "Video intro / outro",         "allowed": true,  "note": "Animate slowly — 4–6s loop" },
+    { "ctx": "SNS animated thumbnail",      "allowed": true,  "note": "Instagram, LinkedIn, YouTube" },
+    { "ctx": "Print poster",                "allowed": false, "note": "Flat color only — CMYK reproduction" },
+    { "ctx": "Print invitation / brochure", "allowed": false, "note": "Flat color only" },
+    { "ctx": "Logo background",             "allowed": false, "note": "Solid only — see Logo rules" },
+    { "ctx": "Business card",               "allowed": false, "note": "Flat color only" },
+    { "ctx": "Booth signage",               "allowed": false, "note": "Flat color only — large-format inkjet" },
+    { "ctx": "Email body",                  "allowed": false, "note": "Email clients render gradients inconsistently" }
+  ],
+  "donts": [
+    { "label": "3+ colors",         "desc": "Use 2-color gradients only — no rainbow stops." },
+    { "label": "Radial gradient",   "desc": "Linear at 135° only. No radial, conic, or mesh." },
+    { "label": "Gradient on type",  "desc": "Type stays solid — never fill text with a gradient." },
+    { "label": "Gradient on logo",  "desc": "Logos always render in a single brand color." }
+  ]
 }

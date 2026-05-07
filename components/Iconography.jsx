@@ -233,14 +233,13 @@ const UTILITIES = [
    11.1 — Construction principles
    ============================================================ */
 function Construction() {
-  // Demo icon (stethoscope) drawn on a visible 24×24 grid.
+  const c = useSectionContent('iconography');
+  const sub = (c.subsections && c.subsections.construction) || {};
+  const rows = sub.rows || [];
   return (
     <div id="ic-construction" className="subsection">
-      <h3>11.1 — Construction principles</h3>
-      <p className="desc">
-        All KIMES icons share one geometry: a 24×24 grid, 1.5px stroke,
-        rounded caps and joins, single-color via <code>currentColor</code>.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc" dangerouslySetInnerHTML={{ __html: sub.desc || '' }} />
 
       <div className="ic-construct">
         <div className="ic-construct-stage">
@@ -274,12 +273,12 @@ function Construction() {
         <div className="ic-construct-spec">
           <table className="ic-spec-table">
             <tbody>
-              <tr><th>Grid</th><td>24×24 (scalable to any size)</td></tr>
-              <tr><th>Stroke</th><td>1.5px · rounded caps and joins</td></tr>
-              <tr><th>Style</th><td>Outline default · filled for active state</td></tr>
-              <tr><th>Color</th><td><code>currentColor</code> — inherits from parent</td></tr>
-              <tr><th>Padding</th><td>1px on all sides (22×22 visual area)</td></tr>
-              <tr><th>Corners</th><td>Rounded — match overall geometry</td></tr>
+              {rows.map((r, i) => (
+                <tr key={i}>
+                  <th>{r.k}</th>
+                  <td dangerouslySetInnerHTML={{ __html: r.v }} />
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -292,14 +291,12 @@ function Construction() {
    11.2 — 14 official categories
    ============================================================ */
 function CategoryIcons() {
+  const c = useSectionContent('iconography');
+  const sub = (c.subsections && c.subsections.categories) || {};
   return (
     <div id="ic-categories" className="subsection">
-      <h3>11.2 — Exhibition category icons</h3>
-      <p className="desc">
-        KIMES 2026 spans 14 official exhibition categories. Each has a
-        dedicated icon used on signage, floor plans, the website, and the
-        printed catalog index.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="ic-cat-grid">
         {CATEGORIES.map(c => (
           <div className="ic-cat-tile" key={c.key}>
@@ -322,14 +319,12 @@ function CategoryIcons() {
    11.3 — UI utility icons
    ============================================================ */
 function UtilityIcons() {
+  const c = useSectionContent('iconography');
+  const sub = (c.subsections && c.subsections.utility) || {};
   return (
     <div id="ic-utility" className="subsection">
-      <h3>11.3 — UI utility icons</h3>
-      <p className="desc">
-        Ten utility icons cover the most common interface affordances —
-        search, navigation, action, and feedback. Same construction rules
-        as category icons.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="ic-util-grid">
         {UTILITIES.map(u => (
           <div className="ic-util-tile" key={u.key}>
@@ -355,13 +350,12 @@ function ColorApplication() {
     { label: 'MedicomteK Blue',    color: '#036EB8', bg: '#fff' },
     { label: 'White on KIMES Red', color: '#fff',    bg: '#E60012' },
   ];
+  const c = useSectionContent('iconography');
+  const sub = (c.subsections && c.subsections.color) || {};
   return (
     <div id="ic-color" className="subsection">
-      <h3>11.4 — Color application</h3>
-      <p className="desc">
-        Icons inherit color from their parent text or active brand theme.
-        No gradients, shadows, or multi-color fills.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="ic-color-grid">
         {samples.map((s, i) => (
           <div className="ic-color-tile" key={i}>
@@ -375,10 +369,7 @@ function ColorApplication() {
           </div>
         ))}
       </div>
-      <div className="ic-color-rule">
-        Rule — single-color fill via <code>currentColor</code>. No gradients,
-        no shadows, no multi-color illustration.
-      </div>
+      <div className="ic-color-rule" dangerouslySetInnerHTML={{ __html: sub.ruleHtml || '' }} />
     </div>
   );
 }
@@ -395,13 +386,12 @@ function SizingScale() {
     { px: 48, use: 'Category cards' },
     { px: 64, use: 'Hero scale' },
   ];
+  const c = useSectionContent('iconography');
+  const sub = (c.subsections && c.subsections.sizing) || {};
   return (
     <div id="ic-sizing" className="subsection">
-      <h3>11.5 — Sizing scale</h3>
-      <p className="desc">
-        Six standard sizes from inline (16px) to hero (64px+). The same SVG
-        scales without retracing — that&rsquo;s the value of the 24×24 grid.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="ic-size-row">
         {sizes.map(s => (
           <div className="ic-size-cell" key={s.px}>
@@ -500,12 +490,12 @@ function IconDonts() {
       ),
     },
   ];
+  const c = useSectionContent('iconography');
+  const sub = (c.subsections && c.subsections.donts) || {};
   return (
     <div id="ic-donts" className="subsection">
-      <h3>11.6 — Don&rsquo;ts</h3>
-      <p className="desc">
-        Six common mistakes. Stay flat, stay single-color, stay 16px+.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="ic-donts-grid">
         {items.map(it => (
           <div className="ic-dont-cell" key={it.label}>

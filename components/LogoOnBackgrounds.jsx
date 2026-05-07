@@ -36,6 +36,8 @@ const LBG_BRANDS = [
    ============================================================ */
 function ClearSpaceAndMin() {
   const brand = useBrandFilter();
+  const c = useSectionContent('logo-rules');
+  const sub = (c.subsections && c.subsections.clearSpace) || {};
   // Per-brand first-letter cap-height ratio (clear space = 1× of that letter).
   const allExamples = [
     { id: 'kimes', name: 'KIMES',          svg: 'kimes',     min: '80px / 24mm',  h: 36, anchor: 'cap-height of K' },
@@ -46,12 +48,8 @@ function ClearSpaceAndMin() {
   const examples = allExamples.filter(e => e.id === brand);
   return (
     <div id="logo-rules-clearspace" className="subsection">
-      <h3>06.1 — Clear space &amp; minimum size</h3>
-      <p className="desc">
-        Reserve clear space around every wordmark equal to the cap-height of
-        its first letter. Below the listed minimum widths, switch to a more
-        legible variant or scale up.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="rules-clearspace-grid">
         {examples.map(e => (
           <div className="rules-cs-card" key={e.id}>
@@ -92,20 +90,20 @@ function BackgroundUsage() {
     { bg: 'Light photo',             logo: 'Full color',                  v: 'ok' },
     { bg: 'Busy photo',              logo: 'Place on solid plate first',  v: 'avoid' },
   ];
+  const c = useSectionContent('logo-rules');
+  const sub = (c.subsections && c.subsections.background) || {};
+  const headers = sub.headers || {};
   return (
     <div id="logo-rules-bg" className="subsection">
-      <h3>06.2 — Background usage</h3>
-      <p className="desc">
-        Pick the right logo for each background type. The matrix below is the
-        quick reference; the brand grid demonstrates the three core contexts.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
 
       <div className="lbg-quickref-wrap">
         <table className="lbg-quickref">
           <thead>
             <tr>
-              <th>Background type</th>
-              <th>Recommended logo</th>
+              <th>{headers.bg}</th>
+              <th>{headers.logo}</th>
               <th></th>
             </tr>
           </thead>
@@ -158,6 +156,8 @@ function PhotographicUsage() {
   // The photo demos use KIMES wordmarks. Skip on co-event pages until per-
   // brand photo examples exist.
   if (brand !== 'kimes') return null;
+  const c = useSectionContent('logo-rules');
+  const sub = (c.subsections && c.subsections.photographic) || {};
   const cases = [
     { id: 'light', label: 'Light / uncluttered', verdict: 'ok',     rule: 'Full color logo',                       cls: 'photo-light' },
     { id: 'busy',  label: 'Busy / complex',      verdict: 'avoid',  rule: 'Place on a solid color plate first',    cls: 'photo-busy'  },
@@ -165,12 +165,8 @@ function PhotographicUsage() {
   ];
   return (
     <div id="logo-rules-photo" className="subsection">
-      <h3>06.3 — Photographic backgrounds</h3>
-      <p className="desc">
-        Always preserve a clear area at least equal to the logo&rsquo;s
-        clear-space rule. If the photo is busy, place the logo on a solid
-        color plate first — never directly on detail.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="lbg-photo-row">
         {cases.map(c => (
           <div key={c.id} className={`lbg-photo-card ${c.verdict}`}>
@@ -191,7 +187,7 @@ function PhotographicUsage() {
             </div>
             <div className="lbg-photo-meta">
               <span className={`verdict ${c.verdict}`}>
-                {c.verdict === 'ok' ? '✓ Allowed' : '✗ Avoid'}
+                {c.verdict === 'ok' ? sub.allowedLabel : sub.avoidLabel}
               </span>
               <span className="vlabel">{c.label}</span>
               <span className="vdesc">{c.rule}</span>
@@ -211,6 +207,8 @@ function Misuse() {
   // The misuse grid uses KIMES SVG with CSS transforms. Skip on co-events
   // until per-brand misuse demos exist.
   if (brand !== 'kimes') return null;
+  const c = useSectionContent('logo-rules');
+  const sub = (c.subsections && c.subsections.misuse) || {};
   // Each entry renders the KIMES primary SVG with one CSS treatment that
   // demonstrates an incorrect modification.
   const items = [
@@ -381,12 +379,8 @@ function Misuse() {
 
   return (
     <div id="logo-rules-misuse" className="subsection">
-      <h3>06.4 — Misuse</h3>
-      <p className="desc">
-        Never modify the logo. The treatments below all break the brand
-        identity — using filters, transforms, recolors, or re-typesetting are
-        all explicitly disallowed.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="rules-misuse-grid">
         {items.map(item => (
           <div className="rules-misuse-cell" key={item.id}>
@@ -401,9 +395,9 @@ function Misuse() {
       </div>
       <div className="rules-misuse-callout">
         <p>
-          의문이 있을 경우 KIMES 브랜드팀에 문의하시기 바랍니다.
+          {sub.calloutKr}
           <br />
-          <em>When in doubt, contact the KIMES brand team.</em>
+          <em>{sub.calloutEn}</em>
         </p>
       </div>
     </div>

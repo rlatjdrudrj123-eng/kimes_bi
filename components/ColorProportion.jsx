@@ -129,14 +129,13 @@ function pickContrastInk(hex) {
    ============================================================ */
 function BrandByBrand() {
   const brand = useBrandFilter();
+  const c = useSectionContent('color-proportion');
+  const sub = (c.subsections && c.subsections.brandByBrand) || {};
   const items = PROPORTIONS.filter(b => b.id === brand);
   return (
     <div id="cp-brand-by-brand" className="subsection">
-      <h3>04.1 — Brand-by-brand proportions</h3>
-      <p className="desc">
-        Each brand has a recommended split between background, structure,
-        and accent. Bar widths match the percentages exactly.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="cp-brand-list">
         {items.map(b => (
           <div className="cp-brand-card" key={b.id}>
@@ -159,20 +158,14 @@ function BrandByBrand() {
    ============================================================ */
 function ComparisonView() {
   const brand = useBrandFilter();
+  const c = useSectionContent('color-proportion');
+  const sub = (c.subsections && c.subsections.comparison) || {};
   const items = PROPORTIONS.filter(b => b.id === brand);
-  const summary = [
-    { id: 'kimes', text: 'red-accent industrial — 15% accent' },
-    { id: 'mc',    text: 'blue-accent technical — 15% accent' },
-    { id: 'bd',    text: 'purple-dominant elegant — 40% color combined' },
-    { id: 'in',    text: 'gray-dominant digital — 50% gray' },
-  ];
+  const summary = c.comparisonNotes || [];
   return (
     <div id="cp-compare" className="subsection">
-      <h3>04.2 — Comparison view</h3>
-      <p className="desc">
-        Stacked side by side, the proportional differences become obvious —
-        each brand has a distinct visual personality.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="cp-compare-grid">
         {items.map(b => {
           const note = summary.find(s => s.id === b.id)?.text;
@@ -245,13 +238,12 @@ function ApplicationMocks() {
   ];
   const mocks = allMocks.filter(m => m.id === brand);
 
+  const c = useSectionContent('color-proportion');
+  const sub = (c.subsections && c.subsections.applicationMocks) || {};
   return (
     <div id="cp-mocks" className="subsection">
-      <h3>04.3 — Application examples</h3>
-      <p className="desc">
-        How each proportion looks in a real layout. Zones are abstract — the
-        idea is the proportional rhythm, not the content.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="cp-mock-row">
         {mocks.map(m => (
           <div className="cp-mock" key={m.id}>
@@ -288,14 +280,9 @@ function AcceptableDeviation() {
   // Demos are KIMES-specific (red proportion ratios) — hide on co-event
   // pages where they'd misrepresent the brand colors.
   if (brand !== 'kimes') return null;
-  // KIMES base: 60 / 25 / 15 (white / black / red)
-  // We vary the red percentage and rebalance the rest.
-  const examples = [
-    { pct: 12, ok: true,  note: 'Within range — slightly understated' },
-    { pct: 18, ok: true,  note: 'Within range — slightly emphasized' },
-    { pct:  5, ok: false, note: 'Too little — looks generic, no brand presence' },
-    { pct: 45, ok: false, note: 'Too much — feels aggressive, off-brand' },
-  ];
+  const c = useSectionContent('color-proportion');
+  const sub = (c.subsections && c.subsections.acceptableDeviation) || {};
+  const examples = sub.examples || [];
   // Build a 3-segment bar where red = pct, black = 25% scaled, white = remainder.
   function buildSegs(redPct) {
     const blackPct = Math.max(10, 25 * (1 - (redPct - 15) / 50));
@@ -311,15 +298,15 @@ function AcceptableDeviation() {
 
   return (
     <div id="cp-deviation" className="subsection">
-      <h3>04.4 — Acceptable deviation</h3>
+      <h3>{sub.title}</h3>
       <div className="cp-rule">
         <p>
-          These proportions are recommendations, not strict ratios. Acceptable
-          deviation is <strong>±5% per color</strong>.
+          {sub.intro} <strong>{sub.introStrong}</strong>.
         </p>
         <ul>
-          <li>Designs that drop the brand color below <strong>10%</strong> lose brand recognition.</li>
-          <li>Designs that exceed <strong>30%</strong> feel aggressive and off-brand.</li>
+          {(sub.bullets || []).map((b, i) => (
+            <li key={i} dangerouslySetInnerHTML={{ __html: b }} />
+          ))}
         </ul>
       </div>
       <div className="cp-dev-grid">
@@ -327,7 +314,7 @@ function AcceptableDeviation() {
           <div className={`cp-dev-card ${e.ok ? 'ok' : 'bad'}`} key={e.pct}>
             <div className="cp-dev-head">
               <span className={`verdict ${e.ok ? 'ok' : 'avoid'}`}>{e.ok ? '✓' : '✗'}</span>
-              <span className="cp-dev-pct">{e.pct}% red</span>
+              <span className="cp-dev-pct">{e.pct}{sub.redLabel || '% red'}</span>
             </div>
             <div className="cp-dev-bar">
               <ProportionBar
@@ -352,6 +339,8 @@ function ColorProportionDonts() {
   const brand = useBrandFilter();
   // Mini-mocks are KIMES red examples — hide on co-event pages.
   if (brand !== 'kimes') return null;
+  const c = useSectionContent('color-proportion');
+  const sub = (c.subsections && c.subsections.donts) || {};
   // Mini-mocks demonstrating each wrong proportion. Use abstract zones.
   const items = [
     {
@@ -401,11 +390,8 @@ function ColorProportionDonts() {
   ];
   return (
     <div id="cp-donts" className="subsection">
-      <h3>04.5 — Don&rsquo;ts</h3>
-      <p className="desc">
-        Four common proportion mistakes. None of these read as on-brand —
-        each breaks the recommended hierarchy in a different way.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="cp-donts-grid">
         {items.map(item => (
           <div className="cp-dont-cell" key={item.id}>

@@ -1,5 +1,30 @@
 {
   "eyebrow": "09 — Logo rules",
   "title": "Logo rules",
-  "lede": "How to use each brand mark correctly across every surface — clear space, background contexts, photographs, and the things you must never do."
+  "lede": "How to use each brand mark correctly across every surface — clear space, background contexts, photographs, and the things you must never do.",
+  "subsections": {
+    "clearSpace": {
+      "title": "06.1 — Clear space & minimum size",
+      "desc": "Reserve clear space around every wordmark equal to the cap-height of its first letter. Below the listed minimum widths, switch to a more legible variant or scale up.",
+      "clearSpaceLabel": "Clear space — 1×",
+      "minSizeLabel": "Minimum size —"
+    },
+    "background": {
+      "title": "06.2 — Background usage",
+      "desc": "Pick the right logo for each background type. The matrix below is the quick reference; the brand grid demonstrates the three core contexts.",
+      "headers": { "bg": "Background type", "logo": "Recommended logo" }
+    },
+    "photographic": {
+      "title": "06.3 — Photographic backgrounds",
+      "desc": "Always preserve a clear area at least equal to the logo's clear-space rule. If the photo is busy, place the logo on a solid color plate first — never directly on detail.",
+      "allowedLabel": "✓ Allowed",
+      "avoidLabel": "✗ Avoid"
+    },
+    "misuse": {
+      "title": "06.4 — Misuse",
+      "desc": "Never modify the logo. The treatments below all break the brand identity — using filters, transforms, recolors, or re-typesetting are all explicitly disallowed.",
+      "calloutKr": "의문이 있을 경우 KIMES 브랜드팀에 문의하시기 바랍니다.",
+      "calloutEn": "When in doubt, contact the KIMES brand team."
+    }
+  }
 }

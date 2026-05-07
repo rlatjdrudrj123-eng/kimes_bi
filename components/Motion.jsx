@@ -154,15 +154,12 @@ function EasingCurve({ d }) {
 
 function MotionSignature() {
   const [paused, setPaused] = React.useState(false);
+  const c = useSectionContent('motion');
+  const sub = (c.subsections && c.subsections.signature) || {};
   return (
     <div id="mo-signature" className="subsection">
-      <h3>15.1 — Signature loop</h3>
-      <p className="desc">
-        The KIMES brand mark in motion. A diagonal sweep — anchored to the
-        slash-cut <em>i</em> — passes across the wordmark on a 4-second loop.
-        This is the master loop used on stage screens, sponsor reels, and the
-        site hero.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc" dangerouslySetInnerHTML={{ __html: sub.desc || '' }} />
       <div className="mo-signature">
         <div className="mo-stage">
           <div className={`mo-mark-wrap${paused ? ' paused' : ''}`}>
@@ -170,10 +167,10 @@ function MotionSignature() {
           </div>
         </div>
         <div className="mo-stage-controls">
-          <button className={paused ? '' : 'is-active'} onClick={() => setPaused(false)}>Play</button>
-          <button className={paused ? 'is-active' : ''} onClick={() => setPaused(true)}>Pause</button>
+          <button className={paused ? '' : 'is-active'} onClick={() => setPaused(false)}>{sub.play || 'Play'}</button>
+          <button className={paused ? 'is-active' : ''} onClick={() => setPaused(true)}>{sub.pause || 'Pause'}</button>
           <div className="scrub"><div className="scrub-fill" style={{ width: paused ? '40%' : '100%', transition: paused ? 'none' : 'width 4s linear' }}></div></div>
-          <div className="timecode">4.00s · loop</div>
+          <div className="timecode">{sub.timecode || '4.00s · loop'}</div>
         </div>
       </div>
     </div>
@@ -181,13 +178,12 @@ function MotionSignature() {
 }
 
 function MotionVariants() {
+  const c = useSectionContent('motion');
+  const sub = (c.subsections && c.subsections.variants) || {};
   return (
     <div id="mo-variants" className="subsection">
-      <h3>15.2 — Variant kit</h3>
-      <p className="desc">
-        Six brand-mark animations covering entry, reveal, ambient, and dark
-        surfaces — one per major use case. Each is shipped as Lottie + MP4.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="mo-variants">
         {VARIANTS.map(v => (
           <div className="mo-variant" key={v.id}>
@@ -207,15 +203,12 @@ function MotionVariants() {
 }
 
 function MotionEasings() {
+  const c = useSectionContent('motion');
+  const sub = (c.subsections && c.subsections.easings) || {};
   return (
     <div id="mo-easings" className="subsection">
-      <h3>15.3 — Easing curves</h3>
-      <p className="desc">
-        Four curated curves. <b>Brand Out</b> is the default — slightly more
-        decelerating than Material Standard, with no overshoot. Reach for
-        Standard for mid-product UI; Decelerate / Accelerate only when an
-        element is entering or leaving the frame.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc" dangerouslySetInnerHTML={{ __html: sub.desc || '' }} />
       <div className="mo-easings">
         {EASINGS.map(e => (
           <div className="mo-easing" key={e.name}>
@@ -233,19 +226,19 @@ function MotionEasings() {
 }
 
 function MotionDurations() {
+  const c = useSectionContent('motion');
+  const sub = (c.subsections && c.subsections.durations) || {};
+  const headers = sub.headers || {};
   return (
     <div id="mo-durations" className="subsection">
-      <h3>15.4 — Duration scale</h3>
-      <p className="desc">
-        Six tokens span micro-feedback to ambient loop. Always pick the
-        shortest duration that feels intentional — speed is brand-appropriate.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="mo-durations">
         <div className="mo-dur-row is-head">
-          <span>Token</span>
-          <span>ms</span>
-          <span>Visual length</span>
-          <span>Use</span>
+          <span>{headers.token}</span>
+          <span>{headers.ms}</span>
+          <span>{headers.bar}</span>
+          <span>{headers.use}</span>
         </div>
         {DURATIONS.map(d => (
           <div className="mo-dur-row" key={d.name}>
@@ -261,13 +254,12 @@ function MotionDurations() {
 }
 
 function MotionFormats() {
+  const c = useSectionContent('motion');
+  const sub = (c.subsections && c.subsections.formats) || {};
   return (
     <div id="mo-formats" className="subsection">
-      <h3>15.5 — Delivery formats</h3>
-      <p className="desc">
-        Three formats cover every distribution surface. Lottie for runtime
-        flexibility, MP4 for compatibility, WebM for transparent overlays.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="mo-formats">
         {MOTION_FORMATS.map(f => (
           <div className="mo-format" key={f.name}>
@@ -287,13 +279,12 @@ function MotionFormats() {
 }
 
 function MotionDonts() {
+  const c = useSectionContent('motion');
+  const sub = (c.subsections && c.subsections.donts) || {};
   return (
     <div id="mo-donts" className="subsection">
-      <h3>15.6 — Don'ts</h3>
-      <p className="desc">
-        Six failure modes that break the brand. Reviewers should reject any
-        animation that violates these.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="mo-donts">
         {MOTION_DONTS.map(d => (
           <div className="mo-dont" key={d.title}>

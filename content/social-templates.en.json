@@ -1,5 +1,34 @@
 {
   "eyebrow": "17 — Social templates",
   "title": "Social & OG templates",
-  "lede": "Eight master templates across four canvas sizes, covering the full sub-brand family and bilingual KO/EN copy. Plus safe-zone diagrams and per-platform asset specs."
+  "lede": "Eight master templates across four canvas sizes, covering the full sub-brand family and bilingual KO/EN copy. Plus safe-zone diagrams and per-platform asset specs.",
+  "subsections": {
+    "formats": {
+      "title": "17.1 — Format inventory",
+      "desc": "Four canvas sizes cover every distribution surface. Always master at the listed pixel dimensions; downscale for smaller targets."
+    },
+    "gallery": {
+      "title": "17.2 — Template gallery",
+      "desc": "Eight master templates: hero poster, pull quote, daily countdown, OG share card, plus one variant for each sub-brand (MedicomteK, Beauty&Derma, INSPIRE). Korean and English copy slots are interchangeable."
+    },
+    "safezone": {
+      "title": "17.3 — Safe zones",
+      "desc": "Stories and Reels surfaces have client-side UI that crops the canvas. Reserve top and bottom bands; the dashed lime area is the only guaranteed-visible region.",
+      "topBand": "Username",
+      "bottomBand": "Reply UI",
+      "heading": "9:16 safe zone",
+      "body": "All critical content — wordmark, headline, dates, URL — must sit inside the dashed lime rectangle. The two red bands are consistently obscured by client UI on Instagram, TikTok, and YouTube Shorts.",
+      "rules": [
+        "Top band: 0–16% reserved for username and reaction stack",
+        "Bottom band: 84–100% reserved for caption and reply UI",
+        "Side margins: 8% each side, accommodating curved-screen edge fade",
+        "Center safe area: 84% wide × 68% tall guaranteed visible"
+      ]
+    },
+    "specs": {
+      "title": "17.4 — Asset specifications",
+      "desc": "Master dimensions, safe-zone allowances, and platform-specific notes for every output. Hand to design ops when commissioning new assets.",
+      "headers": { "name": "Surface", "aspect": "Aspect", "px": "Master px", "safe": "Safe", "note": "Note" }
+    }
+  }
 }

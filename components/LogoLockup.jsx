@@ -56,13 +56,12 @@ function LkAnnotation({ children, top = -20, left = '50%' }) {
    07.1 — KIMES + sub-brands
    ============================================================ */
 function KimesSubBrandLockups() {
+  const c = useSectionContent('logo-lockup');
+  const sub = (c.subsections && c.subsections.internal) || {};
   return (
     <div id="lockup-internal" className="subsection">
-      <h3>07.1 — KIMES + sub-brands</h3>
-      <p className="desc">
-        Three approved patterns for combining KIMES with its three sub-brands.
-        X = the cap-height of the “K” in the KIMES wordmark within the lockup.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
 
       {/* Pattern A — equal-weight horizontal */}
       <div className="lk-card">
@@ -175,13 +174,12 @@ function KimesSubBrandLockups() {
    07.2 — KIMES + external partner
    ============================================================ */
 function ExternalPartnerLockups() {
+  const c = useSectionContent('logo-lockup');
+  const sub = (c.subsections && c.subsections.external) || {};
   return (
     <div id="lockup-external" className="subsection">
-      <h3>07.2 — KIMES + external partner</h3>
-      <p className="desc">
-        Three approved patterns for combining KIMES with sponsor or partner
-        logos. Partner logos are shown here as neutral placeholders.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
 
       {/* Pattern A — equal partnership */}
       <div className="lk-card">
@@ -308,19 +306,19 @@ function LockupRulesTable() {
     { rule: 'Size ratio (KIMES : partner)',     spec: '1 : 1 (equal) or 1 : 0.5 (hosted)' },
     { rule: 'Clear space',                      spec: '1X around the entire lockup, not individual logos' },
   ];
+  const c = useSectionContent('logo-lockup');
+  const sub = (c.subsections && c.subsections.rules) || {};
+  const headers = sub.headers || {};
   return (
     <div id="lockup-rules" className="subsection">
-      <h3>07.3 — Spacing &amp; alignment rules</h3>
-      <p className="desc">
-        X = the cap-height of capital “K” in the KIMES wordmark within the
-        lockup. All measurements scale relative to it.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="lk-table-wrap">
         <table className="lk-table">
           <thead>
             <tr>
-              <th>Rule</th>
-              <th>Specification</th>
+              <th>{headers.rule}</th>
+              <th>{headers.spec}</th>
             </tr>
           </thead>
           <tbody>
@@ -448,13 +446,12 @@ function LockupDonts() {
     },
   ];
 
+  const c = useSectionContent('logo-lockup');
+  const sub = (c.subsections && c.subsections.donts) || {};
   return (
     <div id="lockup-donts" className="subsection">
-      <h3>07.4 — Don&rsquo;ts</h3>
-      <p className="desc">
-        Eight common mistakes when combining logos. None of these are
-        approved — request a corrected lockup from the brand team.
-      </p>
+      <h3>{sub.title}</h3>
+      <p className="desc">{sub.desc}</p>
       <div className="lkd-grid">
         {items.map(item => (
           <div className="lkd-cell" key={item.id}>
@@ -475,16 +472,14 @@ function LockupDonts() {
    07.5 — Approval callout
    ============================================================ */
 function ApprovalCallout() {
+  const c = useSectionContent('logo-lockup');
+  const ap = (c.subsections && c.subsections.approval) || {};
   return (
     <div id="lockup-approval" className="subsection">
       <div className="lk-callout">
-        <div className="lk-callout-eyebrow">중요 · IMPORTANT</div>
-        <p className="lk-callout-ko">
-          외부 파트너 로고 결합 시에는 반드시 KIMES 브랜드팀의 사전 승인이 필요합니다.
-        </p>
-        <p className="lk-callout-en">
-          External partner lockups require prior approval from the KIMES brand team.
-        </p>
+        <div className="lk-callout-eyebrow">{ap.eyebrow}</div>
+        <p className="lk-callout-ko">{ap.ko}</p>
+        <p className="lk-callout-en">{ap.en}</p>
       </div>
     </div>
   );
