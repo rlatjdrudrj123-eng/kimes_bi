@@ -1,0 +1,118 @@
+/* /overview — KIMES 한눈에 보기 (§5) */
+
+/* 시각적으로 숨기되 스크린리더에는 노출 */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- §5.3.1 / §5.3.2 공식 명칭·일정 표 ---------- */
+.ov-table-wrap {
+  margin: var(--space-2) 0 var(--space-5);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.ov-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  background: var(--surface-base);
+}
+.ov-table-caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--surface-line);
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ov-table th,
+.ov-table td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--surface-line);
+}
+.ov-table thead th {
+  border-top: 0;
+  border-bottom: 1px solid var(--surface-line);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+  font-weight: 600;
+}
+.ov-th-label,
+.ov-td-label { width: 76px; white-space: nowrap; }
+.ov-td-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.ov-td-ko {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.ov-td-en {
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+.ov-th-copy,
+.ov-td-copy { width: 1%; white-space: nowrap; }
+.ov-copy-row {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+}
+.ov-copy-row .copy-btn {
+  justify-content: flex-start;
+  min-width: 90px;
+}
+
+/* 모바일 — 표를 카드 리스트로 풀어서 가로 스크롤 회피 */
+@media (max-width: 720px) {
+  .ov-table thead { display: none; }
+  .ov-table,
+  .ov-table tbody,
+  .ov-table tr,
+  .ov-table th,
+  .ov-table td {
+    display: block;
+    width: auto;
+  }
+  .ov-table tr {
+    padding: var(--space-2);
+    border-top: 1px solid var(--surface-line);
+  }
+  .ov-table tr:first-child { border-top: 0; }
+  .ov-table th,
+  .ov-table td {
+    border-top: 0;
+    padding: 4px 0;
+  }
+  .ov-td-label {
+    font-size: var(--fs-caption);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .ov-td-ko { font-weight: 600; }
+  .ov-td-en { font-size: var(--fs-caption); }
+  .ov-copy-row {
+    flex-direction: row;
+    margin-top: var(--space-1);
+  }
+  .ov-copy-row .copy-btn { min-width: 0; flex: 1 1 0; }
+}

@@ -14,7 +14,9 @@
 
 <!-- Per-page stylesheets. Add an entry as each Phase 2 page is built;
      remove the legacy ones in the docs.css cleanup at end of Phase 2. -->
+<link rel="stylesheet" href="components/copy-toast.css" />
 <link rel="stylesheet" href="components/landing.css" />
+<link rel="stylesheet" href="components/overview.css" />
 
 <!-- Legacy section stylesheets (still loaded; surviving Foundations
      components reference them. Phase 2 reattaches each component to its
@@ -88,12 +90,14 @@
 <script type="text/babel" src="components/LogoLockup.jsx"></script>
 <script type="text/babel" src="components/AssetLibrary.jsx"></script>
 <script type="text/babel" src="components/Router.jsx"></script>
+<script type="text/babel" src="components/CopyButton.jsx"></script>
 <script type="text/babel" src="components/AppShell.jsx"></script>
 <script type="text/babel" src="components/Pages.jsx"></script>
 <!-- Per-page implementations — load after Pages.jsx (the stub registry).
      As each phase-2 page lands, its file appears here; the matching stub
      is removed from Pages.jsx so there is exactly one definition. -->
 <script type="text/babel" src="components/LandingPage.jsx"></script>
+<script type="text/babel" src="components/OverviewPage.jsx"></script>
 
 <script type="text/babel">
 function App() {
@@ -109,6 +113,8 @@ function App() {
         <Page key={path} />
       </main>
       <window.Footer />
+      {/* Global toast outlet — CopyButton과 dispatchToast()가 띄움. */}
+      <window.ToastHost />
     </div>
   );
 }

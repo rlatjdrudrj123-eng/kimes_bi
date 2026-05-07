@@ -22,13 +22,7 @@ function Stub({ sectionRef }) {
 
 // LandingPage는 components/LandingPage.jsx에서 정의 (§4 작업으로 분리).
 
-function OverviewPage() {
-  return (
-    <PageShell eyebrow="01" title="KIMES 한눈에 보기" toc={false}>
-      <Stub sectionRef="§5" />
-    </PageShell>
-  );
-}
+// OverviewPage는 components/OverviewPage.jsx에서 정의 (§5 작업으로 분리).
 
 function LogoPage() {
   return (
@@ -179,7 +173,7 @@ function NotFoundPage() {
 
 Object.assign(window, {
   // LandingPage: 별도 파일 components/LandingPage.jsx에서 직접 등록
-  OverviewPage,
+  // OverviewPage: 별도 파일 components/OverviewPage.jsx에서 직접 등록
   LogoPage,
   ColorPage,
   TypographyPage,
