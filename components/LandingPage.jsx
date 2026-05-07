@@ -159,8 +159,8 @@ function LandingPage() {
           <h2 className="landing-h2 landing-contact-h2">더 궁금한 점이 있다면</h2>
           <p>
             가이드에 없는 사용 사례가 있나요?{' '}
-            <a href="mailto:brand@kimes.kr">brand@kimes.kr</a>로 문의해주세요.
-            영업일 3~5일 안에 답변드립니다.
+            <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>로
+            문의해주세요. 영업일 3~5일 안에 답변드립니다.
           </p>
         </div>
       </section>

@@ -27,28 +27,28 @@ function OverviewPage() {
 
   // §5.3.2 — 일정·장소.
   const FACT_ROWS = [
-    { label: '기간', ko: event.dateRangeKo,    en: event.dateRangeEn },
-    { label: '장소', ko: event.venueKo,        en: event.venueEn },
-    { label: '홀',   ko: event.halls,           en: 'Hall A, B, C, D, E' },
-    { label: '주최', ko: '한국의료기기산업협회', en: event.organizerEn },
-    { label: '주관', ko: 'KIMES 사무국',        en: 'KIMES Secretariat' },
+    { label: '기간', ko: event.dateRangeKo,      en: event.dateRangeEn },
+    { label: '장소', ko: event.venueKo,          en: event.venueEn },
+    { label: '홀',   ko: event.halls,             en: 'Hall A, B, C, D, E' },
+    { label: '주최', ko: event.organizationKo,   en: event.organizationEn },
+    { label: '주관', ko: 'KIMES 사무국',          en: 'KIMES Secretariat' },
   ];
 
-  // §5.3.3 — 보일러플레이트 4벌 × 한·영. 본문은 명세 §5.3.3 그대로,
-  // 400자 한국어와 영문 4벌은 명세 톤(차분·단정)에 맞게 새로 작성.
-  // Phase 4 /downloads 작업 시 content/overview.json으로 분리해 CMS
-  // 편집 가능하게 만들 예정.
+  // §5.3.3 — 보일러플레이트 4벌 × 한·영. 한국어 40·100·200자는 명세 §5.3.3
+  // 그대로, 한국어 400자와 영문 4벌은 명세 톤(차분·단정)에 맞게 작성.
+  // 회차·연도·주최·공동주최·숫자 표기는 모두 §10.2.5 / §10.2.6 규칙 준수.
+  // Phase 4 /downloads 작업 시 content/overview.json으로 분리 예정.
   const BOILERPLATES_KO = {
-    40:  { use: 'SNS·이메일 제목용',      text: '한국 최대 의료기기 전시회 KIMES 2027, 3월 18~21일 코엑스' },
-    100: { use: '보도자료 리드문용',      text: 'KIMES 2027은 1,400여 개 기업과 8만여 명의 전문 관람객이 참여하는 한국 최대 규모의 의료기기 전시회입니다.' },
-    200: { use: '회사 소개 페이지·블로그용', text: 'KIMES는 한국의료기기산업협회가 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 60여 개국 1,400여 개 기업이 참가하며, 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리를 아우릅니다.' },
-    400: { use: '보도자료 회사 소개 칸용', text: 'KIMES는 한국의료기기산업협회가 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18일부터 21일까지 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리의 최신 의료기기와 병원설비를 선보입니다. 의료진·연구자·구매 담당자 등 8만여 명이 직접 참관해 신제품 발표와 국제 비즈니스 매칭이 함께 이루어지며, MedicomteK·Beauty&Derma Seoul·INSPIRE Digital Health 세 특별관도 분야별 전문 관람을 지원합니다.' },
+    40:  { use: 'SNS·이메일 제목용',         text: '한국 최대 의료기기 전시회 KIMES 2027, 3월 18~21일 코엑스' },
+    100: { use: '보도자료 리드문용',         text: 'KIMES 2027은 1,400여 개 기업과 8만여 명이 참여하는 한국 최대 의료기기 전시회로, 3월 18~21일 코엑스에서 열립니다.' },
+    200: { use: '회사 소개 페이지·블로그용',  text: 'KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18~21일 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리를 아우릅니다.' },
+    400: { use: '보도자료 회사 소개 칸용',    text: 'KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18일부터 21일까지 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리의 최신 의료기기와 병원설비를 선보입니다. 의료진·연구자·구매 담당자 등 8만여 명이 직접 참관합니다. KIMES 2027에는 MedicomteK, Beauty&Derma Seoul, INSPIRE Digital Health 세 개 특별관이 함께 열려 분야별 전문 전시를 운영합니다.' },
   };
   const BOILERPLATES_EN = {
-    40:  { use: 'Email subject / SNS',     text: 'KIMES 2027 · Mar 18–21 · COEX, Seoul' },
-    100: { use: 'Press release lede',      text: "KIMES 2027 — Korea's largest medical equipment expo, with 1,400+ companies and 80,000 trade visitors." },
-    200: { use: 'About page · blog',       text: "KIMES, hosted annually by KMDIA since 1980, is Korea's leading medical device and hospital equipment exhibition. Its 42nd edition (KIMES 2027) runs March 18–21 at COEX, Seoul, with 1,400+ exhibitors from 60+ countries." },
-    400: { use: 'Press release boilerplate', text: "KIMES, hosted annually by the Korea Medical Devices Industry Association (KMDIA) since 1980, is Korea's leading medical device and hospital equipment exhibition. The 42nd edition (KIMES 2027) runs March 18–21 at COEX, Seoul, with 1,400+ exhibitors from 60+ countries presenting across 14 categories — from imaging and surgical instruments to digital health and bio. KIMES 2027 also hosts MedicomteK, Beauty & Derma Seoul, and INSPIRE Digital Health as dedicated special zones." },
+    40:  { use: 'Email subject / SNS',       text: 'KIMES 2027 · Mar 18–21 · COEX, Seoul' },
+    100: { use: 'Press release lede',        text: "KIMES 2027 — Korea's largest medical equipment show. 1,400+ exhibitors, 80,000+ trade visitors." },
+    200: { use: 'About page · blog',         text: "Hosted by KOREA E&EX INC. with KMDA and KMDIA since 1980, KIMES is Korea's largest medical equipment show. KIMES 2027 (42nd edition) runs March 18–21 at COEX with 1,400+ exhibitors from 60+ countries." },
+    400: { use: 'Press release boilerplate', text: "Hosted by KOREA E&EX INC. with KMDA and KMDIA since 1980, KIMES is Korea's largest medical equipment show. The 42nd edition (KIMES 2027) runs March 18–21 at COEX, Seoul, with 1,400+ exhibitors from 60+ countries in 14 categories. KIMES 2027 hosts MedicomteK, Beauty&Derma Seoul, and INSPIRE Digital Health as special zones, with 80,000+ trade visitors — clinicians, researchers, hospital purchasers." },
   };
   const LENGTHS = [40, 100, 200, 400];
 
@@ -79,15 +79,17 @@ function OverviewPage() {
     { n: '14', ko: '바이오 / 제약',         en: 'Bio & pharmaceuticals' },
   ];
 
-  // §5.3.6 — 공식 채널. 사이트·SNS는 [열기], 이메일은 [복사]
-  // (수신자 필드에 붙여 넣기 편하게).
+  // §5.3.6 — 공식 채널. 단일 창구로 통합: 모든 문의(브랜드·참가·승인·
+  // 라이선스)는 kimes@kimes.kr / 02-551-0102. 사이트·SNS는 [열기],
+  // 이메일·전화는 [복사] (수신자 필드 또는 주소록 붙여 넣기 편하게).
+  const contact = window.KIMES_EVENT.contact;
   const CHANNELS = [
     { label: '공식 사이트', display: 'kimes.kr',          url: 'https://kimes.kr',                       action: 'open' },
-    { label: '브랜드 문의', display: 'brand@kimes.kr',    value: 'brand@kimes.kr',                        action: 'copy' },
-    { label: '참가 문의',   display: 'visit@kimes.kr',    value: 'visit@kimes.kr',                        action: 'copy' },
-    { label: '인스타그램', display: '@kimes_official',   url: 'https://instagram.com/kimes_official',   action: 'open' },
-    { label: '링크드인',   display: '/company/kimes',    url: 'https://linkedin.com/company/kimes',     action: 'open' },
-    { label: '유튜브',     display: '/@kimes',           url: 'https://youtube.com/@kimes',             action: 'open' },
+    { label: '대표 문의',   display: contact.email,        value: contact.email,                          action: 'copy' },
+    { label: '대표 전화',   display: contact.tel,          value: contact.tel,                            action: 'copy' },
+    { label: '인스타그램',  display: '@kimes_official',    url: 'https://instagram.com/kimes_official',   action: 'open' },
+    { label: '링크드인',    display: '/company/kimes',     url: 'https://linkedin.com/company/kimes',     action: 'open' },
+    { label: '유튜브',      display: '/@kimes',            url: 'https://youtube.com/@kimes',             action: 'open' },
   ];
 
   return (

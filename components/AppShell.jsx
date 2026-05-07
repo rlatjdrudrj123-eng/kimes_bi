@@ -62,7 +62,7 @@ function Header() {
 
 function Footer() {
   // 푸터 표기는 components/config.js의 KIMES_EVENT를 단일 출처로 사용.
-  const { event, guide } = window.KIMES_EVENT;
+  const { event, guide, contact } = window.KIMES_EVENT;
   return (
     <footer className="shell-footer">
       <div className="shell-footer-inner">
@@ -72,17 +72,17 @@ function Footer() {
           <Link to="/changelog" className="ft-link">변경 이력 보기 →</Link>
         </div>
         <div className="shell-footer-col">
-          <div>브랜드 문의: <a href="mailto:brand@kimes.kr">brand@kimes.kr</a></div>
-          <div>참가 문의: <a href="mailto:visit@kimes.kr">visit@kimes.kr</a></div>
+          <div>대표 문의: <a href={`mailto:${contact.email}`}>{contact.email}</a></div>
+          <div>대표 전화: <a href={`tel:${contact.tel.replace(/-/g,'')}`}>{contact.tel}</a></div>
           <div className="ft-meta">승인 검토: 영업일 3–5일</div>
         </div>
         <div className="shell-footer-col">
-          <div>주최: 한국의료기기산업협회 (KMDIA)</div>
+          <div>주최: {event.organizationKo}</div>
           <div>공식 사이트: <a href="https://kimes.kr" target="_blank" rel="noopener noreferrer">kimes.kr</a></div>
         </div>
       </div>
       <div className="shell-footer-legal">
-        © KIMES 사무국. KIMES, MedicomteK, Beauty&Derma Seoul, INSPIRE Digital Health는 한국의료기기산업협회의 등록 상표입니다. 무단 사용 시 법적 조치를 받을 수 있습니다.
+        © {event.organizerEn}. KIMES, MedicomteK, Beauty&Derma Seoul, INSPIRE Digital Health는 {event.organizerEn}의 등록 상표입니다. 무단 사용 시 법적 조치를 받을 수 있습니다.
       </div>
     </footer>
   );

@@ -58,6 +58,49 @@
 
 ---
 
+## 2026-05-07 — 주최사·공동주최·문의 단일화·상표권자 정정
+
+### 정정 내용
+
+명세서 초기 드래프트가 "주최: 한국의료기기산업협회 (KMDIA) 단독 / 상표권자: KMDIA / 문의: brand@·visit@ 분리"로 기재되어 있었으나, 실제 운영 구조는 다음과 같습니다.
+
+| 항목 | 잘못된 값 (정정 전) | 정식 값 (정정 후) |
+|---|---|---|
+| 주최(메인) | 한국의료기기산업협회 (KMDIA) | 한국이앤엑스 / KOREA E&EX INC. |
+| 공동주최 | — | KMDA, KMDIA (이 순서) |
+| 주최 정식 표기 (KO) | 주최: 한국의료기기산업협회 (KMDIA) | 주최: 한국이앤엑스 · KMDA · KMDIA |
+| 주최 정식 표기 (EN) | Korea Medical Devices Industry Association (KMDIA) | KOREA E&EX INC. with KMDA and KMDIA |
+| 한국이앤엑스 영문 | Korea E&Ex (가정) | **KOREA E&EX INC.** (ALL CAPS, 영문 본문·© 표기 모두) |
+| 문의 — 브랜드 | brand@kimes.kr | kimes@kimes.kr (단일 창구) |
+| 문의 — 참가 | visit@kimes.kr | kimes@kimes.kr (단일 창구) |
+| 대표 전화 | (명시 없음) | 02-551-0102 |
+| 상표권자 | KMDIA | KOREA E&EX INC. (KIMES / MedicomteK / Beauty&Derma Seoul / INSPIRE Digital Health 4개 브랜드 모두) |
+
+### 적용 범위
+
+명세서 inline 정정:
+- §3.4 푸터 — 가운데 컬럼(brand@/visit@ → kimes@ + tel) · 우측 컬럼(주최) · 하단 © 라인
+- §5.3.2 일정·장소 표 — 주최 행
+- §5.3.3 한국어 200자 보일러플레이트 — "한국의료기기산업협회가" → "한국이앤엑스가 KMDA·KMDIA와 함께"
+- §5.3.6 공식 채널 — brand@/visit@ 두 줄 → 대표 문의·대표 전화 두 줄로
+- §6.2 보도자료 헤더 케이스 5 (line 667) — 푸터 주최 표기
+- §10.2.7 보도자료 표준 보일러플레이트 — 동일 갱신
+- §6 로고 사용 신청 / §9 미승인 표기 라이선스 / §13.3.6 특별관 문의 / §14 권한 페이지 / §15 FAQ 30개 / §17 contact 페이지 — 모든 brand@/visit@ → kimes@kimes.kr
+
+코드·인프라 갱신:
+- **components/config.js** — `event.organizerKo/En` 갱신, `event.organizationKo/En` 신규(공동주최 통합 표기), `coOrganizers` 배열 신규(KMDA → KMDIA 순서), `contact: { email, tel }` 신규. `tel` 키 사용(HTML `<a href="tel:...">` 시맨틱 일치, `phone` 아님).
+- **components/AppShell.jsx** Footer — 가운데 컬럼·우측 컬럼·© 라인 모두 KIMES_EVENT 단일 출처에서 읽도록 갱신.
+- **components/OverviewPage.jsx** — FACT_ROWS 주최 행, CHANNELS 단일 메일+전화, 8개 보일러플레이트 전부 갱신.
+- **components/LandingPage.jsx** — 문의 박스 메일 주소.
+
+### 변경되지 않은 항목
+
+- §5.3.5 14개 카테고리 — 명세 그대로.
+- /contact의 "문의 종류 선택" 탭 (일반·승인·라이선스 분류) — 분류 기준은 유지하되 모든 분기가 단일 메일로 라우팅되도록 처리.
+- 한국어 본문 안에서 "한국이앤엑스" 한글 표기는 그대로 — 영문 약어 필요 시에만 `KOREA E&EX INC.` 병기.
+
+---
+
 ## 작성·검토 규칙
 
 이 문서는 명세서가 inline 수정될 때마다 항목을 추가합니다. 형식:

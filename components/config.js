@@ -30,10 +30,30 @@
     venueShortKo: 'COEX · 서울',
     venueEn: 'COEX, Seoul',
     halls: '1층 Hall A · 3층 Hall B–E',
-    organizerKo: '한국의료기기산업협회 (KMDIA)',
-    organizerEn: 'Korea Medical Devices Industry Association (KMDIA)',
+    // 주최(단독) — 푸터 © · 영문 본문에서는 ALL CAPS 사용.
+    // 한국어 본문 안에서는 한글 표기, 영문 본문·© 표기에서는 ALL CAPS.
+    organizerKo: '한국이앤엑스',
+    organizerEn: 'KOREA E&EX INC.',
+    // 주최 정식 표기 (주최 + 공동주최 통합) — §5.3.2 일정 표 등에 사용
+    organizationKo: '한국이앤엑스 · KMDA · KMDIA',
+    organizationEn: 'KOREA E&EX INC. with KMDA and KMDIA',
     // 신청 마감 — 행사 시작 전날 23:59 (KST)
     applicationDeadline: '2027-03-17T23:59:59+09:00',
+  };
+
+  // ---- 공동주최 (순서: KMDA 먼저, KMDIA 다음) -----------------------------
+  // 주최(한국이앤엑스)와 함께 KIMES 운영에 참여하는 두 협력 단체.
+  const coOrganizers = [
+    { ko: 'KMDA (한국의료기기협동조합)',     en: 'KMDA (Korea Medical Device Industry Cooperative)' },
+    { ko: 'KMDIA (한국의료기기산업협회)',   en: 'KMDIA (Korea Medical Devices Industry Association)' },
+  ];
+
+  // ---- 문의 채널 (단일 창구) ---------------------------------------------
+  // brand@/visit@ 분리되어 있던 것을 모두 단일 창구로 통합. /contact의
+  // 문의 종류 탭은 분류 기준으로 유지하되, 결국 같은 메일로 라우팅.
+  const contact = {
+    email: 'kimes@kimes.kr',
+    tel:   '02-551-0102',
   };
 
   // ---- 가이드 자체 정보 --------------------------------------------------
@@ -108,6 +128,8 @@
     guide,
     next,
     numbers,
+    coOrganizers,
+    contact,
     getEventStatus,
   };
 })();
