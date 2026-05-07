@@ -1,5 +1,6 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
+const useSiteLang       = window.useSiteLang;
 
 /**
  * Typography in use — section 06.
@@ -452,6 +453,7 @@ function AlignmentRules() {
    07.6 — Don'ts (8-cell grid)
    ============================================================ */
 function TypographyDonts() {
+  const lang = useSiteLang();
   const items = [
     {
       id: 'kr-in-mont',
@@ -551,8 +553,7 @@ function TypographyDonts() {
             <span className="tu-dont-x" aria-hidden="true">✗</span>
             <div className="tu-dont-art">{item.art()}</div>
             <div className="tu-dont-meta">
-              <span className="vlabel">{item.ko}</span>
-              <span className="vdesc">{item.en}</span>
+              <span className="vlabel">{lang === 'ko' ? item.ko : item.en}</span>
             </div>
           </div>
         ))}

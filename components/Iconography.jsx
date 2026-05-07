@@ -1,5 +1,6 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
+const useSiteLang       = window.useSiteLang;
 
 /**
  * Iconography — section 11.
@@ -343,12 +344,13 @@ function UtilityIcons() {
    11.4 — Color application
    ============================================================ */
 function ColorApplication() {
+  const lang = useSiteLang();
   const samples = [
-    { label: 'Default text',       color: '#231815', bg: '#fff' },
-    { label: 'Muted gray K40',     color: '#A7A9AC', bg: '#fff' },
-    { label: 'KIMES Red',          color: '#E60012', bg: '#fff' },
-    { label: 'MedicomteK Blue',    color: '#036EB8', bg: '#fff' },
-    { label: 'White on KIMES Red', color: '#fff',    bg: '#E60012' },
+    { label: 'Default text',       krLabel: '기본 텍스트',         color: '#231815', bg: '#fff' },
+    { label: 'Muted gray K40',     krLabel: '뮤티드 그레이 K40',   color: '#A7A9AC', bg: '#fff' },
+    { label: 'KIMES Red',          krLabel: 'KIMES 레드',          color: '#E60012', bg: '#fff' },
+    { label: 'MedicomteK Blue',    krLabel: 'MedicomteK 블루',     color: '#036EB8', bg: '#fff' },
+    { label: 'White on KIMES Red', krLabel: 'KIMES 레드 위 화이트', color: '#fff',    bg: '#E60012' },
   ];
   const c = useSectionContent('iconography');
   const sub = (c.subsections && c.subsections.color) || {};
@@ -363,7 +365,7 @@ function ColorApplication() {
               {React.cloneElement(UTILITY_ICONS.search, { size: 32 })}
             </div>
             <div className="ic-color-meta">
-              <div className="ic-color-name">{s.label}</div>
+              <div className="ic-color-name">{lang === 'ko' && s.krLabel ? s.krLabel : s.label}</div>
               <div className="ic-color-hex mono">{s.color}</div>
             </div>
           </div>
@@ -378,13 +380,14 @@ function ColorApplication() {
    11.5 — Sizing scale
    ============================================================ */
 function SizingScale() {
+  const lang = useSiteLang();
   const sizes = [
-    { px: 16, use: 'Inline with body text' },
-    { px: 20, use: 'Inline with larger text / buttons' },
-    { px: 24, use: 'Default — buttons, navigation' },
-    { px: 32, use: 'Section headers' },
-    { px: 48, use: 'Category cards' },
-    { px: 64, use: 'Hero scale' },
+    { px: 16, use: 'Inline with body text',           krUse: '본문 텍스트와 인라인' },
+    { px: 20, use: 'Inline with larger text / buttons', krUse: '큰 텍스트·버튼과 인라인' },
+    { px: 24, use: 'Default — buttons, navigation',   krUse: '기본 — 버튼, 내비게이션' },
+    { px: 32, use: 'Section headers',                 krUse: '섹션 헤더' },
+    { px: 48, use: 'Category cards',                  krUse: '카테고리 카드' },
+    { px: 64, use: 'Hero scale',                      krUse: '히어로 스케일' },
   ];
   const c = useSectionContent('iconography');
   const sub = (c.subsections && c.subsections.sizing) || {};
@@ -400,7 +403,7 @@ function SizingScale() {
             </div>
             <div className="ic-size-meta">
               <div className="ic-size-px mono">{s.px}px</div>
-              <div className="ic-size-use">{s.use}</div>
+              <div className="ic-size-use">{lang === 'ko' && s.krUse ? s.krUse : s.use}</div>
             </div>
           </div>
         ))}
@@ -413,11 +416,14 @@ function SizingScale() {
    11.6 — Don'ts
    ============================================================ */
 function IconDonts() {
+  const lang = useSiteLang();
   // Stethoscope render with a deliberately wrong styling per cell.
   const items = [
     {
       label: 'Gradient on icon',
+      krLabel: '아이콘에 그라디언트',
       desc: 'Single-color fill only.',
+      krDesc: '단색 채움만.',
       art: () => (
         <svg width="56" height="56" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <defs>
@@ -438,7 +444,9 @@ function IconDonts() {
     },
     {
       label: 'Drop shadow',
+      krLabel: '드롭 섀도우',
       desc: 'Icons are flat — no shadows.',
+      krDesc: '아이콘은 플랫 — 섀도우 금지.',
       art: () => (
         <div style={{ filter: 'drop-shadow(2px 4px 4px rgba(0,0,0,0.4))', color: '#231815' }}>
           {React.cloneElement(CATEGORY_ICONS.stethoscope, { size: 56 })}
@@ -447,7 +455,9 @@ function IconDonts() {
     },
     {
       label: 'Mixing outline + filled',
+      krLabel: '아웃라인 + 채움 혼용',
       desc: 'Pick one style per surface.',
+      krDesc: '한 표면에는 한 스타일만.',
       art: () => (
         <div style={{ display: 'flex', gap: 14, alignItems: 'center', color: '#231815' }}>
           {React.cloneElement(CATEGORY_ICONS.stethoscope, { size: 36 })}
@@ -459,7 +469,9 @@ function IconDonts() {
     },
     {
       label: 'Multi-color fill',
+      krLabel: '다색 채움',
       desc: 'One color per icon, ever.',
+      krDesc: '아이콘은 항상 한 색.',
       art: () => (
         <svg width="56" height="56" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M5 3v6a4 4 0 0 0 8 0V3" stroke="#E60012" />
@@ -472,7 +484,9 @@ function IconDonts() {
     },
     {
       label: 'Stretched non-uniformly',
+      krLabel: '비균등 늘림',
       desc: 'Always preserve the 1:1 aspect.',
+      krDesc: '1:1 비율을 항상 유지.',
       art: () => (
         <div style={{ transform: 'scaleX(1.6)', color: '#231815' }}>
           {React.cloneElement(CATEGORY_ICONS.stethoscope, { size: 56 })}
@@ -481,7 +495,9 @@ function IconDonts() {
     },
     {
       label: 'Below 16px size',
+      krLabel: '16px 미만',
       desc: 'Strokes break and detail disappears.',
+      krDesc: '스트로크가 깨지고 디테일이 사라집니다.',
       art: () => (
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, color: '#231815' }}>
           {React.cloneElement(CATEGORY_ICONS.stethoscope, { size: 10 })}
@@ -502,8 +518,8 @@ function IconDonts() {
             <span className="tu-dont-x">✗</span>
             <div className="ic-dont-stage">{it.art()}</div>
             <div className="ic-dont-meta">
-              <div className="vlabel">{it.label}</div>
-              <div className="vdesc">{it.desc}</div>
+              <div className="vlabel">{lang === 'ko' && it.krLabel ? it.krLabel : it.label}</div>
+              <div className="vdesc">{lang === 'ko' && it.krDesc ? it.krDesc : it.desc}</div>
             </div>
           </div>
         ))}

@@ -1,6 +1,7 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
 const useBrandFilter    = window.useBrandFilter;
+const useSiteLang       = window.useSiteLang;
 
 /**
  * Logo rules — slimmed-down usage guide.
@@ -38,12 +39,13 @@ function ClearSpaceAndMin() {
   const brand = useBrandFilter();
   const c = useSectionContent('logo-rules');
   const sub = (c.subsections && c.subsections.clearSpace) || {};
+  const lang = useSiteLang();
   // Per-brand first-letter cap-height ratio (clear space = 1× of that letter).
   const allExamples = [
-    { id: 'kimes', name: 'KIMES',          svg: 'kimes',     min: '80px / 24mm',  h: 36, anchor: 'cap-height of K' },
-    { id: 'mc',    name: 'MedicomteK',     svg: 'mc',        min: '120px / 30mm', h: 24, anchor: 'cap-height of M' },
-    { id: 'bd',    name: 'Beauty&Derma',   svg: 'bdSeoul',   min: '140px / 36mm', h: 14, anchor: 'cap-height of b' },
-    { id: 'in',    name: 'INSPIRE',        svg: 'inTagline', min: '160px / 40mm', h: 22, anchor: 'cap-height of I' },
+    { id: 'kimes', name: 'KIMES',          svg: 'kimes',     min: '80px / 24mm',  h: 36, anchor: 'cap-height of K', krAnchor: 'K의 cap-height' },
+    { id: 'mc',    name: 'MedicomteK',     svg: 'mc',        min: '120px / 30mm', h: 24, anchor: 'cap-height of M', krAnchor: 'M의 cap-height' },
+    { id: 'bd',    name: 'Beauty&Derma',   svg: 'bdSeoul',   min: '140px / 36mm', h: 14, anchor: 'cap-height of b', krAnchor: 'b의 cap-height' },
+    { id: 'in',    name: 'INSPIRE',        svg: 'inTagline', min: '160px / 40mm', h: 22, anchor: 'cap-height of I', krAnchor: 'I의 cap-height' },
   ];
   const examples = allExamples.filter(e => e.id === brand);
   return (
@@ -64,8 +66,8 @@ function ClearSpaceAndMin() {
             </div>
             <div className="rules-cs-meta">
               <span className="vlabel">{e.name}</span>
-              <span className="vdesc">Clear space — 1× {e.anchor}</span>
-              <span className="vdesc">Minimum size — {e.min}</span>
+              <span className="vdesc">{sub.clearSpaceLabel} {lang === 'ko' && e.krAnchor ? e.krAnchor : e.anchor}</span>
+              <span className="vdesc">{sub.minSizeLabel} {e.min}</span>
             </div>
           </div>
         ))}
@@ -79,16 +81,17 @@ function ClearSpaceAndMin() {
    ============================================================ */
 function BackgroundUsage() {
   const brand = useBrandFilter();
+  const lang  = useSiteLang();
   const ROWS = [
-    { bg: 'Light solid (0–30%)',     logo: 'Full color',                  v: 'ok' },
-    { bg: 'Mid-tone (40–60%)',       logo: 'Avoid — request approval',    v: 'avoid' },
-    { bg: 'Dark solid (70–100%)',    logo: 'White reversed',              v: 'ok' },
-    { bg: "Brand's own color",       logo: 'White reversed',              v: 'ok' },
-    { bg: 'One-color print (light)', logo: 'Full black',                  v: 'ok' },
-    { bg: 'Subordinate context',     logo: 'Gray K40',                    v: 'ok' },
-    { bg: 'Dark photo',              logo: 'White reversed',              v: 'ok' },
-    { bg: 'Light photo',             logo: 'Full color',                  v: 'ok' },
-    { bg: 'Busy photo',              logo: 'Place on solid plate first',  v: 'avoid' },
+    { bg: 'Light solid (0–30%)',     krBg: '밝은 단색 (0–30%)',     logo: 'Full color',                 krLogo: '풀 컬러',                   v: 'ok' },
+    { bg: 'Mid-tone (40–60%)',       krBg: '중간 톤 (40–60%)',      logo: 'Avoid — request approval',   krLogo: '회피 — 사전 승인 요청',     v: 'avoid' },
+    { bg: 'Dark solid (70–100%)',    krBg: '어두운 단색 (70–100%)', logo: 'White reversed',             krLogo: '화이트 반전',               v: 'ok' },
+    { bg: "Brand's own color",       krBg: '브랜드 자체 색',         logo: 'White reversed',             krLogo: '화이트 반전',               v: 'ok' },
+    { bg: 'One-color print (light)', krBg: '단색 인쇄 (밝은)',       logo: 'Full black',                 krLogo: '풀 블랙',                   v: 'ok' },
+    { bg: 'Subordinate context',     krBg: '하위 컨텍스트',          logo: 'Gray K40',                   krLogo: '그레이 K40',                v: 'ok' },
+    { bg: 'Dark photo',              krBg: '어두운 사진',            logo: 'White reversed',             krLogo: '화이트 반전',               v: 'ok' },
+    { bg: 'Light photo',             krBg: '밝은 사진',              logo: 'Full color',                 krLogo: '풀 컬러',                   v: 'ok' },
+    { bg: 'Busy photo',              krBg: '복잡한 사진',            logo: 'Place on solid plate first', krLogo: '먼저 단색 플레이트 위에',  v: 'avoid' },
   ];
   const c = useSectionContent('logo-rules');
   const sub = (c.subsections && c.subsections.background) || {};
@@ -110,8 +113,8 @@ function BackgroundUsage() {
           <tbody>
             {ROWS.map(r => (
               <tr key={r.bg}>
-                <td>{r.bg}</td>
-                <td>{r.logo}</td>
+                <td>{lang === 'ko' && r.krBg ? r.krBg : r.bg}</td>
+                <td>{lang === 'ko' && r.krLogo ? r.krLogo : r.logo}</td>
                 <td><span className={`verdict ${r.v}`}>{r.v === 'ok' ? '✓' : '✗'}</span></td>
               </tr>
             ))}
@@ -158,10 +161,11 @@ function PhotographicUsage() {
   if (brand !== 'kimes') return null;
   const c = useSectionContent('logo-rules');
   const sub = (c.subsections && c.subsections.photographic) || {};
+  const lang = useSiteLang();
   const cases = [
-    { id: 'light', label: 'Light / uncluttered', verdict: 'ok',     rule: 'Full color logo',                       cls: 'photo-light' },
-    { id: 'busy',  label: 'Busy / complex',      verdict: 'avoid',  rule: 'Place on a solid color plate first',    cls: 'photo-busy'  },
-    { id: 'dark',  label: 'Dark / low-key',      verdict: 'ok',     rule: 'White reversed logo',                   cls: 'photo-dark'  },
+    { id: 'light', label: 'Light / uncluttered', krLabel: '밝은 / 단순',  verdict: 'ok',    rule: 'Full color logo',                       krRule: '풀 컬러 로고',                cls: 'photo-light' },
+    { id: 'busy',  label: 'Busy / complex',      krLabel: '복잡한',        verdict: 'avoid', rule: 'Place on a solid color plate first',   krRule: '먼저 단색 플레이트 위에 배치', cls: 'photo-busy'  },
+    { id: 'dark',  label: 'Dark / low-key',      krLabel: '어두운',        verdict: 'ok',    rule: 'White reversed logo',                  krRule: '화이트 반전 로고',            cls: 'photo-dark'  },
   ];
   return (
     <div id="logo-rules-photo" className="subsection">
@@ -171,7 +175,7 @@ function PhotographicUsage() {
         {cases.map(c => (
           <div key={c.id} className={`lbg-photo-card ${c.verdict}`}>
             <div className={`lbg-photo-stage ${c.cls}`}>
-              <span className="lbg-photo-tag">PHOTO — {c.label.toUpperCase()}</span>
+              <span className="lbg-photo-tag">{lang === 'ko' ? '사진 — ' : 'PHOTO — '}{(lang === 'ko' && c.krLabel ? c.krLabel : c.label).toUpperCase()}</span>
               {c.id !== 'busy' && (
                 <div className="lbg-photo-logo">
                   <InlineLogo
@@ -189,8 +193,8 @@ function PhotographicUsage() {
               <span className={`verdict ${c.verdict}`}>
                 {c.verdict === 'ok' ? sub.allowedLabel : sub.avoidLabel}
               </span>
-              <span className="vlabel">{c.label}</span>
-              <span className="vdesc">{c.rule}</span>
+              <span className="vlabel">{lang === 'ko' && c.krLabel ? c.krLabel : c.label}</span>
+              <span className="vdesc">{lang === 'ko' && c.krRule ? c.krRule : c.rule}</span>
             </div>
           </div>
         ))}
@@ -209,6 +213,7 @@ function Misuse() {
   if (brand !== 'kimes') return null;
   const c = useSectionContent('logo-rules');
   const sub = (c.subsections && c.subsections.misuse) || {};
+  const lang = useSiteLang();
   // Each entry renders the KIMES primary SVG with one CSS treatment that
   // demonstrates an incorrect modification.
   const items = [
@@ -387,8 +392,7 @@ function Misuse() {
             <span className="misuse-x" aria-hidden="true">✗</span>
             <div className="rules-misuse-art">{item.render()}</div>
             <div className="rules-misuse-meta">
-              <span className="vlabel">{item.ko}</span>
-              <span className="vdesc">{item.en}</span>
+              <span className="vlabel">{lang === 'ko' ? item.ko : item.en}</span>
             </div>
           </div>
         ))}

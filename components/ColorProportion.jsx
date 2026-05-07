@@ -1,5 +1,6 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
+const useSiteLang = window.useSiteLang;
 
 /**
  * Color proportion — section 04.
@@ -30,9 +31,9 @@ const PROPORTIONS = [
     tone: '강렬한 산업 전시회',
     toneEn: 'Bold industrial trade show',
     segments: [
-      { hex: '#FFFFFF', name: 'White', pct: 60, role: 'Background, breathing space' },
-      { hex: '#231815', name: 'Black', pct: 25, role: 'Text, structure' },
-      { hex: '#E60012', name: 'Red',   pct: 15, role: 'Accent, headlines, CTAs' },
+      { hex: '#FFFFFF', name: 'White', kr: '화이트', pct: 60, role: 'Background, breathing space', krRole: '배경, 여백' },
+      { hex: '#231815', name: 'Black', kr: '블랙',   pct: 25, role: 'Text, structure',              krRole: '텍스트, 구조' },
+      { hex: '#E60012', name: 'Red',   kr: '레드',   pct: 15, role: 'Accent, headlines, CTAs',      krRole: '액센트, 헤드라인, CTA' },
     ],
   },
   {
@@ -42,9 +43,9 @@ const PROPORTIONS = [
     tone: '전문적·기술적',
     toneEn: 'Professional / technical',
     segments: [
-      { hex: '#FFFFFF', name: 'White', pct: 65, role: 'Background' },
-      { hex: '#231815', name: 'Black', pct: 20, role: 'Text' },
-      { hex: '#036EB8', name: 'Blue',  pct: 15, role: 'Accent' },
+      { hex: '#FFFFFF', name: 'White', kr: '화이트', pct: 65, role: 'Background', krRole: '배경' },
+      { hex: '#231815', name: 'Black', kr: '블랙',   pct: 20, role: 'Text',       krRole: '텍스트' },
+      { hex: '#036EB8', name: 'Blue',  kr: '블루',   pct: 15, role: 'Accent',     krRole: '액센트' },
     ],
   },
   {
@@ -54,10 +55,10 @@ const PROPORTIONS = [
     tone: '우아함·전문성',
     toneEn: 'Elegant / refined',
     segments: [
-      { hex: '#FFFFFF', name: 'White',         pct: 60, role: 'Background' },
-      { hex: '#BAB1D7', name: 'Light purple',  pct: 25, role: 'Soft fills, large surfaces' },
-      { hex: '#5D3B8B', name: 'Purple',        pct: 10, role: 'Text, headlines' },
-      { hex: '#231815', name: 'Black',         pct:  5, role: 'Body text' },
+      { hex: '#FFFFFF', name: 'White',         kr: '화이트',     pct: 60, role: 'Background',                  krRole: '배경' },
+      { hex: '#BAB1D7', name: 'Light purple',  kr: '라이트 퍼플', pct: 25, role: 'Soft fills, large surfaces',  krRole: '부드러운 채움, 넓은 표면' },
+      { hex: '#5D3B8B', name: 'Purple',        kr: '퍼플',       pct: 10, role: 'Text, headlines',             krRole: '텍스트, 헤드라인' },
+      { hex: '#231815', name: 'Black',         kr: '블랙',       pct:  5, role: 'Body text',                    krRole: '본문' },
     ],
   },
   {
@@ -67,9 +68,9 @@ const PROPORTIONS = [
     tone: '혁신·디지털',
     toneEn: 'Innovation / digital',
     segments: [
-      { hex: '#595757', name: 'Gray',  pct: 50, role: 'Primary surface' },
-      { hex: '#FFFFFF', name: 'White', pct: 35, role: 'Text on gray' },
-      { hex: '#BFD633', name: 'Lime',  pct: 15, role: 'Highlights, CTAs' },
+      { hex: '#595757', name: 'Gray',  kr: '그레이', pct: 50, role: 'Primary surface', krRole: '주요 표면' },
+      { hex: '#FFFFFF', name: 'White', kr: '화이트', pct: 35, role: 'Text on gray',    krRole: '그레이 위 텍스트' },
+      { hex: '#BFD633', name: 'Lime',  kr: '라임',   pct: 15, role: 'Highlights, CTAs', krRole: '하이라이트, CTA' },
     ],
   },
 ];
@@ -77,6 +78,9 @@ const PROPORTIONS = [
 /* ---------- Reusable proportion bar --------------------------- */
 
 function ProportionBar({ segments, height = 48, showLabels = true, idPrefix = '' }) {
+  const lang = useSiteLang();
+  const tName = (s) => lang === 'ko' && s.kr ? s.kr : s.name;
+  const tRole = (s) => lang === 'ko' && s.krRole ? s.krRole : s.role;
   return (
     <div className="cp-bar-wrap">
       <div className="cp-bar" style={{ height }}>
@@ -87,7 +91,7 @@ function ProportionBar({ segments, height = 48, showLabels = true, idPrefix = ''
               key={`${idPrefix}${i}`}
               className={`cp-seg ${isWhite ? 'is-white' : ''}`}
               style={{ width: `${s.pct}%`, background: s.hex }}
-              title={`${s.name} — ${s.pct}%`}
+              title={`${tName(s)} — ${s.pct}%`}
             >
               {s.pct >= 18 && (
                 <span className="cp-seg-pct" style={{ color: pickContrastInk(s.hex) }}>
@@ -103,9 +107,9 @@ function ProportionBar({ segments, height = 48, showLabels = true, idPrefix = ''
           {segments.map((s, i) => (
             <div key={`l${idPrefix}${i}`} className="cp-bar-label" style={{ width: `${s.pct}%` }}>
               <span className="cp-sw" style={{ background: s.hex, borderColor: s.hex.toUpperCase() === '#FFFFFF' ? '#e1e5ea' : 'transparent' }} />
-              <span className="cp-name">{s.name}</span>
+              <span className="cp-name">{tName(s)}</span>
               <span className="cp-pct">{s.pct}%</span>
-              <span className="cp-role">{s.role}</span>
+              <span className="cp-role">{tRole(s)}</span>
             </div>
           ))}
         </div>
@@ -129,6 +133,7 @@ function pickContrastInk(hex) {
    ============================================================ */
 function BrandByBrand() {
   const brand = useBrandFilter();
+  const lang  = useSiteLang();
   const c = useSectionContent('color-proportion');
   const sub = (c.subsections && c.subsections.brandByBrand) || {};
   const items = PROPORTIONS.filter(b => b.id === brand);
@@ -142,8 +147,7 @@ function BrandByBrand() {
             <div className="cp-brand-head">
               <span className="cp-dot" style={{ background: b.accent }} />
               <span className="cp-brand-name">{b.name}</span>
-              <span className="cp-tone">{b.tone}</span>
-              <span className="cp-tone-en">— {b.toneEn}</span>
+              <span className="cp-tone">{lang === 'ko' ? b.tone : b.toneEn}</span>
             </div>
             <ProportionBar segments={b.segments} idPrefix={`${b.id}-`} />
           </div>
@@ -197,32 +201,34 @@ function ApplicationMocks() {
   const brand = useBrandFilter();
   // Each mock is a 4:5 ratio card. Zones are sized to mirror the
   // proportion table for that brand. Pure color blocks — no copy.
+  const lang = useSiteLang();
+  const tr = (en, ko) => lang === 'ko' && ko ? ko : en;
   const allMocks = [
     {
       id: 'kimes',
       name: 'KIMES',
       zones: [
-        { h: 60, bg: '#FFFFFF', label: 'IMAGE / HEADLINE' },
-        { h: 15, bg: '#E60012', label: 'EYEBROW' },
-        { h: 25, bg: '#231815', label: 'FOOTER',  ink: '#fff' },
+        { h: 60, bg: '#FFFFFF', label: tr('IMAGE / HEADLINE', '\uc774\ubbf8\uc9c0 / \ud5e4\ub4dc\ub77c\uc778') },
+        { h: 15, bg: '#E60012', label: tr('EYEBROW',          '\uc5d0\uc774\ube0c\ub85c\uc6b0') },
+        { h: 25, bg: '#231815', label: tr('FOOTER',           '\ud478\ud130'),       ink: '#fff' },
       ],
     },
     {
       id: 'mc',
       name: 'MedicomteK',
       zones: [
-        { h: 65, bg: '#FFFFFF', label: 'CONTENT' },
-        { h: 15, bg: '#036EB8', label: 'ACCENT' },
-        { h: 20, bg: '#231815', label: 'FOOTER', ink: '#fff' },
+        { h: 65, bg: '#FFFFFF', label: tr('CONTENT', '\ucf58\ud150\uce20') },
+        { h: 15, bg: '#036EB8', label: tr('ACCENT',  '\uc561\uc13c\ud2b8') },
+        { h: 20, bg: '#231815', label: tr('FOOTER',  '\ud478\ud130'), ink: '#fff' },
       ],
     },
     {
       id: 'bd',
       name: 'Beauty\u2009&\u2009Derma',
       zones: [
-        { h: 25, bg: '#BAB1D7', label: 'SOFT BG' },
-        { h: 60, bg: '#FFFFFF', label: 'CONTENT' },
-        { h: 10, bg: '#5D3B8B', label: 'HEADLINE', ink: '#fff' },
+        { h: 25, bg: '#BAB1D7', label: tr('SOFT BG',  '\uc18c\ud504\ud2b8 \ubc30\uacbd') },
+        { h: 60, bg: '#FFFFFF', label: tr('CONTENT',  '\ucf58\ud150\uce20') },
+        { h: 10, bg: '#5D3B8B', label: tr('HEADLINE', '\ud5e4\ub4dc\ub77c\uc778'), ink: '#fff' },
         { h:  5, bg: '#231815', label: '',         ink: '#fff' },
       ],
     },
@@ -230,9 +236,9 @@ function ApplicationMocks() {
       id: 'in',
       name: 'INSPIRE',
       zones: [
-        { h: 50, bg: '#595757', label: 'SURFACE',     ink: '#fff' },
-        { h: 35, bg: '#FFFFFF', label: 'CONTENT CARD' },
-        { h: 15, bg: '#BFD633', label: 'CTA' },
+        { h: 50, bg: '#595757', label: tr('SURFACE',      '\ud45c\uba74'),       ink: '#fff' },
+        { h: 35, bg: '#FFFFFF', label: tr('CONTENT CARD', '\ucf58\ud150\uce20 \uce74\ub4dc') },
+        { h: 15, bg: '#BFD633', label: tr('CTA',          'CTA') },
       ],
     },
   ];
@@ -342,12 +348,14 @@ function ColorProportionDonts() {
   const c = useSectionContent('color-proportion');
   const sub = (c.subsections && c.subsections.donts) || {};
   // Mini-mocks demonstrating each wrong proportion. Use abstract zones.
+  const lang = useSiteLang();
   const items = [
     {
       id: 'equal',
       ko: '균등 분할',
       en: 'Equal split (33/33/33)',
       sub: 'No hierarchy, brand identity diluted',
+      krSub: '위계 없음, 브랜드 아이덴티티 희석',
       zones: [
         { h: 33, bg: '#FFFFFF' },
         { h: 34, bg: '#231815' },
@@ -359,6 +367,7 @@ function ColorProportionDonts() {
       ko: '브랜드 컬러 과다',
       en: 'Brand color as background fill',
       sub: '>40% — overwhelming, off-brand',
+      krSub: '40% 초과 — 압도적이고 브랜드답지 않음',
       zones: [
         { h: 60, bg: '#E60012' },
         { h: 25, bg: '#FFFFFF' },
@@ -370,6 +379,7 @@ function ColorProportionDonts() {
       ko: '브랜드 컬러 혼용',
       en: 'Multiple brand colors mixed',
       sub: 'KIMES red + MedicomteK blue confuses identity',
+      krSub: 'KIMES 레드 + MedicomteK 블루는 아이덴티티 혼선',
       zones: [
         { h: 35, bg: '#E60012' },
         { h: 30, bg: '#FFFFFF' },
@@ -381,6 +391,7 @@ function ColorProportionDonts() {
       ko: '브랜드 컬러 부족',
       en: 'Brand color reduced to under 5%',
       sub: 'Invisible — no brand presence',
+      krSub: '안 보임 — 브랜드 존재감 없음',
       zones: [
         { h: 70, bg: '#FFFFFF' },
         { h: 27, bg: '#231815' },
@@ -410,9 +421,8 @@ function ColorProportionDonts() {
               ))}
             </div>
             <div className="cp-dont-meta">
-              <span className="vlabel">{item.ko}</span>
-              <span className="vdesc">{item.en}</span>
-              <span className="vdesc">{item.sub}</span>
+              <span className="vlabel">{lang === 'ko' ? item.ko : item.en}</span>
+              <span className="vdesc">{lang === 'ko' ? item.krSub : item.sub}</span>
             </div>
           </div>
         ))}

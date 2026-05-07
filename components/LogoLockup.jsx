@@ -16,7 +16,10 @@ const useSectionContent = window.useSectionContent;
  * labels — never invent fake partner brands.
  */
 
-const InlineLogo = window.InlineLogo;
+const InlineLogo        = window.InlineLogo;
+const useSectionContent = window.useSectionContent;
+const useSiteLang       = window.useSiteLang;
+function trL(en, ko, lang) { return lang === 'ko' && ko ? ko : en; }
 
 /* --- Reusable helpers ----------------------------------------- */
 
@@ -297,14 +300,15 @@ function ExternalPartnerLockups() {
    07.3 — Spacing & alignment rules
    ============================================================ */
 function LockupRulesTable() {
+  const lang = useSiteLang();
   const rows = [
-    { rule: 'Gap between logos (same row)',     spec: 'Minimum 2X' },
-    { rule: 'Divider thickness',                spec: '1px solid — #231815 (strong) or #E1E5EA (soft)' },
-    { rule: 'Divider height',                   spec: '1.2× tallest logo height' },
-    { rule: 'Vertical alignment',               spec: 'Optical center (not baseline) — adjust per logo' },
-    { rule: 'Size ratio (KIMES : sub-brand)',   spec: '1 : 0.6 in Pattern B' },
-    { rule: 'Size ratio (KIMES : partner)',     spec: '1 : 1 (equal) or 1 : 0.5 (hosted)' },
-    { rule: 'Clear space',                      spec: '1X around the entire lockup, not individual logos' },
+    { rule: 'Gap between logos (same row)',     krRule: '같은 행 로고 간 간격',        spec: 'Minimum 2X',                                          krSpec: '최소 2X' },
+    { rule: 'Divider thickness',                krRule: '구분선 두께',                  spec: '1px solid — #231815 (strong) or #E1E5EA (soft)',     krSpec: '1px 실선 — #231815 (강) 또는 #E1E5EA (약)' },
+    { rule: 'Divider height',                   krRule: '구분선 높이',                  spec: '1.2× tallest logo height',                            krSpec: '가장 큰 로고 높이의 1.2배' },
+    { rule: 'Vertical alignment',               krRule: '수직 정렬',                    spec: 'Optical center (not baseline) — adjust per logo',     krSpec: '시각적 중앙 (베이스라인 아님) — 로고별 조정' },
+    { rule: 'Size ratio (KIMES : sub-brand)',   krRule: '크기 비율 (KIMES : 서브)',     spec: '1 : 0.6 in Pattern B',                                krSpec: '패턴 B에서 1 : 0.6' },
+    { rule: 'Size ratio (KIMES : partner)',     krRule: '크기 비율 (KIMES : 파트너)',   spec: '1 : 1 (equal) or 1 : 0.5 (hosted)',                  krSpec: '1 : 1 (동등) 또는 1 : 0.5 (주최형)' },
+    { rule: 'Clear space',                      krRule: '클리어 스페이스',               spec: '1X around the entire lockup, not individual logos',   krSpec: '개별 로고가 아닌 락업 전체 주변 1X' },
   ];
   const c = useSectionContent('logo-lockup');
   const sub = (c.subsections && c.subsections.rules) || {};
@@ -324,8 +328,8 @@ function LockupRulesTable() {
           <tbody>
             {rows.map(r => (
               <tr key={r.rule}>
-                <td>{r.rule}</td>
-                <td>{r.spec}</td>
+                <td>{trL(r.rule, r.krRule, lang)}</td>
+                <td>{trL(r.spec, r.krSpec, lang)}</td>
               </tr>
             ))}
           </tbody>
@@ -339,6 +343,7 @@ function LockupRulesTable() {
    07.4 — Don'ts
    ============================================================ */
 function LockupDonts() {
+  const lang = useSiteLang();
   // Each don't renders KIMES + 2 sub-brand wordmarks under a deliberately-
   // wrong arrangement. The misuse is created with CSS, not by editing the
   // SVGs themselves.
@@ -458,8 +463,7 @@ function LockupDonts() {
             <span className="lkd-x" aria-hidden="true">✗</span>
             <div className="lkd-art">{item.art()}</div>
             <div className="lkd-meta">
-              <span className="vlabel">{item.ko}</span>
-              <span className="vdesc">{item.en}</span>
+              <span className="vlabel">{lang === 'ko' ? item.ko : item.en}</span>
             </div>
           </div>
         ))}

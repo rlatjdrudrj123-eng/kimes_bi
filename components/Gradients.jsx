@@ -1,6 +1,7 @@
 /* eslint-disable */
 const useSectionContent = window.useSectionContent;
 const useBrandFilter    = window.useBrandFilter;
+const useSiteLang       = window.useSiteLang;
 
 /**
  * Gradients — section 05.
@@ -17,6 +18,9 @@ const GR_BRANDS = [
     dot: '#E60012',
     css: 'linear-gradient(135deg, #E60012 0%, #231815 100%)',
     desc: 'Red to Black, 135°. Use behind dark hero sections — adds depth without overpowering the wordmark.',
+    krDesc: '레드 → 블랙, 135°. 다크 히어로 섹션 뒤에 사용 — 워드마크를 압도하지 않으면서 깊이감 부여.',
+    krHeadline: '한국 최대 의료 전시회',
+    krCta: '사전등록',
     logoWhite: 'kimesWhite',
     headline: 'Korea\u2019s largest medical exhibition',
     cta: 'Register now',
@@ -27,6 +31,9 @@ const GR_BRANDS = [
     dot: '#036EB8',
     css: 'linear-gradient(135deg, #036EB8 0%, #042C53 100%)',
     desc: 'Blue to Deep Navy, 135°. Use for tech and digital surfaces — webinars, system pages, product video.',
+    krDesc: '블루 → 딥 네이비, 135°. 테크·디지털 표면용 — 웨비나, 시스템 페이지, 제품 영상.',
+    krHeadline: '의료 혁신을 연결합니다',
+    krCta: '플랫폼 둘러보기',
     logoWhite: 'mcWhite',
     headline: 'Connecting medical innovation',
     cta: 'Explore platform',
@@ -37,6 +44,9 @@ const GR_BRANDS = [
     dot: '#5D3B8B',
     css: 'linear-gradient(135deg, #5D3B8B 0%, #BAB1D7 100%)',
     desc: 'Deep Purple to Light Purple, 135°. Use for soft, elegant surfaces — campaign covers, treatment pages.',
+    krDesc: '딥 퍼플 → 라이트 퍼플, 135°. 부드럽고 우아한 표면용 — 캠페인 커버, 시술 안내 페이지.',
+    krHeadline: '뷰티, 과학을 만나다',
+    krCta: '더 알아보기',
     logoWhite: 'bdWhite',
     headline: 'Beauty meets science',
     cta: 'Learn more',
@@ -47,6 +57,9 @@ const GR_BRANDS = [
     dot: '#BFD633',
     css: 'linear-gradient(135deg, #595757 0%, #BFD633 100%)',
     desc: 'Gray to Lime, 135°. Use for innovation and digital surfaces — startup features, lab content.',
+    krDesc: '그레이 → 라임, 135°. 이노베이션·디지털 표면용 — 스타트업 피처, 랩 콘텐츠.',
+    krHeadline: '헬스가 이노베이션을 만나는 곳',
+    krCta: '함께하기',
     logoWhite: 'inLimeTagline',
     headline: 'Where health meets innovation',
     cta: 'Get involved',
@@ -58,6 +71,7 @@ const GR_BRANDS = [
    ============================================================ */
 function GradientSet() {
   const brand = useBrandFilter();
+  const lang  = useSiteLang();
   const c = useSectionContent('gradients');
   const sub = (c.subsections && c.subsections.set) || {};
   const items = GR_BRANDS.filter(b => b.key === brand);
@@ -77,7 +91,7 @@ function GradientSet() {
                 <span className="gr-card-label">{b.label}</span>
               </div>
               <code className="gr-css">{b.css}</code>
-              <p className="gr-card-desc">{b.desc}</p>
+              <p className="gr-card-desc">{lang === 'ko' && b.krDesc ? b.krDesc : b.desc}</p>
             </div>
           </div>
         ))}
@@ -91,6 +105,7 @@ function GradientSet() {
    ============================================================ */
 function GradientApplications() {
   const brand = useBrandFilter();
+  const lang  = useSiteLang();
   const c = useSectionContent('gradients');
   const sub = (c.subsections && c.subsections.applications) || {};
   const items = GR_BRANDS.filter(b => b.key === brand);
@@ -106,9 +121,9 @@ function GradientApplications() {
                 <div className="gr-app-logo">
                   <InlineLogo name={b.logoWhite} height={26} />
                 </div>
-                <div className="gr-app-headline">{b.headline}</div>
+                <div className="gr-app-headline">{lang === 'ko' && b.krHeadline ? b.krHeadline : b.headline}</div>
                 <div className="gr-app-cta">
-                  <span>{b.cta}</span>
+                  <span>{lang === 'ko' && b.krCta ? b.krCta : b.cta}</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
