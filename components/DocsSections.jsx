@@ -91,10 +91,7 @@ const NAV = [
       { id: 'iconography', label: 'Iconography' },
       { id: 'spacing', label: 'Spacing & grid' },
       { id: 'asset-library', label: 'Asset library' },
-      { id: 'motion', label: 'Motion' },
-      { id: 'a11y', label: 'Accessibility' },
       { id: 'social-templates', label: 'Social templates' },
-      { id: 'bi-audit', label: 'BI audit' },
     ],
   },
   {
