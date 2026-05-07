@@ -129,21 +129,6 @@ const NAV = [
     ],
   },
   {
-    title: 'Components',
-    // Same page as Foundations — items render as in-page sections after BIAudit
-    // and the co-event summaries. Section ids match the anchors used by each
-    // component file (Buttons.jsx → #buttons, Cards.jsx → #cards, etc.).
-    page: 'Brand Foundations.html',
-    items: [
-      { id: 'buttons',    label: 'Buttons' },
-      { id: 'cards',      label: 'Cards' },
-      { id: 'forms',      label: 'Forms' },
-      { id: 'navigation', label: 'Navigation' },
-      { id: 'badges',     label: 'Badges' },
-      { id: 'banners',    label: 'Banners' },
-    ],
-  },
-  {
     title: 'Applications',
     page: 'Brand Foundations.html',
     items: [
