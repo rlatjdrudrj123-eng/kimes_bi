@@ -67,6 +67,17 @@
     status: 'pending',
   };
 
+  // ---- KIMES 컬러 (메인 2종 + 보조 그레이) -------------------------------
+  // /color · /logo 카드 하단 미세 글씨 등 가이드 전반에서 단일 출처로 참조.
+  // 행사 회차와 관계없이 고정값. CSS :root 변수(--kimes-red 등)와 같은 값.
+  // 다음 순서로 읽힘: hex (CSS 표준), rgb 배열 (디지털), cmyk 배열 (인쇄),
+  // pantone 별색 매칭 ID (대형 인쇄·Pantone 매칭 안정).
+  const colors = {
+    red:   { hex: '#E60012', rgb: [230, 0, 18],     cmyk: [0, 100, 100, 0], pantone: '185 C'     },
+    black: { hex: '#231815', rgb: [35, 24, 21],     cmyk: [0, 0, 0, 100],   pantone: 'Black 6 C' },
+    gray:  { hex: '#A7A9AC', rgb: [167, 169, 172],  cmyk: [0, 0, 0, 40] },
+  };
+
   // ---- 3단계 상태 신호 톤 -------------------------------------------------
   // 가이드 전반의 "할 수 있다 / 조건부 / 절대 안 됨" 일관된 시각 신호.
   // CSS :root 변수(--status-*)와 같은 값. 인라인 스타일·JS 측정용 반복.
@@ -155,6 +166,7 @@
     coOrganizers,
     contact,
     assets,
+    colors,
     tone,
     getEventStatus,
   };

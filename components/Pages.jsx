@@ -26,13 +26,7 @@ function Stub({ sectionRef }) {
 
 // LogoPage는 components/LogoPage.jsx에서 정의 (§6 작업으로 분리).
 
-function ColorPage() {
-  return (
-    <PageShell eyebrow="03" title="컬러" toc={false}>
-      <Stub sectionRef="§7" />
-    </PageShell>
-  );
-}
+// ColorPage는 components/ColorPage.jsx에서 정의 (§7 작업으로 분리).
 
 function TypographyPage() {
   return (
@@ -166,9 +160,10 @@ function NotFoundPage() {
 }
 
 Object.assign(window, {
-  // LandingPage: 별도 파일 components/LandingPage.jsx에서 직접 등록
+  // LandingPage:  별도 파일 components/LandingPage.jsx에서 직접 등록
   // OverviewPage: 별도 파일 components/OverviewPage.jsx에서 직접 등록
-  // LogoPage:    별도 파일 components/LogoPage.jsx에서 직접 등록
+  // LogoPage:     별도 파일 components/LogoPage.jsx에서 직접 등록
+  // ColorPage:    별도 파일 components/ColorPage.jsx에서 직접 등록
   LogoPage,
   ColorPage,
   TypographyPage,

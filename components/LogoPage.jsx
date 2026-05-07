@@ -149,7 +149,7 @@ function LogoPage() {
         ))}
       </div>
       <p className="lg-versions-foot">
-        해상도: 벡터 / 컬러모드: SVG = sRGB · AI = CMYK + Pantone 185 C 별색
+        해상도: 벡터 / 컬러모드: SVG = sRGB · AI = CMYK + Pantone {window.KIMES_EVENT.colors.red.pantone} 별색
       </p>
 
       {/* §6.2.3 클리어 스페이스 ---------------------------------------- */}
