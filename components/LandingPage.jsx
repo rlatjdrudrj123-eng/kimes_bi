@@ -68,7 +68,10 @@ function LandingPage() {
 
       {/* §4.2.2 이 가이드는 누구를 위한 것인가 -------------------------- */}
       <section className="landing-section" id="audience">
-        <h2 className="landing-h2">이 가이드는 누구를 위한 것인가</h2>
+        <div className="landing-h2-block">
+          <h2 className="landing-h2">Audience</h2>
+          <div className="landing-h2-sub">이 가이드는 누구를 위한 것인가</div>
+        </div>
         <div className="landing-audience">
           <div className="landing-audience-card landing-audience-yes">
             <h3>이 가이드가 필요한 분</h3>
@@ -93,7 +96,10 @@ function LandingPage() {
 
       {/* §4.2.3 5분 빠른 시작 ----------------------------------------- */}
       <section className="landing-section" id="quickstart">
-        <h2 className="landing-h2">5분 빠른 시작</h2>
+        <div className="landing-h2-block">
+          <h2 className="landing-h2">Quick Start</h2>
+          <div className="landing-h2-sub">5분 빠른 시작</div>
+        </div>
         <ol className="landing-steps">
           <li className="landing-step">
             <span className="landing-step-num" aria-hidden="true">1</span>
@@ -125,7 +131,10 @@ function LandingPage() {
 
       {/* §4.2.4 자주 찾는 자료 ----------------------------------------- */}
       <section className="landing-section" id="quick-links">
-        <h2 className="landing-h2">자주 찾는 자료</h2>
+        <div className="landing-h2-block">
+          <h2 className="landing-h2">Quick Links</h2>
+          <div className="landing-h2-sub">자주 찾는 자료</div>
+        </div>
         <div className="landing-tiles">
           {QUICK_LINKS.map(item => (
             <Link key={item.label} to={item.to} className="landing-tile">
@@ -141,7 +150,10 @@ function LandingPage() {
 
       {/* §4.2.5 공지·업데이트 ----------------------------------------- */}
       <section className="landing-section" id="updates">
-        <h2 className="landing-h2">최근 업데이트</h2>
+        <div className="landing-h2-block">
+          <h2 className="landing-h2">Recent Updates</h2>
+          <div className="landing-h2-sub">최근 업데이트</div>
+        </div>
         <ul className="landing-updates-list">
           {UPDATES.map(u => (
             <li key={u.date}>
@@ -156,7 +168,10 @@ function LandingPage() {
       {/* §4.2.6 문의 박스 ---------------------------------------------- */}
       <section className="landing-section" id="contact">
         <div className="landing-contact-box">
-          <h2 className="landing-h2 landing-contact-h2">더 궁금한 점이 있다면</h2>
+          <div className="landing-h2-block">
+            <h2 className="landing-h2 landing-contact-h2">Contact</h2>
+            <div className="landing-h2-sub">더 궁금한 점이 있다면</div>
+          </div>
           <p>
             가이드에 없는 사용 사례가 있나요?{' '}
             <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>로

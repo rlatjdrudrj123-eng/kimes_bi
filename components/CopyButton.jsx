@@ -50,7 +50,7 @@ function ToastHost() {
 
 function CopyButton({
   value,
-  label = '복사',
+  label = 'Copy',           // §22.5 UI 마이크로카피 영문 기본값. 호출 측에서 한글·다른 영문으로 override 가능 (예: 한국어/영문 등 데이터 라벨).
   size = 'sm',
   variant = 'outline',
   className = '',
@@ -84,6 +84,8 @@ function CopyButton({
     }
     if (ok) {
       setCopied(true);
+      // 토스트는 한국어 본문 톤. 마이크로카피 액션은 영문이지만 알림 메시지는
+      // 본문 카피라 한국어 자연스러움.
       dispatchToast('복사되었습니다');
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => setCopied(false), 1500);
@@ -106,7 +108,7 @@ function CopyButton({
       aria-label={aria}
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
-      <span className="copy-btn-label">{copied ? '복사됨' : label}</span>
+      <span className="copy-btn-label">{copied ? 'Copied' : label}</span>
     </button>
   );
 }

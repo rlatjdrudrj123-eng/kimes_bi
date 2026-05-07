@@ -88,14 +88,26 @@
 .landing-section {
   padding-top: var(--space-6);
 }
+/* §22.5 영문 H2 — Montserrat. 한글 서브는 .landing-h2-sub */
 .landing-h2 {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: var(--fs-h2);
   font-weight: 700;
   letter-spacing: -0.015em;
-  margin: 0 0 var(--space-3);
+  margin: 0;
   color: var(--text-primary);
   scroll-margin-top: calc(var(--shell-header-h) + 16px);
+}
+.landing-h2-block {
+  margin-bottom: var(--space-3);
+}
+.landing-h2-sub {
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  color: var(--kimes-gray);
+  letter-spacing: -0.005em;
 }
 
 /* ---------- §4.2.2 Audience ---------- */

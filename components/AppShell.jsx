@@ -111,6 +111,17 @@ function PageShell({ eyebrow, title, subtitle, lede, children, toc = true }) {
   );
 }
 
+// SectionHeading — §22.5 영문 H2 + 한글 서브 패턴. 페이지 안의 각 섹션
+// 헤더에 사용. title=영문, subtitle=한글. 둘 모두 또는 영문만 가능.
+function SectionHeading({ id, title, subtitle, className }) {
+  return (
+    <header className={`section-heading ${className || ''}`.trim()}>
+      <h2 id={id}>{title}</h2>
+      {subtitle && <div className="section-subtitle">{subtitle}</div>}
+    </header>
+  );
+}
+
 function TocSidebar() {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -143,5 +154,6 @@ Object.assign(window, {
   Header,
   Footer,
   PageShell,
+  SectionHeading,
   TocSidebar,
 });

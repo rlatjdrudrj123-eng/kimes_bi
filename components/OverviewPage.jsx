@@ -13,6 +13,7 @@
 //   §5.3.6 공식 채널
 
 const PageShell = window.PageShell;
+const SectionHeading = window.SectionHeading;
 const CopyButton = window.CopyButton;
 
 function OverviewPage() {
@@ -95,20 +96,21 @@ function OverviewPage() {
   return (
     <PageShell
       eyebrow="01"
-      title="KIMES 한눈에 보기"
+      title="Overview"
+      subtitle="한눈에 보기"
       lede="보도자료·홈페이지·SNS·이메일에 그대로 복사해 쓸 수 있는 공식 문구를 한 페이지에 모았습니다."
     >
       {/* §5.3.1 공식 명칭 ----------------------------------------- */}
-      <h2 id="official-names">공식 명칭</h2>
+      <SectionHeading id="official-names" title="Official Names" subtitle="공식 명칭" />
       <p>
         회사 자료에 KIMES를 표기할 때 다음 명칭을 그대로 사용합니다. 각 행
-        우측의 [복사] 버튼으로 한국어·영문 어느 쪽이든 클립보드에 바로
+        우측의 [Copy] 버튼으로 한국어·영문 어느 쪽이든 클립보드에 바로
         담을 수 있습니다.
       </p>
       <FactTable rows={NAME_ROWS} caption="공식 명칭 한·영 표기" />
 
       {/* §5.3.2 일정·장소 ----------------------------------------- */}
-      <h2 id="schedule">일정·장소</h2>
+      <SectionHeading id="schedule" title="Date & Venue" subtitle="일정·장소" />
       <p>
         보도자료·초청장·홈페이지에 사용할 정확한 일정과 장소입니다. 영문은
         보도자료·해외 채널용으로 그대로 복사해서 사용합니다.
@@ -116,10 +118,10 @@ function OverviewPage() {
       <FactTable rows={FACT_ROWS} caption="일정 및 장소 한·영 표기" />
 
       {/* §5.3.3 보일러플레이트 4벌 ---------------------------- */}
-      <h2 id="boilerplates">한 줄 소개 (보일러플레이트)</h2>
+      <SectionHeading id="boilerplates" title="Boilerplate" subtitle="한 줄 소개" />
       <p>
         보도자료 끝의 표준 회사 소개문처럼 길이별로 4벌을 준비했습니다.
-        각 박스의 [복사] 버튼으로 클립보드에 담은 뒤 원하는 자료에
+        각 박스의 [Copy] 버튼으로 클립보드에 담은 뒤 원하는 자료에
         그대로 붙여 넣으면 됩니다. 좌측 하단에 실제 글자 수와 한도가
         표시되며, 한도를 넘으면 빨갛게 강조됩니다.
       </p>
@@ -133,7 +135,7 @@ function OverviewPage() {
       ))}
 
       {/* §5.3.4 핵심 숫자 ----------------------------------------- */}
-      <h2 id="numbers">핵심 숫자</h2>
+      <SectionHeading id="numbers" title="Key Numbers" subtitle="핵심 숫자" />
       <p>
         보도자료·홈페이지에 KIMES 규모를 표기할 때 다음 숫자를 그대로
         사용합니다. 잠정 수치와 직전 회차 실적이 섞여 있으니 출처 표기를
@@ -152,7 +154,7 @@ function OverviewPage() {
       </div>
 
       {/* §5.3.5 14개 전시 카테고리 ----------------------------------- */}
-      <h2 id="categories">14개 전시 카테고리</h2>
+      <SectionHeading id="categories" title="Categories" subtitle="14개 전시 카테고리" />
       <p>
         KIMES는 영상진단부터 바이오·제약까지 14개 전시 카테고리로 구성됩니다.
         각 카테고리별 부스 위치와 참가업체 명단은 행사 직전 공식 사이트에
@@ -169,10 +171,10 @@ function OverviewPage() {
       </ol>
 
       {/* §5.3.6 공식 채널 -------------------------------------------- */}
-      <h2 id="channels">공식 채널</h2>
+      <SectionHeading id="channels" title="Official Channels" subtitle="공식 채널" />
       <p>
-        KIMES 사무국과 직접 연결되는 채널입니다. 이메일은 [복사]로 수신자
-        필드에 붙여 넣고, 사이트·SNS는 [열기]로 새 탭에서 확인하세요.
+        KIMES 사무국과 직접 연결되는 채널입니다. 이메일은 [Copy]로 수신자
+        필드에 붙여 넣고, 사이트·SNS는 [Open]으로 새 탭에서 확인하세요.
       </p>
       <ul className="ov-channels">
         {CHANNELS.map(ch => (
@@ -187,12 +189,12 @@ function OverviewPage() {
                   rel="noopener noreferrer"
                   className="btn btn-sm btn-outline"
                 >
-                  열기 ↗
+                  Open ↗
                 </a>
               ) : (
                 <CopyButton
                   value={ch.value}
-                  label="복사"
+                  label="Copy"
                   ariaLabel={`${ch.label} ${ch.value} 복사`}
                 />
               )}

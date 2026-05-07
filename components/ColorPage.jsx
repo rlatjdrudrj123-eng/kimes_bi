@@ -12,6 +12,7 @@
 // 갱신 가능.
 
 const PageShell = window.PageShell;
+const SectionHeading = window.SectionHeading;
 const CopyButton = window.CopyButton;
 
 // 메인 컬러 카드 표시용 메타데이터. config.colors의 값 형식(rgb/cmyk
@@ -52,14 +53,15 @@ function ColorPage() {
   return (
     <PageShell
       eyebrow="03"
-      title="컬러"
-      lede="참가업체가 인쇄소·디자인 팀에 정확한 색 값을 넘길 수 있도록 디지털·인쇄 양쪽 모두를 정리했습니다. 각 값에는 [복사] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
+      title="Color"
+      subtitle="컬러"
+      lede="참가업체가 인쇄소·디자인 팀에 정확한 색 값을 넘길 수 있도록 디지털·인쇄 양쪽 모두를 정리했습니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
     >
       {/* §7.2.1 메인 컬러 2종 ----------------------------------------- */}
-      <h2 id="main">메인 컬러</h2>
+      <SectionHeading id="main" title="Primary Colors" subtitle="메인 컬러" />
       <p>
         KIMES 워드마크와 공식 표기에 사용하는 두 가지 색입니다. 어느 한쪽도
-        다른 색으로 대체할 수 없습니다.
+        다른 색으로 대체하지 않습니다.
       </p>
       <div className="clr-cards">
         <ColorCard color={RED}   tone="light" />
@@ -67,7 +69,7 @@ function ColorPage() {
       </div>
 
       {/* §7.2.2 보조 그레이 ------------------------------------------- */}
-      <h2 id="secondary">보조 그레이</h2>
+      <SectionHeading id="secondary" title="Neutral" subtitle="보조 그레이" />
       <p>
         UI 안에서 정보의 위계를 구분할 때 사용합니다. KIMES 워드마크나 강조
         영역에는 사용하지 않습니다.
@@ -75,7 +77,7 @@ function ColorPage() {
       <GrayCard color={GRAY} />
 
       {/* §7.2.3 색 사용 원칙 ------------------------------------------ */}
-      <h2 id="rules">색 사용 원칙</h2>
+      <SectionHeading id="rules" title="How to Use" subtitle="색 사용 원칙" />
       <ol className="clr-rules">
         <li>
           KIMES 컬러는 단색으로만 사용합니다. 그라디언트·글로우·드롭 섀도우
@@ -93,7 +95,7 @@ function ColorPage() {
       </ol>
 
       {/* §7.2.4 다운로드 ---------------------------------------------- */}
-      <h2 id="downloads">다운로드</h2>
+      <SectionHeading id="downloads" title="Downloads" subtitle="다운로드" />
       <p>
         디자인 툴별 팔레트 파일과 코드용 CSS 스니펫입니다. CSS 스니펫은 별도
         자산 파일 없이 바로 복사해 사용할 수 있습니다.
@@ -198,22 +200,22 @@ function DownloadItem({ item, assetStatus }) {
             type="button"
             className="btn btn-md btn-outline"
             disabled
-            aria-label={`${item.label} — 자산 준비 중`}
-            title="자산 준비 중"
+            aria-label={`${item.label} — Coming soon`}
+            title="Coming soon"
           >
-            {item.action === 'open' ? '열기 ↗' : '다운로드'}
+            {item.action === 'open' ? 'Open ↗' : 'Download'}
           </button>
         ) : item.action === 'open' ? (
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="btn btn-md btn-outline">
-            열기 ↗
+            Open ↗
           </a>
         ) : (
           <a href={`/assets/colors/${item.file}`} className="btn btn-md btn-outline" download>
-            다운로드
+            Download
           </a>
         )}
       </div>
-      {pending && <div className="clr-dl-pending">자산 준비 중 · Coming soon</div>}
+      {pending && <div className="clr-dl-pending">Coming Soon</div>}
     </div>
   );
 }

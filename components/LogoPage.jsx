@@ -8,6 +8,7 @@
 //   §6.2.6 Don'ts 12종 + §6.2.7 사용 신청 박스 ← 다음 커밋
 
 const PageShell = window.PageShell;
+const SectionHeading = window.SectionHeading;
 const Link = window.Link;
 const KimesWordmark = window.KimesWordmark;
 const InlineLogo = window.InlineLogo;
@@ -115,11 +116,12 @@ function LogoPage() {
   return (
     <PageShell
       eyebrow="02"
-      title="로고"
-      lede="KIMES 워드마크의 정식 자산을 다운로드하고, 어떤 상황에서 어떤 버전을 써야 하는지 확인하세요. 변형·재타이핑·임의 색상 변경은 가이드 위반에 해당합니다."
+      title="Logo"
+      subtitle="로고"
+      lede="KIMES 워드마크의 정식 자산을 다운로드하고, 어떤 상황에서 어떤 버전을 써야 하는지 확인하세요. 변형·재타이핑·임의 색상 변경은 권장하지 않는 사용입니다."
     >
       {/* §6.2.1 KIMES 워드마크 ----------------------------------------- */}
-      <h2 id="wordmark">KIMES 워드마크</h2>
+      <SectionHeading id="wordmark" title="Wordmark" subtitle="KIMES 워드마크" />
       <div className="lg-hero">
         <div className="lg-hero-art" aria-label="KIMES 워드마크">
           <KimesWordmark height={120} />
@@ -133,7 +135,7 @@ function LogoPage() {
       </div>
 
       {/* §6.2.2 로고 버전 (그리드 카드) -------------------------------- */}
-      <h2 id="versions">로고 버전</h2>
+      <SectionHeading id="versions" title="Versions" subtitle="로고 버전" />
       <p>
         용도에 맞는 버전을 선택해 다운로드하세요. SVG는 디지털·웹 표준,
         PNG는 빠른 미리보기·메신저 첨부, AI/EPS는 인쇄·간판 작업용입니다.
@@ -153,7 +155,7 @@ function LogoPage() {
       </p>
 
       {/* §6.2.3 클리어 스페이스 ---------------------------------------- */}
-      <h2 id="clearspace">클리어 스페이스</h2>
+      <SectionHeading id="clearspace" title="Clear Space" subtitle="클리어 스페이스" />
       <p>
         워드마크 사방으로 K 높이만큼의 빈 영역을 반드시 확보합니다. 이 영역
         안에는 다른 로고·문구·이미지가 들어갈 수 없습니다.
@@ -161,7 +163,7 @@ function LogoPage() {
       <ClearSpaceDiagram />
 
       {/* §6.2.4 최소 크기 ---------------------------------------------- */}
-      <h2 id="minsize">최소 크기</h2>
+      <SectionHeading id="minsize" title="Minimum Size" subtitle="최소 크기" />
       <p>
         다음 크기 이상에서만 KIMES 워드마크를 사용합니다. 더 작아지면
         <code> i</code> 안의 검은 쐐기가 뭉개져 식별이 어려워집니다.
@@ -177,7 +179,7 @@ function LogoPage() {
       </div>
 
       {/* §6.2.5 배경별 사용 매트릭스 ------------------------------------ */}
-      <h2 id="bg-matrix">배경별 사용 매트릭스</h2>
+      <SectionHeading id="bg-matrix" title="Background Use" subtitle="배경별 사용 매트릭스" />
       <p>
         배경 종류에 맞는 워드마크 버전입니다. 가독성·인쇄 적합성·법적 안전성
         모두를 고려한 권장입니다. <strong>⚠ 조건부</strong> 행은 사전 승인 또는
@@ -206,10 +208,10 @@ function LogoPage() {
 
       {/* §6.2.7 로고 사용 신청 ------------------------------------------ */}
       <section className="lg-apply" id="apply">
-        <h2 className="lg-apply-h2">로고 사용 신청</h2>
+        <SectionHeading title="Request Approval" subtitle="로고 사용 신청" className="lg-apply-heading" />
         <p>
           가이드에 명시된 일반적인 사용은 별도 신청이 필요 없습니다. 다만
-          다음 경우는 사무국 사전 승인을 받아야 합니다.
+          다음 경우는 사무국 사전 승인을 받아주세요.
         </p>
         <ul className="lg-apply-list">
           <li>굿즈·기념품 제작 (티셔츠·머그컵·에코백 등)</li>
@@ -218,7 +220,7 @@ function LogoPage() {
           <li>가이드에 없는 새로운 사용 케이스</li>
         </ul>
         <div className="lg-apply-actions">
-          <a href="#/contact?type=logo" className="btn btn-primary btn-md">승인 신청하기 →</a>
+          <a href="#/contact?type=logo" className="btn btn-primary btn-md">Apply →</a>
           <span className="lg-apply-channel">
             또는 <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>
             {' · '}
@@ -251,8 +253,8 @@ function LogoVersionCard({ version, year, assetStatus }) {
                 type="button"
                 className="btn btn-sm btn-outline"
                 disabled
-                aria-label={`${version.name} ${f.label} — 자산 준비 중`}
-                title="자산 준비 중"
+                aria-label={`${version.name} ${f.label} — Coming soon`}
+                title="Coming soon"
               >
                 {f.label}
               </button>
@@ -269,7 +271,7 @@ function LogoVersionCard({ version, year, assetStatus }) {
           ))}
         </div>
         {pending && (
-          <div className="lg-card-pending">자산 준비 중 · Coming soon</div>
+          <div className="lg-card-pending">Coming Soon</div>
         )}
       </div>
     </div>
