@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KIMES 2026 BI 가이드</title>
-<meta name="description" content="KIMES 2026 참가업체용 브랜드 가이드. 보도자료, 부스, 초청장, SNS 등 KIMES와 함께하는 모든 자료에서 브랜드를 정확하게 표기하는 방법입니다." />
+<title>KIMES 2027 BI 가이드</title>
+<meta name="description" content="KIMES 2027 참가업체용 브랜드 가이드. 보도자료, 부스, 초청장, SNS 등 KIMES와 함께하는 모든 자료에서 브랜드를 정확하게 표기하는 방법입니다." />
 
 <!-- Fonts + base CSS -->
 <link rel="stylesheet" href="docs.css" />
@@ -30,6 +30,10 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<!-- Event metadata SSoT — must load before any component reads
+     window.KIMES_EVENT (Footer, LandingPage, etc.). -->
+<script src="components/config.js"></script>
 
 <!-- Content loader — fetches all content/*.json files in parallel and
      exposes the merged result on window.CONTENT. The final mount script

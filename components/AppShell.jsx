@@ -21,9 +21,9 @@ function Header() {
   return (
     <header className="shell-header">
       <div className="shell-header-inner">
-        <Link to="/" className="shell-logo brand-mark" ariaLabel="KIMES 2026 BI 가이드 — 시작 페이지">
+        <Link to="/" className="shell-logo brand-mark" ariaLabel={`${window.KIMES_EVENT.event.nameKo} BI 가이드 — 시작 페이지`}>
           <KimesWordmark height={20} />
-          <span className="shell-logo-sub">2026 BI 가이드</span>
+          <span className="shell-logo-sub">{window.KIMES_EVENT.event.year} BI 가이드</span>
         </Link>
 
         <nav className={`shell-nav ${open ? 'is-open' : ''}`} aria-label="주 메뉴">
@@ -61,12 +61,14 @@ function Header() {
 }
 
 function Footer() {
+  // 푸터 표기는 components/config.js의 KIMES_EVENT를 단일 출처로 사용.
+  const { event, guide } = window.KIMES_EVENT;
   return (
     <footer className="shell-footer">
       <div className="shell-footer-inner">
         <div className="shell-footer-col">
-          <div className="ft-strong">KIMES 2026 BI 가이드</div>
-          <div className="ft-meta">v2026.0 · 최종 갱신 2026-05-04</div>
+          <div className="ft-strong">{event.nameKo} BI 가이드</div>
+          <div className="ft-meta">{guide.version} · 최종 갱신 {guide.updatedAt}</div>
           <Link to="/changelog" className="ft-link">변경 이력 보기 →</Link>
         </div>
         <div className="shell-footer-col">
