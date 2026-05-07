@@ -68,18 +68,38 @@ const FILE_FORMATS = [
 ];
 
 // §6.2.5 배경별 사용 매트릭스 — 9행. 각 행: 배경 / 권장 버전 / 비고 / 상태.
-// 상태 'ok'는 권장(✓), 'no'는 회피·금지(✗). 색만으로 의미 전달하지 않도록
-// 아이콘 + 텍스트 라벨 병기 (§21.2).
+// 3단계 신호 시스템: 'ok' 권장(✓) / 'warn' 조건부(⚠ 사전 승인·플레이트
+// 처리 등 추가 절차 필요). 'error'(✗ 절대 금지)는 매트릭스에서 사용
+// 안 함 — §6.2.6 Don'ts 12종에서만 사용해 사용자 혼동 방지.
+// §21.2 색만으로 의미 전달 금지: 아이콘(✓/⚠) + 텍스트 라벨 병기.
 const BG_MATRIX = [
-  { bg: '흰색 또는 밝은 단색 (밝기 ≥ 70%)', ver: '기본 (레드)',                        note: '가장 일반적인 사용 케이스',  status: 'ok' },
-  { bg: '중간 명도 단색 (40~60%)',           ver: '가급적 회피 — 사용 시 사전 승인',  note: '가독성 저하',               status: 'no' },
-  { bg: '어두운 단색 (≤ 30%)',                ver: '화이트',                           note: '기본 레드 사용 금지',        status: 'ok' },
-  { bg: '빨간색 배경',                        ver: '화이트',                           note: '기본 레드 절대 금지',        status: 'ok' },
-  { bg: '회사 브랜드 컬러 위',                ver: '화이트 (밝은 회사 색이면 블랙)',   note: '명도 대비 우선',             status: 'ok' },
-  { bg: '단색 인쇄·팩스',                     ver: '블랙',                             note: '컬러 출력 불가 환경',        status: 'ok' },
-  { bg: '밝고 단순한 사진',                   ver: '기본 (레드)',                      note: '클리어 스페이스 확보 필수', status: 'ok' },
-  { bg: '어두운 사진',                        ver: '화이트',                           note: '명도 대비 충분한 영역에만', status: 'ok' },
-  { bg: '복잡하고 디테일 많은 사진',          ver: '단색 플레이트 위에 올려 사용',     note: '직접 얹지 않음',             status: 'no' },
+  { bg: '흰색 또는 밝은 단색 (밝기 ≥ 70%)', ver: '기본 (레드)',                        note: '가장 일반적인 사용 케이스',  status: 'ok'   },
+  { bg: '중간 명도 단색 (40~60%)',           ver: '사전 승인 후 사용',                note: '가독성 저하 — 사무국 검토 필요', status: 'warn' },
+  { bg: '어두운 단색 (≤ 30%)',                ver: '화이트',                           note: '기본 레드 사용 금지',        status: 'ok'   },
+  { bg: '빨간색 배경',                        ver: '화이트',                           note: '기본 레드 절대 금지',        status: 'ok'   },
+  { bg: '회사 브랜드 컬러 위',                ver: '화이트 (밝은 회사 색이면 블랙)',   note: '명도 대비 우선',             status: 'ok'   },
+  { bg: '단색 인쇄·팩스',                     ver: '블랙',                             note: '컬러 출력 불가 환경',        status: 'ok'   },
+  { bg: '밝고 단순한 사진',                   ver: '기본 (레드)',                      note: '클리어 스페이스 확보 필수', status: 'ok'   },
+  { bg: '어두운 사진',                        ver: '화이트',                           note: '명도 대비 충분한 영역에만', status: 'ok'   },
+  { bg: '복잡하고 디테일 많은 사진',          ver: '단색 플레이트 위에 올려 사용',     note: '직접 얹지 않음 — 플레이트 필수', status: 'warn' },
+];
+
+// §6.2.6 Don'ts — 12종. 모두 절대 금지(✗ error 톤). 각 셀에 잘못된
+// 예시는 KIMES 워드마크에 CSS 변형 적용해 인라인 렌더 (별도 이미지
+// 자산 불필요).
+const DONTS = [
+  { id: 1,  title: '색 바꾸기',                     desc: '회사 컬러로 통일하지 않습니다',  bad: 'color' },
+  { id: 2,  title: '검은 쐐기 제거',                desc: 'i 안의 디테일을 지우지 않습니다', bad: 'wedge' },
+  { id: 3,  title: '가로·세로 늘리기',              desc: '비율을 변형하지 않습니다',       bad: 'stretch' },
+  { id: 4,  title: '회전·기울이기',                 desc: '수평을 깨뜨리지 않습니다',       bad: 'rotate' },
+  { id: 5,  title: '그림자·외곽선·글로우',           desc: '효과를 추가하지 않습니다',       bad: 'shadow' },
+  { id: 6,  title: '그라디언트 채움',                desc: '단색 외 채움을 쓰지 않습니다',   bad: 'gradient' },
+  { id: 7,  title: '다른 폰트로 다시 타이핑',        desc: 'CSS 텍스트로 재현하지 않습니다', bad: 'font' },
+  { id: 8,  title: '원·박스·배지 안에 가두기',       desc: '컨테이너 안에 넣지 않습니다',    bad: 'box' },
+  { id: 9,  title: '입체·3D 효과',                  desc: '평면 워드마크를 유지합니다',    bad: '3d' },
+  { id: 10, title: '워드마크 일부 잘라내기',         desc: '글자를 가리지 않습니다',         bad: 'crop' },
+  { id: 11, title: '회사 로고와 합쳐 새 로고 만들기', desc: '독립 워드마크로 유지합니다',     bad: 'merge' },
+  { id: 12, title: '패턴·텍스처 채움',                desc: '단색 채움만 사용합니다',         bad: 'pattern' },
 ];
 
 const MIN_SIZES = [
@@ -160,14 +180,52 @@ function LogoPage() {
       <h2 id="bg-matrix">배경별 사용 매트릭스</h2>
       <p>
         배경 종류에 맞는 워드마크 버전입니다. 가독성·인쇄 적합성·법적 안전성
-        모두를 고려한 권장입니다. 어떤 배경에 어떤 버전을 써야 할지 모를
-        때 이 표를 먼저 확인하세요.
+        모두를 고려한 권장입니다. <strong>⚠ 조건부</strong> 행은 사전 승인 또는
+        플레이트 처리 등 추가 절차가 필요합니다.
       </p>
       <BgMatrix rows={BG_MATRIX} />
       <div className="lg-matrix-legend" aria-hidden="true">
         <span className="lg-matrix-status status-ok"><CheckGlyph /> 권장</span>
-        <span className="lg-matrix-status status-no"><CrossGlyph /> 회피·금지</span>
+        <span className="lg-matrix-status status-warn"><WarnGlyph /> 조건부 (사전 승인·플레이트 처리)</span>
       </div>
+
+      {/* §6.2.6 절대 하지 말 것 (Don'ts) — 12종 ------------------------- */}
+      <h2 id="donts">절대 하지 말 것</h2>
+      <p>
+        다음 12가지 변형은 KIMES 워드마크에 절대 적용하지 않습니다. 위반 시
+        사용 중단 요청이 발송되며, 재발 시 참가 자격 검토 대상이 됩니다.
+        가이드에 없는 새로운 사용 케이스가 있다면 페이지 하단의 [승인
+        신청하기]를 통해 사전 검토를 받으세요.
+      </p>
+      <div className="lg-donts">
+        {DONTS.map(d => <DontCard key={d.id} d={d} />)}
+      </div>
+      <div className="lg-donts-foot" role="note">
+        위반 시 사용 중단 요청 + 재발 시 참가 자격 검토 대상
+      </div>
+
+      {/* §6.2.7 로고 사용 신청 ------------------------------------------ */}
+      <section className="lg-apply" id="apply">
+        <h2 className="lg-apply-h2">로고 사용 신청</h2>
+        <p>
+          가이드에 명시된 일반적인 사용은 별도 신청이 필요 없습니다. 다만
+          다음 경우는 사무국 사전 승인을 받아야 합니다.
+        </p>
+        <ul className="lg-apply-list">
+          <li>굿즈·기념품 제작 (티셔츠·머그컵·에코백 등)</li>
+          <li>영상물에 KIMES 로고 등장 (TVC·바이럴·웨비나 인트로)</li>
+          <li>외부 미디어 광고 집행</li>
+          <li>가이드에 없는 새로운 사용 케이스</li>
+        </ul>
+        <div className="lg-apply-actions">
+          <a href="#/contact?type=logo" className="btn btn-primary btn-md">승인 신청하기 →</a>
+          <span className="lg-apply-channel">
+            또는 <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>
+            {' · '}
+            <a href={`tel:${window.KIMES_EVENT.contact.tel.replace(/-/g,'')}`}>{window.KIMES_EVENT.contact.tel}</a>
+          </span>
+        </div>
+      </section>
     </PageShell>
   );
 }
@@ -245,7 +303,7 @@ function ClearSpaceDiagram() {
 }
 
 // 배경별 사용 매트릭스 — 데스크탑은 표, 모바일(≤720px)은 카드 리스트로
-// 자동 변환 (CSS 미디어 쿼리). 각 행에 ✓/✗ 아이콘 + 텍스트 라벨 병기.
+// 자동 변환. 각 행에 ✓/⚠ 아이콘 + 상태 텍스트(권장/조건부) 병기.
 function BgMatrix({ rows }) {
   return (
     <div className="lg-matrix-wrap">
@@ -263,8 +321,14 @@ function BgMatrix({ rows }) {
         <tbody>
           {rows.map((r, i) => (
             <tr key={i} className={`lg-matrix-row status-${r.status}`}>
-              <td className="lg-matrix-status-cell" aria-label={r.status === 'ok' ? '권장' : '회피·금지'}>
-                {r.status === 'ok' ? <CheckGlyph /> : <CrossGlyph />}
+              <td
+                className="lg-matrix-status-cell"
+                aria-label={r.status === 'ok' ? '권장' : '조건부'}
+              >
+                {r.status === 'ok' ? <CheckGlyph /> : <WarnGlyph />}
+                <span className="lg-matrix-status-text">
+                  {r.status === 'ok' ? '권장' : '조건부'}
+                </span>
               </td>
               <td className="lg-matrix-bg">{r.bg}</td>
               <td className="lg-matrix-ver">{r.ver}</td>
@@ -277,10 +341,71 @@ function BgMatrix({ rows }) {
   );
 }
 
+// §6.2.6 Don'ts 카드 — ✗ 아이콘(error 톤) + 잘못된 예시 + 한 줄 설명.
+function DontCard({ d }) {
+  return (
+    <div className="lg-dont">
+      <div className="lg-dont-mark" aria-label="절대 금지">
+        <CrossGlyph />
+      </div>
+      <div className="lg-dont-preview">
+        <BadExample variant={d.bad} />
+      </div>
+      <div className="lg-dont-body">
+        <div className="lg-dont-title">{d.id}. {d.title}</div>
+        <div className="lg-dont-desc">{d.desc}</div>
+      </div>
+    </div>
+  );
+}
+
+// 잘못된 KIMES 워드마크 변형 12종을 CSS만으로 재현. 별도 이미지 자산
+// 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
+function BadExample({ variant }) {
+  // 폰트 변경(#7)은 SVG가 아니라 텍스트로 재현해야 의미가 살아남.
+  if (variant === 'font') {
+    return <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">KIMES</span>;
+  }
+  // 회사 로고와 합쳐(#11): 워드마크 + "+" + 가짜 회사 배지.
+  if (variant === 'merge') {
+    return (
+      <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
+        <KimesWordmark height={22} />
+        <span className="lg-bad-merge-plus">×</span>
+        <span className="lg-bad-merge-co">CO.</span>
+      </span>
+    );
+  }
+  // 쐐기 제거(#2): 워드마크 위에 흰 사각형 오버레이로 i의 검은 쐐기 가림.
+  if (variant === 'wedge') {
+    return (
+      <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
+        <KimesWordmark height={28} />
+        <span className="lg-bad-wedge-cover" />
+      </span>
+    );
+  }
+  // 나머지는 KIMES 워드마크에 CSS 클래스만 부착.
+  return (
+    <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
+      <KimesWordmark height={28} />
+    </span>
+  );
+}
+
 function CheckGlyph() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+function WarnGlyph() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+      <line x1="12" y1="9"  x2="12"    y2="13" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
     </svg>
   );
 }

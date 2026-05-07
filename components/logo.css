@@ -266,8 +266,22 @@
   text-align: center;
   vertical-align: middle;
 }
-.lg-matrix-row.status-ok .lg-matrix-status-cell { color: var(--status-ok); }
-.lg-matrix-row.status-no .lg-matrix-status-cell { color: var(--status-warn); }
+.lg-matrix-row.status-ok   .lg-matrix-status-cell { color: var(--status-ok); }
+.lg-matrix-row.status-warn .lg-matrix-status-cell { color: var(--status-warn); }
+/* 상태 셀 안의 아이콘 + 텍스트 라벨 — 색만으로 의미 전달 금지(§21.2) */
+.lg-matrix-status-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.lg-matrix-status-text {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
 .lg-matrix-bg {
   font-weight: 500;
   color: var(--text-primary);
@@ -278,7 +292,8 @@
   font-size: var(--fs-caption);
   line-height: 1.5;
 }
-.lg-matrix-row.status-no .lg-matrix-note { color: var(--status-warn); }
+.lg-matrix-row.status-warn .lg-matrix-note { color: var(--status-warn); }
+.lg-matrix-row.status-warn { background: rgba(180, 83, 9, 0.04); }
 
 /* 매트릭스 모바일 변환 — 카드 리스트 */
 @media (max-width: 720px) {
@@ -329,5 +344,218 @@
   align-items: center;
   gap: 6px;
 }
-.lg-matrix-status.status-ok svg { color: var(--status-ok); }
-.lg-matrix-status.status-no svg { color: var(--status-warn); }
+.lg-matrix-status.status-ok   svg { color: var(--status-ok); }
+.lg-matrix-status.status-warn svg { color: var(--status-warn); }
+
+/* ---------- §6.2.6 Don'ts 12종 그리드 ---------- */
+.lg-donts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0;
+}
+@media (max-width: 1100px) { .lg-donts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 800px)  { .lg-donts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px)  { .lg-donts { grid-template-columns: 1fr; } }
+
+.lg-dont {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.lg-dont-mark {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--status-error);
+  color: #fff;
+}
+.lg-dont-mark svg { width: 12px; height: 12px; stroke-width: 3.5; }
+.lg-dont-preview {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.lg-dont-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.lg-dont-title {
+  font-weight: 700;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+  letter-spacing: -0.005em;
+}
+.lg-dont-desc {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.lg-donts-foot {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: 10px var(--space-3);
+  font-size: var(--fs-caption);
+  color: var(--status-error);
+  background: rgba(185, 28, 28, 0.06);
+  border-left: 3px solid var(--status-error);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-weight: 600;
+}
+
+/* ---------- 잘못된 예시 12종 (CSS만으로 KIMES 워드마크 변형 재현) ---------- */
+.lg-bad {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  /* 부모 .lg-dont-preview가 64px 박스라 변형이 그 안에서만 보이도록 */
+  max-width: 100%;
+}
+
+/* 1. 색 바꾸기 — hue-rotate으로 KIMES Red를 다른 색으로 */
+.lg-bad-color { filter: hue-rotate(150deg); }
+
+/* 2. i 안의 검은 쐐기 제거 — viewBox 기준 i 위치(약 51-64 / 218.94)에
+   흰 사각형 오버레이로 검은 쐐기를 가림 */
+.lg-bad-wedge { position: relative; }
+.lg-bad-wedge-cover {
+  position: absolute;
+  /* SVG의 51.29~64 → 약 23.4%~29.2%, 위쪽 절반 */
+  left: 23.4%;
+  top: 0;
+  width: 5.8%;
+  height: 45%;
+  background: #fff;
+  pointer-events: none;
+}
+
+/* 3. 가로 늘리기 */
+.lg-bad-stretch svg { transform: scaleX(1.6); transform-origin: left center; }
+
+/* 4. 회전 */
+.lg-bad-rotate { transform: rotate(-9deg); }
+
+/* 5. 그림자 */
+.lg-bad-shadow svg { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+
+/* 6. 그라디언트 채움 — saturate/contrast/hue 조작으로 무지개 느낌 */
+.lg-bad-gradient { filter: hue-rotate(50deg) saturate(2) contrast(0.85); }
+.lg-bad-gradient::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(255,200,0,0.55), rgba(0,180,255,0.55));
+  mix-blend-mode: hue;
+  pointer-events: none;
+}
+
+/* 7. 다른 폰트로 다시 타이핑 — 텍스트로 재현 */
+.lg-bad-font {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--kimes-red);
+  letter-spacing: 0.02em;
+}
+
+/* 8. 박스/원 안에 가두기 */
+.lg-bad-box {
+  border: 2px solid var(--kimes-red);
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+
+/* 9. 입체·3D — perspective + rotateY */
+.lg-bad-3d { transform: perspective(80px) rotateY(20deg); transform-origin: center; }
+
+/* 10. 일부 잘라내기 — clip-path */
+.lg-bad-crop svg { clip-path: inset(0 32% 0 0); }
+
+/* 11. 회사 로고와 합치기 */
+.lg-bad-merge { gap: 6px; }
+.lg-bad-merge-plus {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.lg-bad-merge-co {
+  font-family: 'Arial', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  background: #036EB8;
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* 12. 패턴 채움 — 워드마크 위에 사선 줄무늬 오버레이 */
+.lg-bad-pattern { position: relative; }
+.lg-bad-pattern::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 3px,
+    rgba(255, 255, 255, 0.7) 3px 6px
+  );
+  pointer-events: none;
+}
+
+/* ---------- §6.2.7 사용 신청 박스 ---------- */
+.lg-apply {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  border-top: 3px solid var(--kimes-red);
+}
+.lg-apply-h2 {
+  /* 페이지 H2 스타일 유지하되 박스 안에 어울리도록 마진 조정 */
+  margin: 0 0 var(--space-2) !important;
+  font-size: var(--fs-h3) !important;
+}
+.lg-apply p {
+  margin: 0 0 var(--space-2);
+  color: var(--text-secondary);
+}
+.lg-apply-list {
+  margin: 0 0 var(--space-3);
+  padding-left: 20px;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.lg-apply-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.lg-apply-channel {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+.lg-apply-channel a {
+  color: var(--kimes-red);
+  text-decoration: underline;
+}

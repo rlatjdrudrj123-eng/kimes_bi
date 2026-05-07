@@ -27,10 +27,13 @@
   --text-secondary: #3F3F46;
   --text-muted:     #71717A;
 
-  /* §19.1 Status */
-  --status-info: #036EB8;
-  --status-warn: #B91C1C;
-  --status-ok:   #15803D;
+  /* §19.1 Status — 3단계 신호 (ok 권장 / warn 조건부 / error 절대 금지).
+     warn은 KIMES Red·Gray와 충돌 안 하는 앰버. error는 §6.2.6 Don'ts /
+     §9 미승인 표기에서만 사용. config.js의 tone 객체와 같은 값. */
+  --status-info:  #036EB8;
+  --status-ok:    #15803D;
+  --status-warn:  #B45309;
+  --status-error: #B91C1C;
 
   /* §19.2 Type */
   --font-display: "Montserrat", sans-serif;

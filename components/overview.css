@@ -129,8 +129,9 @@
   background: var(--surface-base);
   transition: border-color 120ms ease, background 120ms ease;
 }
+/* 보일러플레이트 한도 초과는 "절대 사용 불가" 신호 — error 톤 사용. */
 .bp-box.is-over {
-  border-color: var(--status-warn);
+  border-color: var(--status-error);
   background: rgba(185, 28, 28, 0.04);
 }
 .bp-head {
@@ -165,7 +166,7 @@
   color: var(--text-muted);
 }
 .bp-box.is-over .bp-count {
-  color: var(--status-warn);
+  color: var(--status-error);
   font-weight: 700;
 }
 
