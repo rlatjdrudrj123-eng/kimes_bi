@@ -254,7 +254,23 @@ function ComponentsHero() {
   );
 }
 
+// Page wrapper — composes every Button subsection in order so the App in
+// index.html can render the whole "Buttons" section with one tag.
+function Buttons() {
+  return (
+    <React.Fragment>
+      <ButtonsIntro />
+      <ButtonVariants />
+      <ButtonSizes />
+      <ButtonStates />
+      <ButtonBrandThemes />
+      <ButtonCodeTokens />
+    </React.Fragment>
+  );
+}
+
 Object.assign(window, {
+  Buttons,
   ComponentsHero,
   ButtonsIntro,
   ButtonVariants,

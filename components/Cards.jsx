@@ -298,7 +298,22 @@ function CardCodeTokens() {
   );
 }
 
+// Page wrapper — composes every Card subsection so App can render with one tag.
+function Cards() {
+  return (
+    <React.Fragment>
+      <CardsIntro />
+      <ExhibitorCardsSection />
+      <SessionCardsSection />
+      <StatCardsSection />
+      <NewsCardsSection />
+      <CardCodeTokens />
+    </React.Fragment>
+  );
+}
+
 Object.assign(window, {
+  Cards,
   CardsIntro,
   ExhibitorCardsSection,
   SessionCardsSection,

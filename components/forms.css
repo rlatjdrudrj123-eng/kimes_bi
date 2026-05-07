@@ -1,0 +1,86 @@
+/* KIMES Design System — Forms */
+
+.kfm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+  margin-top: 12px;
+}
+@media (max-width: 720px) {
+  .kfm-grid { grid-template-columns: 1fr; }
+}
+
+.kfm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.kfm-field--wide { grid-column: 1 / -1; }
+.kfm-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink, #231815);
+  text-transform: uppercase;
+}
+.kfm-input {
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  font: 14px/1 'Montserrat', system-ui, sans-serif;
+  color: var(--ink, #231815);
+  background: #fff;
+  outline: none;
+  transition: border-color 120ms, box-shadow 120ms;
+}
+.kfm-input:focus,
+.kfm-input.is-focus {
+  border-color: #E60012;
+  box-shadow: 0 0 0 2px rgba(230, 0, 18, 0.18);
+}
+.kfm-input:disabled {
+  background: #fafafa;
+  color: #a1a1aa;
+  cursor: not-allowed;
+}
+.kfm-textarea {
+  height: auto;
+  padding: 10px 12px;
+  font-family: inherit;
+  resize: vertical;
+}
+.kfm-help {
+  font-size: 11.5px;
+  color: var(--ink-muted, #71717a);
+  letter-spacing: 0.02em;
+}
+.kfm-field.is-error .kfm-input {
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.16);
+}
+.kfm-error { color: #b91c1c; font-weight: 600; }
+
+/* Choices group */
+.kfm-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  min-height: 44px;
+}
+.kfm-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--ink, #231815);
+  cursor: pointer;
+  user-select: none;
+}
+.kfm-check input[type="checkbox"],
+.kfm-check input[type="radio"] {
+  width: 18px; height: 18px;
+  accent-color: #E60012;
+  margin: 0;
+}

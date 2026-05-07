@@ -20,6 +20,10 @@
 <link rel="stylesheet" href="components/a11y.css" />
 <link rel="stylesheet" href="components/social.css" />
 <link rel="stylesheet" href="components/audit.css" />
+<link rel="stylesheet" href="components/buttons.css" />
+<link rel="stylesheet" href="components/cards.css" />
+<link rel="stylesheet" href="components/forms.css" />
+<link rel="stylesheet" href="components/navigation.css" />
 
 
 <!-- Editor overlay CSS (lightweight in-place editor; trigger: 5x click on the
@@ -80,6 +84,10 @@
 <script type="text/babel" src="components/Accessibility.jsx"></script>
 <script type="text/babel" src="components/SocialTemplates.jsx"></script>
 <script type="text/babel" src="components/BIAudit.jsx"></script>
+<script type="text/babel" src="components/Buttons.jsx"></script>
+<script type="text/babel" src="components/Cards.jsx"></script>
+<script type="text/babel" src="components/Forms.jsx"></script>
+<script type="text/babel" src="components/Navigation.jsx"></script>
 
 <script type="text/babel">
 function App() {
@@ -118,6 +126,12 @@ function App() {
         <CoEventPage brandId="mc" navId="medicomtek" />
         <CoEventPage brandId="bd" navId="beautyderma" />
         <CoEventPage brandId="in" navId="inspire" />
+
+        {/* Components group — buttons / cards / forms / navigation */}
+        <Buttons />
+        <Cards />
+        <Forms />
+        <Navigation />
       </main>
     </div>
   );

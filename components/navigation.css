@@ -1,0 +1,159 @@
+/* KIMES Design System — Navigation */
+
+/* Top nav bar */
+.knav-topbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--ink-faint, #e1e5ea);
+  border-radius: 8px;
+}
+.knav-brand {
+  font: 800 18px/1 'Montserrat', system-ui, sans-serif;
+  color: #E60012;
+  letter-spacing: -0.01em;
+}
+.knav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+.knav-link {
+  position: relative;
+  display: inline-block;
+  padding: 8px 12px;
+  font: 600 13px/1.2 'Montserrat', system-ui, sans-serif;
+  color: var(--ink-muted, #71717a);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 120ms;
+}
+.knav-link:hover { color: var(--ink, #231815); }
+.knav-link.is-active {
+  color: var(--ink, #231815);
+}
+.knav-link.is-active::after {
+  content: '';
+  position: absolute;
+  left: 12px; right: 12px;
+  bottom: 2px;
+  height: 2px;
+  background: #E60012;
+  border-radius: 1px;
+}
+.knav-cta {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #E60012;
+  color: #fff;
+  text-decoration: none;
+  font: 700 12px/1 'Montserrat', system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: background-color 120ms;
+}
+.knav-cta:hover { background: #b9000e; }
+
+/* Breadcrumbs */
+.knav-bc {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  background: #fafafa;
+  border-radius: 6px;
+  font: 13px/1 'Montserrat', system-ui, sans-serif;
+}
+.knav-bc-item {
+  color: var(--ink-muted, #71717a);
+  text-decoration: none;
+  transition: color 120ms;
+}
+.knav-bc-item:hover:not(.is-current) {
+  color: #E60012;
+  text-decoration: underline;
+}
+.knav-bc-item.is-current {
+  color: var(--ink, #231815);
+  font-weight: 700;
+}
+.knav-bc-sep {
+  color: var(--ink-faint, #d4d4d4);
+  font-weight: 700;
+}
+
+/* Tabs */
+.knav-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--ink-faint, #e1e5ea);
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+.knav-tab {
+  background: transparent;
+  border: 0;
+  padding: 12px 18px;
+  margin-bottom: -1px;
+  font: 600 13px/1.2 'Montserrat', system-ui, sans-serif;
+  color: var(--ink-muted, #71717a);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 120ms, border-color 120ms;
+  white-space: nowrap;
+}
+.knav-tab:hover { color: var(--ink, #231815); }
+.knav-tab.is-active {
+  color: var(--ink, #231815);
+  border-bottom-color: #E60012;
+}
+.knav-tab-body {
+  padding: 16px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-muted, #71717a);
+}
+
+/* Pagination */
+.knav-page {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+.knav-page-btn,
+.knav-page-num {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  font: 600 13px/1 'Montserrat', system-ui, sans-serif;
+  color: var(--ink-muted, #71717a);
+  cursor: pointer;
+  transition: background-color 120ms, color 120ms;
+}
+.knav-page-btn { font-size: 16px; }
+.knav-page-num:hover,
+.knav-page-btn:hover:not(:disabled) {
+  background: #fff;
+  color: var(--ink, #231815);
+}
+.knav-page-num.is-active {
+  background: #E60012;
+  color: #fff;
+}
+.knav-page-btn:disabled {
+  color: var(--ink-faint, #d4d4d4);
+  cursor: not-allowed;
+}
