@@ -94,15 +94,6 @@ const NAV = [
       { id: 'social-templates', label: 'Social templates' },
     ],
   },
-  {
-    title: 'Applications',
-    page: 'Brand Foundations.html',
-    items: [
-      { id: 'social-templates', label: 'Social media templates' },
-      { id: 'print',            label: 'Print collateral' },
-      { id: 'signage',          label: 'Event signage' },
-    ],
-  },
 ];
 
 // The page each NAV group lives on, computed from the current location so
