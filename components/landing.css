@@ -1,0 +1,311 @@
+/* KIMES BI 가이드 — §4 / 랜딩 페이지 */
+
+.landing {
+  max-width: var(--shell-max-w);
+  margin: 0 auto;
+  padding: 0 var(--space-3) var(--space-7);
+}
+
+/* ---------- §4.2.1 Hero ---------- */
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+  gap: var(--space-5);
+  padding: var(--space-7) 0 var(--space-6);
+  align-items: end;
+  border-bottom: 1px solid var(--surface-line);
+}
+@media (max-width: 900px) {
+  .landing-hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    padding: var(--space-5) 0;
+  }
+}
+
+.landing-headline {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: clamp(36px, 4.6vw, var(--fs-display));
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0 0 var(--space-2);
+  color: var(--text-primary);
+}
+.landing-subhead {
+  font-size: var(--fs-body-lg);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+  max-width: 60ch;
+}
+
+.landing-cta-row {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Hero meta box (D-카운트다운) */
+.landing-meta-box {
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--surface-base);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-self: end;
+}
+.landing-meta-line {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.landing-meta-label {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--kimes-red);
+  line-height: 1.1;
+}
+.landing-meta-sub {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+.landing-meta-past .landing-meta-label {
+  color: var(--text-secondary);
+  font-size: 22px;
+  letter-spacing: -0.005em;
+}
+.landing-meta-live .landing-meta-label { color: var(--kimes-red); }
+.landing-meta-upcoming .landing-meta-label { color: var(--kimes-red); }
+
+/* ---------- 공통 섹션 ---------- */
+.landing-section {
+  padding-top: var(--space-6);
+}
+.landing-h2 {
+  font-family: var(--font-body);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-3);
+  color: var(--text-primary);
+  scroll-margin-top: calc(var(--shell-header-h) + 16px);
+}
+
+/* ---------- §4.2.2 Audience ---------- */
+.landing-audience {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+@media (max-width: 700px) {
+  .landing-audience { grid-template-columns: 1fr; }
+}
+.landing-audience-card {
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--surface-base);
+}
+.landing-audience-card h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  letter-spacing: -0.01em;
+}
+.landing-audience-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.landing-audience-card a {
+  color: var(--status-info);
+  text-decoration: underline;
+}
+.landing-audience-yes {
+  border-top: 3px solid var(--kimes-red);
+}
+.landing-audience-yes h3 { color: var(--text-primary); }
+.landing-audience-no {
+  background: var(--surface-subtle);
+}
+.landing-audience-no h3 { color: var(--text-secondary); }
+
+/* ---------- §4.2.3 Quick start ---------- */
+.landing-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 800px) {
+  .landing-steps { grid-template-columns: 1fr; }
+}
+.landing-step {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-subtle);
+}
+.landing-step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--kimes-red);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+}
+.landing-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.landing-step-title {
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+.landing-step-link,
+.landing-step-link a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.landing-step-link a:hover { color: var(--kimes-red); }
+.landing-step-sep { color: var(--text-muted); }
+
+/* ---------- §4.2.4 Quick links ---------- */
+.landing-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+@media (max-width: 1023px) {
+  .landing-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .landing-tiles { grid-template-columns: 1fr; }
+}
+.landing-tile {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 4px;
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+.landing-tile:hover {
+  border-color: var(--kimes-red);
+  background: var(--surface-subtle);
+  transform: translateY(-1px);
+}
+.landing-tile-icon {
+  width: 36px; height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  color: var(--kimes-red);
+  margin-bottom: 4px;
+}
+.landing-tile-label {
+  font-weight: 700;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+}
+.landing-tile-desc {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ---------- §4.2.5 Updates ---------- */
+.landing-updates-list {
+  list-style: none;
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--surface-line);
+}
+.landing-updates-list li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-2);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--surface-line);
+}
+@media (max-width: 480px) {
+  .landing-updates-list li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+.landing-update-date {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: var(--fs-caption);
+}
+.landing-update-title {
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+}
+.landing-updates-more {
+  display: inline-block;
+  font-size: var(--fs-body);
+  color: var(--kimes-red);
+  text-decoration: none;
+  margin-top: 4px;
+}
+.landing-updates-more:hover { text-decoration: underline; }
+
+/* ---------- §4.2.6 Contact box ---------- */
+.landing-contact-box {
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.landing-contact-h2 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-h3);
+}
+.landing-contact-box p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-body-lg);
+  line-height: 1.6;
+}
+.landing-contact-box a {
+  color: var(--kimes-red);
+  text-decoration: underline;
+  font-weight: 600;
+}

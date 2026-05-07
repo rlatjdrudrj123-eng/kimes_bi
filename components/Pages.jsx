@@ -20,18 +20,7 @@ function Stub({ sectionRef }) {
   );
 }
 
-function LandingPage() {
-  return (
-    <PageShell
-      eyebrow="00"
-      title="시작하며"
-      lede="KIMES 2026 참가업체를 위한 브랜드 가이드의 시작 페이지입니다."
-      toc={false}
-    >
-      <Stub sectionRef="§4" />
-    </PageShell>
-  );
-}
+// LandingPage는 components/LandingPage.jsx에서 정의 (§4 작업으로 분리).
 
 function OverviewPage() {
   return (
@@ -189,7 +178,7 @@ function NotFoundPage() {
 }
 
 Object.assign(window, {
-  LandingPage,
+  // LandingPage: 별도 파일 components/LandingPage.jsx에서 직접 등록
   OverviewPage,
   LogoPage,
   ColorPage,

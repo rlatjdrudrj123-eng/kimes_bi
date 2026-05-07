@@ -12,6 +12,10 @@
 <!-- Global app shell (§3 IA: header / footer / page shell + §19 tokens) -->
 <link rel="stylesheet" href="components/app-shell.css" />
 
+<!-- Per-page stylesheets. Add an entry as each Phase 2 page is built;
+     remove the legacy ones in the docs.css cleanup at end of Phase 2. -->
+<link rel="stylesheet" href="components/landing.css" />
+
 <!-- Legacy section stylesheets (still loaded; surviving Foundations
      components reference them. Phase 2 reattaches each component to its
      destination route, then we'll prune.) -->
@@ -20,10 +24,11 @@
 <link rel="stylesheet" href="components/typography-in-use.css" />
 
 
-<!-- Editor overlay CSS (lightweight in-place editor; trigger: 5x click on the
-     KIMES wordmark in the sidebar, or visit /#admin). Sveltia CMS at /admin/
-     is the canonical editor — this localStorage one is for quick visual
-     tweaks (font, size, line breaks, image dimensions) without a commit. -->
+<!-- Editor overlay CSS (lightweight in-place editor; trigger: 5x click on
+     the KIMES wordmark in the header — class .brand-mark — or visit
+     /#admin). Sveltia CMS at /admin/ is the canonical editor — this
+     localStorage one is for quick visual tweaks (font, size, line breaks,
+     image dimensions) without a commit. -->
 <link rel="stylesheet" href="content-editor.css" />
 
 <!-- React + Babel from CDN. The prototype was built against these exact versions. -->
@@ -62,7 +67,7 @@
 <div id="root"></div>
 
 <!-- Pre-mount loading indicator (hidden once #root has children) -->
-<div id="__pre_mount"><div class="lp">Loading KIMES Design System…</div></div>
+<div id="__pre_mount"><div class="lp">KIMES 2027 BI 가이드를 불러오는 중…</div></div>
 
 <!-- Load order:
      1. LogoSvgs.js → window.LOGO_SVGS
@@ -85,6 +90,10 @@
 <script type="text/babel" src="components/Router.jsx"></script>
 <script type="text/babel" src="components/AppShell.jsx"></script>
 <script type="text/babel" src="components/Pages.jsx"></script>
+<!-- Per-page implementations — load after Pages.jsx (the stub registry).
+     As each phase-2 page lands, its file appears here; the matching stub
+     is removed from Pages.jsx so there is exactly one definition. -->
+<script type="text/babel" src="components/LandingPage.jsx"></script>
 
 <script type="text/babel">
 function App() {
@@ -111,9 +120,9 @@ window.CONTENT_READY.then(() => {
 });
 </script>
 
-<!-- Lightweight in-place editor (localStorage-backed). Triggered by 5x click
-     on the KIMES wordmark in the sidebar, or visiting /#admin. Sveltia at
-     /admin/ remains the canonical editor for content commits. -->
+<!-- Lightweight in-place editor (localStorage-backed). Triggered by 5x
+     click on the KIMES wordmark in the header (.brand-mark) or visiting
+     /#admin. Sveltia at /admin/ remains the canonical editor for commits. -->
 <script src="content-editor.js"></script>
 
 </body>
