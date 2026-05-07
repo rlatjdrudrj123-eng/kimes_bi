@@ -119,3 +119,215 @@
   color: var(--kimes-black);
   font-variant-numeric: tabular-nums;
 }
+
+/* ---------- 자산 준비 중 라벨 ---------- */
+.lg-card-pending {
+  margin-top: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--kimes-gray);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- §6.2.3 클리어 스페이스 다이어그램 ---------- */
+.lg-clear-wrap {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-5) var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+.lg-clear-stage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+}
+.lg-clear-outer {
+  position: relative;
+  border: 2px dashed var(--text-muted);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+.lg-clear-inner {
+  border: 1px solid var(--surface-line);
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+}
+.lg-clear-1x {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--kimes-red);
+  background: var(--surface-base);
+  padding: 0 6px;
+  white-space: nowrap;
+}
+.lg-clear-1x-top    { top: -10px;    left: 50%; transform: translateX(-50%); }
+.lg-clear-1x-bottom { bottom: -10px; left: 50%; transform: translateX(-50%); }
+.lg-clear-1x-left   { left: -10px;   top: 50%;  transform: translate(-100%, -50%); }
+.lg-clear-1x-right  { right: -10px;  top: 50%;  transform: translate(100%, -50%); }
+.lg-clear-caption {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 56ch;
+}
+.lg-clear-caption strong {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+@media (max-width: 600px) {
+  /* 모바일에서는 1X 라벨이 화면 밖으로 나가지 않도록 워드마크 자체를 축소 */
+  .lg-clear-stage { padding: var(--space-2); transform: scale(0.7); transform-origin: center; }
+}
+
+/* ---------- §6.2.4 최소 크기 카드 ---------- */
+.lg-minsize {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-5);
+}
+@media (max-width: 800px) { .lg-minsize { grid-template-columns: 1fr; } }
+.lg-min-card {
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lg-min-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.lg-min-value {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.lg-min-hint {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ---------- §6.2.5 배경별 사용 매트릭스 ---------- */
+.lg-matrix-wrap {
+  margin: var(--space-2) 0 var(--space-2);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.lg-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  background: var(--surface-base);
+}
+.lg-matrix thead th {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--surface-line);
+  background: var(--surface-subtle);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.lg-matrix-th-status { width: 44px; text-align: center !important; }
+.lg-matrix tbody td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--surface-line);
+  vertical-align: top;
+}
+.lg-matrix-status-cell {
+  width: 44px;
+  text-align: center;
+  vertical-align: middle;
+}
+.lg-matrix-row.status-ok .lg-matrix-status-cell { color: var(--status-ok); }
+.lg-matrix-row.status-no .lg-matrix-status-cell { color: var(--status-warn); }
+.lg-matrix-bg {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.lg-matrix-ver { color: var(--text-secondary); }
+.lg-matrix-note {
+  color: var(--text-muted);
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+}
+.lg-matrix-row.status-no .lg-matrix-note { color: var(--status-warn); }
+
+/* 매트릭스 모바일 변환 — 카드 리스트 */
+@media (max-width: 720px) {
+  .lg-matrix thead { display: none; }
+  .lg-matrix,
+  .lg-matrix tbody,
+  .lg-matrix tr,
+  .lg-matrix td { display: block; width: auto; }
+  .lg-matrix tr {
+    padding: var(--space-2);
+    border-top: 1px solid var(--surface-line);
+    position: relative;
+  }
+  .lg-matrix tr:first-child { border-top: 0; }
+  .lg-matrix td {
+    border-top: 0;
+    padding: 4px 0 4px 36px;
+  }
+  .lg-matrix .lg-matrix-status-cell {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    width: 24px;
+    padding: 0;
+  }
+  .lg-matrix .lg-matrix-bg {
+    font-weight: 700;
+    font-size: var(--fs-body-lg);
+  }
+  .lg-matrix .lg-matrix-ver::before {
+    content: '권장: ';
+    color: var(--text-muted);
+    font-size: var(--fs-caption);
+  }
+}
+
+/* 매트릭스 범례 */
+.lg-matrix-legend {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.lg-matrix-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.lg-matrix-status.status-ok svg { color: var(--status-ok); }
+.lg-matrix-status.status-no svg { color: var(--status-warn); }
