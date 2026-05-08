@@ -1109,9 +1109,22 @@
     setTimeout(() => waitForRoot(tries + 1), 100);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => waitForRoot());
-  } else {
-    waitForRoot();
+  // ─── Phase 2 비활성화 ──────────────────────────────────────────────────
+  // /admin/ Sveltia CMS와 인플레이스 에디터(이 파일)는 모두 active 페이지의
+  // 콘텐츠 매핑이 정비되지 않은 상태. 현재 §9~§15 페이지의 데이터는 React
+  // 컴포넌트 안 const 배열에 박혀있어 CMS 편집이 사이트에 반영되지 않음.
+  // Phase 4 재정비 시 (a) 콘텐츠 → content/*.json 마이그레이션 + (b)
+  // 컴포넌트가 JSON 읽도록 리팩터 + (c) admin 인증 백엔드 통일 (github
+  // OAuth 또는 Netlify Identity 중 하나) 후 부팅 재활성화.
+  //
+  // 활성화 복원 시 아래 if 블록을 원래대로 풀고, admin/index.html도 정식
+  // 어드민 페이지로 복원.
+  const KIMES_EDITOR_DISABLED = true;
+  if (!KIMES_EDITOR_DISABLED) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => waitForRoot());
+    } else {
+      waitForRoot();
+    }
   }
 })();
