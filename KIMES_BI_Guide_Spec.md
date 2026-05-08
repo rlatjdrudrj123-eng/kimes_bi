@@ -479,58 +479,63 @@ H1 영문 라벨 `Don'ts`. 한글 서브타이틀은 두지 않거나 "피해야
 
 ### 7.2 섹션 구성
 
-#### 7.2.1 메인 컬러 2종 카드
+KIMES 컬러 시스템은 **Primary 3 + Sub 4** 구조. KIMES 4브랜드(KIMES + 특별관 3종)와 톤다운 그레이를 한 곳에 모음. §13 특별관 페이지의 컬러 정의는 이 단일 출처에서 가져옵니다 (이중 관리 X).
 
-각 카드: 큰 색면(60% 이상 차지) + HEX·RGB·CMYK·Pantone + `[복사]`.
+#### 7.2.1 Primary Colors / 메인 컬러
 
-```
-KIMES Red
-HEX     #E60012      [복사]
-RGB     230, 0, 18    [복사]
-CMYK    0 / 100 / 100 / 0   [복사]
-Pantone 185 C        [복사]
-용도    헤드라인, CTA, 워드마크, 강조
-```
+KIMES 워드마크와 공식 표기에 사용. 3개 카드 (큰 색면 220px+ + HEX/RGB/CMYK/Pantone + Copy 버튼).
 
-```
-KIMES Black
-HEX     #231815
-RGB     35, 24, 21
-CMYK    0 / 0 / 0 / 100
-Pantone Black 6 C
-용도    본문, 보조 표면, 텍스트
-```
+| 컬러 | HEX | RGB | CMYK | Pantone |
+|---|---|---|---|---|
+| KIMES Red | `#E60012` | 230, 0, 18 | 0 / 100 / 100 / 0 | 185 C |
+| KIMES Black | `#231815` | 35, 24, 21 | 0 / 0 / 0 / 100 | Black 6 C |
+| KIMES White | `#FFFFFF` | 255, 255, 255 | 0 / 0 / 0 / 0 | — |
 
-#### 7.2.2 보조 그레이 1종
+흰 카드 시각 처리: 1px Gray 점선 보더로 색면 가시화.
 
-```
-Neutral Gray
-HEX     #A7A9AC
-용도    비활성 텍스트, 디바이더, 메타정보
-```
+#### 7.2.2 Sub Colors / 보조 컬러
 
-#### 7.2.3 색 사용 원칙 (3줄)
+특별관 표기 · 톤다운 자리. 4개 카드 (작은 색면 ~120px + 라벨 + 한 줄 용도 + 컴팩트 메타).
 
-> KIMES 컬러는 단색으로만 사용합니다. 그라디언트·글로우·드롭 섀도우는 KIMES 디지털 자산에 한해 사무국이 제한적으로 사용하며, 참가업체 자료에는 적용하지 않습니다.
+| 컬러 | HEX | Pantone | 용도 |
+|---|---|---|---|
+| MedicomteK Blue | `#036EB8` | 285 C | MedicomteK 특별관 |
+| Beauty&Derma Purple | `#5D3B8B` | 2685 C | Beauty&Derma Seoul 특별관 |
+| INSPIRE Lime | `#BFD633` | 382 C | INSPIRE Digital Health 특별관 |
+| Neutral Gray | `#A7A9AC` | — | 톤다운 |
 
-> 참가업체의 자체 브랜드 컬러는 그대로 유지하세요. KIMES 컬러는 KIMES 워드마크와 "KIMES 2027 참가" 같은 공식 표기에만 적용합니다.
+각 카드 색면 위에 라벨 (예: "MedicomteK Blue") + 카드 본문에 한 줄 용도 (예: "MedicomteK 특별관"). 설명 풀이는 두지 않음 — 토스·네이버 결의 짧은 라벨 톤.
 
-> 인쇄물은 CMYK + Pantone 별색 병기를 권장합니다. 대형 인쇄(현수막·실사 출력)는 Pantone 매칭이 색 안정성에 유리합니다.
+#### 7.2.3 How to Use / 색 사용 원칙
 
-#### 7.2.4 다운로드
+1. KIMES Primary 컬러는 KIMES 워드마크와 공식 표기에 사용합니다.
+2. Sub 컬러는 특별관 표기와 톤다운 자리에 사용합니다. Primary를 대체하지 않습니다.
+3. 참가업체 자체 브랜드 컬러는 그대로 유지하세요.
+4. 인쇄물은 CMYK + Pantone 별색 병기를 권장합니다.
+
+#### 7.2.4 Downloads / 다운로드
 
 - Adobe Swatch Exchange (.ase) — Illustrator·Photoshop·InDesign 호환
 - Sketch 팔레트 (.sketchpalette)
 - Figma 라이브러리 (링크)
-- CSS 변수 스니펫 (코드 블록 + 복사)
+- CSS 변수 스니펫 (코드 블록 + Copy)
 
 ```css
 :root {
+  /* Primary */
   --kimes-red:   #E60012;
   --kimes-black: #231815;
-  --kimes-gray:  #A7A9AC;
+  --kimes-white: #FFFFFF;
+
+  /* Sub */
+  --mc-blue:    #036EB8;
+  --bd-purple:  #5D3B8B;
+  --in-lime:    #BFD633;
+  --kimes-gray: #A7A9AC;
 }
 ```
+
+자산 다운로드 3개(.ase / .sketchpalette / Figma)는 ASSET_STATUS pending 시 disabled. CSS 스니펫만 정적 텍스트라 즉시 복사 가능.
 
 ---
 
@@ -1089,22 +1094,24 @@ KIMES 안에서 운영되는 3개 특별관(MedicomteK · Beauty&Derma Seoul · 
 
 ### 13.4 특별관별 세부 (작성용 데이터)
 
+각 특별관의 컬러는 §7.2.2 Sub Colors 단일 출처에서 가져옵니다. 이 페이지의 데이터는 컬러 외 메타정보(이름·한 줄 소개·태그라인) 위주.
+
 #### MedicomteK
 - 한국어: 메디콤텍 / 영문: MedicomteK
 - 한 줄: 의료 커뮤니케이션·커넥티드 케어 기술 전시
-- 메인 컬러: #036EB8 (Blue) / Pantone 285 C
-- 보조: #042C53 (Deep Navy)
+- 메인 컬러: §7.2.2 **MedicomteK Blue** (`#036EB8` / Pantone 285 C)
 
 #### Beauty&Derma Seoul
 - 한국어: 뷰티앤더마 서울 / 영문: Beauty&Derma Seoul
 - 한 줄: 미용의학·피부과 전문 전시 (서울·부산 에디션)
-- 메인 컬러: #5D3B8B (Purple) / Pantone 2685 C
-- 보조: #BAB1D7 (Light Purple)
+- 메인 컬러: §7.2.2 **Beauty&Derma Purple** (`#5D3B8B` / Pantone 2685 C)
 
 #### INSPIRE Digital Health
 - 한국어: 인스파이어 디지털 헬스 / 영문: INSPIRE Digital Health
 - 태그라인: HEALTH MEETS INNOVATION
-- 메인 컬러: #595757 (Gray) / 액센트: #BFD633 (Lime)
+- 메인 컬러: §7.2.2 **INSPIRE Lime** (`#BFD633` / Pantone 382 C)
+
+(이전 드래프트의 보조 컬러 — Deep Navy `#042C53`, Light Purple `#BAB1D7`, Gray `#595757` 등 — 은 §7.2.2 Sub Colors 4색 체계로 정리되며 제거됨. KIMES 4브랜드 시스템은 Primary 3 + Sub 4로 단일화.)
 
 ---
 

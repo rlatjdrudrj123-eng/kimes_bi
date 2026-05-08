@@ -67,15 +67,25 @@
     status: 'pending',
   };
 
-  // ---- KIMES 컬러 (메인 2종 + 보조 그레이) -------------------------------
-  // /color · /logo 카드 하단 미세 글씨 등 가이드 전반에서 단일 출처로 참조.
-  // 행사 회차와 관계없이 고정값. CSS :root 변수(--kimes-red 등)와 같은 값.
-  // 다음 순서로 읽힘: hex (CSS 표준), rgb 배열 (디지털), cmyk 배열 (인쇄),
-  // pantone 별색 매칭 ID (대형 인쇄·Pantone 매칭 안정).
+  // ---- KIMES 컬러 (Primary 3 + Sub 4) -------------------------------------
+  // KIMES 4브랜드 시스템: KIMES 워드마크용 Primary 3색 + 특별관 3종 + 톤다운
+  // Gray. /color, /logo 미세글씨, /special-zones 컬러 정의 모두 이 단일
+  // 출처 참조 (§13 특별관 페이지 컬러 중복 정의 제거).
+  // 사이트 내부 UI 토큰(--surface-*, --text-*)은 별개 유지 (§19).
   const colors = {
-    red:   { hex: '#E60012', rgb: [230, 0, 18],     cmyk: [0, 100, 100, 0], pantone: '185 C'     },
-    black: { hex: '#231815', rgb: [35, 24, 21],     cmyk: [0, 0, 0, 100],   pantone: 'Black 6 C' },
-    gray:  { hex: '#A7A9AC', rgb: [167, 169, 172],  cmyk: [0, 0, 0, 40] },
+    primary: {
+      red:   { hex: '#E60012', rgb: [230, 0, 18],    cmyk: [0, 100, 100, 0], pantone: '185 C',     label: 'KIMES Red' },
+      black: { hex: '#231815', rgb: [35, 24, 21],    cmyk: [0, 0, 0, 100],   pantone: 'Black 6 C', label: 'KIMES Black' },
+      white: { hex: '#FFFFFF', rgb: [255, 255, 255], cmyk: [0, 0, 0, 0],     /* 흰색은 Pantone 매칭 없음 */
+                                                                              label: 'KIMES White' },
+    },
+    sub: {
+      mcBlue:   { hex: '#036EB8', rgb: [3, 110, 184],   cmyk: [85, 50, 0, 0], pantone: '285 C',  label: 'MedicomteK Blue',     usage: 'MedicomteK 특별관' },
+      bdPurple: { hex: '#5D3B8B', rgb: [93, 59, 139],   cmyk: [78, 90, 0, 0], pantone: '2685 C', label: 'Beauty&Derma Purple', usage: 'Beauty&Derma Seoul 특별관' },
+      inLime:   { hex: '#BFD633', rgb: [191, 214, 51],  cmyk: [30, 0, 90, 0], pantone: '382 C',  label: 'INSPIRE Lime',        usage: 'INSPIRE Digital Health 특별관' },
+      gray:     { hex: '#A7A9AC', rgb: [167, 169, 172], cmyk: [0, 0, 0, 40],  /* 그레이는 Pantone 매칭 없음 */
+                                                                              label: 'Neutral Gray',         usage: '톤다운' },
+    },
   };
 
   // ---- 3단계 상태 신호 톤 -------------------------------------------------

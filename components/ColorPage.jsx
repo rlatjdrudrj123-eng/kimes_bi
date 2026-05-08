@@ -1,53 +1,66 @@
-// §7 — /color. 참가업체가 자기 인쇄소·디자인 팀에 정확한 색 값을 넘길 수
-// 있게 한다. 디지털·인쇄 모두 커버.
+// §7 — /color. KIMES 4브랜드 컬러 시스템: Primary 3 (Red·Black·White) +
+// Sub 4 (MedicomteK Blue·Beauty&Derma Purple·INSPIRE Lime·Neutral Gray).
+// 컬러 값은 components/config.js의 KIMES_EVENT.colors 단일 출처 — §13
+// 특별관 페이지도 같은 출처 참조해 중복 정의 제거.
 //
 // 명세 §7.2 4개 섹션:
-//   §7.2.1 메인 컬러 2종 (KIMES Red, KIMES Black) — 큰 카드
-//   §7.2.2 보조 그레이 1종 — 작은 카드
-//   §7.2.3 색 사용 원칙 (3줄)
-//   §7.2.4 다운로드 (.ase, Sketch, Figma, CSS 스니펫)
-//
-// 컬러 값은 components/config.js의 KIMES_EVENT.colors 단일 출처에서 읽음.
-// /logo 카드 하단의 Pantone 표기와 동일한 값을 공유 — 두 곳 모두 한 번에
-// 갱신 가능.
+//   §7.2.1 Primary Colors / 메인 컬러 (3장 큰 카드)
+//   §7.2.2 Sub Colors / 보조 컬러 (4장 카드 — 특별관 3 + 톤다운)
+//   §7.2.3 How to Use / 색 사용 원칙 (4줄)
+//   §7.2.4 Downloads / 다운로드 (.ase/Sketch/Figma + CSS 스니펫)
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
 const CopyButton = window.CopyButton;
 
-// 메인 컬러 카드 표시용 메타데이터. config.colors의 값 형식(rgb/cmyk
-// 배열)을 표시 문자열로 정규화하고, 카드별 이름·용도를 부착.
 function formatRgb(arr)  { return arr.join(', '); }
 function formatCmyk(arr) { return arr.join(' / '); }
 
-function buildColor(spec, meta) {
+// config.colors의 raw 데이터(rgb/cmyk 배열, hex)를 카드 표시용 정규화.
+function buildColor(spec) {
   return {
-    ...meta,
+    label:   spec.label,
     hex:     spec.hex.toUpperCase(),
     rgb:     formatRgb(spec.rgb),
     cmyk:    formatCmyk(spec.cmyk),
     pantone: spec.pantone || null,
+    usage:   spec.usage || null,
   };
 }
 
 const DOWNLOAD_ITEMS = [
-  { id: 'ase',    label: 'Adobe Swatch',  ext: '.ase',           hint: 'Illustrator·Photoshop·InDesign 호환',  file: 'kimes-colors.ase',           action: 'download' },
-  { id: 'sketch', label: 'Sketch 팔레트', ext: '.sketchpalette', hint: 'Sketch 앱에서 직접 가져오기',          file: 'kimes-colors.sketchpalette', action: 'download' },
-  { id: 'figma',  label: 'Figma 라이브러리', ext: '외부',         hint: 'Figma 커뮤니티 라이브러리 링크',        url: 'https://figma.com',           action: 'open' },
+  { id: 'ase',    label: 'Adobe Swatch',     ext: '.ase',           hint: 'Illustrator·Photoshop·InDesign 호환', file: 'kimes-colors.ase',           action: 'download' },
+  { id: 'sketch', label: 'Sketch 팔레트',    ext: '.sketchpalette', hint: 'Sketch 앱에서 가져오기',              file: 'kimes-colors.sketchpalette', action: 'download' },
+  { id: 'figma',  label: 'Figma 라이브러리', ext: '외부',           hint: 'Figma 커뮤니티 라이브러리 링크',       url: 'https://figma.com',           action: 'open' },
 ];
 
 function ColorPage() {
-  const { colors, event } = window.KIMES_EVENT;
+  const { colors } = window.KIMES_EVENT;
   const assetStatus = (window.KIMES_EVENT.assets && window.KIMES_EVENT.assets.status) || 'pending';
 
-  const RED   = buildColor(colors.red,   { id: 'red',   name: 'KIMES Red',    usage: '헤드라인 · CTA · 워드마크 · 강조' });
-  const BLACK = buildColor(colors.black, { id: 'black', name: 'KIMES Black',  usage: '본문 텍스트 · 보조 표면 · 텍스트' });
-  const GRAY  = buildColor(colors.gray,  { id: 'gray',  name: 'Neutral Gray', usage: '비활성 텍스트 · 디바이더 · 메타정보' });
+  const PRIMARY = [
+    { id: 'red',   ...buildColor(colors.primary.red) },
+    { id: 'black', ...buildColor(colors.primary.black) },
+    { id: 'white', ...buildColor(colors.primary.white) },
+  ];
+  const SUB = [
+    { id: 'mc',   ...buildColor(colors.sub.mcBlue) },
+    { id: 'bd',   ...buildColor(colors.sub.bdPurple) },
+    { id: 'in',   ...buildColor(colors.sub.inLime) },
+    { id: 'gray', ...buildColor(colors.sub.gray) },
+  ];
 
   const cssSnippet = `:root {
-  --kimes-red:   ${colors.red.hex};
-  --kimes-black: ${colors.black.hex};
-  --kimes-gray:  ${colors.gray.hex};
+  /* Primary */
+  --kimes-red:   ${colors.primary.red.hex};
+  --kimes-black: ${colors.primary.black.hex};
+  --kimes-white: ${colors.primary.white.hex};
+
+  /* Sub */
+  --mc-blue:    ${colors.sub.mcBlue.hex};
+  --bd-purple:  ${colors.sub.bdPurple.hex};
+  --in-lime:    ${colors.sub.inLime.hex};
+  --kimes-gray: ${colors.sub.gray.hex};
 }`;
 
   return (
@@ -55,50 +68,36 @@ function ColorPage() {
       eyebrow="03"
       title="Color"
       subtitle="컬러"
-      lede="참가업체가 인쇄소·디자인 팀에 정확한 색 값을 넘길 수 있도록 디지털·인쇄 양쪽 모두를 정리했습니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
+      lede="KIMES 워드마크와 공식 표기에는 Primary 3색을, 특별관 표기·톤다운에는 Sub 4색을 사용합니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
     >
-      {/* §7.2.1 메인 컬러 2종 ----------------------------------------- */}
-      <SectionHeading id="main" title="Primary Colors" subtitle="메인 컬러" />
-      <p>
-        KIMES 워드마크와 공식 표기에 사용하는 두 가지 색입니다. 어느 한쪽도
-        다른 색으로 대체하지 않습니다.
-      </p>
-      <div className="clr-cards">
-        <ColorCard color={RED}   tone="light" />
-        <ColorCard color={BLACK} tone="light" />
+      {/* §7.2.1 Primary Colors ---------------------------------------- */}
+      <SectionHeading id="primary" title="Primary Colors" subtitle="메인 컬러" />
+      <p>KIMES 워드마크와 공식 표기.</p>
+      <div className="clr-primary-grid">
+        {PRIMARY.map(c => <PrimaryCard key={c.id} color={c} />)}
       </div>
 
-      {/* §7.2.2 보조 그레이 ------------------------------------------- */}
-      <SectionHeading id="secondary" title="Neutral" subtitle="보조 그레이" />
-      <p>
-        UI 안에서 정보의 위계를 구분할 때 사용합니다. KIMES 워드마크나 강조
-        영역에는 사용하지 않습니다.
-      </p>
-      <GrayCard color={GRAY} />
+      {/* §7.2.2 Sub Colors -------------------------------------------- */}
+      <SectionHeading id="sub" title="Sub Colors" subtitle="보조 컬러" />
+      <p>특별관 표기 · 톤다운.</p>
+      <div className="clr-sub-grid">
+        {SUB.map(c => <SubCard key={c.id} color={c} />)}
+      </div>
 
-      {/* §7.2.3 색 사용 원칙 ------------------------------------------ */}
+      {/* §7.2.3 How to Use -------------------------------------------- */}
       <SectionHeading id="rules" title="How to Use" subtitle="색 사용 원칙" />
       <ol className="clr-rules">
-        <li>
-          KIMES 컬러는 단색으로만 사용합니다. 그라디언트·글로우·드롭 섀도우
-          같은 효과는 적용하지 않습니다.
-        </li>
-        <li>
-          참가업체 자체 브랜드 컬러는 그대로 유지하세요. KIMES 컬러는 KIMES
-          워드마크와 <code>"{event.nameKo} 참가"</code> 같은 공식 표기에만
-          적용합니다.
-        </li>
-        <li>
-          인쇄물은 CMYK + Pantone 별색 병기를 권장합니다. 대형 인쇄에서는
-          Pantone 매칭이 더 안정적입니다.
-        </li>
+        <li>KIMES Primary 컬러는 KIMES 워드마크와 공식 표기에 사용합니다.</li>
+        <li>Sub 컬러는 특별관 표기와 톤다운 자리에 사용합니다. Primary를 대체하지 않습니다.</li>
+        <li>참가업체 자체 브랜드 컬러는 그대로 유지하세요.</li>
+        <li>인쇄물은 CMYK + Pantone 별색 병기를 권장합니다.</li>
       </ol>
 
-      {/* §7.2.4 다운로드 ---------------------------------------------- */}
+      {/* §7.2.4 Downloads --------------------------------------------- */}
       <SectionHeading id="downloads" title="Downloads" subtitle="다운로드" />
       <p>
-        디자인 툴별 팔레트 파일과 코드용 CSS 스니펫입니다. CSS 스니펫은 별도
-        자산 파일 없이 바로 복사해 사용할 수 있습니다.
+        디자인 툴별 팔레트 파일과 코드용 CSS 스니펫. CSS 스니펫은 자산
+        파일 없이 바로 복사해 사용할 수 있습니다.
       </p>
       <div className="clr-dl-grid">
         {DOWNLOAD_ITEMS.map(item => (
@@ -110,43 +109,79 @@ function ColorPage() {
   );
 }
 
-// 큰 카드 (메인 컬러용). 색면 60% 이상 + HEX·RGB·CMYK·Pantone 4행 + 용도.
-function ColorCard({ color }) {
+// Primary 카드 — 큰 색면(220px+) + HEX/RGB/CMYK/Pantone + 용도 한 줄.
+function PrimaryCard({ color }) {
+  const isWhite = color.id === 'white';
   return (
     <article className={`clr-card clr-${color.id}`}>
       <div
-        className="clr-card-swatch"
+        className={`clr-card-swatch ${isWhite ? 'clr-card-swatch-white' : ''}`}
         style={{ background: color.hex }}
-        aria-label={`${color.name} 색면 ${color.hex}`}
+        aria-label={`${color.label} 색면 ${color.hex}`}
       />
       <div className="clr-card-body">
-        <div className="clr-card-name">{color.name}</div>
+        <div className="clr-card-name">{color.label}</div>
         <dl className="clr-card-meta">
-          <ColorRow term="HEX"     value={color.hex}          ariaPrefix={color.name} />
-          <ColorRow term="RGB"     value={color.rgb}          ariaPrefix={color.name} />
-          <ColorRow term="CMYK"    value={color.cmyk}         ariaPrefix={color.name} />
-          {color.pantone && (
-            <ColorRow term="Pantone" value={color.pantone}    ariaPrefix={color.name} />
+          <ColorRow term="HEX"     value={color.hex}  ariaPrefix={color.label} />
+          <ColorRow term="RGB"     value={color.rgb}  ariaPrefix={color.label} />
+          <ColorRow term="CMYK"    value={color.cmyk} ariaPrefix={color.label} />
+          {color.pantone ? (
+            <ColorRow term="Pantone" value={color.pantone} ariaPrefix={color.label} />
+          ) : (
+            <div className="clr-row clr-row-empty">
+              <dt className="clr-row-term">Pantone</dt>
+              <dd className="clr-row-value clr-row-dash">—</dd>
+              <dd className="clr-row-action" aria-hidden="true" />
+            </div>
           )}
         </dl>
-        <div className="clr-card-usage">
-          <span className="clr-card-usage-label">용도</span>
-          <span>{color.usage}</span>
-        </div>
       </div>
     </article>
   );
 }
 
-function ColorRow({ term, value, ariaPrefix }) {
+// Sub 카드 — 100~150px 색면 + 라벨 + 한 줄 용도 + 컴팩트 메타.
+function SubCard({ color }) {
+  const isLight = color.id === 'in' || color.id === 'gray'; // 밝은 배경엔 검정 텍스트
   return (
-    <div className="clr-row">
+    <article className={`clr-sub clr-sub-${color.id}`}>
+      <div
+        className={`clr-sub-swatch ${isLight ? 'is-light' : ''}`}
+        style={{ background: color.hex }}
+        aria-label={`${color.label} 색면 ${color.hex}`}
+      >
+        <span className="clr-sub-swatch-label">{color.label}</span>
+      </div>
+      <div className="clr-sub-body">
+        <div className="clr-sub-usage">{color.usage}</div>
+        <dl className="clr-sub-meta">
+          <ColorRow term="HEX"     value={color.hex}  ariaPrefix={color.label} compact />
+          <ColorRow term="RGB"     value={color.rgb}  ariaPrefix={color.label} compact />
+          <ColorRow term="CMYK"    value={color.cmyk} ariaPrefix={color.label} compact />
+          {color.pantone ? (
+            <ColorRow term="Pantone" value={color.pantone} ariaPrefix={color.label} compact />
+          ) : (
+            <div className="clr-row clr-row-empty clr-row-compact">
+              <dt className="clr-row-term">Pantone</dt>
+              <dd className="clr-row-value clr-row-dash">—</dd>
+              <dd className="clr-row-action" aria-hidden="true" />
+            </div>
+          )}
+        </dl>
+      </div>
+    </article>
+  );
+}
+
+function ColorRow({ term, value, ariaPrefix, compact }) {
+  return (
+    <div className={`clr-row ${compact ? 'clr-row-compact' : ''}`}>
       <dt className="clr-row-term">{term}</dt>
       <dd className="clr-row-value">{value}</dd>
       <dd className="clr-row-action">
         <CopyButton
           value={value}
-          label="복사"
+          label="Copy"
           ariaLabel={`${ariaPrefix} ${term} 값 ${value} 복사`}
         />
       </dd>
@@ -154,37 +189,6 @@ function ColorRow({ term, value, ariaPrefix }) {
   );
 }
 
-// 작은 가로 카드 (보조 그레이용). 색면은 작은 사각형, 메타는 인라인.
-function GrayCard({ color }) {
-  return (
-    <article className="clr-gray-card">
-      <div
-        className="clr-gray-swatch"
-        style={{ background: color.hex }}
-        aria-label={`${color.name} 색면 ${color.hex}`}
-      />
-      <div className="clr-gray-body">
-        <div className="clr-gray-head">
-          <span className="clr-gray-name">{color.name}</span>
-          <span className="clr-gray-usage">{color.usage}</span>
-        </div>
-        <div className="clr-gray-meta">
-          <span><strong>HEX</strong> {color.hex}</span>
-          <span><strong>RGB</strong> {color.rgb}</span>
-          <span><strong>CMYK</strong> {color.cmyk}</span>
-        </div>
-      </div>
-      <div className="clr-gray-actions">
-        <CopyButton value={color.hex}  label="HEX"  ariaLabel={`${color.name} HEX ${color.hex} 복사`} />
-        <CopyButton value={color.rgb}  label="RGB"  ariaLabel={`${color.name} RGB ${color.rgb} 복사`} />
-        <CopyButton value={color.cmyk} label="CMYK" ariaLabel={`${color.name} CMYK ${color.cmyk} 복사`} />
-      </div>
-    </article>
-  );
-}
-
-// 다운로드 항목 — pending 시 disabled 버튼 + "준비 중" 라벨, ready 시
-// 정상 다운로드/외부 링크.
 function DownloadItem({ item, assetStatus }) {
   const pending = assetStatus !== 'ready';
   return (
@@ -220,13 +224,12 @@ function DownloadItem({ item, assetStatus }) {
   );
 }
 
-// CSS 변수 스니펫 — 정적 텍스트라 자산 상태와 무관하게 바로 복사 가능.
 function CssSnippet({ code }) {
   return (
     <div className="clr-snippet">
       <div className="clr-snippet-head">
-        <span className="clr-snippet-title">CSS 변수 스니펫</span>
-        <CopyButton value={code} label="복사" ariaLabel="CSS 변수 스니펫 복사" />
+        <span className="clr-snippet-title">CSS Variables</span>
+        <CopyButton value={code} label="Copy" ariaLabel="CSS 변수 스니펫 복사" />
       </div>
       <pre className="clr-snippet-code"><code>{code}</code></pre>
       <div className="clr-snippet-hint">
