@@ -78,7 +78,7 @@ function LandingPage() {
             <ul>
               <li>{event.nameKo} 참가업체 마케팅·디자인 담당자</li>
               <li>참가업체 외주 대행사 (PR·디자인·영상)</li>
-              <li>특별관 참가업체 (MedicomteK / Beauty&amp;Derma / INSPIRE)</li>
+              <li>특별관 참가업체 (MedicomteK / BEAUTY&amp;DERMA SEOUL / INSPIRE Digital Health)</li>
             </ul>
           </div>
           <div className="landing-audience-card landing-audience-no">

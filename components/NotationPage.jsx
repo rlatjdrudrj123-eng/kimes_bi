@@ -1,7 +1,7 @@
 // §9 — /notation Writing Style. 보도자료·웹사이트·인쇄물·SNS 어디든
 // KIMES를 언급할 때 따라야 할 표기 규칙. 통일성이 브랜드 신뢰도를 만듭니다.
 //
-// 명세 §9.2.1~§9.2.9 평면 구조 — 9개 섹션:
+// 명세 §9.2.1~§9.2.8 평면 구조 — 8개 섹션:
 //   §9.2.1 Name Notation         — KIMES 명칭 표기
 //   §9.2.2 Edition               — 회차
 //   §9.2.3 Date & Time           — 날짜·시간
@@ -10,11 +10,11 @@
 //   §9.2.6 Separators            — 구분 기호
 //   §9.2.7 SNS Tag               — SNS 태그·해시태그 (이전 §12 /digital 흡수)
 //   §9.2.8 Restricted Expressions — 별도 계약·승인 필요 표현 (이전 §9 /co-branding 흡수)
-//   §9.2.9 Press Boilerplate     — 보도자료 보일러플레이트 한·영
 //
 // /co-branding 페이지(이전 §9)는 70% 디자이너 영역이라 통째로 제거. /digital
 // 페이지(이전 §12)는 §6.2.3 / §6.2.5와 정보 중복으로 통째로 제거. 두 페이지
 // 의 핵심 정보(Restricted Expressions / SNS Tag)만 본 페이지로 흡수.
+// 보도자료 보일러플레이트는 §5 /overview의 §5.3.3 4벌과 정보 중복으로 제거.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
