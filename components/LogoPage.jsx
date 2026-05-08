@@ -235,9 +235,9 @@ function LogoPage() {
       {/* §6.2.6 Don'ts — 11종 -------------------------------------- */}
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
       <p>
-        KIMES 워드마크 SVG는 변형하지 않고 그대로 사용합니다. 텍스트 자유
-        조판은 마케팅·콘텐츠 영역의 별개 작업입니다 — 한·영 혼용 조판
-        규칙은 → <Link to="/typography">/typography</Link>.
+        KIMES 워드마크 SVG는 변형하지 않고 그대로 사용합니다. 텍스트 표기는
+        마케팅·콘텐츠 영역의 별개 작업입니다 — 권장 사양·표기 사례는 →{' '}
+        <Link to="/typography">/typography</Link>.
       </p>
       <div className="lg-donts">
         {DONTS.map(d => <DontCard key={d.id} d={d} />)}
