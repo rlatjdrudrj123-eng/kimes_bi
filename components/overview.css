@@ -179,19 +179,21 @@
 }
 @media (max-width: 900px) { .ov-num-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .ov-num-grid { grid-template-columns: 1fr; } }
+/* §22.5 통계 카드 패턴 — 숫자·라벨만, 출처는 섹션 lede에. 메타 라벨이
+   없어진 만큼 숫자 임팩트를 키우고 라벨 호흡을 늘림. */
 .ov-num {
   border: 1px solid var(--surface-line);
   border-radius: var(--radius-md);
   background: var(--surface-base);
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .ov-num-value {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(40px, 5vw, 56px);
+  font-size: clamp(44px, 5.5vw, 60px);
   line-height: 1;
   letter-spacing: -0.025em;
   color: var(--text-primary);
@@ -201,12 +203,7 @@
   font-size: var(--fs-body);
   font-weight: 600;
   color: var(--text-secondary);
-  margin-top: var(--space-1);
-}
-.ov-num-source {
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  font-family: var(--font-mono);
+  margin-top: 6px;
 }
 
 /* ---------- §5.3.5 14개 카테고리 ---------- */

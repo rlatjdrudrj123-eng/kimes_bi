@@ -53,13 +53,16 @@ function OverviewPage() {
   };
   const LENGTHS = [40, 100, 200, 400];
 
-  // §5.3.4 — 핵심 숫자 4장. config.js의 numbers에서 출처 표기까지 함께.
+  // §5.3.4 — 핵심 숫자 4장. §22.5 통계 카드 패턴: 카드는 숫자·라벨만,
+  // 출처(잠정·실적 시점)는 섹션 lede에 한 줄로 명시 — 카드 시각 임팩트
+  // 유지. 출처 정보는 config.numbers.*.source에 기록되어 있지만 카드에
+  // 렌더링하지 않음.
   const numbers = window.KIMES_EVENT.numbers;
   const NUM_CARDS = [
-    { value: numbers.exhibitors.value, label: '참가업체',      source: numbers.exhibitors.source },
-    { value: numbers.countries.value,  label: '참가국',         source: numbers.countries.source },
-    { value: numbers.visitors.value,   label: '관람객',         source: numbers.visitors.source },
-    { value: numbers.categories.value, label: '전시 카테고리',  source: numbers.categories.source },
+    { value: numbers.exhibitors.value, label: '참가업체' },
+    { value: numbers.countries.value,  label: '참가국' },
+    { value: numbers.visitors.value,   label: '관람객' },
+    { value: numbers.categories.value, label: '전시 카테고리' },
   ];
 
   // §5.3.5 — 14개 전시 카테고리. 명세 §5.3.5의 한·영 병기 그대로.
@@ -137,18 +140,15 @@ function OverviewPage() {
       {/* §5.3.4 핵심 숫자 ----------------------------------------- */}
       <SectionHeading id="numbers" title="Key Numbers" subtitle="핵심 숫자" />
       <p>
-        보도자료·홈페이지에 KIMES 규모를 표기할 때 다음 숫자를 그대로
-        사용합니다. 잠정 수치와 직전 회차 실적이 섞여 있으니 출처 표기를
-        함께 옮겨 적어주세요.
+        보도자료·홈페이지에 KIMES 규모를 표기할 때 다음 숫자를 사용합니다.
+        참가업체·참가국 수는 KIMES 2027 기준이며, 관람객 수는 직전 회차
+        (2026) 실적입니다.
       </p>
       <div className="ov-num-grid" role="list">
         {NUM_CARDS.map(card => (
           <div key={card.label} className="ov-num" role="listitem">
             <div className="ov-num-value">{card.value}</div>
             <div className="ov-num-label">{card.label}</div>
-            <div className="ov-num-source">
-              {card.source ? `(${card.source})` : ' '}
-            </div>
           </div>
         ))}
       </div>
