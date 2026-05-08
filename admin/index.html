@@ -1,70 +1,26 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KIMES BI 가이드 — 어드민 (준비 중)</title>
-<style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Pretendard', 'Pretendard Variable', system-ui, sans-serif;
-    background: #fafafa;
-    color: #18181b;
-  }
-  .placeholder {
-    max-width: 480px;
-    padding: 48px 32px;
-    text-align: center;
-    line-height: 1.6;
-  }
-  .placeholder h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 32px;
-    letter-spacing: -0.02em;
-    margin: 0 0 8px;
-    color: #E60012;
-  }
-  .placeholder p {
-    margin: 0 0 16px;
-    color: #52525b;
-    font-size: 15px;
-  }
-  .placeholder .small {
-    font-size: 13px;
-    color: #71717a;
-    line-height: 1.55;
-  }
-  .placeholder a {
-    display: inline-block;
-    margin-top: 24px;
-    padding: 10px 20px;
-    border: 1px solid #d4d4d8;
-    border-radius: 6px;
-    color: #18181b;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-  }
-  .placeholder a:hover {
-    border-color: #18181b;
-  }
-</style>
+<title>KIMES BI 가이드 — 콘텐츠 에디터</title>
 </head>
 <body>
-<main class="placeholder">
-  <h1>준비 중</h1>
-  <p>어드민 콘텐츠 편집 기능은 Phase 4 자산 패키지 정리 단계에서
-     활성화 예정입니다.</p>
-  <p class="small">현재 사이트의 페이지 콘텐츠는 정비 작업이 끝나지
-     않아 어드민 편집이 페이지에 반영되지 않습니다. 재활성화 후 다시
-     안내드립니다. 콘텐츠 변경 요청은 사무국으로 연락 주세요.</p>
-  <a href="/">← 가이드 메인으로</a>
-</main>
+
+<!--
+  Sveltia CMS — Decap CMS의 현대적 드롭인 대체. admin/config.yml을 그대로
+  읽음. backend.name: github + Netlify의 자동 OAuth 프록시(api.netlify.com)
+  를 통해 GitHub 계정으로 직접 로그인. Netlify Identity widget은 git-gateway
+  backend 전용이므로 github backend에서는 제거 (인증 충돌 원인).
+
+  로그인 흐름: /admin/ 접속 → "Login with GitHub" → GitHub OAuth 동의 →
+  Sveltia가 GitHub REST API로 main 브랜치에 직접 커밋. 30초 안에 Netlify
+  자동 재배포.
+
+  Decap으로 되돌리려면 아래 script를 다음으로 교체:
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+-->
+<script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+
 </body>
 </html>

@@ -6,10 +6,11 @@
 ## 프로젝트 개요
 
 KIMES 2027 (제42회 국제 의료기기·병원설비 전시회) 참가업체용 BI 가이드
-사이트. 정적 React + Babel-standalone 페이지. 현재 §9~§15 페이지 데이터는
-React 컴포넌트 안 const 배열로 박혀있고, 일부 legacy 콘텐츠만 `content/`의
-JSON에 있음. CMS(/admin/) + 인플레이스 에디터는 Phase 4까지 일시 비활성화
-상태 — 콘텐츠 마이그레이션 후 복원 예정.
+사이트. 정적 React + Babel-standalone 페이지. 콘텐츠는 일부 legacy 영역만
+`content/*.json`에 있고, §9~§15 새 페이지 데이터는 React 컴포넌트 안 const
+배열에 박혀있음. 편집은 `/admin/`의 Sveltia CMS (GitHub OAuth) 또는 헤더
+KIMES 로고 5x 클릭으로 열리는 인플레이스 에디터로 GitHub 커밋. CMS 콘텐츠
+풀 매핑은 ContentLoader 확장 작업이 별도로 필요.
 
 ## 단일 출처
 
@@ -43,26 +44,36 @@ JSON에 있음. CMS(/admin/) + 인플레이스 에디터는 Phase 4까지 일시
 레퍼런스가 추가되더라도 그 자료의 톤·구조·시각 결을 통째로 따라가지
 않습니다. 부분적 시스템·시각 처리만 차용합니다.
 
-## 운영 도구 (Phase 2 단계 — 일시 비활성화)
+## 운영 도구
 
-§9~§15 페이지 데이터가 React 컴포넌트 안 const 배열에 박혀있어 CMS 편집이
-페이지에 반영되지 않는 상태. Phase 4 재정비 시 콘텐츠 → JSON 마이그레이션
-+ 인증 백엔드 통일 후 복원 예정.
+- `.brand-mark` className의 5x 클릭 트리거 — 헤더 KIMES 로고. content-editor.js
+- `#admin` / `#edit` URL 해시 트리거 — 같은 인플레이스 에디터 진입점
+- `/admin/` Sveltia CMS — GitHub OAuth 인증 (Netlify 자동 프록시 사용),
+  콘텐츠를 main 브랜치에 직접 커밋
+- content-editor.js의 GitHub Publish 버튼 — 인플레이스 편집 → PAT 커밋
 
-- `.brand-mark` className의 5x 클릭 트리거 — content-editor.js (비활성)
-- `#admin` / `#edit` URL 해시 트리거 — content-editor.js (비활성)
-- `/admin/` Sveltia CMS — admin/index.html은 "준비 중" placeholder
-- content-editor.js의 boot()는 `KIMES_EDITOR_DISABLED = true` 플래그로 차단
+헤더·사이드바·로고·네비를 수정할 때 위 트리거가 깨지지 않는지 먼저 확인.
 
-복원 절차 (Phase 4):
-1. content-editor.js 끝부분 `KIMES_EDITOR_DISABLED` 플래그를 false로
-2. admin/index.html을 Sveltia CMS 진입 페이지로 복원
-3. admin/config.yml backend 설정과 admin/index.html 인증 위젯 일치
-   (github OAuth 또는 Netlify Identity + git-gateway 중 하나로 통일)
-4. content/*.json과 §9~§15 컴포넌트 const 데이터 매핑 (ContentLoader 확장)
+### 인증 설정 메모
 
-헤더·사이드바·로고·네비를 수정할 때 위 트리거 위치(.brand-mark 등)는 보존
-— Phase 4 복원 시 같은 className으로 바인딩.
+- admin/index.html은 Sveltia CMS 스크립트만 로드 — Netlify Identity widget
+  은 사용하지 않음 (git-gateway backend 전용). 두 인증 방식을 혼재하면
+  로그인 실패하므로 분리 유지.
+- admin/config.yml의 `backend.name: github` + repo 매핑이 진실의 출처.
+  Netlify가 자동으로 GitHub OAuth 프록시(api.netlify.com)를 제공해
+  별도 OAuth App 등록 불필요.
+
+### 콘텐츠 매핑 한계 (현재)
+
+§9~§15 페이지의 데이터(FAQ 항목·Application 타일·Permission 매트릭스 등)
+는 React 컴포넌트 안 const 배열에 박혀있어 CMS 편집으로 직접 수정 불가.
+CMS는 legacy `content/*.json`(intro / color / typography / logo /
+typography-in-use / logo-rules / logo-lockup / asset-library) 영역만
+실시간 반영.
+
+자산 다운로드 URL 관리·페이지 콘텐츠 풀 편집은 ContentLoader 확장 + 컴포
+넌트 리팩터(const → JSON) 작업이 필요. 우선순위는 자산 status 토글 + 자산
+URL 관리부터.
 
 ## 자산 상태 플래그
 
