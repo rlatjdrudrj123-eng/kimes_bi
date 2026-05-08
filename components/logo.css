@@ -219,96 +219,157 @@
   line-height: 1.5;
 }
 
-/* ---------- §6.2.5 배경별 사용 — 6개 시각 예시 카드 ---------- */
-.lg-bg-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+/* ---------- §6.2.5 배경별 사용 — 명도 그라디언트 바 (KT BI 결) ----- */
+.lg-grad-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin: var(--space-2) 0 var(--space-5);
+}
+.lg-grad {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.lg-grad-head {
+  display: flex;
+  align-items: baseline;
   gap: var(--space-2);
-  margin: var(--space-2) 0 var(--space-3);
+  flex-wrap: wrap;
 }
-@media (max-width: 1100px) { .lg-bg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px)  { .lg-bg-grid { grid-template-columns: 1fr; } }
-
-.lg-bg-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
-  overflow: hidden;
-}
-
-.lg-bg-tile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 140px;
-  padding: var(--space-3);
-}
-
-/* 6가지 배경 — 실제 색·패턴으로 시각 직관 전달 */
-.lg-bg-tile-white { background: #ffffff; border-bottom: 1px solid var(--surface-line); }
-.lg-bg-tile-dark  { background: var(--kimes-black); }
-.lg-bg-tile-red   { background: var(--kimes-red); }
-.lg-bg-tile-brand { background: #5D3B8B; } /* 보라 — 회사 컬러 예시 */
-.lg-bg-tile-mid   { background: #888888; }
-.lg-bg-tile-photo {
-  /* 자연 사진 느낌의 다중 색조 그라디언트 + 패턴 오버레이 */
-  background:
-    repeating-linear-gradient(45deg,
-      rgba(0,0,0,0.08) 0 8px, rgba(255,255,255,0.06) 8px 16px),
-    linear-gradient(135deg, #4a6741 0%, #6b8e23 30%, #8b7355 60%, #c0a884 100%);
-}
-/* photo 카드는 흰 플레이트 위에 워드마크 배치 */
-.lg-bg-plate {
-  background: #fff;
-  padding: 10px 16px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-}
-/* 중간 명도 카드 — 사무국 협의 신호로 warn 글리프 */
-.lg-bg-warn-glyph {
-  width: 36px; height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--status-warn);
-  color: #fff;
-}
-.lg-bg-warn-glyph svg { width: 18px; height: 18px; stroke-width: 2.5; }
-
-.lg-bg-meta {
-  padding: var(--space-3);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-top: 1px solid var(--surface-line);
-}
-.lg-bg-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.lg-grad-label {
   font-family: var(--font-display);
-  font-size: var(--fs-caption);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.lg-bg-card.status-ok   .lg-bg-status { color: var(--status-ok); }
-.lg-bg-card.status-warn .lg-bg-status { color: var(--status-warn); }
-.lg-bg-label {
   font-weight: 700;
-  color: var(--text-primary);
   font-size: var(--fs-body);
+  color: var(--text-primary);
   letter-spacing: -0.005em;
 }
-.lg-bg-hint {
+.lg-grad-sub {
   font-size: var(--fs-caption);
+  color: var(--kimes-gray);
+}
+/* 명도 0-100% 그라디언트 바 — 흰색 → 검정. 워드마크 5개 stop을
+   absolute 위치 left%로 배치. */
+.lg-grad-bar {
+  position: relative;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(to right, #ffffff, var(--kimes-black));
+  border: 1px solid var(--surface-line);
+  overflow: visible;
+}
+.lg-grad-stop {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  pointer-events: none;
+}
+.lg-grad-scale {
+  position: relative;
+  height: 14px;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
   color: var(--text-muted);
-  line-height: 1.5;
+}
+.lg-grad-scale > span {
+  position: absolute;
+  top: 0;
+}
+.lg-grad-ranges {
+  position: relative;
+  height: 36px;
+  margin-top: 4px;
+}
+.lg-grad-range {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-caption);
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.lg-grad-range.status-ok   { background: rgba(21, 128, 61, 0.10);  color: var(--status-ok); }
+.lg-grad-range.status-warn { background: rgba(180, 83, 9, 0.10);   color: var(--status-warn); }
+.lg-grad-range.status-no   { background: rgba(113, 113, 122, 0.12); color: var(--text-secondary); }
+.lg-grad-range-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+}
+.lg-grad-range-hint {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lg-grad-range.status-ok   .lg-grad-range-label { color: var(--status-ok); }
+.lg-grad-range.status-warn .lg-grad-range-label { color: var(--status-warn); }
+.lg-grad-range.status-no   .lg-grad-range-label { color: var(--text-muted); }
+
+@media (max-width: 600px) {
+  .lg-grad-range-hint { display: none; }
+  .lg-grad-ranges { height: 24px; }
+}
+
+/* ---------- 컬러 배경 위 시뮬레이션 칩 ---------- */
+.lg-color-bg-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.005em;
+  margin: var(--space-3) 0 var(--space-2);
+}
+.lg-color-bg-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+@media (max-width: 900px) { .lg-color-bg-row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .lg-color-bg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lg-color-bg-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  height: 90px;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--surface-line);
+}
+.lg-color-bg-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  /* 대비를 위해 가독성 높이는 배경별 처리 — 어두운 배경엔 흰 라벨,
+     밝은 배경엔 검정 라벨. 인라인 스타일로 처리되지 않으므로 배경별
+     별도 처리하지 않고 자식 InlineLogo 색에 의존. */
+}
+/* 어두운 배경 (Red, Blue, Purple) — 라벨도 흰색 */
+.lg-color-bg-chip[style*="#E60012"] .lg-color-bg-label,
+.lg-color-bg-chip[style*="#036EB8"] .lg-color-bg-label,
+.lg-color-bg-chip[style*="#5D3B8B"] .lg-color-bg-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+/* 밝은 배경 (Lime, Gray) — 라벨 검정 */
+.lg-color-bg-chip[style*="#BFD633"] .lg-color-bg-label,
+.lg-color-bg-chip[style*="#A7A9AC"] .lg-color-bg-label {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 /* ---------- §6.2.6 Don'ts 12종 그리드 ---------- */
@@ -372,17 +433,8 @@
   color: var(--text-muted);
   line-height: 1.5;
 }
-/* 부드러운 안내 박스 — 처벌 경고 톤이 아닌 협조 안내 톤 */
-.lg-donts-foot {
-  margin: var(--space-2) 0 var(--space-5);
-  padding: 12px var(--space-3);
-  font-size: var(--fs-caption);
-  line-height: 1.6;
-  color: var(--text-secondary);
-  background: var(--surface-subtle);
-  border-left: 3px solid var(--surface-line);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-}
+/* (페이지 끝 안내 박스 — KT 결로 정보 전달 톤만 유지하기 위해 제거.
+   필요한 메시지는 lede 한 문장으로 압축됨.) */
 
 /* ---------- 잘못된 예시 12종 (CSS만으로 KIMES 워드마크 변형 재현) ---------- */
 .lg-bad {

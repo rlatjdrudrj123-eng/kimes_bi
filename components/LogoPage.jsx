@@ -63,16 +63,60 @@ const FILE_FORMATS = [
   { ext: 'eps', label: 'EPS' },
 ];
 
-// §6.2.5 배경별 사용 — 6개 시각 예시 카드. 표 형식보다 직관적이라 시각
-// 이해가 빠름. 각 카드: 실제 배경 + 그 위 권장 워드마크 렌더 + 상태(권장
-// / 사무국 협의) + 한 줄 설명.
-const BG_EXAMPLES = [
-  { id: 'white',  bgKind: 'white', wordmark: 'kimes',      status: 'ok',   label: '흰 배경 / 밝은 단색',         hint: '가장 일반적인 사용 — 기본 (레드)' },
-  { id: 'dark',   bgKind: 'dark',  wordmark: 'kimesWhite', status: 'ok',   label: '어두운 단색 / 어두운 사진',   hint: '명도 대비 충분 — 화이트 사용' },
-  { id: 'red',    bgKind: 'red',   wordmark: 'kimesWhite', status: 'ok',   label: 'KIMES Red 배경',              hint: '브랜드 면 위 — 화이트 사용' },
-  { id: 'brand',  bgKind: 'brand', wordmark: 'kimesWhite', status: 'ok',   label: '회사 브랜드 컬러 위',         hint: '명도 대비 우선 — 밝은 회사 색이면 블랙' },
-  { id: 'mid',    bgKind: 'mid',   wordmark: null,         status: 'warn', label: '중간 명도 단색 (40~60%)',     hint: '가독성 저하 우려 — 사용 전 사무국 협의' },
-  { id: 'photo',  bgKind: 'photo', wordmark: 'kimes',      status: 'warn', label: '복잡한 사진 위',              hint: '직접 얹지 않음 — 단색 플레이트 위에 사용', plate: true },
+// §6.2.5 배경별 사용 — 명도 그라디언트 바 (KT BI 가이드 결).
+// 카드 시스템 대신 명도 0-100% 그라디언트 위에 각 워드마크 색을
+// 5개 stop 위치에 시뮬레이션 렌더해 사용자가 자기 케이스를 명도 구간에
+// 바로 매핑하게 함.
+//
+// 3개 바: Primary(Red) / White / Black.
+// 각 바마다 사용 가능 구간을 색깔 띠로 안내.
+const BG_BARS = [
+  {
+    id: 'red',
+    label: 'Primary Wordmark (Red)',
+    sub: '메인 워드마크 (레드)',
+    wordmark: 'kimes',
+    ranges: [
+      { from: 0,  to: 30,  status: 'ok',   hint: '사용 가능 — 밝은 배경' },
+      { from: 30, to: 70,  status: 'warn', hint: '가독성 저하 — 화이트/블랙으로 전환' },
+      { from: 70, to: 100, status: 'no',   hint: '사용 안 함 — 화이트 사용' },
+    ],
+  },
+  {
+    id: 'white',
+    label: 'White Wordmark',
+    sub: '화이트 워드마크',
+    wordmark: 'kimesWhite',
+    ranges: [
+      { from: 0,  to: 30,  status: 'no',   hint: '가독성 부족 — 기본/블랙 사용' },
+      { from: 30, to: 70,  status: 'warn', hint: '대비가 충분한지 확인' },
+      { from: 70, to: 100, status: 'ok',   hint: '사용 가능 — 어두운 배경' },
+    ],
+  },
+  {
+    id: 'black',
+    label: 'Black Wordmark',
+    sub: '블랙 워드마크',
+    wordmark: 'kimesBlack',
+    ranges: [
+      { from: 0,  to: 30,  status: 'ok',   hint: '사용 가능 — 밝은 배경 (단색 인쇄·팩스)' },
+      { from: 30, to: 70,  status: 'warn', hint: '대비가 충분한지 확인' },
+      { from: 70, to: 100, status: 'no',   hint: '가독성 부족 — 화이트 사용' },
+    ],
+  },
+];
+
+// 워드마크 시뮬레이션 위치 — 5개 stop (10%, 30%, 50%, 70%, 90%)
+const BAR_STOPS = [10, 30, 50, 70, 90];
+
+// 컬러 배경 시뮬레이션 — KIMES Red·MC Blue·BD Purple·IN Lime + Gray.
+// 각 배경에 어울리는 워드마크 색 자동 선택.
+const COLOR_BGS = [
+  { id: 'red',     bg: '#E60012', wordmark: 'kimesWhite', label: 'KIMES Red' },
+  { id: 'mc',      bg: '#036EB8', wordmark: 'kimesWhite', label: 'MedicomteK Blue' },
+  { id: 'bd',      bg: '#5D3B8B', wordmark: 'kimesWhite', label: 'Beauty&Derma Purple' },
+  { id: 'in',      bg: '#BFD633', wordmark: 'kimesBlack', label: 'INSPIRE Lime' },
+  { id: 'gray',    bg: '#A7A9AC', wordmark: 'kimesBlack', label: 'Neutral Gray' },
 ];
 
 // §6.2.6 Don'ts — 11종. 모두 절대 금지(✗ error 톤) — 워드마크 SVG에
@@ -171,29 +215,29 @@ function LogoPage() {
         ))}
       </div>
 
-      {/* §6.2.5 배경별 사용 — 6개 시각 예시 카드 ------------------------ */}
+      {/* §6.2.5 배경별 사용 — 명도 그라디언트 바 ------------------------ */}
       <SectionHeading id="bg-use" title="Background Use" subtitle="배경별 사용" />
       <p>
-        배경 종류에 따라 어울리는 워드마크 버전입니다. 6가지 일반적인 상황
-        예시로 안내합니다. 다른 상황이 있으면 사무국과 협의해주세요.
+        배경 명도에 따라 워드마크를 선택합니다. 30~70% 중간 명도에서는
+        가독성이 떨어지니 다른 명도 단계로 조정하거나 단색 플레이트를
+        깔고 워드마크를 올립니다.
       </p>
-      <BgExamples items={BG_EXAMPLES} />
+      <div className="lg-grad-stack">
+        {BG_BARS.map(bar => <BgGradientBar key={bar.id} bar={bar} />)}
+      </div>
+      <h3 className="lg-color-bg-title">컬러 배경 위 시뮬레이션</h3>
+      <div className="lg-color-bg-row">
+        {COLOR_BGS.map(c => <ColorBgChip key={c.id} item={c} />)}
+      </div>
 
-      {/* §6.2.6 Don'ts — 11종 (피해야 할 사용 예시) -------------------- */}
+      {/* §6.2.6 Don'ts — 11종 -------------------------------------- */}
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
       <p>
-        KIMES 워드마크 SVG에는 다음과 같은 변형을 적용하지 마세요. 일관된
-        브랜드 인상을 위해 권장하지 않는 사용입니다. 텍스트 자유 조판
-        (다른 폰트로 "KIMES" 표기)은 마케팅·콘텐츠에서 자유롭게 사용하셔도
-        됩니다 — 워드마크 자리(보도자료 헤더 마크 등)에만 SVG를
-        사용해주세요.
+        KIMES 워드마크 SVG는 변형하지 않고 그대로 사용합니다. 텍스트 자유
+        조판은 §8.2 마케팅·콘텐츠 영역의 별개 작업입니다.
       </p>
       <div className="lg-donts">
         {DONTS.map(d => <DontCard key={d.id} d={d} />)}
-      </div>
-      <div className="lg-donts-foot" role="note">
-        공식 워드마크는 일관된 사용을 위해 변형하지 않습니다. 잘못된 사용이
-        발견되면 사무국이 정정을 요청드릴 수 있습니다.
       </div>
 
       {/* §6.2.7 로고 사용 신청 ------------------------------------------ */}
@@ -291,48 +335,51 @@ function ClearSpaceDiagram() {
   );
 }
 
-// §6.2.5 배경별 사용 — 6개 시각 예시 카드. 표 형식보다 직관적. 각 카드:
-// 실제 배경(흰/어두움/빨강/보라/회색/사진) + 그 위 권장 워드마크 인라인
-// 렌더 + 상태(✓ 권장 / ⚠ 사무국 협의) + 한 줄 설명.
-function BgExamples({ items }) {
+// §6.2.5 배경별 사용 — 명도 그라디언트 바 (KT BI 가이드 결).
+// 카드 시스템 대신 명도 0-100% 바 위에 워드마크 5개 stop을 시뮬레이션
+// 렌더해 사용자가 자기 배경 명도를 바로 매핑할 수 있게.
+function BgGradientBar({ bar }) {
   return (
-    <div className="lg-bg-grid">
-      {items.map(it => <BgCard key={it.id} item={it} />)}
+    <div className="lg-grad">
+      <div className="lg-grad-head">
+        <span className="lg-grad-label">{bar.label}</span>
+        <span className="lg-grad-sub">{bar.sub}</span>
+      </div>
+      <div className="lg-grad-bar" aria-label={`${bar.label} 명도 시뮬레이션`}>
+        {BAR_STOPS.map(pct => (
+          <span key={pct} className="lg-grad-stop" style={{ left: `${pct}%` }}>
+            <InlineLogo name={bar.wordmark} height={18} ariaLabel="" />
+          </span>
+        ))}
+      </div>
+      <div className="lg-grad-scale" aria-hidden="true">
+        <span style={{ left: '0%' }}>0%</span>
+        <span style={{ left: '50%', transform: 'translateX(-50%)' }}>50%</span>
+        <span style={{ left: '100%', transform: 'translateX(-100%)' }}>100%</span>
+      </div>
+      <div className="lg-grad-ranges">
+        {bar.ranges.map((r, i) => (
+          <div
+            key={i}
+            className={`lg-grad-range status-${r.status}`}
+            style={{ left: `${r.from}%`, width: `${r.to - r.from}%` }}
+          >
+            <span className="lg-grad-range-label">{r.from}–{r.to}%</span>
+            <span className="lg-grad-range-hint">{r.hint}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-function BgCard({ item }) {
-  const tile = (
-    <div className={`lg-bg-tile lg-bg-tile-${item.bgKind}`}>
-      {item.plate ? (
-        <div className="lg-bg-plate">
-          {item.wordmark && (
-            <InlineLogo name={item.wordmark} height={26}
-              ariaLabel={`KIMES — ${item.label}`} />
-          )}
-        </div>
-      ) : item.wordmark ? (
-        <InlineLogo name={item.wordmark} height={28}
-          ariaLabel={`KIMES — ${item.label}`} />
-      ) : (
-        <span className="lg-bg-warn-glyph" aria-hidden="true">
-          <WarnGlyph />
-        </span>
-      )}
-    </div>
-  );
+// 컬러 배경 시뮬레이션 — KIMES Red·MC Blue·BD Purple·IN Lime·Gray
+// 배경 위 워드마크 어떻게 보이는지 작은 칩으로 한 줄.
+function ColorBgChip({ item }) {
   return (
-    <div className={`lg-bg-card status-${item.status}`}>
-      {tile}
-      <div className="lg-bg-meta">
-        <div className="lg-bg-status">
-          {item.status === 'ok' ? <CheckGlyph /> : <WarnGlyph />}
-          <span>{item.status === 'ok' ? '권장' : '사무국 협의'}</span>
-        </div>
-        <div className="lg-bg-label">{item.label}</div>
-        <div className="lg-bg-hint">{item.hint}</div>
-      </div>
+    <div className="lg-color-bg-chip" style={{ background: item.bg }}>
+      <InlineLogo name={item.wordmark} height={18} ariaLabel={`KIMES — ${item.label}`} />
+      <span className="lg-color-bg-label">{item.label}</span>
     </div>
   );
 }

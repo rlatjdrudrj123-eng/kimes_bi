@@ -20,3 +20,7 @@ dist/
 
 # Netlify CLI
 .netlify/
+
+# Reference assets (vendor PDFs, .ai 등 — 로컬 참조용, README만 커밋)
+references/*
+!references/README.md
