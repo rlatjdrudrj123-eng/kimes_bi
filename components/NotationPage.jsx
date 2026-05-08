@@ -18,7 +18,6 @@
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
-const CopyButton = window.CopyButton;
 
 // 10.2.1 명칭 표기
 const NAME_RULES = [
@@ -84,22 +83,12 @@ const SEP_RULES = [
 ];
 
 function NotationPage() {
-  const { contact, year } = window.KIMES_EVENT;
-
-  const boilerplateKo = `[KIMES ${year} 소개]
-KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. ${year}년에는 제42회를 맞아 3월 18~21일 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리를 아우릅니다.
-공식 사이트: kimes.kr · 문의: ${contact.email} · ${contact.tel}`;
-
-  const boilerplateEn = `[About KIMES ${year}]
-KIMES is Korea's leading medical equipment and hospital supplies exhibition, hosted annually since 1980 by KOREA E&EX INC. with KMDA and KMDIA. The 42nd edition runs March 18–21, ${year} at COEX, Seoul, with 1,400+ exhibitors from 60+ countries across 14 categories — imaging, surgery, treatment, rehabilitation, beauty, and digital health.
-Official site: kimes.kr · Contact: ${contact.email} · ${contact.tel}`;
-
   return (
     <PageShell
       eyebrow="05"
       title="Writing Style"
       subtitle="공식 표기 규칙"
-      lede="보도자료·웹사이트·인쇄물·SNS 어디든 KIMES를 언급할 때 따라야 할 표기 규칙입니다. 명칭·날짜·숫자·구분 기호 + SNS 태그·해시태그 + 별도 계약 필요 표현 + 보도자료 보일러플레이트까지 한 페이지에서 확인하실 수 있습니다."
+      lede="보도자료·웹사이트·인쇄물·SNS 어디든 KIMES를 언급할 때 따라야 할 표기 규칙입니다. 명칭·날짜·숫자·구분 기호부터 SNS 태그·별도 계약 필요 표현까지 한 페이지에서 확인하실 수 있습니다. 보도자료 보일러플레이트는 → /overview의 4벌(40·100·200·400자)을 그대로 사용하세요."
     >
       {/* §10.2.1 명칭 표기 ----------------------------------------------- */}
       <SectionHeading id="name" title="Name Notation" subtitle="KIMES 명칭 표기" />
@@ -231,30 +220,6 @@ Official site: kimes.kr · Contact: ${contact.email} · ${contact.tel}`;
         </div>
       </section>
 
-      {/* §9.2.9 보일러플레이트 ------------------------------------------ */}
-      <SectionHeading id="boilerplate" title="Press Boilerplate" subtitle="보도자료 표준 보일러플레이트" />
-      <p>
-        보도자료 끝에 그대로 붙일 수 있는 한·영 두 가지 표준 보일러플레이트
-        입니다. <code>KIMES_EVENT.year</code> 기반 동적이라 회차 갱신 시 자동
-        반영됩니다. 두 박스의 [Copy] 버튼으로 클립보드에 바로 담을 수
-        있습니다.
-      </p>
-      <div className="ws-boilerplate-grid">
-        <article className="ws-boilerplate">
-          <header className="ws-boilerplate-head">
-            <span className="ws-boilerplate-lang">한국어</span>
-            <CopyButton text={boilerplateKo} label="복사" />
-          </header>
-          <pre className="ws-boilerplate-body">{boilerplateKo}</pre>
-        </article>
-        <article className="ws-boilerplate">
-          <header className="ws-boilerplate-head">
-            <span className="ws-boilerplate-lang">English</span>
-            <CopyButton text={boilerplateEn} label="Copy" />
-          </header>
-          <pre className="ws-boilerplate-body">{boilerplateEn}</pre>
-        </article>
-      </div>
     </PageShell>
   );
 }
