@@ -40,13 +40,7 @@ function Stub({ sectionRef }) {
 
 // SpecialZones (Index + 3 detail) 는 components/SpecialZonesPage.jsx에서 정의 (§13).
 
-function PermissionsPage() {
-  return (
-    <PageShell eyebrow="10" title="권한·승인·라이선스" toc={false}>
-      <Stub sectionRef="§14" />
-    </PageShell>
-  );
-}
+// PermissionsPage는 components/PermissionsPage.jsx에서 정의 (§14 작업으로 분리).
 
 function FaqPage() {
   return (
@@ -112,7 +106,7 @@ Object.assign(window, {
   // ApplicationsPage: 별도 파일 components/ApplicationsPage.jsx에서 직접 등록
   // DigitalPage:     별도 파일 components/DigitalPage.jsx에서 직접 등록
   // SpecialZones*: components/SpecialZonesPage.jsx에서 직접 등록 (4종)
-  PermissionsPage,
+  // PermissionsPage: 별도 파일 components/PermissionsPage.jsx에서 직접 등록
   FaqPage,
   DownloadsPage,
   ContactPage,

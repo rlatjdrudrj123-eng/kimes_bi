@@ -1,0 +1,282 @@
+/* /permissions — §14 권한·승인·라이선스 */
+
+/* ---------- 범례 ---------- */
+.pm-legend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-3);
+}
+@media (max-width: 900px) { .pm-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .pm-legend { grid-template-columns: 1fr; } }
+
+.pm-legend-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.pm-legend-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+}
+.pm-legend-item.pm-level-free       .pm-legend-mark { background: var(--status-ok); }
+.pm-legend-item.pm-level-preapproval .pm-legend-mark { background: var(--status-warn); }
+.pm-legend-item.pm-level-licensed   .pm-legend-mark { background: var(--text-primary); }
+.pm-legend-item.pm-level-restricted .pm-legend-mark { background: var(--text-muted); }
+.pm-legend-body { display: flex; flex-direction: column; gap: 2px; }
+.pm-legend-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+}
+.pm-legend-en {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.pm-legend-desc {
+  margin-top: 2px;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pm-note {
+  margin: var(--space-2) 0 var(--space-3);
+  padding: 12px var(--space-3);
+  background: var(--surface-subtle);
+  border-left: 3px solid var(--kimes-red);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ---------- 매트릭스 표 ---------- */
+.pm-matrix-wrap {
+  overflow-x: auto;
+  margin: 0 0 var(--space-5);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+}
+.pm-matrix {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: var(--fs-caption);
+}
+.pm-matrix thead th {
+  position: sticky;
+  top: 0;
+  padding: 10px 12px;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--surface-line);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-muted);
+}
+.pm-matrix thead th:first-child { text-align: left; }
+.pm-matrix tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--surface-line);
+  vertical-align: middle;
+  text-align: center;
+}
+.pm-matrix tbody tr:last-child td { border-bottom: 0; }
+.pm-action {
+  text-align: left !important;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.pm-cell { color: var(--text-muted); }
+.pm-cell-active {
+  font-weight: 800;
+  font-size: 16px;
+}
+.pm-cell-active.pm-cell-free       { color: var(--status-ok);   background: rgba(21, 128, 61, 0.08); }
+.pm-cell-active.pm-cell-preapproval { color: var(--status-warn); background: rgba(180, 83, 9, 0.08); }
+.pm-cell-active.pm-cell-licensed   { color: var(--text-primary); background: var(--surface-subtle); }
+.pm-cell-active.pm-cell-restricted { color: var(--text-muted);  background: rgba(113, 113, 122, 0.08); }
+
+/* ---------- 자산 선택 참고 ---------- */
+.pm-asset-ref {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-3);
+  background: var(--surface-base);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+}
+.pm-asset-ref-title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  color: var(--text-primary);
+}
+.pm-asset-ref p {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-caption);
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+.pm-asset-ref ul {
+  margin: 4px 0 var(--space-1);
+  padding-left: 22px;
+  font-size: var(--fs-caption);
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.pm-asset-ref a { color: var(--kimes-red); font-weight: 600; text-decoration: none; }
+.pm-asset-ref a:hover { text-decoration: underline; }
+
+/* ---------- §14.2.2 행위 시점 ---------- */
+.pm-timing {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.pm-timing p { margin: 0 0 var(--space-1); font-size: var(--fs-body); color: var(--text-primary); }
+.pm-timing ul {
+  margin: var(--space-1) 0 0;
+  padding-left: 22px;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ---------- §14.2.3 신청 절차 ---------- */
+.pm-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-3);
+}
+@media (max-width: 800px) { .pm-steps { grid-template-columns: 1fr; } }
+
+.pm-step {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.pm-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--kimes-red);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+}
+.pm-step-body { display: flex; flex-direction: column; gap: 4px; }
+.pm-step-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+}
+.pm-step-desc {
+  font-size: var(--fs-caption);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.pm-form {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-3);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+}
+.pm-form-title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  color: var(--text-primary);
+}
+.pm-form-list {
+  margin: 0 0 var(--space-3);
+  padding-left: 22px;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pm-form-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ---------- §14.2.4 / §14.2.5 ---------- */
+.pm-non-compliance,
+.pm-licensing {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.pm-non-compliance p,
+.pm-licensing p {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+.pm-non-compliance-foot {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+.pm-non-compliance-foot a,
+.pm-licensing-channel a { color: var(--kimes-red); font-weight: 600; text-decoration: none; }
+.pm-non-compliance-foot a:hover,
+.pm-licensing-channel a:hover { text-decoration: underline; }
+
+.pm-licensing-channel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.pm-licensing-channel span {
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+}
+.pm-licensing-channel code {
+  font-family: var(--font-mono);
+  background: var(--surface-muted);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.92em;
+}
