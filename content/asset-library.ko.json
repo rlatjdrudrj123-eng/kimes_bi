@@ -33,7 +33,7 @@
       },
       {
         "id": "bd",
-        "label": "Beauty&Derma",
+        "label": "BEAUTY&DERMA SEOUL",
         "dot": "#5D3B8B",
         "variants": [
           { "logo": "bdSeoul", "label": "수평형",     "file": "beauty-derma-logo.svg" },
@@ -70,8 +70,8 @@
       { "name": "KIMES 레드",           "token": "--kimes-red",        "hex": "#E60012", "rgb": "230, 0, 18",     "cmyk": "0 / 100 / 100 / 0" },
       { "name": "KIMES 블랙",           "token": "--kimes-black",      "hex": "#231815", "rgb": "35, 24, 21",     "cmyk": "0 / 0 / 0 / 100" },
       { "name": "MedicomteK 블루",      "token": "--mc-blue",          "hex": "#036EB8", "rgb": "3, 110, 184",    "cmyk": "85 / 50 / 0 / 0" },
-      { "name": "Beauty&Derma 퍼플",    "token": "--bd-purple",        "hex": "#5D3B8B", "rgb": "93, 59, 139",    "cmyk": "78 / 90 / 0 / 0" },
-      { "name": "Beauty&Derma 라이트",  "token": "--bd-light-purple",  "hex": "#BAB1D7", "rgb": "186, 177, 215",  "cmyk": "30 / 30 / 0 / 0" },
+      { "name": "BEAUTY&DERMA 퍼플",    "token": "--bd-purple",        "hex": "#5D3B8B", "rgb": "93, 59, 139",    "cmyk": "78 / 90 / 0 / 0" },
+      { "name": "BEAUTY&DERMA 라이트",  "token": "--bd-light-purple",  "hex": "#BAB1D7", "rgb": "186, 177, 215",  "cmyk": "30 / 30 / 0 / 0" },
       { "name": "INSPIRE 그레이",       "token": "--in-gray",          "hex": "#595757", "rgb": "89, 87, 87",     "cmyk": "0 / 0 / 0 / 80" },
       { "name": "INSPIRE 라임",         "token": "--in-lime",          "hex": "#BFD633", "rgb": "191, 214, 51",   "cmyk": "30 / 0 / 90 / 0" },
       { "name": "뉴트럴 블랙",          "token": "--neutral-black",    "hex": "#231815", "rgb": "35, 24, 21",     "cmyk": "0 / 0 / 0 / 100" },
@@ -138,6 +138,6 @@
       { "key": "최종 갱신",      "value": "2026-05-04",      "mono": true },
       { "key": "관리 주체",      "value": "KIMES 브랜드팀" }
     ],
-    "fineprint": "© KIMES 브랜드팀. 모든 상표는 각 소유자의 자산입니다. KIMES, MedicomteK, Beauty&Derma, INSPIRE Digital Health는 한국의료기기산업협회의 상표입니다."
+    "fineprint": "© KIMES 브랜드팀. 모든 상표는 각 소유자의 자산입니다. KIMES, MedicomteK, BEAUTY&DERMA SEOUL, INSPIRE Digital Health는 한국의료기기산업협회의 상표입니다."
   }
 }

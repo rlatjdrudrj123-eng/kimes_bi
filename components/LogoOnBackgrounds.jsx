@@ -44,7 +44,7 @@ function ClearSpaceAndMin() {
   const allExamples = [
     { id: 'kimes', name: 'KIMES',          svg: 'kimes',     min: '80px / 24mm',  h: 36, anchor: 'cap-height of K', krAnchor: 'K의 cap-height' },
     { id: 'mc',    name: 'MedicomteK',     svg: 'mc',        min: '120px / 30mm', h: 24, anchor: 'cap-height of M', krAnchor: 'M의 cap-height' },
-    { id: 'bd',    name: 'Beauty&Derma',   svg: 'bdSeoul',   min: '140px / 36mm', h: 14, anchor: 'cap-height of b', krAnchor: 'b의 cap-height' },
+    { id: 'bd',    name: 'BEAUTY&DERMA SEOUL',   svg: 'bdSeoul',   min: '140px / 36mm', h: 14, anchor: 'cap-height of b', krAnchor: 'b의 cap-height' },
     { id: 'in',    name: 'INSPIRE',        svg: 'inTagline', min: '160px / 40mm', h: 22, anchor: 'cap-height of I', krAnchor: 'I의 cap-height' },
   ];
   const examples = allExamples.filter(e => e.id === brand);

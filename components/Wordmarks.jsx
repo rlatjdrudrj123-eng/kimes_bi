@@ -55,7 +55,7 @@ function MedicomtekWordmark({ height = 40, variant = 'primary', suffix, color, a
   return <InlineLogo name={map[v] || 'mc'} height={height} ariaLabel={v === '2026' ? 'MedicomteK 2026' : 'MedicomteK'} {...rest} />;
 }
 
-/* ---------- Beauty&Derma ---------- */
+/* ---------- BEAUTY&DERMA SEOUL ---------- */
 //   variant: 'horizontal' | 'stack' | 'white'
 //   layout: 'stack-left' | 'stack-right' (legacy → 'stack')
 function BeautyDermaWordmark({ height = 40, variant = 'horizontal', layout, color, edition, ...rest }) {
@@ -67,7 +67,7 @@ function BeautyDermaWordmark({ height = 40, variant = 'horizontal', layout, colo
     (typeof color === 'string' && (color === '#fff' || color === '#ffffff' || color.toLowerCase() === 'white'));
   if (isWhite) v = 'white';
   const map = { horizontal: 'bdSeoul', stack: 'bdStack', white: 'bdWhite' };
-  return <InlineLogo name={map[v] || 'bdSeoul'} height={height} ariaLabel="Beauty & Derma" {...rest} />;
+  return <InlineLogo name={map[v] || 'bdSeoul'} height={height} ariaLabel="BEAUTY&DERMA SEOUL" {...rest} />;
 }
 
 /* ---------- INSPIRE Digital Health ---------- */

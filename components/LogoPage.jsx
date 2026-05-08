@@ -114,7 +114,7 @@ const BAR_STOPS = [10, 30, 50, 70, 90];
 const COLOR_BGS = [
   { id: 'red',     bg: '#E60012', wordmark: 'kimesWhite', label: 'KIMES Red' },
   { id: 'mc',      bg: '#036EB8', wordmark: 'kimesWhite', label: 'MedicomteK Blue' },
-  { id: 'bd',      bg: '#5D3B8B', wordmark: 'kimesWhite', label: 'Beauty&Derma Purple' },
+  { id: 'bd',      bg: '#5D3B8B', wordmark: 'kimesWhite', label: 'BEAUTY&DERMA Purple' },
   { id: 'in',      bg: '#BFD633', wordmark: 'kimesBlack', label: 'INSPIRE Lime' },
   { id: 'gray',    bg: '#A7A9AC', wordmark: 'kimesBlack', label: 'Neutral Gray' },
 ];

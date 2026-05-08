@@ -82,7 +82,7 @@ function Footer() {
         </div>
       </div>
       <div className="shell-footer-legal">
-        © {event.organizerEn}. KIMES, MedicomteK, Beauty&Derma Seoul, INSPIRE Digital Health는 {event.organizerEn}의 등록 상표입니다. 무단 사용 시 법적 조치를 받을 수 있습니다.
+        © {event.organizerEn}. KIMES, MedicomteK, BEAUTY&DERMA SEOUL, INSPIRE Digital Health는 {event.organizerEn}의 등록 상표입니다. 무단 사용 시 법적 조치를 받을 수 있습니다.
       </div>
     </footer>
   );

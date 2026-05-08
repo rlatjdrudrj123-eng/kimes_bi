@@ -1,5 +1,5 @@
 // §7 — /color. KIMES 4브랜드 컬러 시스템: Primary 3 (Red·Black·White) +
-// Sub 4 (MedicomteK Blue·Beauty&Derma Purple·INSPIRE Lime·Neutral Gray).
+// Sub 4 (MedicomteK Blue·BEAUTY&DERMA Purple·INSPIRE Lime·Neutral Gray).
 // 컬러 값은 components/config.js의 KIMES_EVENT.colors 단일 출처 — §13
 // 특별관 페이지도 같은 출처 참조해 중복 정의 제거.
 //

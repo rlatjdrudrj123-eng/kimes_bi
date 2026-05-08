@@ -25,7 +25,7 @@
     },
     {
       "id": "bd",
-      "name": "Beauty & Derma",
+      "name": "BEAUTY&DERMA SEOUL",
       "color": "#5D3B8B",
       "items": [
         { "svg": "bdSeoul", "file": "beautyderma-seoul-logo.svg",       "label": "수평형",      "h": 14 },
@@ -47,6 +47,6 @@
   ],
   "familySignature": {
     "title": "패밀리 시그니처",
-    "body": "KIMES와 MedicomteK는 <code>i</code>의 슬래시컷 디테일을 공유합니다 — KIMES 의료기기 패밀리의 비주얼 시그니처입니다. Beauty&Derma와 INSPIRE Digital Health는 각자의 비주얼 시스템을 갖춘 독립 아이덴티티입니다."
+    "body": "KIMES와 MedicomteK는 <code>i</code>의 슬래시컷 디테일을 공유합니다 — KIMES 의료기기 패밀리의 비주얼 시그니처입니다. BEAUTY&DERMA SEOUL와 INSPIRE Digital Health는 각자의 비주얼 시스템을 갖춘 독립 아이덴티티입니다."
   }
 }

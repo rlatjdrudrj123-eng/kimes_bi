@@ -27,7 +27,7 @@ const QUICK_LINKS = [
 // 분리 예정. 그때까지는 여기에 인라인.
 const UPDATES = [
   { date: '2026-05-07', title: 'v2027.0 — 참가업체용 가이드로 전면 개편' },
-  { date: '2026-04-15', title: '특별관 BI 추가 (MedicomteK / Beauty&Derma / INSPIRE)' },
+  { date: '2026-04-15', title: '특별관 BI 추가 (MedicomteK / BEAUTY&DERMA SEOUL / INSPIRE)' },
   { date: '2026-03-20', title: '공식 보일러플레이트 한·영 갱신' },
 ];
 

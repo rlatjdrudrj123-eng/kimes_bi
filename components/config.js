@@ -81,7 +81,7 @@
     },
     sub: {
       mcBlue:   { hex: '#036EB8', rgb: [3, 110, 184],   cmyk: [85, 50, 0, 0], pantone: '285 C',  label: 'MedicomteK Blue',     usage: 'MedicomteK 특별관' },
-      bdPurple: { hex: '#5D3B8B', rgb: [93, 59, 139],   cmyk: [78, 90, 0, 0], pantone: '2685 C', label: 'Beauty&Derma Purple', usage: 'Beauty&Derma Seoul 특별관' },
+      bdPurple: { hex: '#5D3B8B', rgb: [93, 59, 139],   cmyk: [78, 90, 0, 0], pantone: '2685 C', label: 'BEAUTY&DERMA Purple', usage: 'BEAUTY&DERMA SEOUL 특별관' },
       inLime:   { hex: '#BFD633', rgb: [191, 214, 51],  cmyk: [30, 0, 90, 0], pantone: '382 C',  label: 'INSPIRE Lime',        usage: 'INSPIRE Digital Health 특별관' },
       gray:     { hex: '#A7A9AC', rgb: [167, 169, 172], cmyk: [0, 0, 0, 40],  /* 그레이는 Pantone 매칭 없음 */
                                                                               label: 'Neutral Gray',         usage: '톤다운' },

@@ -77,7 +77,7 @@ function KimesSubBrandLockups() {
             <LkDivider />
             <InlineLogo name="mc" height={22} ariaLabel="MedicomteK" />
             <LkDivider />
-            <InlineLogo name="bdSeoul" height={14} ariaLabel="Beauty&Derma" />
+            <InlineLogo name="bdSeoul" height={14} ariaLabel="BEAUTY&DERMA SEOUL" />
             <LkDivider />
             <InlineLogo name="inTagline" height={22} ariaLabel="INSPIRE Digital Health" />
           </div>
@@ -115,7 +115,7 @@ function KimesSubBrandLockups() {
             <div className="lk-row lk-row-center lk-row-secondary">
               <InlineLogo name="mc" height={20} ariaLabel="MedicomteK" />
               <span className="lk-bullet" aria-hidden="true">·</span>
-              <InlineLogo name="bdSeoul" height={12} ariaLabel="Beauty&Derma" />
+              <InlineLogo name="bdSeoul" height={12} ariaLabel="BEAUTY&DERMA SEOUL" />
               <span className="lk-bullet" aria-hidden="true">·</span>
               <InlineLogo name="inTagline" height={20} ariaLabel="INSPIRE Digital Health" />
             </div>
@@ -149,7 +149,7 @@ function KimesSubBrandLockups() {
               <InlineLogo name="kimes" height={40} ariaLabel="KIMES" />
             </div>
             <div className="lk-row lk-row-center"><InlineLogo name="mc" height={18} ariaLabel="MedicomteK" /></div>
-            <div className="lk-row lk-row-center"><InlineLogo name="bdSeoul" height={12} ariaLabel="Beauty&Derma" /></div>
+            <div className="lk-row lk-row-center"><InlineLogo name="bdSeoul" height={12} ariaLabel="BEAUTY&DERMA SEOUL" /></div>
             <div className="lk-row lk-row-center"><InlineLogo name="inTagline" height={18} ariaLabel="INSPIRE Digital Health" /></div>
           </div>
         </div>

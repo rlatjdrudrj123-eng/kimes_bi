@@ -33,7 +33,7 @@
       },
       {
         "id": "bd",
-        "label": "Beauty&Derma",
+        "label": "BEAUTY&DERMA SEOUL",
         "dot": "#5D3B8B",
         "variants": [
           { "logo": "bdSeoul", "label": "Horizontal",   "file": "beauty-derma-logo.svg" },
@@ -70,8 +70,8 @@
       { "name": "KIMES Red",           "token": "--kimes-red",        "hex": "#E60012", "rgb": "230, 0, 18",     "cmyk": "0 / 100 / 100 / 0" },
       { "name": "KIMES Black",         "token": "--kimes-black",      "hex": "#231815", "rgb": "35, 24, 21",     "cmyk": "0 / 0 / 0 / 100" },
       { "name": "MedicomteK Blue",     "token": "--mc-blue",          "hex": "#036EB8", "rgb": "3, 110, 184",    "cmyk": "85 / 50 / 0 / 0" },
-      { "name": "Beauty&Derma Purple", "token": "--bd-purple",        "hex": "#5D3B8B", "rgb": "93, 59, 139",    "cmyk": "78 / 90 / 0 / 0" },
-      { "name": "Beauty&Derma Light",  "token": "--bd-light-purple",  "hex": "#BAB1D7", "rgb": "186, 177, 215",  "cmyk": "30 / 30 / 0 / 0" },
+      { "name": "BEAUTY&DERMA Purple", "token": "--bd-purple",        "hex": "#5D3B8B", "rgb": "93, 59, 139",    "cmyk": "78 / 90 / 0 / 0" },
+      { "name": "BEAUTY&DERMA Light",  "token": "--bd-light-purple",  "hex": "#BAB1D7", "rgb": "186, 177, 215",  "cmyk": "30 / 30 / 0 / 0" },
       { "name": "INSPIRE Gray",        "token": "--in-gray",          "hex": "#595757", "rgb": "89, 87, 87",     "cmyk": "0 / 0 / 0 / 80" },
       { "name": "INSPIRE Lime",        "token": "--in-lime",          "hex": "#BFD633", "rgb": "191, 214, 51",   "cmyk": "30 / 0 / 90 / 0" },
       { "name": "Neutral Black",       "token": "--neutral-black",    "hex": "#231815", "rgb": "35, 24, 21",     "cmyk": "0 / 0 / 0 / 100" },
@@ -138,6 +138,6 @@
       { "key": "Last updated",   "value": "2026-05-04",      "mono": true },
       { "key": "Maintained by",  "value": "KIMES Brand Team" }
     ],
-    "fineprint": "© KIMES Brand Team. All trademarks are property of their respective owners. KIMES, MedicomteK, Beauty&Derma, and INSPIRE Digital Health are trademarks of the Korea Medical Devices Industry Association."
+    "fineprint": "© KIMES Brand Team. All trademarks are property of their respective owners. KIMES, MedicomteK, BEAUTY&DERMA SEOUL, and INSPIRE Digital Health are trademarks of the Korea Medical Devices Industry Association."
   }
 }

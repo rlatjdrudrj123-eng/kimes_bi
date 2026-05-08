@@ -86,7 +86,7 @@ function SpecialZoneMedicomtek() {
 
 function SpecialZoneBeautyDerma() {
   return (
-    <PageShell eyebrow="09.2" title="Beauty&Derma Seoul" toc={false}>
+    <PageShell eyebrow="09.2" title="BEAUTY&DERMA SEOUL" toc={false}>
       <Stub sectionRef="§13" />
     </PageShell>
   );
