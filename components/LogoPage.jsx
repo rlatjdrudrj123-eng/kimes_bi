@@ -13,9 +13,14 @@ const Link = window.Link;
 const KimesWordmark = window.KimesWordmark;
 const InlineLogo = window.InlineLogo;
 
-// 5개 로고 버전. 각 카드: SVG 키 + 라벨 + 용도 + 다운로드 파일명.
+// 4개 로고 버전. 각 카드: SVG 키 + 라벨 + 용도 + 다운로드 파일명.
 // 파일은 /assets/logos/ 안에 위치 (벤더 제공 자산 — 본 리포에 미포함된
 // 경우 링크가 404 반환할 수 있음. Phase 4 자산 패키지 정리 시 일괄 검증).
+//
+// 연도 일체형(예: KIMES 2027 일체형)은 워드마크 SVG와 숫자의 자간·
+// 베이스라인·시각 무게가 정밀히 맞은 단일 SVG여야 정확. 코드 합성으로는
+// 불가. 사무국 디자이너가 회차마다 별도 제공하므로 가이드 카드에는
+// 두지 않음.
 const LOGO_VERSIONS = [
   {
     id: 'red',
@@ -49,16 +54,6 @@ const LOGO_VERSIONS = [
     tile: 'tile-light',
     base: 'kimes-gray-logo',
   },
-  {
-    id: 'year',
-    name: '연도 일체형 (KIMES 2027)',
-    use: '행사 직전 발표·초청장',
-    // 연도는 행사 메타에서 동적으로 가져와 KIMES 워드마크에 결합.
-    // 매년 회차 갱신 시 config.js만 수정하면 새 연도가 반영됨.
-    svgKey: 'kimes-year-composite',
-    tile: 'tile-light',
-    base: 'kimes-2027-logo',
-  },
 ];
 
 const FILE_FORMATS = [
@@ -68,26 +63,21 @@ const FILE_FORMATS = [
   { ext: 'eps', label: 'EPS' },
 ];
 
-// §6.2.5 배경별 사용 매트릭스 — 9행. 각 행: 배경 / 권장 버전 / 비고 / 상태.
-// 3단계 신호 시스템: 'ok' 권장(✓) / 'warn' 조건부(⚠ 사전 승인·플레이트
-// 처리 등 추가 절차 필요). 'error'(✗ 절대 금지)는 매트릭스에서 사용
-// 안 함 — §6.2.6 Don'ts 12종에서만 사용해 사용자 혼동 방지.
-// §21.2 색만으로 의미 전달 금지: 아이콘(✓/⚠) + 텍스트 라벨 병기.
-const BG_MATRIX = [
-  { bg: '흰색 또는 밝은 단색 (밝기 ≥ 70%)', ver: '기본 (레드)',                        note: '가장 일반적인 사용 케이스',  status: 'ok'   },
-  { bg: '중간 명도 단색 (40~60%)',           ver: '사전 승인 후 사용',                note: '가독성 저하 — 사무국 검토 필요', status: 'warn' },
-  { bg: '어두운 단색 (≤ 30%)',                ver: '화이트',                           note: '기본 레드 사용 금지',        status: 'ok'   },
-  { bg: '빨간색 배경',                        ver: '화이트',                           note: '기본 레드 절대 금지',        status: 'ok'   },
-  { bg: '회사 브랜드 컬러 위',                ver: '화이트 (밝은 회사 색이면 블랙)',   note: '명도 대비 우선',             status: 'ok'   },
-  { bg: '단색 인쇄·팩스',                     ver: '블랙',                             note: '컬러 출력 불가 환경',        status: 'ok'   },
-  { bg: '밝고 단순한 사진',                   ver: '기본 (레드)',                      note: '클리어 스페이스 확보 필수', status: 'ok'   },
-  { bg: '어두운 사진',                        ver: '화이트',                           note: '명도 대비 충분한 영역에만', status: 'ok'   },
-  { bg: '복잡하고 디테일 많은 사진',          ver: '단색 플레이트 위에 올려 사용',     note: '직접 얹지 않음 — 플레이트 필수', status: 'warn' },
+// §6.2.5 배경별 사용 — 6개 시각 예시 카드. 표 형식보다 직관적이라 시각
+// 이해가 빠름. 각 카드: 실제 배경 + 그 위 권장 워드마크 렌더 + 상태(권장
+// / 사무국 협의) + 한 줄 설명.
+const BG_EXAMPLES = [
+  { id: 'white',  bgKind: 'white', wordmark: 'kimes',      status: 'ok',   label: '흰 배경 / 밝은 단색',         hint: '가장 일반적인 사용 — 기본 (레드)' },
+  { id: 'dark',   bgKind: 'dark',  wordmark: 'kimesWhite', status: 'ok',   label: '어두운 단색 / 어두운 사진',   hint: '명도 대비 충분 — 화이트 사용' },
+  { id: 'red',    bgKind: 'red',   wordmark: 'kimesWhite', status: 'ok',   label: 'KIMES Red 배경',              hint: '브랜드 면 위 — 화이트 사용' },
+  { id: 'brand',  bgKind: 'brand', wordmark: 'kimesWhite', status: 'ok',   label: '회사 브랜드 컬러 위',         hint: '명도 대비 우선 — 밝은 회사 색이면 블랙' },
+  { id: 'mid',    bgKind: 'mid',   wordmark: null,         status: 'warn', label: '중간 명도 단색 (40~60%)',     hint: '가독성 저하 우려 — 사용 전 사무국 협의' },
+  { id: 'photo',  bgKind: 'photo', wordmark: 'kimes',      status: 'warn', label: '복잡한 사진 위',              hint: '직접 얹지 않음 — 단색 플레이트 위에 사용', plate: true },
 ];
 
-// §6.2.6 Don'ts — 12종. 모두 절대 금지(✗ error 톤). 각 셀에 잘못된
-// 예시는 KIMES 워드마크에 CSS 변형 적용해 인라인 렌더 (별도 이미지
-// 자산 불필요).
+// §6.2.6 Don'ts — 11종. 모두 절대 금지(✗ error 톤) — 워드마크 SVG에
+// 적용되는 변형들. 텍스트 자유 조판(다른 폰트로 "KIMES" 표기)은
+// §8.2 마케팅·콘텐츠 자유 영역으로 이전 — 이 목록에서 제외.
 const DONTS = [
   { id: 1,  title: '색 바꾸기',                     desc: '회사 컬러로 통일하지 않습니다',  bad: 'color' },
   { id: 2,  title: '검은 쐐기 제거',                desc: 'i 안의 디테일을 지우지 않습니다', bad: 'wedge' },
@@ -95,12 +85,11 @@ const DONTS = [
   { id: 4,  title: '회전·기울이기',                 desc: '수평을 깨뜨리지 않습니다',       bad: 'rotate' },
   { id: 5,  title: '그림자·외곽선·글로우',           desc: '효과를 추가하지 않습니다',       bad: 'shadow' },
   { id: 6,  title: '그라디언트 채움',                desc: '단색 외 채움을 쓰지 않습니다',   bad: 'gradient' },
-  { id: 7,  title: '다른 폰트로 다시 타이핑',        desc: 'CSS 텍스트로 재현하지 않습니다', bad: 'font' },
-  { id: 8,  title: '원·박스·배지 안에 가두기',       desc: '컨테이너 안에 넣지 않습니다',    bad: 'box' },
-  { id: 9,  title: '입체·3D 효과',                  desc: '평면 워드마크를 유지합니다',    bad: '3d' },
-  { id: 10, title: '워드마크 일부 잘라내기',         desc: '글자를 가리지 않습니다',         bad: 'crop' },
-  { id: 11, title: '회사 로고와 합쳐 새 로고 만들기', desc: '독립 워드마크로 유지합니다',     bad: 'merge' },
-  { id: 12, title: '패턴·텍스처 채움',                desc: '단색 채움만 사용합니다',         bad: 'pattern' },
+  { id: 7,  title: '원·박스·배지 안에 가두기',       desc: '컨테이너 안에 넣지 않습니다',    bad: 'box' },
+  { id: 8,  title: '입체·3D 효과',                  desc: '평면 워드마크를 유지합니다',    bad: '3d' },
+  { id: 9,  title: '워드마크 일부 잘라내기',         desc: '글자를 가리지 않습니다',         bad: 'crop' },
+  { id: 10, title: '회사 로고와 합쳐 새 로고 만들기', desc: '독립 워드마크로 유지합니다',     bad: 'merge' },
+  { id: 11, title: '패턴·텍스처 채움',                desc: '단색 채움만 사용합니다',         bad: 'pattern' },
 ];
 
 const MIN_SIZES = [
@@ -110,7 +99,6 @@ const MIN_SIZES = [
 ];
 
 function LogoPage() {
-  const event = window.KIMES_EVENT.event;
   const assetStatus = (window.KIMES_EVENT.assets && window.KIMES_EVENT.assets.status) || 'pending';
 
   return (
@@ -140,12 +128,17 @@ function LogoPage() {
         용도에 맞는 버전을 선택해 다운로드하세요. SVG는 디지털·웹 표준,
         PNG는 빠른 미리보기·메신저 첨부, AI/EPS는 인쇄·간판 작업용입니다.
       </p>
+      <p>
+        행사 직전 발표용 연도 일체형 워드마크(예: KIMES 2027 일체형)는
+        사무국이 별도로 제공합니다. 필요한 경우{' '}
+        <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>로
+        요청해주세요.
+      </p>
       <div className="lg-versions">
         {LOGO_VERSIONS.map(v => (
           <LogoVersionCard
             key={v.id}
             version={v}
-            year={event.year}
             assetStatus={assetStatus}
           />
         ))}
@@ -178,32 +171,29 @@ function LogoPage() {
         ))}
       </div>
 
-      {/* §6.2.5 배경별 사용 매트릭스 ------------------------------------ */}
-      <SectionHeading id="bg-matrix" title="Background Use" subtitle="배경별 사용 매트릭스" />
+      {/* §6.2.5 배경별 사용 — 6개 시각 예시 카드 ------------------------ */}
+      <SectionHeading id="bg-use" title="Background Use" subtitle="배경별 사용" />
       <p>
-        배경 종류에 맞는 워드마크 버전입니다. 가독성·인쇄 적합성·법적 안전성
-        모두를 고려한 권장입니다. <strong>⚠ 조건부</strong> 행은 사전 승인 또는
-        플레이트 처리 등 추가 절차가 필요합니다.
+        배경 종류에 따라 어울리는 워드마크 버전입니다. 6가지 일반적인 상황
+        예시로 안내합니다. 다른 상황이 있으면 사무국과 협의해주세요.
       </p>
-      <BgMatrix rows={BG_MATRIX} />
-      <div className="lg-matrix-legend" aria-hidden="true">
-        <span className="lg-matrix-status status-ok"><CheckGlyph /> 권장</span>
-        <span className="lg-matrix-status status-warn"><WarnGlyph /> 조건부 (사전 승인·플레이트 처리)</span>
-      </div>
+      <BgExamples items={BG_EXAMPLES} />
 
-      {/* §6.2.6 절대 하지 말 것 (Don'ts) — 12종 ------------------------- */}
-      <h2 id="donts">절대 하지 말 것</h2>
+      {/* §6.2.6 Don'ts — 11종 (피해야 할 사용 예시) -------------------- */}
+      <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
       <p>
-        다음 12가지 변형은 KIMES 워드마크에 절대 적용하지 않습니다. 위반 시
-        사용 중단 요청이 발송되며, 재발 시 참가 자격 검토 대상이 됩니다.
-        가이드에 없는 새로운 사용 케이스가 있다면 페이지 하단의 [승인
-        신청하기]를 통해 사전 검토를 받으세요.
+        KIMES 워드마크 SVG에는 다음과 같은 변형을 적용하지 마세요. 일관된
+        브랜드 인상을 위해 권장하지 않는 사용입니다. 텍스트 자유 조판
+        (다른 폰트로 "KIMES" 표기)은 마케팅·콘텐츠에서 자유롭게 사용하셔도
+        됩니다 — 워드마크 자리(보도자료 헤더 마크 등)에만 SVG를
+        사용해주세요.
       </p>
       <div className="lg-donts">
         {DONTS.map(d => <DontCard key={d.id} d={d} />)}
       </div>
       <div className="lg-donts-foot" role="note">
-        위반 시 사용 중단 요청 + 재발 시 참가 자격 검토 대상
+        공식 워드마크는 일관된 사용을 위해 변형하지 않습니다. 잘못된 사용이
+        발견되면 사무국이 정정을 요청드릴 수 있습니다.
       </div>
 
       {/* §6.2.7 로고 사용 신청 ------------------------------------------ */}
@@ -232,15 +222,12 @@ function LogoPage() {
   );
 }
 
-function LogoVersionCard({ version, year, assetStatus }) {
+function LogoVersionCard({ version, assetStatus }) {
   const pending = assetStatus !== 'ready';
   return (
     <div className={`lg-card ${version.tile}`}>
       <div className="lg-card-tile">
-        {version.svgKey === 'kimes-year-composite'
-          ? <KimesYearComposite year={year} height={44} />
-          : <InlineLogo name={version.svgKey} height={36} ariaLabel={`KIMES — ${version.name}`} />
-        }
+        <InlineLogo name={version.svgKey} height={36} ariaLabel={`KIMES — ${version.name}`} />
       </div>
       <div className="lg-card-body">
         <div className="lg-card-name">{version.name}</div>
@@ -304,41 +291,48 @@ function ClearSpaceDiagram() {
   );
 }
 
-// 배경별 사용 매트릭스 — 데스크탑은 표, 모바일(≤720px)은 카드 리스트로
-// 자동 변환. 각 행에 ✓/⚠ 아이콘 + 상태 텍스트(권장/조건부) 병기.
-function BgMatrix({ rows }) {
+// §6.2.5 배경별 사용 — 6개 시각 예시 카드. 표 형식보다 직관적. 각 카드:
+// 실제 배경(흰/어두움/빨강/보라/회색/사진) + 그 위 권장 워드마크 인라인
+// 렌더 + 상태(✓ 권장 / ⚠ 사무국 협의) + 한 줄 설명.
+function BgExamples({ items }) {
   return (
-    <div className="lg-matrix-wrap">
-      <table className="lg-matrix" role="table">
-        <thead>
-          <tr>
-            <th scope="col" className="lg-matrix-th-status">
-              <span className="visually-hidden">상태</span>
-            </th>
-            <th scope="col">배경</th>
-            <th scope="col">권장 버전</th>
-            <th scope="col">비고</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={i} className={`lg-matrix-row status-${r.status}`}>
-              <td
-                className="lg-matrix-status-cell"
-                aria-label={r.status === 'ok' ? '권장' : '조건부'}
-              >
-                {r.status === 'ok' ? <CheckGlyph /> : <WarnGlyph />}
-                <span className="lg-matrix-status-text">
-                  {r.status === 'ok' ? '권장' : '조건부'}
-                </span>
-              </td>
-              <td className="lg-matrix-bg">{r.bg}</td>
-              <td className="lg-matrix-ver">{r.ver}</td>
-              <td className="lg-matrix-note">{r.note}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="lg-bg-grid">
+      {items.map(it => <BgCard key={it.id} item={it} />)}
+    </div>
+  );
+}
+
+function BgCard({ item }) {
+  const tile = (
+    <div className={`lg-bg-tile lg-bg-tile-${item.bgKind}`}>
+      {item.plate ? (
+        <div className="lg-bg-plate">
+          {item.wordmark && (
+            <InlineLogo name={item.wordmark} height={26}
+              ariaLabel={`KIMES — ${item.label}`} />
+          )}
+        </div>
+      ) : item.wordmark ? (
+        <InlineLogo name={item.wordmark} height={28}
+          ariaLabel={`KIMES — ${item.label}`} />
+      ) : (
+        <span className="lg-bg-warn-glyph" aria-hidden="true">
+          <WarnGlyph />
+        </span>
+      )}
+    </div>
+  );
+  return (
+    <div className={`lg-bg-card status-${item.status}`}>
+      {tile}
+      <div className="lg-bg-meta">
+        <div className="lg-bg-status">
+          {item.status === 'ok' ? <CheckGlyph /> : <WarnGlyph />}
+          <span>{item.status === 'ok' ? '권장' : '사무국 협의'}</span>
+        </div>
+        <div className="lg-bg-label">{item.label}</div>
+        <div className="lg-bg-hint">{item.hint}</div>
+      </div>
     </div>
   );
 }
@@ -361,14 +355,12 @@ function DontCard({ d }) {
   );
 }
 
-// 잘못된 KIMES 워드마크 변형 12종을 CSS만으로 재현. 별도 이미지 자산
+// 잘못된 KIMES 워드마크 변형 11종을 CSS만으로 재현. 별도 이미지 자산
 // 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
+// "다른 폰트로 다시 타이핑" 항목은 §8.2 텍스트 자유 조판 영역으로
+// 이전되어 이 목록에서 제외 — variant 'font' case 제거됨.
 function BadExample({ variant }) {
-  // 폰트 변경(#7)은 SVG가 아니라 텍스트로 재현해야 의미가 살아남.
-  if (variant === 'font') {
-    return <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">KIMES</span>;
-  }
-  // 회사 로고와 합쳐(#11): 워드마크 + "+" + 가짜 회사 배지.
+  // 회사 로고와 합쳐(#10): 워드마크 + "×" + 가짜 회사 배지.
   if (variant === 'merge') {
     return (
       <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
@@ -420,21 +412,8 @@ function CrossGlyph() {
   );
 }
 
-// 연도 일체형 워드마크 — KIMES 워드마크 + 행사 연도(검정)를 가로로 결합.
-// 벤더 제공 SVG가 없을 때(또는 회차 갱신 직후)도 정확한 연도를 보여줄
-// 수 있도록 컴포지트로 구성.
-function KimesYearComposite({ year, height = 44 }) {
-  return (
-    <span className="lg-year-lockup" style={{ height }}>
-      <KimesWordmark height={height * 0.92} />
-      <span
-        className="lg-year-num"
-        style={{ fontSize: height * 0.95, lineHeight: 1 }}
-      >
-        {year}
-      </span>
-    </span>
-  );
-}
+// 연도 일체형 워드마크는 사무국이 단일 SVG 자산으로 별도 제공. 코드 합성
+// 방식(KimesYearComposite)은 자간·베이스라인·시각 무게가 정확히 안 맞아
+// 제거됨. 필요하면 사무국 brand 문의로 SVG 자산 요청.
 
 window.LogoPage = LogoPage;

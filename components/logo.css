@@ -105,20 +105,8 @@
   font-family: var(--font-mono);
 }
 
-/* ---------- 연도 일체형 컴포지트 (KIMES + 2027) ---------- */
-.lg-year-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  line-height: 1;
-}
-.lg-year-num {
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--kimes-black);
-  font-variant-numeric: tabular-nums;
-}
+/* (연도 일체형 컴포지트 CSS는 카드 제거와 함께 삭제됨 — 사무국 SVG
+   자산 도착 후 단일 SVG로 재추가 예정.) */
 
 /* ---------- 자산 준비 중 라벨 ---------- */
 .lg-card-pending {
@@ -231,121 +219,97 @@
   line-height: 1.5;
 }
 
-/* ---------- §6.2.5 배경별 사용 매트릭스 ---------- */
-.lg-matrix-wrap {
-  margin: var(--space-2) 0 var(--space-2);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+/* ---------- §6.2.5 배경별 사용 — 6개 시각 예시 카드 ---------- */
+.lg-bg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-3);
 }
-.lg-matrix {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--fs-body);
-  background: var(--surface-base);
-}
-.lg-matrix thead th {
-  text-align: left;
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--surface-line);
-  background: var(--surface-subtle);
-  font-size: var(--fs-caption);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-.lg-matrix-th-status { width: 44px; text-align: center !important; }
-.lg-matrix tbody td {
-  padding: 12px 14px;
-  border-top: 1px solid var(--surface-line);
-  vertical-align: top;
-}
-.lg-matrix-status-cell {
-  width: 44px;
-  text-align: center;
-  vertical-align: middle;
-}
-.lg-matrix-row.status-ok   .lg-matrix-status-cell { color: var(--status-ok); }
-.lg-matrix-row.status-warn .lg-matrix-status-cell { color: var(--status-warn); }
-/* 상태 셀 안의 아이콘 + 텍스트 라벨 — 색만으로 의미 전달 금지(§21.2) */
-.lg-matrix-status-cell {
+@media (max-width: 1100px) { .lg-bg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px)  { .lg-bg-grid { grid-template-columns: 1fr; } }
+
+.lg-bg-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-.lg-matrix-status-text {
-  font-family: var(--font-display);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.lg-matrix-bg {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-.lg-matrix-ver { color: var(--text-secondary); }
-.lg-matrix-note {
-  color: var(--text-muted);
-  font-size: var(--fs-caption);
-  line-height: 1.5;
-}
-.lg-matrix-row.status-warn .lg-matrix-note { color: var(--status-warn); }
-.lg-matrix-row.status-warn { background: rgba(180, 83, 9, 0.04); }
-
-/* 매트릭스 모바일 변환 — 카드 리스트 */
-@media (max-width: 720px) {
-  .lg-matrix thead { display: none; }
-  .lg-matrix,
-  .lg-matrix tbody,
-  .lg-matrix tr,
-  .lg-matrix td { display: block; width: auto; }
-  .lg-matrix tr {
-    padding: var(--space-2);
-    border-top: 1px solid var(--surface-line);
-    position: relative;
-  }
-  .lg-matrix tr:first-child { border-top: 0; }
-  .lg-matrix td {
-    border-top: 0;
-    padding: 4px 0 4px 36px;
-  }
-  .lg-matrix .lg-matrix-status-cell {
-    position: absolute;
-    top: var(--space-2);
-    left: var(--space-2);
-    width: 24px;
-    padding: 0;
-  }
-  .lg-matrix .lg-matrix-bg {
-    font-weight: 700;
-    font-size: var(--fs-body-lg);
-  }
-  .lg-matrix .lg-matrix-ver::before {
-    content: '권장: ';
-    color: var(--text-muted);
-    font-size: var(--fs-caption);
-  }
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  overflow: hidden;
 }
 
-/* 매트릭스 범례 */
-.lg-matrix-legend {
+.lg-bg-tile {
   display: flex;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: var(--space-3);
 }
-.lg-matrix-status {
+
+/* 6가지 배경 — 실제 색·패턴으로 시각 직관 전달 */
+.lg-bg-tile-white { background: #ffffff; border-bottom: 1px solid var(--surface-line); }
+.lg-bg-tile-dark  { background: var(--kimes-black); }
+.lg-bg-tile-red   { background: var(--kimes-red); }
+.lg-bg-tile-brand { background: #5D3B8B; } /* 보라 — 회사 컬러 예시 */
+.lg-bg-tile-mid   { background: #888888; }
+.lg-bg-tile-photo {
+  /* 자연 사진 느낌의 다중 색조 그라디언트 + 패턴 오버레이 */
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(0,0,0,0.08) 0 8px, rgba(255,255,255,0.06) 8px 16px),
+    linear-gradient(135deg, #4a6741 0%, #6b8e23 30%, #8b7355 60%, #c0a884 100%);
+}
+/* photo 카드는 흰 플레이트 위에 워드마크 배치 */
+.lg-bg-plate {
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
-.lg-matrix-status.status-ok   svg { color: var(--status-ok); }
-.lg-matrix-status.status-warn svg { color: var(--status-warn); }
+/* 중간 명도 카드 — 사무국 협의 신호로 warn 글리프 */
+.lg-bg-warn-glyph {
+  width: 36px; height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--status-warn);
+  color: #fff;
+}
+.lg-bg-warn-glyph svg { width: 18px; height: 18px; stroke-width: 2.5; }
+
+.lg-bg-meta {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--surface-line);
+}
+.lg-bg-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.lg-bg-card.status-ok   .lg-bg-status { color: var(--status-ok); }
+.lg-bg-card.status-warn .lg-bg-status { color: var(--status-warn); }
+.lg-bg-label {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  letter-spacing: -0.005em;
+}
+.lg-bg-hint {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
 
 /* ---------- §6.2.6 Don'ts 12종 그리드 ---------- */
 .lg-donts {
@@ -408,15 +372,16 @@
   color: var(--text-muted);
   line-height: 1.5;
 }
+/* 부드러운 안내 박스 — 처벌 경고 톤이 아닌 협조 안내 톤 */
 .lg-donts-foot {
   margin: var(--space-2) 0 var(--space-5);
-  padding: 10px var(--space-3);
+  padding: 12px var(--space-3);
   font-size: var(--fs-caption);
-  color: var(--status-error);
-  background: rgba(185, 28, 28, 0.06);
-  border-left: 3px solid var(--status-error);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--surface-subtle);
+  border-left: 3px solid var(--surface-line);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-weight: 600;
 }
 
 /* ---------- 잘못된 예시 12종 (CSS만으로 KIMES 워드마크 변형 재현) ---------- */
@@ -464,17 +429,10 @@
   pointer-events: none;
 }
 
-/* 7. 다른 폰트로 다시 타이핑 — 텍스트로 재현 */
-.lg-bad-font {
-  font-family: 'Times New Roman', Georgia, serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--kimes-red);
-  letter-spacing: 0.02em;
-}
+/* (옛 #7 다른 폰트 재타이핑 변형은 §8.2 텍스트 자유 조판 영역으로
+   이전되어 Don'ts에서 제외됨 — .lg-bad-font 규칙 삭제) */
 
-/* 8. 박스/원 안에 가두기 */
+/* 7. 박스/원 안에 가두기 (옛 #8) */
 .lg-bad-box {
   border: 2px solid var(--kimes-red);
   border-radius: 999px;
