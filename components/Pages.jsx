@@ -42,13 +42,7 @@ function Stub({ sectionRef }) {
 
 // PermissionsPage는 components/PermissionsPage.jsx에서 정의 (§14 작업으로 분리).
 
-function FaqPage() {
-  return (
-    <PageShell eyebrow="11" title="자주 묻는 질문" toc={false}>
-      <Stub sectionRef="§15" />
-    </PageShell>
-  );
-}
+// FaqPage는 components/FaqPage.jsx에서 정의 (§15 작업으로 분리).
 
 function DownloadsPage() {
   return (
@@ -107,7 +101,7 @@ Object.assign(window, {
   // DigitalPage:     별도 파일 components/DigitalPage.jsx에서 직접 등록
   // SpecialZones*: components/SpecialZonesPage.jsx에서 직접 등록 (4종)
   // PermissionsPage: 별도 파일 components/PermissionsPage.jsx에서 직접 등록
-  FaqPage,
+  // FaqPage: 별도 파일 components/FaqPage.jsx에서 직접 등록
   DownloadsPage,
   ContactPage,
   ChangelogPage,
