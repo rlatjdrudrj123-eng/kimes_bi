@@ -62,7 +62,7 @@ function SpecialZonesIndex() {
       eyebrow="09"
       title="Special Zones"
       subtitle="특별관"
-      lede="KIMES 2027은 3개의 특별관을 운영합니다. 각 특별관은 KIMES 안에서 별도 테마와 시각 정체성을 가집니다. 특별관 참가업체는 KIMES 표기에 더해 해당 특별관 표기도 함께 사용할 수 있습니다."
+      lede="KIMES 2027은 3개의 특별관을 운영합니다. 각 특별관은 KIMES 안에서 별도 테마와 시각 정체성을 갖습니다. 특별관 참가업체는 KIMES 표기에 더해 해당 특별관 표기도 함께 사용할 수 있습니다."
     >
       <div className="sz-index">
         {zones.map(z => (
