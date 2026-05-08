@@ -1,0 +1,475 @@
+/* /typography — §8 타이포그래피 페이지. 7개 sub-section 평면 구조.
+   진짜 CSS 렌더 원칙(이미지 X) — 모든 사례는 inline style 또는 클래스로
+   직접 폰트 사양 전달. */
+
+/* ---------- §8.1 Two Asset Models — 워드마크 vs 텍스트 표기 ----------- */
+.ty-models {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-2);
+}
+@media (max-width: 800px) { .ty-models { grid-template-columns: 1fr; } }
+
+.ty-model {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.ty-model-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.ty-model-tag {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.ty-model-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+.ty-model-def {
+  margin: 4px 0 var(--space-1);
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.ty-model-uses {
+  margin: 0 0 var(--space-2);
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+}
+.ty-model-cta {
+  margin-top: auto;
+  display: inline-flex;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-caption);
+  color: var(--kimes-red);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.ty-model-cta:hover { text-decoration: underline; }
+.ty-models-foot {
+  margin: var(--space-1) 0 var(--space-5);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ---------- §8.2 Fonts — Montserrat / Pretendard 카드 ---------------- */
+.ty-font-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-5);
+}
+@media (max-width: 900px) { .ty-font-grid { grid-template-columns: 1fr; } }
+
+.ty-font-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  overflow: hidden;
+}
+.ty-font-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) 0;
+}
+.ty-font-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+.ty-font-role {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.ty-font-sample {
+  padding: var(--space-3) var(--space-3) var(--space-3);
+  font-size: 88px;
+  line-height: 1;
+  color: var(--kimes-red);
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--surface-line);
+}
+@media (max-width: 600px) { .ty-font-sample { font-size: 64px; } }
+
+.ty-font-weights {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+.ty-font-weight {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
+  align-items: baseline;
+  padding: 8px var(--space-3);
+  border-bottom: 1px solid var(--surface-line);
+}
+.ty-font-weight:last-child { border-bottom: 0; }
+.ty-font-weight-preview {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+.ty-font-weight-meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.ty-font-weight-num {
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.ty-font-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-top: 1px solid var(--surface-line);
+  background: var(--surface-subtle);
+}
+.ty-font-license {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+.ty-font-note {
+  padding: 0 var(--space-3) var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ---------- §8.3 Mixed Composition — 4가지 규칙 카드 ---------------- */
+.ty-mix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-5);
+}
+@media (max-width: 800px) { .ty-mix-grid { grid-template-columns: 1fr; } }
+
+.ty-mix-rule {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-3);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+.ty-mix-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+}
+.ty-mix-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  letter-spacing: -0.005em;
+  color: var(--text-primary);
+}
+.ty-mix-desc {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.ty-mix-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-2);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-subtle);
+}
+.ty-mix-row {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.ty-mix-ok .ty-mix-mark {
+  color: var(--status-ok);
+  font-weight: 700;
+}
+.ty-mix-no .ty-mix-mark {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+.ty-mix-no { opacity: 0.7; }
+
+/* Rule 1·2 — 라틴 부분 폰트 매핑 */
+.ty-mix-latin-good {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+.ty-mix-latin-bad {
+  /* 한글 폰트로 라틴 표기 — 디지털 환경에서 fallback이 곱지 않은 상태를
+     시뮬레이션. font-feature-settings 끄기 + 약간의 시각 어색함. */
+  font-family: 'Pretendard', 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Rule 3 — 같은 줄 굵기·크기 통일 */
+.ty-mix-row3-good { font-family: var(--font-body); font-weight: 700; }
+.ty-mix-row3-good span { font-size: 17px; }
+.ty-mix-row3-bad .r3-ko {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+}
+.ty-mix-row3-bad .r3-en {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+}
+
+/* Rule 4 — 좌측 정렬 + word-break */
+.ty-mix-row4-good {
+  margin: 0;
+  text-align: left;
+  word-break: keep-all;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  max-width: 28ch;
+}
+.ty-mix-row4-bad {
+  margin: 0;
+  text-align: justify;
+  word-break: break-all;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  max-width: 28ch;
+}
+
+/* ---------- §8.4 Recommended Notation — 권장 조판 -------------------- */
+.ty-rec {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-4);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+}
+@media (max-width: 800px) { .ty-rec { grid-template-columns: 1fr; gap: var(--space-3); } }
+
+.ty-rec-sample {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-3);
+  background: #fff;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-sm);
+}
+.ty-rec-main {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--kimes-red);
+}
+.ty-rec-sub {
+  margin-top: 12px;
+  font-family: 'Pretendard', 'Pretendard Variable', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--kimes-black);
+}
+@media (max-width: 600px) {
+  .ty-rec-main { font-size: 44px; }
+  .ty-rec-sub  { font-size: 18px; }
+}
+.ty-rec-spec {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-caption);
+}
+.ty-rec-spec th,
+.ty-rec-spec td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-line);
+  vertical-align: top;
+}
+.ty-rec-spec tr:last-child th,
+.ty-rec-spec tr:last-child td { border-bottom: 0; }
+.ty-rec-spec th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  width: 32%;
+}
+.ty-rec-spec td {
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.ty-rec-spec code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  padding: 1px 5px;
+  background: var(--surface-muted);
+  border-radius: 3px;
+}
+
+/* ---------- §8.5 Free Composition Gallery — 7개 사례 ----------------- */
+.ty-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-5);
+}
+@media (max-width: 1000px) { .ty-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px)  { .ty-gallery { grid-template-columns: 1fr; } }
+
+.ty-gallery-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-base);
+  overflow: hidden;
+}
+.ty-gallery-sample {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: var(--space-3);
+  background: #fff;
+  border-bottom: 1px solid var(--surface-line);
+  text-align: center;
+  word-break: keep-all;
+}
+.ty-gallery-cap {
+  padding: 10px var(--space-3);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  background: var(--surface-subtle);
+}
+.ty-gallery-note {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* 7번 — 수치 동반 사례. 큰 숫자 + 작은 KIMES 2027 라벨 */
+.ty-data-num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  letter-spacing: -0.03em;
+  color: var(--kimes-red);
+  line-height: 1;
+}
+.ty-data-label {
+  margin-left: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  align-self: flex-end;
+  padding-bottom: 6px;
+}
+
+/* ---------- §8.6 Wordmark Use — 가드레일 박스 ------------------------ */
+.ty-guard {
+  margin: var(--space-2) 0 var(--space-5);
+  padding: var(--space-4);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  border-top: 3px solid var(--kimes-red);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+.ty-guard p {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-primary);
+  max-width: 64ch;
+}
+
+/* ---------- §8.7 Cross-link ------------------------------------------ */
+.ty-cross {
+  margin: var(--space-3) 0 var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--surface-line);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+.ty-cross a {
+  color: var(--kimes-red);
+  text-decoration: none;
+  font-weight: 600;
+}
+.ty-cross a:hover { text-decoration: underline; }

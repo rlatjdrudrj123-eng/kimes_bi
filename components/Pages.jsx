@@ -28,13 +28,7 @@ function Stub({ sectionRef }) {
 
 // ColorPage는 components/ColorPage.jsx에서 정의 (§7 작업으로 분리).
 
-function TypographyPage() {
-  return (
-    <PageShell eyebrow="04" title="타이포그래피" toc={false}>
-      <Stub sectionRef="§8" />
-    </PageShell>
-  );
-}
+// TypographyPage는 components/TypographyPage.jsx에서 정의 (§8 작업으로 분리).
 
 function CoBrandingPage() {
   return (
@@ -166,7 +160,7 @@ Object.assign(window, {
   // ColorPage:    별도 파일 components/ColorPage.jsx에서 직접 등록
   LogoPage,
   ColorPage,
-  TypographyPage,
+  // TypographyPage:  별도 파일 components/TypographyPage.jsx에서 직접 등록
   CoBrandingPage,
   NotationPage,
   ApplicationsPage,
