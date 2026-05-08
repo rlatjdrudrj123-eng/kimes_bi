@@ -112,7 +112,7 @@ function FaqPage() {
 
 function DownloadsPage() {
   return (
-    <PageShell eyebrow="12" title="자산 다운로드" toc={false}>
+    <PageShell eyebrow="12" title="에셋 다운로드" toc={false}>
       <Stub sectionRef="§16" />
     </PageShell>
   );

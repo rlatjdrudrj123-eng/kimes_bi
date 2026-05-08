@@ -19,8 +19,8 @@ const InlineLogo = window.InlineLogo;
 //
 // 연도 일체형(예: KIMES 2027 일체형)은 워드마크 SVG와 숫자의 자간·
 // 베이스라인·시각 무게가 정밀히 맞은 단일 SVG여야 정확. 코드 합성으로는
-// 불가. 사무국 디자이너가 회차마다 별도 제공하므로 가이드 카드에는
-// 두지 않음.
+// 처리하지 않음. 사무국 디자이너가 회차마다 별도 제공하므로 가이드
+// 카드에는 두지 않음.
 const LOGO_VERSIONS = [
   {
     id: 'red',
@@ -115,9 +115,9 @@ const COLOR_SEGMENTS = [
   { id: 'gray', bg: '#A7A9AC', wordmark: 'kimesBlack', wmLabel: '블랙' },
 ];
 
-// §6.2.6 Don'ts — 11종. 모두 절대 금지(✗ error 톤) — 워드마크 SVG에
-// 적용되는 변형들. 텍스트 자유 조판(다른 폰트로 "KIMES" 표기)은
-// §8.2 마케팅·콘텐츠 자유 영역으로 이전 — 이 목록에서 제외.
+// §6.2.6 Don'ts — 11종. 워드마크 SVG에 적용되는 변형 사례 (✗ 시각 신호로
+// 권장하지 않음을 명확히 안내). 텍스트 표기(다른 폰트로 "KIMES" 표기)는
+// §8 마케팅·콘텐츠 영역으로 이전 — 이 목록에서 제외.
 const DONTS = [
   { id: 1,  title: '색 바꾸기',                     desc: '회사 컬러로 통일하지 않습니다',  bad: 'color' },
   { id: 2,  title: '검은 쐐기 제거',                desc: 'i 안의 디테일을 지우지 않습니다', bad: 'wedge' },
@@ -190,8 +190,8 @@ function LogoPage() {
       {/* §6.2.3 클리어 스페이스 ---------------------------------------- */}
       <SectionHeading id="clearspace" title="Clear Space" subtitle="클리어 스페이스" />
       <p>
-        워드마크 사방으로 K 높이만큼의 빈 영역을 반드시 확보합니다. 이 영역
-        안에는 다른 로고·문구·이미지가 들어갈 수 없습니다.
+        워드마크 사방으로 K 높이만큼의 빈 영역을 확보합니다. 이 영역 안에는
+        다른 로고·문구·이미지가 들어가지 않도록 합니다.
       </p>
       <ClearSpaceDiagram />
 
@@ -418,7 +418,7 @@ function ColorChips({ segments }) {
 function DontCard({ d }) {
   return (
     <div className="lg-dont">
-      <div className="lg-dont-mark" aria-label="절대 금지">
+      <div className="lg-dont-mark" aria-label="권장하지 않는 사용 예시">
         <CrossGlyph />
       </div>
       <div className="lg-dont-preview">
@@ -432,10 +432,10 @@ function DontCard({ d }) {
   );
 }
 
-// 잘못된 KIMES 워드마크 변형 11종을 CSS만으로 재현. 별도 이미지 자산
-// 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
-// "다른 폰트로 다시 타이핑" 항목은 §8.2 텍스트 자유 조판 영역으로
-// 이전되어 이 목록에서 제외 — variant 'font' case 제거됨.
+// 권장하지 않는 KIMES 워드마크 변형 11종을 CSS만으로 재현. 별도 이미지
+// 자산 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
+// "다른 폰트로 다시 타이핑" 항목은 §8 텍스트 표기 영역으로 이전되어 이
+// 목록에서 제외 — variant 'font' case 제거됨.
 function BadExample({ variant }) {
   // 회사 로고와 합쳐(#10): 워드마크 + "×" + 가짜 회사 배지.
   if (variant === 'merge') {
