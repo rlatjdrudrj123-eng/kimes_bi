@@ -32,13 +32,7 @@ function Stub({ sectionRef }) {
 
 // CoBrandingPage는 components/CoBrandingPage.jsx에서 정의 (§9 작업으로 분리).
 
-function NotationPage() {
-  return (
-    <PageShell eyebrow="06" title="공식 표기 규칙" toc={false}>
-      <Stub sectionRef="§10" />
-    </PageShell>
-  );
-}
+// NotationPage는 components/NotationPage.jsx에서 정의 (§10 작업으로 분리).
 
 function ApplicationsPage() {
   return (
@@ -156,7 +150,7 @@ Object.assign(window, {
   ColorPage,
   // TypographyPage:  별도 파일 components/TypographyPage.jsx에서 직접 등록
   // CoBrandingPage:  별도 파일 components/CoBrandingPage.jsx에서 직접 등록
-  NotationPage,
+  // NotationPage:    별도 파일 components/NotationPage.jsx에서 직접 등록
   ApplicationsPage,
   DigitalPage,
   SpecialZonesIndex,
