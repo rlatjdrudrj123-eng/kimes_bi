@@ -63,41 +63,21 @@ const FILE_FORMATS = [
   { ext: 'eps', label: 'EPS' },
 ];
 
-// §6.2.5 배경별 사용 — KT BI 가이드의 11칸 격자 시스템을 KIMES 톤으로
-// 차용. 명도/컬러 11칸 균등 분할 + 각 칸에 사용 가능 워드마크 표시,
-// 사용 차단 칸은 빨간 대각선 빗금. 시각 도구 5개: 격자 4개 + 컬러 칩 1세트.
+// §6.2.5 배경별 사용 — KT 11칸 격자 시스템 + KIMES 4브랜드 칩.
+// 시각 도구 3개로 단순화: 격자 2개(Primary / B-W 묶음) + 칩 1세트.
+// Gray 워드마크는 자유 사용 → 한 줄 안내로 처리. 일반 컬러 그라디언트는
+// 4브랜드 칩 케이스와 정보 중복이라 제거.
 //
-// KT 시스템과 같은 결의 핵심:
-//   - Black/White 워드마크는 한 격자에서 묶어 처리 (각각 별도 X)
-//   - 11칸 격자(0%~100%, 10% 단위)로 명도 변화 시각화
-//   - 사용 X 구간은 빨간 대각선 빗금으로 명확 차단
+// 사용 룰 (엄격):
+//   1) Primary (Red): 0–10%만 (대비 충분한 흰색·매우 옅은 배경)
+//   2) Black/White:  0–30% Black / 40–100% White (boundary 30/40)
 //
-// 4가지 격자:
-//   1) Primary (Red) — 명도 격자, 0–30% 사용 가능 / 40–100% 차단
-//   2) Black/White ★ 묶음 — 명도 격자, 0–40% Black / 50–100% White
-//   3) Black/White ★ 컬러 — KIMES 컬러 흐름 격자, 0–4 Black / 5–10 White
-//   4) Gray — 명도 격자, 0–20% 사용 가능 / 30–100% 차단
+// KT 시스템과 같은 결: 11칸 단색 격자 + Black/White 묶음 + 빨간 빗금.
 
-// 명도 11칸 (0% 흰색 → 100% 검정). HSL lightness step 10%.
+// 명도 11칸 (0% 흰색 → 100% 검정). 10% 단위 grayscale.
 const BRIGHTNESS_HEX = [
   '#FFFFFF', '#E6E6E6', '#CCCCCC', '#B3B3B3', '#999999',
   '#808080', '#666666', '#4D4D4D', '#333333', '#1A1A1A', '#000000',
-];
-
-// KIMES 컬러 흐름 11칸 — 옅은 톤(흰/그레이/라임) → 진한 톤(MC Blue/
-// BD Purple/Red/Black). 4브랜드 컬러 4개를 흐름의 핵심 stop으로 배치.
-const COLOR_FLOW_HEX = [
-  '#FFFFFF', // 0 흰
-  '#F2F2F2', // 1 매우 옅은 그레이
-  '#DEE2E0', // 2 옅은 그레이
-  '#E0EBC4', // 3 옅은 라임
-  '#BFD633', // 4 IN Lime
-  '#6FA4B8', // 5 라임→블루 전이
-  '#036EB8', // 6 MC Blue
-  '#3F4583', // 7 블루→퍼플 전이
-  '#5D3B8B', // 8 BD Purple
-  '#E60012', // 9 KIMES Red
-  '#231815', // 10 KIMES Black
 ];
 
 const GRID_BARS = [
@@ -106,9 +86,9 @@ const GRID_BARS = [
     label: 'Primary Wordmark (Red)',
     sub: '메인 워드마크 (레드)',
     rightLabel: '명도 배경색 규정',
-    rule: '명도 30% 이하 배경에서만 사용. 그 외엔 Black 또는 White로.',
+    rule: '명도 10% 이하 흰색·매우 옅은 배경에서만 사용. 그 외엔 Black 또는 White로.',
     showScale: true,
-    cells: BRIGHTNESS_HEX.map((bg, i) => i <= 3
+    cells: BRIGHTNESS_HEX.map((bg, i) => i <= 1
       ? { bg, wm: 'kimes' }
       : { bg, blocked: true }),
   },
@@ -117,33 +97,11 @@ const GRID_BARS = [
     label: 'Black / White Wordmark',
     sub: '블랙·화이트 워드마크',
     rightLabel: '명도 배경색 규정',
-    rule: '0–40% 배경: Black 워드마크 / 50–100% 배경: White 워드마크.',
+    rule: '0–30% 배경: Black 워드마크 / 40–100% 배경: White 워드마크.',
     showScale: true,
-    cells: BRIGHTNESS_HEX.map((bg, i) => i <= 4
+    cells: BRIGHTNESS_HEX.map((bg, i) => i <= 3
       ? { bg, wm: 'kimesBlack' }
       : { bg, wm: 'kimesWhite' }),
-  },
-  {
-    id: 'bw-color',
-    label: 'Black / White Wordmark',
-    sub: '블랙·화이트 워드마크',
-    rightLabel: '기타 배경색 규정',
-    rule: '컬러 명도에 따라 Black 또는 White 선택. 채도 있는 컬러 위에선 White가 안전합니다.',
-    showScale: false,
-    cells: COLOR_FLOW_HEX.map((bg, i) => i <= 4
-      ? { bg, wm: 'kimesBlack' }
-      : { bg, wm: 'kimesWhite' }),
-  },
-  {
-    id: 'gray',
-    label: 'Gray Wordmark',
-    sub: '그레이 워드마크',
-    rightLabel: '명도 배경색 규정',
-    rule: '흰색·매우 옅은 배경에서 톤다운이 필요할 때만 사용.',
-    showScale: true,
-    cells: BRIGHTNESS_HEX.map((bg, i) => i <= 2
-      ? { bg, wm: 'kimesGray' }
-      : { bg, blocked: true }),
   },
 ];
 
@@ -253,19 +211,26 @@ function LogoPage() {
         ))}
       </div>
 
-      {/* §6.2.5 배경별 사용 — 11칸 격자 4개 + 컬러 칩 1세트 ------------ */}
+      {/* §6.2.5 배경별 사용 — 11칸 격자 2개 + 브랜드 컬러 칩 1세트 ----- */}
       <SectionHeading id="bg-use" title="Background Use" subtitle="배경별 사용" />
       <p>배경 명도와 컬러에 따라 워드마크를 선택합니다.</p>
       <div className="lg-grid-stack">
         {GRID_BARS.map(bar => <GridBar key={bar.id} bar={bar} />)}
       </div>
 
-      {/* H3 sub-section — 격자 4개 다음, 브랜드 단색 칩 5개 */}
+      {/* H3 sub-section — 격자 2개 다음, 브랜드 단색 칩 5개 */}
       <header className="lg-h3-block">
         <h3 className="lg-h3" id="color-bg">Brand Color Backgrounds</h3>
         <div className="lg-h3-sub">브랜드 컬러 배경</div>
       </header>
       <ColorChips segments={COLOR_SEGMENTS} />
+
+      {/* Gray 워드마크 — 별도 격자 없이 한 줄 안내. 사용 빈도 낮고
+          톤다운 자유 사용이라 격자로 만들 정보 양이 부족. */}
+      <p className="lg-gray-note">
+        Gray 워드마크는 톤다운이 필요한 자리(본문 안 작은 표기·각주 등)에
+        자유롭게 사용합니다.
+      </p>
 
       {/* §6.2.6 Don'ts — 11종 -------------------------------------- */}
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
@@ -394,7 +359,7 @@ function GridBar({ bar }) {
               aria-label={cell.blocked ? '사용 안 함' : `${cell.wm} 사용 가능`}
             >
               {!cell.blocked && cell.wm && (
-                <InlineLogo name={cell.wm} height={13} ariaLabel="" />
+                <InlineLogo name={cell.wm} height={9} ariaLabel="" />
               )}
             </div>
           ))}

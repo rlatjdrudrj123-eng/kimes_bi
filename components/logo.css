@@ -317,7 +317,15 @@
 /* 모바일에선 11칸이 좁아져 워드마크가 깨질 수 있어 cell 높이 축소 */
 @media (max-width: 600px) {
   .lg-grid-cells { height: 44px; }
-  .lg-grid-cell svg { transform: scale(0.85); }
+  .lg-grid-cell svg { transform: scale(0.9); }
+}
+
+/* Gray 워드마크 자유 사용 한 줄 안내 — 칩 다음 줄에 가벼운 톤으로 */
+.lg-gray-note {
+  margin: var(--space-2) 0 var(--space-5);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 /* ---------- H3 sub-section (Brand Color Backgrounds) ---------- */
