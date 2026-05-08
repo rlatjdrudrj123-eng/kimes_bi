@@ -30,13 +30,7 @@ function Stub({ sectionRef }) {
 
 // TypographyPage는 components/TypographyPage.jsx에서 정의 (§8 작업으로 분리).
 
-function CoBrandingPage() {
-  return (
-    <PageShell eyebrow="05" title="KIMES와 함께 쓰기" toc={false}>
-      <Stub sectionRef="§9" />
-    </PageShell>
-  );
-}
+// CoBrandingPage는 components/CoBrandingPage.jsx에서 정의 (§9 작업으로 분리).
 
 function NotationPage() {
   return (
@@ -161,7 +155,7 @@ Object.assign(window, {
   LogoPage,
   ColorPage,
   // TypographyPage:  별도 파일 components/TypographyPage.jsx에서 직접 등록
-  CoBrandingPage,
+  // CoBrandingPage:  별도 파일 components/CoBrandingPage.jsx에서 직접 등록
   NotationPage,
   ApplicationsPage,
   DigitalPage,
