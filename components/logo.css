@@ -248,15 +248,41 @@
   font-size: var(--fs-caption);
   color: var(--kimes-gray);
 }
-/* 명도 0-100% 그라디언트 바 — 흰색 → 검정. 워드마크 5개 stop을
-   absolute 위치 left%로 배치. */
+/* 그라디언트 바 — 종류별로 배경이 다름. 워드마크 단일 stop을 absolute
+   left%로 OK 구간 중앙에 배치.
+   - gradient-brightness: 흰 → 검정 (Primary, Gray)
+   - gradient-compound-light: 흰 → 옅은 노랑/그레이 (Black 워드마크)
+   - gradient-compound-dark: KIMES 컬러 흐름 — 흰 → IN Lime → MC Blue
+       → BD Purple → KIMES Red → KIMES Black (White 워드마크) */
 .lg-grad-bar {
   position: relative;
   height: 64px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(to right, #ffffff, var(--kimes-black));
   border: 1px solid var(--surface-line);
   overflow: visible;
+}
+.lg-grad-bar.gradient-brightness {
+  background: linear-gradient(to right, #ffffff 0%, var(--kimes-black) 100%);
+}
+.lg-grad-bar.gradient-compound-light {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #f4ecd8 25%,
+    #e6e7ea 55%,
+    #9ea0a5 100%
+  );
+}
+.lg-grad-bar.gradient-compound-dark {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #BFD633 22%,
+    #036EB8 48%,
+    #5D3B8B 70%,
+    #E60012 88%,
+    var(--kimes-black) 100%
+  );
 }
 .lg-grad-stop {
   position: absolute;
@@ -266,60 +292,25 @@
   align-items: center;
   pointer-events: none;
 }
-.lg-grad-scale {
-  position: relative;
-  height: 14px;
-  margin-top: 2px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-muted);
-}
-.lg-grad-scale > span {
-  position: absolute;
-  top: 0;
-}
-.lg-grad-ranges {
-  position: relative;
-  height: 36px;
-  margin-top: 4px;
-}
-.lg-grad-range {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  padding: 4px 6px;
-  border-radius: var(--radius-sm);
-  font-size: var(--fs-caption);
-  line-height: 1.3;
+
+/* 사용 규칙 텍스트 — 바 아래 두 줄 (✓ OK / 한계 안내) */
+.lg-grad-rules {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  gap: 2px;
+  margin-top: 6px;
 }
-.lg-grad-range.status-ok   { background: rgba(21, 128, 61, 0.10);  color: var(--status-ok); }
-.lg-grad-range.status-warn { background: rgba(180, 83, 9, 0.10);   color: var(--status-warn); }
-.lg-grad-range.status-no   { background: rgba(113, 113, 122, 0.12); color: var(--text-secondary); }
-.lg-grad-range-label {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 10px;
-}
-.lg-grad-range-hint {
-  font-size: 11px;
-  font-weight: 500;
+.lg-grad-rule {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
   color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.lg-grad-range.status-ok   .lg-grad-range-label { color: var(--status-ok); }
-.lg-grad-range.status-warn .lg-grad-range-label { color: var(--status-warn); }
-.lg-grad-range.status-no   .lg-grad-range-label { color: var(--text-muted); }
-
-@media (max-width: 600px) {
-  .lg-grad-range-hint { display: none; }
-  .lg-grad-ranges { height: 24px; }
+.lg-grad-rule-ok {
+  color: var(--status-ok);
+  font-weight: 600;
+}
+.lg-grad-rule-no {
+  color: var(--text-muted);
 }
 
 /* ---------- H3 sub-section (Brand Color Backgrounds) ---------- */
@@ -344,36 +335,35 @@
   letter-spacing: -0.005em;
 }
 
-/* ---------- 브랜드 컬러 그라디언트 바 — 5구간 균등 ---------- */
+/* ---------- 브랜드 컬러 칩 5구간 — 칩 사이 여백 + 라벨(워드마크 종류) -- */
 .lg-color-bar-wrap {
   margin-bottom: var(--space-5);
 }
 .lg-color-bar {
   display: flex;
+  gap: 16px;
   height: 64px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--surface-line);
-  overflow: hidden;
 }
 .lg-color-bar-seg {
   flex: 1 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--radius-sm);
 }
 .lg-color-bar-names {
   display: flex;
-  margin-top: 4px;
+  gap: 16px;
+  margin-top: 6px;
 }
 .lg-color-bar-name {
   flex: 1 1 0;
   text-align: center;
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
 }
 .lg-color-bar-rules {
   display: flex;
