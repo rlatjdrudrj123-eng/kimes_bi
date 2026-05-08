@@ -85,15 +85,17 @@
 .clr-row-compact .clr-row-value { font-size: var(--fs-caption); }
 .clr-row-compact .clr-row-term { font-size: 10px; }
 
-/* ---------- §7.2.2 Sub Colors (4 카드 — 특별관 3 + 톤다운) ---------- */
+/* ---------- §7.2.2 Sub Colors (4 카드 — 특별관 3 + 톤다운) ----------
+   2x2 그리드 — 4열 1줄로 두면 카드 폭이 좁아 RGB·CMYK 값이 줄바꿈됨.
+   2x2 폭으로 늘려 메타가 한 줄에 깔끔하게 들어가게 함. 색면 비율도
+   Primary 카드와 결 맞춤(200px+). */
 .clr-sub-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
   margin: var(--space-2) 0 var(--space-5);
 }
-@media (max-width: 1100px) { .clr-sub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px)  { .clr-sub-grid { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .clr-sub-grid { grid-template-columns: 1fr; } }
 
 .clr-sub {
   display: flex;
@@ -105,7 +107,7 @@
 }
 .clr-sub-swatch {
   position: relative;
-  min-height: 120px;
+  min-height: 200px;
   display: flex;
   align-items: flex-end;
   padding: var(--space-3);

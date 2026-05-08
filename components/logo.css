@@ -322,55 +322,83 @@
   .lg-grad-ranges { height: 24px; }
 }
 
-/* ---------- 컬러 배경 위 시뮬레이션 칩 ---------- */
-.lg-color-bg-title {
-  font-family: var(--font-display);
-  font-size: var(--fs-body);
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.005em;
-  margin: var(--space-3) 0 var(--space-2);
+/* ---------- H3 sub-section (Brand Color Backgrounds) ---------- */
+.lg-h3-block {
+  margin: var(--space-5) 0 var(--space-2);
 }
-.lg-color-bg-row {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--space-2);
+.lg-h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text-primary);
+  scroll-margin-top: calc(var(--shell-header-h) + 16px);
+}
+.lg-h3-sub {
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  color: var(--kimes-gray);
+  letter-spacing: -0.005em;
+}
+
+/* ---------- 브랜드 컬러 그라디언트 바 — 5구간 균등 ---------- */
+.lg-color-bar-wrap {
   margin-bottom: var(--space-5);
 }
-@media (max-width: 900px) { .lg-color-bg-row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 480px) { .lg-color-bg-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.lg-color-bg-chip {
+.lg-color-bar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-1);
-  height: 90px;
-  padding: var(--space-2);
+  height: 64px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--surface-line);
+  overflow: hidden;
 }
-.lg-color-bg-label {
+.lg-color-bar-seg {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lg-color-bar-names {
+  display: flex;
+  margin-top: 4px;
+}
+.lg-color-bar-name {
+  flex: 1 1 0;
+  text-align: center;
   font-family: var(--font-display);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  /* 대비를 위해 가독성 높이는 배경별 처리 — 어두운 배경엔 흰 라벨,
-     밝은 배경엔 검정 라벨. 인라인 스타일로 처리되지 않으므로 배경별
-     별도 처리하지 않고 자식 InlineLogo 색에 의존. */
+  color: var(--text-muted);
 }
-/* 어두운 배경 (Red, Blue, Purple) — 라벨도 흰색 */
-.lg-color-bg-chip[style*="#E60012"] .lg-color-bg-label,
-.lg-color-bg-chip[style*="#036EB8"] .lg-color-bg-label,
-.lg-color-bg-chip[style*="#5D3B8B"] .lg-color-bg-label {
-  color: rgba(255, 255, 255, 0.9);
+.lg-color-bar-rules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
 }
-/* 밝은 배경 (Lime, Gray) — 라벨 검정 */
-.lg-color-bg-chip[style*="#BFD633"] .lg-color-bg-label,
-.lg-color-bg-chip[style*="#A7A9AC"] .lg-color-bg-label {
-  color: rgba(0, 0, 0, 0.7);
+.lg-color-bar-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
 }
+.lg-color-bar-mark {
+  width: 18px; height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+}
+.lg-color-bar-mark svg { width: 11px; height: 11px; stroke-width: 3.5; }
+.lg-color-bar-mark.dark  { background: var(--text-primary); }
+.lg-color-bar-mark.light { background: var(--kimes-gray); color: var(--text-primary); }
 
 /* ---------- §6.2.6 Don'ts 12종 그리드 ---------- */
 .lg-donts {

@@ -63,60 +63,51 @@ const FILE_FORMATS = [
   { ext: 'eps', label: 'EPS' },
 ];
 
-// §6.2.5 배경별 사용 — 명도 그라디언트 바 (KT BI 가이드 결).
-// 카드 시스템 대신 명도 0-100% 그라디언트 위에 각 워드마크 색을
-// 5개 stop 위치에 시뮬레이션 렌더해 사용자가 자기 케이스를 명도 구간에
-// 바로 매핑하게 함.
+// §6.2.5 배경별 사용 — 명도 그라디언트 바 + 브랜드 컬러 그라디언트 바.
+// 시각 도구 4개로 통일 (명도 3 + 브랜드 컬러 1).
 //
-// 3개 바: Primary(Red) / White / Black.
-// 각 바마다 사용 가능 구간을 색깔 띠로 안내.
+// 명도 바 (Primary Red / White / Black): 0-100% 그라디언트 위에 각
+// 워드마크 색을 "사용 가능" 구간에만 stop 시뮬레이션 렌더. 사용 가능 /
+// 사용 안 함 두 단계로 단순화 (중간 warn 단계 제거).
 const BG_BARS = [
   {
     id: 'red',
     label: 'Primary Wordmark (Red)',
     sub: '메인 워드마크 (레드)',
     wordmark: 'kimes',
-    ranges: [
-      { from: 0,  to: 30,  status: 'ok',   hint: '사용 가능 — 밝은 배경' },
-      { from: 30, to: 70,  status: 'warn', hint: '가독성 저하 — 화이트/블랙으로 전환' },
-      { from: 70, to: 100, status: 'no',   hint: '사용 안 함 — 화이트 사용' },
-    ],
+    okRange: { from: 0,  to: 30,  hint: '사용 가능 — 밝은 배경' },
+    noRange: { from: 30, to: 100, hint: '사용 안 함 — 화이트로 전환' },
+    stops:   [8, 16, 24],   // OK 구간 안 (0-30%) 3개 stop
   },
   {
     id: 'white',
     label: 'White Wordmark',
     sub: '화이트 워드마크',
     wordmark: 'kimesWhite',
-    ranges: [
-      { from: 0,  to: 30,  status: 'no',   hint: '가독성 부족 — 기본/블랙 사용' },
-      { from: 30, to: 70,  status: 'warn', hint: '대비가 충분한지 확인' },
-      { from: 70, to: 100, status: 'ok',   hint: '사용 가능 — 어두운 배경' },
-    ],
+    okRange: { from: 70, to: 100, hint: '사용 가능 — 어두운 배경' },
+    noRange: { from: 0,  to: 70,  hint: '가독성 부족 — 기본/블랙 사용' },
+    stops:   [76, 84, 92],
   },
   {
     id: 'black',
     label: 'Black Wordmark',
     sub: '블랙 워드마크',
     wordmark: 'kimesBlack',
-    ranges: [
-      { from: 0,  to: 30,  status: 'ok',   hint: '사용 가능 — 밝은 배경 (단색 인쇄·팩스)' },
-      { from: 30, to: 70,  status: 'warn', hint: '대비가 충분한지 확인' },
-      { from: 70, to: 100, status: 'no',   hint: '가독성 부족 — 화이트 사용' },
-    ],
+    okRange: { from: 0,  to: 30,  hint: '사용 가능 — 밝은 배경 (단색 인쇄·팩스)' },
+    noRange: { from: 30, to: 100, hint: '가독성 부족 — 화이트로 전환' },
+    stops:   [8, 16, 24],
   },
 ];
 
-// 워드마크 시뮬레이션 위치 — 5개 stop (10%, 30%, 50%, 70%, 90%)
-const BAR_STOPS = [10, 30, 50, 70, 90];
-
-// 컬러 배경 시뮬레이션 — KIMES Red·MC Blue·BD Purple·IN Lime + Gray.
-// 각 배경에 어울리는 워드마크 색 자동 선택.
-const COLOR_BGS = [
-  { id: 'red',     bg: '#E60012', wordmark: 'kimesWhite', label: 'KIMES Red' },
-  { id: 'mc',      bg: '#036EB8', wordmark: 'kimesWhite', label: 'MedicomteK Blue' },
-  { id: 'bd',      bg: '#5D3B8B', wordmark: 'kimesWhite', label: 'BEAUTY&DERMA Purple' },
-  { id: 'in',      bg: '#BFD633', wordmark: 'kimesBlack', label: 'INSPIRE Lime' },
-  { id: 'gray',    bg: '#A7A9AC', wordmark: 'kimesBlack', label: 'Neutral Gray' },
+// 브랜드 컬러 그라디언트 바 — KIMES 4브랜드 컬러 + Gray 5구간 통합.
+// 칩 5개 → 가로 1줄 그라디언트 바로 통합. 어두운 채도(Red/Blue/Purple)는
+// 화이트 워드마크, 밝은 채도(Lime/Gray)는 블랙 워드마크.
+const COLOR_SEGMENTS = [
+  { id: 'red',  bg: '#E60012', wordmark: 'kimesWhite', name: 'KIMES Red' },
+  { id: 'mc',   bg: '#036EB8', wordmark: 'kimesWhite', name: 'MC Blue' },
+  { id: 'bd',   bg: '#5D3B8B', wordmark: 'kimesWhite', name: 'BD Purple' },
+  { id: 'in',   bg: '#BFD633', wordmark: 'kimesBlack', name: 'IN Lime' },
+  { id: 'gray', bg: '#A7A9AC', wordmark: 'kimesBlack', name: 'Neutral' },
 ];
 
 // §6.2.6 Don'ts — 11종. 모두 절대 금지(✗ error 톤) — 워드마크 SVG에
@@ -215,20 +206,19 @@ function LogoPage() {
         ))}
       </div>
 
-      {/* §6.2.5 배경별 사용 — 명도 그라디언트 바 ------------------------ */}
+      {/* §6.2.5 배경별 사용 — 명도 바 3 + 컬러 바 1 ------------------- */}
       <SectionHeading id="bg-use" title="Background Use" subtitle="배경별 사용" />
-      <p>
-        배경 명도에 따라 워드마크를 선택합니다. 30~70% 중간 명도에서는
-        가독성이 떨어지니 다른 명도 단계로 조정하거나 단색 플레이트를
-        깔고 워드마크를 올립니다.
-      </p>
+      <p>배경 명도와 컬러에 따라 워드마크를 선택합니다.</p>
       <div className="lg-grad-stack">
         {BG_BARS.map(bar => <BgGradientBar key={bar.id} bar={bar} />)}
       </div>
-      <h3 className="lg-color-bg-title">컬러 배경 위 시뮬레이션</h3>
-      <div className="lg-color-bg-row">
-        {COLOR_BGS.map(c => <ColorBgChip key={c.id} item={c} />)}
-      </div>
+
+      {/* H3 sub-section — 명도 바 3개 다음, 컬러 바 1개 */}
+      <header className="lg-h3-block">
+        <h3 className="lg-h3" id="color-bg">Brand Color Backgrounds</h3>
+        <div className="lg-h3-sub">브랜드 컬러 배경</div>
+      </header>
+      <ColorGradientBar segments={COLOR_SEGMENTS} />
 
       {/* §6.2.6 Don'ts — 11종 -------------------------------------- */}
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
@@ -346,7 +336,7 @@ function BgGradientBar({ bar }) {
         <span className="lg-grad-sub">{bar.sub}</span>
       </div>
       <div className="lg-grad-bar" aria-label={`${bar.label} 명도 시뮬레이션`}>
-        {BAR_STOPS.map(pct => (
+        {bar.stops.map(pct => (
           <span key={pct} className="lg-grad-stop" style={{ left: `${pct}%` }}>
             <InlineLogo name={bar.wordmark} height={18} ariaLabel="" />
           </span>
@@ -358,28 +348,58 @@ function BgGradientBar({ bar }) {
         <span style={{ left: '100%', transform: 'translateX(-100%)' }}>100%</span>
       </div>
       <div className="lg-grad-ranges">
-        {bar.ranges.map((r, i) => (
-          <div
-            key={i}
-            className={`lg-grad-range status-${r.status}`}
-            style={{ left: `${r.from}%`, width: `${r.to - r.from}%` }}
-          >
-            <span className="lg-grad-range-label">{r.from}–{r.to}%</span>
-            <span className="lg-grad-range-hint">{r.hint}</span>
-          </div>
-        ))}
+        <div
+          className="lg-grad-range status-ok"
+          style={{ left: `${bar.okRange.from}%`, width: `${bar.okRange.to - bar.okRange.from}%` }}
+        >
+          <span className="lg-grad-range-label">✓ {bar.okRange.from}–{bar.okRange.to}%</span>
+          <span className="lg-grad-range-hint">{bar.okRange.hint}</span>
+        </div>
+        <div
+          className="lg-grad-range status-no"
+          style={{ left: `${bar.noRange.from}%`, width: `${bar.noRange.to - bar.noRange.from}%` }}
+        >
+          <span className="lg-grad-range-label">{bar.noRange.from}–{bar.noRange.to}%</span>
+          <span className="lg-grad-range-hint">{bar.noRange.hint}</span>
+        </div>
       </div>
     </div>
   );
 }
 
-// 컬러 배경 시뮬레이션 — KIMES Red·MC Blue·BD Purple·IN Lime·Gray
-// 배경 위 워드마크 어떻게 보이는지 작은 칩으로 한 줄.
-function ColorBgChip({ item }) {
+// 브랜드 컬러 그라디언트 바 — KIMES 4브랜드 + Gray 5구간 통합. 가로 1줄
+// 균등 5분할. 어두운 채도(Red/Blue/Purple)는 화이트, 밝은 채도(Lime/Gray)
+// 는 블랙 워드마크. 명도 그라디언트 바와 시각 결 통일.
+function ColorGradientBar({ segments }) {
   return (
-    <div className="lg-color-bg-chip" style={{ background: item.bg }}>
-      <InlineLogo name={item.wordmark} height={18} ariaLabel={`KIMES — ${item.label}`} />
-      <span className="lg-color-bg-label">{item.label}</span>
+    <div className="lg-color-bar-wrap">
+      <div className="lg-color-bar" role="group" aria-label="브랜드 컬러 배경 시뮬레이션">
+        {segments.map(seg => (
+          <div
+            key={seg.id}
+            className="lg-color-bar-seg"
+            style={{ background: seg.bg }}
+            aria-label={`${seg.name} — ${seg.wordmark === 'kimesWhite' ? '화이트 워드마크' : '블랙 워드마크'}`}
+          >
+            <InlineLogo name={seg.wordmark} height={18} ariaLabel="" />
+          </div>
+        ))}
+      </div>
+      <div className="lg-color-bar-names" aria-hidden="true">
+        {segments.map(seg => (
+          <span key={seg.id} className="lg-color-bar-name">{seg.name}</span>
+        ))}
+      </div>
+      <div className="lg-color-bar-rules">
+        <div className="lg-color-bar-rule">
+          <span className="lg-color-bar-mark dark"><CheckGlyph /></span>
+          <span>어두운 채도 컬러: 화이트 워드마크</span>
+        </div>
+        <div className="lg-color-bar-rule">
+          <span className="lg-color-bar-mark light"><CheckGlyph /></span>
+          <span>밝은 채도 컬러: 블랙 워드마크</span>
+        </div>
+      </div>
     </div>
   );
 }
