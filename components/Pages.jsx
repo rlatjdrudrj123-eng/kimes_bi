@@ -38,37 +38,7 @@ function Stub({ sectionRef }) {
 
 // DigitalPage는 components/DigitalPage.jsx에서 정의 (§12 작업으로 분리).
 
-function SpecialZonesIndex() {
-  return (
-    <PageShell eyebrow="09" title="특별관" toc={false}>
-      <Stub sectionRef="§13" />
-    </PageShell>
-  );
-}
-
-function SpecialZoneMedicomtek() {
-  return (
-    <PageShell eyebrow="09.1" title="MedicomteK" toc={false}>
-      <Stub sectionRef="§13" />
-    </PageShell>
-  );
-}
-
-function SpecialZoneBeautyDerma() {
-  return (
-    <PageShell eyebrow="09.2" title="BEAUTY&DERMA SEOUL" toc={false}>
-      <Stub sectionRef="§13" />
-    </PageShell>
-  );
-}
-
-function SpecialZoneInspire() {
-  return (
-    <PageShell eyebrow="09.3" title="INSPIRE Digital Health" toc={false}>
-      <Stub sectionRef="§13" />
-    </PageShell>
-  );
-}
+// SpecialZones (Index + 3 detail) 는 components/SpecialZonesPage.jsx에서 정의 (§13).
 
 function PermissionsPage() {
   return (
@@ -141,10 +111,7 @@ Object.assign(window, {
   // NotationPage:    별도 파일 components/NotationPage.jsx에서 직접 등록
   // ApplicationsPage: 별도 파일 components/ApplicationsPage.jsx에서 직접 등록
   // DigitalPage:     별도 파일 components/DigitalPage.jsx에서 직접 등록
-  SpecialZonesIndex,
-  SpecialZoneMedicomtek,
-  SpecialZoneBeautyDerma,
-  SpecialZoneInspire,
+  // SpecialZones*: components/SpecialZonesPage.jsx에서 직접 등록 (4종)
   PermissionsPage,
   FaqPage,
   DownloadsPage,
