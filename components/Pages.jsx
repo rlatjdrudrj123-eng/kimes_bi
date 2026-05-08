@@ -44,21 +44,8 @@ function Stub({ sectionRef }) {
 
 // FaqPage는 components/FaqPage.jsx에서 정의 (§15 작업으로 분리).
 
-function DownloadsPage() {
-  return (
-    <PageShell eyebrow="12" title="에셋 다운로드" toc={false}>
-      <Stub sectionRef="§16" />
-    </PageShell>
-  );
-}
-
-function ContactPage() {
-  return (
-    <PageShell eyebrow="13" title="문의·신청" toc={false}>
-      <Stub sectionRef="§17" />
-    </PageShell>
-  );
-}
+// DownloadsPage는 components/DownloadsPage.jsx에서 정의 (§16 작업으로 분리).
+// ContactPage는 components/ContactPage.jsx에서 정의 (§17 작업으로 분리).
 
 function ChangelogPage() {
   return (
@@ -102,8 +89,8 @@ Object.assign(window, {
   // SpecialZones*: components/SpecialZonesPage.jsx에서 직접 등록 (4종)
   // PermissionsPage: 별도 파일 components/PermissionsPage.jsx에서 직접 등록
   // FaqPage: 별도 파일 components/FaqPage.jsx에서 직접 등록
-  DownloadsPage,
-  ContactPage,
+  // DownloadsPage: 별도 파일 components/DownloadsPage.jsx에서 직접 등록
+  // ContactPage: 별도 파일 components/ContactPage.jsx에서 직접 등록
   ChangelogPage,
   NotFoundPage,
 });
