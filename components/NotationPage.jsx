@@ -83,6 +83,8 @@ const SEP_RULES = [
 ];
 
 function NotationPage() {
+  const { year } = window.KIMES_EVENT;
+
   return (
     <PageShell
       eyebrow="05"
