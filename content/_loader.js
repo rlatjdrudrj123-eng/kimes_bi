@@ -41,6 +41,13 @@
     'social-templates',
   ];
 
+  // Non-i18n shared files (single locale, single source). admin/config.yml의
+  // "Downloads & Assets" 컬렉션이 편집하는 자산 다운로드 URL · status 토글
+  // 데이터는 한·영 동일하게 적용되므로 로케일 분기 없음.
+  const SHARED_FILES = [
+    'downloads',
+  ];
+
   const LOCALES = ['en', 'ko'];
   const LANG_STORAGE_KEY = 'kimes_ds_lang_v1';
 
@@ -91,8 +98,9 @@
   };
 
   window.CONTENT = {};
-  window.CONTENT_READY = Promise.all(
-    FILES.flatMap(name => LOCALES.map(loc =>
+  window.CONTENT_READY = Promise.all([
+    // i18n 섹션: 로케일별 두 파일.
+    ...FILES.flatMap(name => LOCALES.map(loc =>
       fetch(`content/${name}.${loc}.json`, { cache: 'no-store' })
         .then(r => {
           if (!r.ok) throw new Error(`content/${name}.${loc}.json: HTTP ${r.status}`);
@@ -108,8 +116,29 @@
           // other locale as a fallback.
           console.warn('[content-loader]', err.message || err);
         })
-    ))
-  ).then(() => window.CONTENT);
+    )),
+    // 공유 (non-i18n) 파일: 단일 파일.
+    // 로드 후 부수 효과로 window.KIMES_EVENT.assets.status를 downloads.json의
+    // status로 동기화 — 어드민에서 status 토글 시 사이트 전체 다운로드 버튼이
+    // 일괄 활성화되도록.
+    ...SHARED_FILES.map(name =>
+      fetch(`content/${name}.json`, { cache: 'no-store' })
+        .then(r => {
+          if (!r.ok) throw new Error(`content/${name}.json: HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(json => {
+          window.CONTENT[name] = json;
+          if (name === 'downloads' && json.status &&
+              window.KIMES_EVENT && window.KIMES_EVENT.assets) {
+            window.KIMES_EVENT.assets.status = json.status;
+          }
+        })
+        .catch(err => {
+          console.warn('[content-loader]', err.message || err);
+        })
+    ),
+  ]).then(() => window.CONTENT);
 
   // Convenience helper: returns the current-locale object for a section,
   // falling back to the other locale if the current one is missing.

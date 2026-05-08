@@ -1,29 +1,30 @@
-# Sveltia CMS configuration
+# Sveltia CMS 설정 — Downloads & Assets 단일 컬렉션
 # ---------------------------------------------------------------------------
-# Backend: github. Editors authenticate with their GitHub account; Sveltia
-# commits each save directly to this repo's `main` branch via the GitHub
-# REST API. For local development, "Work with Local Repository" reads/writes
-# files via the browser's File System Access API — no proxy needed.
+# 이 어드민은 현재 1개 영역만 관리합니다: 자산 다운로드 URL과 status 토글.
 #
-# Bilingual structure: every section has TWO file entries below — one for
-# English (.en.json) and one for Korean (.ko.json). Editors pick whichever
-# locale they need. The public site loads both at runtime and toggles via
-# the EN / 한국어 button in the sidebar.
+# legacy content/*.json (intro / color / typography / logo / typography-in-use
+# / logo-rules / logo-lockup / asset-library) 등 17개 파일은 어떤 활성 라우트
+# 에서도 읽히지 않는 상태이므로 admin 컬렉션에서 제외. 해당 콘텐츠를 살리
+# 려면 ContentLoader 매핑 + 컴포넌트 리팩터 필요 (별도 작업).
+#
+# §9~§15 새 페이지(FAQ / Applications / Permissions / Special Zones / Notation
+# / Downloads / Contact)의 const 데이터도 마찬가지로 컴포넌트 코드에 박혀
+# 있어 admin에서 직접 편집 불가. 자산 status 토글 + 다운로드 URL 채우기는
+# downloads.json 한 파일로 사이트 전체 다운로드 버튼 동작에 즉시 반영.
+#
+# 인증: GitHub OAuth (Netlify 자동 OAuth 프록시 — 별도 OAuth App 등록 불필요).
+# 저장소에 push 권한 있는 GitHub 계정으로 로그인하면 main 브랜치에 직접 커밋.
 
 backend:
-  # Sveltia supports github / gitlab / gitea / bitbucket / test-repo / local.
-  # For production, update `repo` below to <github-owner>/<repo>.
   name: github
   repo: rlatjdrudrj123-eng/kimes_bi
   branch: main
 
-# Where the CMS uploads images. Components reference these paths directly.
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-# Local-development mode. When the site is loaded from localhost, Sveltia
-# offers a "Work with Local Repository" option that uses the File System
-# Access API to read/write the project folder directly.
+# 로컬 개발 — localhost로 사이트 띄우면 "Work with Local Repository" 옵션이
+# 나타나 File System Access API로 직접 파일 편집.
 local_backend: true
 
 site_url: "/"
@@ -31,403 +32,61 @@ display_url: "/"
 logo_url: "/index.html"
 
 collections:
-  # =========================================================================
-  # English copy
-  # =========================================================================
-  - name: "foundations_en"
-    label: "Brand foundations · English"
-    description: "English copy for every section on the public site. Pick a section, edit, and Save — Sveltia commits to GitHub and Netlify rebuilds within ~30 seconds."
+  - name: "downloads_assets"
+    label: "Downloads & Assets"
+    description: "자산 다운로드 URL과 자산 상태 토글. status를 'ready'로 변경하면 사이트 전체 다운로드 버튼이 일괄 활성화됩니다. 각 항목의 url에 Google Drive 등 링크를 채우면 그 항목만 활성화됩니다. 저장 시 GitHub main 브랜치에 자동 커밋되고 Netlify가 30초 안에 재배포합니다."
     files:
-
-      - file: "content/intro.en.json"
-        name: "intro_en"
-        label: "01 — Intro / Hero"
+      - file: "content/downloads.json"
+        name: "downloads"
+        label: "Downloads & Assets"
         format: "json"
         fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
-          - name: "meta"
-            label: "Meta facts"
-            label_singular: "Fact"
-            widget: "list"
-            fields:
-              - { name: "label", label: "Label", widget: "string" }
-              - { name: "value", label: "Value", widget: "string" }
+          - name: "status"
+            label: "자산 상태"
+            hint: "pending = 모든 다운로드 버튼 비활성 (Coming Soon 표시) / ready = 활성화"
+            widget: "select"
+            options:
+              - { label: "준비 중 (Pending)", value: "pending" }
+              - { label: "공개 (Ready)", value: "ready" }
 
-      - file: "content/color.en.json"
-        name: "color_en"
-        label: "03 — Color tokens"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
-          - name: "groups"
-            label: "Brand color groups"
-            label_singular: "Group"
-            widget: "list"
-            fields:
-              - { name: "id",        label: "ID",                  widget: "string" }
-              - { name: "name",      label: "Brand name",          widget: "string" }
-              - { name: "indicator", label: "Indicator dot color", widget: "color" }
-              - { name: "note",      label: "Sub-text",            widget: "string" }
-              - name: "rows"
-                label: "Color rows"
-                label_singular: "Color"
-                widget: "list"
-                fields:
-                  - { name: "token", label: "Token (CSS var)", widget: "string" }
-                  - { name: "hex",   label: "HEX",             widget: "color" }
-                  - { name: "rgb",   label: "RGB",             widget: "string" }
-                  - { name: "cmyk",  label: "CMYK",            widget: "string" }
-                  - { name: "usage", label: "Usage notes",     widget: "text" }
-          - name: "tableHeaders"
-            label: "Table column labels"
+          - name: "bundle"
+            label: "통합 패키지"
+            hint: "/downloads 페이지 상단의 큰 카드"
             widget: "object"
             fields:
-              - { name: "token", label: "Token col",  widget: "string", default: "Token" }
-              - { name: "hex",   label: "HEX col",    widget: "string", default: "HEX" }
-              - { name: "rgb",   label: "RGB col",    widget: "string", default: "RGB" }
-              - { name: "cmyk",  label: "CMYK col",   widget: "string", default: "CMYK" }
-              - { name: "usage", label: "Usage col",  widget: "string", default: "Usage" }
+              - { name: "title", label: "패키지 제목", widget: "string" }
+              - { name: "desc",  label: "설명",        widget: "string" }
+              - { name: "ext",   label: "확장자",      widget: "string", default: ".zip" }
+              - { name: "size",  label: "용량",        widget: "string", default: "약 28 MB" }
+              - { name: "url",   label: "다운로드 URL", widget: "string", required: false, hint: "비워두면 비활성. Google Drive 또는 직접 호스팅 URL." }
 
-      - file: "content/typography.en.json"
-        name: "typography_en"
-        label: "06 — Typography"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
-          - name: "tabs"
-            label: "Tab labels"
-            widget: "object"
-            fields:
-              - { name: "latin", label: "Latin tab",  widget: "string" }
-              - { name: "kr",    label: "Korean tab", widget: "string" }
-          - name: "scaleLatin"
-            label: "Latin (Montserrat) scale"
-            label_singular: "Step"
+          - name: "categories"
+            label: "카테고리별 다운로드"
+            label_singular: "카테고리"
+            hint: "/downloads 페이지의 카테고리 아코디언"
             widget: "list"
             fields:
-              - { name: "token",  label: "Token",        widget: "string" }
-              - { name: "size",   label: "Size (px)",    widget: "number" }
-              - { name: "weight", label: "Weight",       widget: "number" }
-              - { name: "lh",     label: "Line height",  widget: "number", value_type: "float" }
-              - { name: "label",  label: "Label",        widget: "string" }
-              - { name: "sample", label: "Sample text",  widget: "text" }
-          - name: "scaleKr"
-            label: "Korean (Pretendard) scale"
-            label_singular: "Step"
-            widget: "list"
-            fields:
-              - { name: "token",  label: "Token",        widget: "string" }
-              - { name: "size",   label: "Size (px)",    widget: "number" }
-              - { name: "weight", label: "Weight",       widget: "number" }
-              - { name: "lh",     label: "Line height",  widget: "number", value_type: "float" }
-              - { name: "label",  label: "Label",        widget: "string" }
-              - { name: "sample", label: "Sample text",  widget: "text" }
-
-      - file: "content/logo.en.json"
-        name: "logo_en"
-        label: "08 — Logo catalog"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede (HTML allowed)", widget: "text" }
-          - name: "brands"
-            label: "Brands"
-            label_singular: "Brand"
-            widget: "list"
-            fields:
-              - { name: "id",    label: "ID",              widget: "string" }
-              - { name: "name",  label: "Brand name",      widget: "string" }
-              - { name: "color", label: "Indicator color", widget: "color" }
+              - { name: "id",    label: "ID",       widget: "string" }
+              - { name: "label", label: "카테고리 라벨", widget: "string" }
               - name: "items"
-                label: "Logo files"
-                label_singular: "File"
+                label: "항목"
+                label_singular: "자산"
                 widget: "list"
                 fields:
-                  - { name: "svg",   label: "SVG ref (LogoSvgs.js key)", widget: "string" }
-                  - { name: "file",  label: "Filename",                  widget: "string" }
-                  - { name: "label", label: "Label",                     widget: "string" }
-                  - { name: "h",     label: "Display height (px)",       widget: "number" }
-                  - { name: "dark",  label: "Dark tile",                 widget: "boolean", required: false, default: false }
-          - name: "familySignature"
-            label: "Family signature footer"
-            widget: "object"
-            fields:
-              - { name: "title", label: "Title",               widget: "string" }
-              - { name: "body",  label: "Body (HTML allowed)", widget: "text" }
+                  - { name: "name",     label: "이름",  widget: "string" }
+                  - { name: "url",      label: "URL",  widget: "string", required: false, hint: "비워두면 비활성. external이 true면 외부 링크 (새 탭)." }
+                  - { name: "size",     label: "용량", widget: "string", required: false }
+                  - { name: "external", label: "외부 링크?", widget: "boolean", default: false, hint: "Figma·Google Fonts·GitHub 등 외부 사이트 링크인 경우 체크" }
 
-      # ---------- 07 Typography in use (header only) ----------
-      - file: "content/typography-in-use.en.json"
-        name: "typography_in_use_en"
-        label: "07 — Typography in use"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
-
-      # ---------- 09 Logo rules (header only) ----------
-      - file: "content/logo-rules.en.json"
-        name: "logo_rules_en"
-        label: "09 — Logo rules"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
-
-      # ---------- 10 Logo lockup (header only) ----------
-      - file: "content/logo-lockup.en.json"
-        name: "logo_lockup_en"
-        label: "10 — Logo lockup"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
-
-      # ---------- 13 Asset library ----------
-      - file: "content/asset-library.en.json"
-        name: "asset_library_en"
-        label: "13 — Asset library"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "Eyebrow", widget: "string" }
-          - { name: "title",   label: "Title",   widget: "string" }
-          - { name: "lede",    label: "Lede paragraph", widget: "text" }
-          - name: "colors"
-            label: "Color values"
-            widget: "object"
-            fields:
-              - { name: "title",     label: "Sub-title",  widget: "string" }
-              - { name: "desc",      label: "Description", widget: "text" }
-              - { name: "copyLabel", label: "Copy button label", widget: "string" }
-              - name: "rows"
-                label: "Color rows"
-                label_singular: "Color"
-                widget: "list"
-                fields:
-                  - { name: "name",  label: "Name",  widget: "string" }
-                  - { name: "token", label: "Token", widget: "string" }
-                  - { name: "hex",   label: "HEX",   widget: "color" }
-                  - { name: "rgb",   label: "RGB",   widget: "string" }
-                  - { name: "cmyk",  label: "CMYK",  widget: "string" }
-          - name: "version"
-            label: "Version & legal"
-            widget: "object"
-            fields:
-              - { name: "title", label: "Sub-title", widget: "string" }
-              - { name: "fineprint", label: "Legal fineprint", widget: "text" }
-              - name: "rows"
-                label: "Meta rows"
-                label_singular: "Row"
-                widget: "list"
-                fields:
-                  - { name: "key",   label: "Key",        widget: "string" }
-                  - { name: "value", label: "Value",      widget: "string" }
-                  - { name: "mono",  label: "Monospace?", widget: "boolean", required: false, default: false }
-
-  # =========================================================================
-  # Korean copy — same schema as English, edits the .ko.json files
-  # =========================================================================
-  - name: "foundations_ko"
-    label: "Brand foundations · 한국어"
-    description: "공개 사이트 각 섹션의 한국어 콘텐츠. 섹션을 골라 수정한 뒤 Save를 누르면 Sveltia가 GitHub에 커밋하고 Netlify가 약 30초 안에 재배포합니다."
-    files:
-
-      - file: "content/intro.ko.json"
-        name: "intro_ko"
-        label: "01 — Intro / Hero (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
-          - name: "meta"
-            label: "메타 정보"
-            label_singular: "항목"
-            widget: "list"
-            fields:
-              - { name: "label", label: "라벨",  widget: "string" }
-              - { name: "value", label: "값",    widget: "string" }
-
-      - file: "content/color.ko.json"
-        name: "color_ko"
-        label: "03 — Color tokens (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
-          - name: "groups"
-            label: "브랜드별 컬러 그룹"
-            label_singular: "그룹"
+          - name: "applications"
+            label: "적용 예시 갤러리 (5종)"
+            label_singular: "사례"
+            hint: "/applications 페이지의 5개 카드"
             widget: "list"
             fields:
               - { name: "id",        label: "ID",          widget: "string" }
-              - { name: "name",      label: "브랜드명",    widget: "string" }
-              - { name: "indicator", label: "인디케이터 색", widget: "color" }
-              - { name: "note",      label: "보조 설명",    widget: "string" }
-              - name: "rows"
-                label: "색상 행"
-                label_singular: "색상"
-                widget: "list"
-                fields:
-                  - { name: "token", label: "토큰 (CSS 변수)", widget: "string" }
-                  - { name: "hex",   label: "HEX",            widget: "color" }
-                  - { name: "rgb",   label: "RGB",            widget: "string" }
-                  - { name: "cmyk",  label: "CMYK",           widget: "string" }
-                  - { name: "usage", label: "용도 설명",       widget: "text" }
-          - name: "tableHeaders"
-            label: "표 컬럼 라벨"
-            widget: "object"
-            fields:
-              - { name: "token", label: "토큰 컬럼",  widget: "string", default: "토큰" }
-              - { name: "hex",   label: "HEX 컬럼",   widget: "string", default: "HEX" }
-              - { name: "rgb",   label: "RGB 컬럼",   widget: "string", default: "RGB" }
-              - { name: "cmyk",  label: "CMYK 컬럼",  widget: "string", default: "CMYK" }
-              - { name: "usage", label: "용도 컬럼",  widget: "string", default: "용도" }
-
-      - file: "content/typography.ko.json"
-        name: "typography_ko"
-        label: "06 — Typography (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
-          - name: "tabs"
-            label: "탭 라벨"
-            widget: "object"
-            fields:
-              - { name: "latin", label: "라틴 탭",   widget: "string" }
-              - { name: "kr",    label: "한글 탭",   widget: "string" }
-          - name: "scaleLatin"
-            label: "라틴 (Montserrat) 스케일"
-            label_singular: "단계"
-            widget: "list"
-            fields:
-              - { name: "token",  label: "토큰",       widget: "string" }
-              - { name: "size",   label: "크기 (px)", widget: "number" }
-              - { name: "weight", label: "두께",       widget: "number" }
-              - { name: "lh",     label: "행간",       widget: "number", value_type: "float" }
-              - { name: "label",  label: "라벨",       widget: "string" }
-              - { name: "sample", label: "샘플 텍스트", widget: "text" }
-          - name: "scaleKr"
-            label: "한글 (Pretendard) 스케일"
-            label_singular: "단계"
-            widget: "list"
-            fields:
-              - { name: "token",  label: "토큰",       widget: "string" }
-              - { name: "size",   label: "크기 (px)", widget: "number" }
-              - { name: "weight", label: "두께",       widget: "number" }
-              - { name: "lh",     label: "행간",       widget: "number", value_type: "float" }
-              - { name: "label",  label: "라벨",       widget: "string" }
-              - { name: "sample", label: "샘플 텍스트", widget: "text" }
-
-      - file: "content/logo.ko.json"
-        name: "logo_ko"
-        label: "08 — Logo catalog (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", hint: "타이틀 바로 아래에 들어가는 도입 문단. <code>·</code> <b>·</b> 같은 인라인 HTML 허용", widget: "text" }
-          - name: "brands"
-            label: "브랜드"
-            label_singular: "브랜드"
-            widget: "list"
-            fields:
-              - { name: "id",    label: "ID",            widget: "string" }
-              - { name: "name",  label: "브랜드명",      widget: "string" }
-              - { name: "color", label: "인디케이터 색", widget: "color" }
-              - name: "items"
-                label: "로고 파일"
-                label_singular: "파일"
-                widget: "list"
-                fields:
-                  - { name: "svg",   label: "SVG 키 (LogoSvgs.js)", widget: "string" }
-                  - { name: "file",  label: "파일명",               widget: "string" }
-                  - { name: "label", label: "라벨",                 widget: "string" }
-                  - { name: "h",     label: "표시 높이 (px)",       widget: "number" }
-                  - { name: "dark",  label: "어두운 타일",          widget: "boolean", required: false, default: false }
-          - name: "familySignature"
-            label: "패밀리 시그니처 푸터"
-            widget: "object"
-            fields:
-              - { name: "title", label: "타이틀",            widget: "string" }
-              - { name: "body",  label: "본문 (HTML 가능)", widget: "text" }
-
-      - file: "content/typography-in-use.ko.json"
-        name: "typography_in_use_ko"
-        label: "07 — Typography in use (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
-
-      - file: "content/logo-rules.ko.json"
-        name: "logo_rules_ko"
-        label: "09 — Logo rules (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
-
-      - file: "content/logo-lockup.ko.json"
-        name: "logo_lockup_ko"
-        label: "10 — Logo lockup (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
-
-      - file: "content/asset-library.ko.json"
-        name: "asset_library_ko"
-        label: "13 — Asset library (한국어)"
-        format: "json"
-        fields:
-          - { name: "eyebrow", label: "헤드 라벨", widget: "string" }
-          - { name: "title",   label: "타이틀",   widget: "string" }
-          - { name: "lede",    label: "리드 문단", widget: "text" }
-          - name: "colors"
-            label: "컬러 값"
-            widget: "object"
-            fields:
-              - { name: "title",     label: "서브 타이틀", widget: "string" }
-              - { name: "desc",      label: "설명",        widget: "text" }
-              - { name: "copyLabel", label: "Copy 버튼 라벨", widget: "string" }
-              - name: "rows"
-                label: "컬러 행"
-                label_singular: "컬러"
-                widget: "list"
-                fields:
-                  - { name: "name",  label: "이름",  widget: "string" }
-                  - { name: "token", label: "토큰", widget: "string" }
-                  - { name: "hex",   label: "HEX",  widget: "color" }
-                  - { name: "rgb",   label: "RGB",  widget: "string" }
-                  - { name: "cmyk",  label: "CMYK", widget: "string" }
-          - name: "version"
-            label: "버전 / 법적 고지"
-            widget: "object"
-            fields:
-              - { name: "title",     label: "서브 타이틀", widget: "string" }
-              - { name: "fineprint", label: "법적 문구", widget: "text" }
-              - name: "rows"
-                label: "메타 행"
-                label_singular: "행"
-                widget: "list"
-                fields:
-                  - { name: "key",   label: "키",            widget: "string" }
-                  - { name: "value", label: "값",            widget: "string" }
-                  - { name: "mono",  label: "모노스페이스?", widget: "boolean", required: false, default: false }
-
+              - { name: "title",     label: "자료 제목",   widget: "string" }
+              - { name: "situation", label: "사용 상황",   widget: "string" }
+              - { name: "format",    label: "자료 형식",   widget: "string" }
+              - { name: "compat",    label: "호환",        widget: "string" }
+              - { name: "url",       label: "다운로드 URL", widget: "string", required: false }
