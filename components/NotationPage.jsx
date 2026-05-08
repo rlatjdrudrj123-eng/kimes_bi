@@ -1,7 +1,20 @@
-// §10 — /notation. 보도자료·웹사이트·인쇄물·SNS 어디든 KIMES를 언급할 때
-// 따라야 할 표기 규칙. 사소해 보이지만 통일성이 브랜드 신뢰도를 만듭니다.
+// §9 — /notation Writing Style. 보도자료·웹사이트·인쇄물·SNS 어디든
+// KIMES를 언급할 때 따라야 할 표기 규칙. 통일성이 브랜드 신뢰도를 만듭니다.
 //
-// 명세 §10.2.1~§10.2.7 평면 구조. 모든 표는 ✓ OK / ✗ 미권장 패턴.
+// 명세 §9.2.1~§9.2.9 평면 구조 — 9개 섹션:
+//   §9.2.1 Name Notation         — KIMES 명칭 표기
+//   §9.2.2 Edition               — 회차
+//   §9.2.3 Date & Time           — 날짜·시간
+//   §9.2.4 Place & Booth         — 장소·부스
+//   §9.2.5 Numbers               — 숫자
+//   §9.2.6 Separators            — 구분 기호
+//   §9.2.7 SNS Tag               — SNS 태그·해시태그 (이전 §12 /digital 흡수)
+//   §9.2.8 Restricted Expressions — 별도 계약·승인 필요 표현 (이전 §9 /co-branding 흡수)
+//   §9.2.9 Press Boilerplate     — 보도자료 보일러플레이트 한·영
+//
+// /co-branding 페이지(이전 §9)는 70% 디자이너 영역이라 통째로 제거. /digital
+// 페이지(이전 §12)는 §6.2.3 / §6.2.5와 정보 중복으로 통째로 제거. 두 페이지
+// 의 핵심 정보(Restricted Expressions / SNS Tag)만 본 페이지로 흡수.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
@@ -27,12 +40,30 @@ const DATE_RULES = [
   { case: '✗ 피해주세요', ko: 'hyphen(-)으로 범위', en: 'hyphen for ranges', bad: true },
 ];
 
-// 10.2.4 장소·부스
+// 9.2.4 장소·부스
 const PLACE_RULES = [
   { case: '장소',       ok: '코엑스 / COEX',                       bad: '코엑스 컨벤션센터' },
   { case: '홀',         ok: 'Hall A · Hall B–E',                    bad: 'A홀, B-E홀' },
   { case: '부스',       ok: 'Booth A-101 (영문 ALL CAPS, 하이픈)',   bad: 'booth a101 / A101' },
   { case: '한글 표기',  ok: '부스 A-101',                            bad: 'A-101부스' },
+];
+
+// 9.2.7 SNS 태그·해시태그 — 이전 §12 /digital의 SNS Channels에서 흡수
+const SNS_RULES = [
+  { item: '공식 태그',     value: '@kimes_official',                       hint: 'SNS 게시물 캡션에 멘션' },
+  { item: '해시태그',      value: '#KIMES2027 · #KIMES · #의료기기전시회 · #COEX', hint: '게시물 본문 또는 캡션 끝' },
+  { item: '라이브 스트리밍', value: 'KIMES 로고 노출 시 사전 통보 권장',     hint: '의무 아님 — 사무국 노출 추적용' },
+];
+
+// 9.2.8 별도 계약·승인 필요 표현 — 이전 §9 /co-branding의 Restricted에서 흡수
+const RESTRICTED = [
+  'KIMES 공식 파트너 / Official Partner of KIMES',
+  'KIMES 추천 / KIMES Recommended',
+  'KIMES 인증 / KIMES Certified',
+  'KIMES 후원 / Sponsored by KIMES',
+  'KIMES 주최 / Organized by KIMES',
+  'KIMES 로고를 회사 로고와 합친 새 로고',
+  '"KIMES 2027 official ___" 형태의 모든 표현',
 ];
 
 // 10.2.5 숫자 — 4 룰
@@ -65,10 +96,10 @@ Official site: kimes.kr · Contact: ${contact.email} · ${contact.tel}`;
 
   return (
     <PageShell
-      eyebrow="06"
+      eyebrow="05"
       title="Writing Style"
       subtitle="공식 표기 규칙"
-      lede="보도자료·웹사이트·인쇄물·SNS 어디든 한 줄 안에 KIMES를 언급할 때 따라야 할 표기 규칙입니다. 사소해 보이지만 통일성이 브랜드 신뢰도를 만듭니다."
+      lede="보도자료·웹사이트·인쇄물·SNS 어디든 KIMES를 언급할 때 따라야 할 표기 규칙입니다. 명칭·날짜·숫자·구분 기호 + SNS 태그·해시태그 + 별도 계약 필요 표현 + 보도자료 보일러플레이트까지 한 페이지에서 확인하실 수 있습니다."
     >
       {/* §10.2.1 명칭 표기 ----------------------------------------------- */}
       <SectionHeading id="name" title="Name Notation" subtitle="KIMES 명칭 표기" />
@@ -159,7 +190,48 @@ Official site: kimes.kr · Contact: ${contact.email} · ${contact.tel}`;
         </tbody>
       </table>
 
-      {/* §10.2.7 보일러플레이트 ----------------------------------------- */}
+      {/* §9.2.7 SNS 태그·해시태그 (이전 §12 /digital 흡수) ------------- */}
+      <SectionHeading id="sns" title="SNS Tag" subtitle="SNS 태그·해시태그" />
+      <p>
+        SNS 콘텐츠에 KIMES 워드마크가 등장할 때 캡션에 공식 태그를 권장합니다.
+        의무는 아니나 사무국 노출 추적·답례 인사 자료로 활용됩니다.
+      </p>
+      <table className="ws-table">
+        <thead>
+          <tr><th>항목</th><th>권장</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          {SNS_RULES.map((r, i) => (
+            <tr key={i}>
+              <td>{r.item}</td>
+              <td><code>{r.value}</code></td>
+              <td className="ws-sns-hint">{r.hint}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* §9.2.8 별도 계약·승인 필요 표현 (이전 §9 /co-branding 흡수) --- */}
+      <SectionHeading id="restricted" title="Restricted Expressions" subtitle="별도 계약·승인이 필요한 표현" />
+      <section className="ws-restricted">
+        <p>
+          다음 표현은 별도 계약·승인이 필요합니다. 사용 전 사무국과 협의해
+          주세요.
+        </p>
+        <ul className="ws-restricted-list">
+          {RESTRICTED.map((r, i) => <li key={i}>{r}</li>)}
+        </ul>
+        <div className="ws-restricted-actions">
+          <a href="#/contact?type=license" className="btn btn-primary btn-md">
+            라이선스 문의 →
+          </a>
+          <span className="ws-restricted-channel">
+            {window.KIMES_EVENT.contact.email} · {window.KIMES_EVENT.contact.tel}
+          </span>
+        </div>
+      </section>
+
+      {/* §9.2.9 보일러플레이트 ------------------------------------------ */}
       <SectionHeading id="boilerplate" title="Press Boilerplate" subtitle="보도자료 표준 보일러플레이트" />
       <p>
         보도자료 끝에 그대로 붙일 수 있는 한·영 두 가지 표준 보일러플레이트

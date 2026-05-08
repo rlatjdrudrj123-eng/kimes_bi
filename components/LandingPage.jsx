@@ -13,14 +13,14 @@ const Link = window.Link;
 
 // §4.2.4 자주 찾는 자료 — 4×2 그리드의 8개 타일.
 const QUICK_LINKS = [
-  { to: '/downloads',   label: '로고 패키지',           desc: '.zip 통합 패키지',           icon: 'download' },
-  { to: '/overview',    label: '공식 명칭 한·영',       desc: '복사해서 바로 사용',          icon: 'doc' },
-  { to: '/co-branding', label: '부스 표기 양식',        desc: 'KIMES + 자사 로고 합쳐 쓰기', icon: 'booth' },
-  { to: '/co-branding', label: '이메일 서명 배너',      desc: '메일 마지막에 첨부',          icon: 'mail' },
-  { to: '/co-branding', label: 'SNS 카드 양식',          desc: '인스타·링크드인 공유용',       icon: 'sns' },
-  { to: '/overview',    label: '보도자료 보일러플레이트', desc: '40·100·200·400자',           icon: 'press' },
-  { to: '/faq',         label: '자주 묻는 질문',          desc: '9개 분류 30개 답변',          icon: 'help' },
-  { to: '/contact',     label: '승인 신청',              desc: '특수 사용 사전 검토',         icon: 'check' },
+  { to: '/downloads',    label: '에셋 패키지',           desc: '.zip 통합 패키지',           icon: 'download' },
+  { to: '/overview',     label: '공식 명칭 한·영',       desc: '복사해서 바로 사용',          icon: 'doc' },
+  { to: '/notation',     label: '표기 규칙',              desc: '명칭·날짜·숫자·SNS 태그',     icon: 'doc' },
+  { to: '/applications', label: '이메일 서명 배너',      desc: '메일 마지막에 첨부',          icon: 'mail' },
+  { to: '/applications', label: 'SNS 카드 양식',          desc: '인스타·링크드인 공유용',       icon: 'sns' },
+  { to: '/overview',     label: '보도자료 보일러플레이트', desc: '40·100·200·400자',           icon: 'press' },
+  { to: '/faq',          label: '자주 묻는 질문',          desc: '9개 분류 29개 답변',          icon: 'help' },
+  { to: '/contact',      label: '승인 신청',              desc: '특수 사용 사전 검토',         icon: 'check' },
 ];
 
 // §4.2.5 최근 3개 공지. /changelog와 동일한 데이터 — Phase 4에서 JSON으로
@@ -122,8 +122,8 @@ function LandingPage() {
           <li className="landing-step">
             <span className="landing-step-num" aria-hidden="true">3</span>
             <div className="landing-step-body">
-              <span className="landing-step-title">우리 회사와 같이 쓰기</span>
-              <Link to="/co-branding" className="landing-step-link">/co-branding →</Link>
+              <span className="landing-step-title">텍스트·표기 규칙 확인</span>
+              <Link to="/notation" className="landing-step-link">/notation →</Link>
             </div>
           </li>
         </ol>

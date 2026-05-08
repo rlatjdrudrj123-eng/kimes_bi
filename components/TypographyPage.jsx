@@ -221,7 +221,7 @@ function TypographyPage() {
       {/* §8.6 cross-link ------------------------------------------------- */}
       <p className="ty-cross">
         로고 에셋은 → <Link to="/logo">/logo</Link>{' · '}
-        우리 회사 로고와 함께 사용은 → <Link to="/co-branding">/co-branding</Link>
+        표기 규칙·승인 필요 표현은 → <Link to="/notation">/notation</Link>
       </p>
     </PageShell>
   );

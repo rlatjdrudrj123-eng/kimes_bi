@@ -89,8 +89,8 @@ function SpecialZonesIndex() {
 
       <p className="sz-foot-note">
         특별관 단독 표기는 특별관 안에서만 사용합니다. 외부 자료(보도자료·
-        회사 홈페이지·SNS 등)에서는 KIMES와 함께 표기해주세요. 자세한 락업
-        룰은 → <Link to="/co-branding">/co-branding</Link>.
+        회사 홈페이지·SNS 등)에서는 KIMES와 함께 표기해주세요. 표기 규칙은
+        → <Link to="/notation">/notation</Link>.
       </p>
     </PageShell>
   );
@@ -203,7 +203,7 @@ function ZoneDetail({ slug }) {
 
       <p className="sz-cross">
         특별관 인덱스 → <Link to="/special-zones">/special-zones</Link>{' · '}
-        함께 표기 룰 → <Link to="/co-branding">/co-branding</Link>
+        표기 규칙 → <Link to="/notation">/notation</Link>
       </p>
     </PageShell>
   );

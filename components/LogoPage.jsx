@@ -127,7 +127,7 @@ const DONTS = [
   { id: 4, title: '색 반전',                          desc: 'KIMES Red·흰·검 외 색 반전을 피해주세요', bad: 'invert' },
   { id: 5, title: '화질 낮은 이미지 사용',             desc: 'SVG 또는 고해상도 PNG를 사용해주세요',   bad: 'lowres' },
   { id: 6, title: '비공식 워드마크 사용',              desc: '/logo에서 받은 공식 SVG만 사용해주세요',  bad: 'unofficial' },
-  { id: 7, title: '회사 로고와 잘못된 락업',           desc: '/co-branding의 락업 룰을 참고해주세요',   bad: 'badlockup' },
+  { id: 7, title: '회사 로고와 잘못된 락업',           desc: '시각적 무게가 비슷하도록 배치해주세요',   bad: 'badlockup' },
 ];
 
 const MIN_SIZES = [
