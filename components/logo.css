@@ -405,15 +405,14 @@
 .lg-color-bar-mark.dark  { background: var(--text-primary); }
 .lg-color-bar-mark.light { background: var(--kimes-gray); color: var(--text-primary); }
 
-/* ---------- §6.2.6 Don'ts 12종 그리드 ---------- */
+/* ---------- §6.2.6 Don'ts 8종 그리드 (4×2 데스크톱 / 2×4 태블릿 / 1열 모바일) ---------- */
 .lg-donts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-2);
   margin: var(--space-2) 0;
 }
-@media (max-width: 1100px) { .lg-donts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 800px)  { .lg-donts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 1100px) { .lg-donts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px)  { .lg-donts { grid-template-columns: 1fr; } }
 
 .lg-dont {
@@ -469,7 +468,7 @@
 /* (페이지 끝 안내 박스 — KT 결로 정보 전달 톤만 유지하기 위해 제거.
    필요한 메시지는 lede 한 문장으로 압축됨.) */
 
-/* ---------- 잘못된 예시 12종 (CSS만으로 KIMES 워드마크 변형 재현) ---------- */
+/* ---------- 권장하지 않는 사용 8종 (CSS만으로 재현) ---------- */
 .lg-bad {
   display: inline-flex;
   align-items: center;
@@ -478,67 +477,63 @@
   max-width: 100%;
 }
 
-/* 1. 색 바꾸기 — hue-rotate으로 KIMES Red를 다른 색으로 */
+/* #1 색 변경 — hue-rotate으로 KIMES Red를 다른 색으로 */
 .lg-bad-color { filter: hue-rotate(150deg); }
 
-/* 2. i 안의 검은 쐐기 제거 — viewBox 기준 i 위치(약 51-64 / 218.94)에
-   흰 사각형 오버레이로 검은 쐐기를 가림 */
-.lg-bad-wedge { position: relative; }
-.lg-bad-wedge-cover {
-  position: absolute;
-  /* SVG의 51.29~64 → 약 23.4%~29.2%, 위쪽 절반 */
-  left: 23.4%;
-  top: 0;
-  width: 5.8%;
-  height: 45%;
-  background: #fff;
-  pointer-events: none;
-}
-
-/* 3. 가로 늘리기 */
+/* #2 크기 변형 — 가로로 늘이기 */
 .lg-bad-stretch svg { transform: scaleX(1.6); transform-origin: left center; }
 
-/* 4. 회전 */
-.lg-bad-rotate { transform: rotate(-9deg); }
+/* #3 다른 폰트로 재타이핑 — SVG 워드마크 대신 시스템 serif로 "KIMES" */
+.lg-bad-font-text {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  color: var(--kimes-red);
+  font-style: italic;
+}
 
-/* 5. 그림자 */
-.lg-bad-shadow svg { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
-
-/* 6. 그라디언트 채움 — saturate/contrast/hue 조작으로 무지개 느낌 */
-.lg-bad-gradient { filter: hue-rotate(50deg) saturate(2) contrast(0.85); }
-.lg-bad-gradient::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(255,200,0,0.55), rgba(0,180,255,0.55));
-  mix-blend-mode: hue;
+/* #4 워드마크 위 텍스트·그래픽 겹치기 — 우상단 작은 라벨 오버레이 */
+.lg-bad-overlay { position: relative; }
+.lg-bad-overlay-tag {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: var(--kimes-black);
+  padding: 2px 5px;
+  border-radius: 2px;
   pointer-events: none;
 }
 
-/* (옛 #7 다른 폰트 재타이핑 변형은 §8.2 텍스트 자유 조판 영역으로
-   이전되어 Don'ts에서 제외됨 — .lg-bad-font 규칙 삭제) */
-
-/* 7. 박스/원 안에 가두기 (옛 #8) */
-.lg-bad-box {
-  border: 2px solid var(--kimes-red);
-  border-radius: 999px;
-  padding: 4px 14px;
+/* #5 색 반전 — 빨강을 옅은 파랑으로 invert + 배경 다크 */
+.lg-bad-invert {
+  background: var(--kimes-black);
+  padding: 4px 8px;
+  border-radius: 2px;
 }
+.lg-bad-invert svg { filter: invert(1) hue-rotate(180deg); }
 
-/* 9. 입체·3D — perspective + rotateY */
-.lg-bad-3d { transform: perspective(80px) rotateY(20deg); transform-origin: center; }
+/* #6 화질 낮은 이미지 — blur로 픽셀화 시뮬레이션 */
+.lg-bad-lowres svg { filter: blur(1.6px) contrast(0.9); }
 
-/* 10. 일부 잘라내기 — clip-path */
-.lg-bad-crop svg { clip-path: inset(0 32% 0 0); }
-
-/* 11. 회사 로고와 합치기 */
-.lg-bad-merge { gap: 6px; }
-.lg-bad-merge-plus {
+/* #7 비공식 워드마크 — 워드마크 옆에 추가 단어 ("KOREA") */
+.lg-bad-unofficial { gap: 4px; }
+.lg-bad-unofficial-extra {
   font-family: var(--font-display);
-  font-weight: 600;
-  color: var(--text-muted);
-  font-size: 14px;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--kimes-red);
+  letter-spacing: -0.01em;
 }
-.lg-bad-merge-co {
+
+/* #8 회사 로고와 잘못된 락업 — 가짜 회사 배지가 워드마크에 너무 붙음 */
+.lg-bad-badlockup { gap: 2px; }
+.lg-bad-badlockup-co {
   font-family: 'Arial', sans-serif;
   font-weight: 800;
   font-size: 14px;
@@ -547,19 +542,6 @@
   padding: 3px 7px;
   border-radius: 2px;
   letter-spacing: 0.02em;
-}
-
-/* 12. 패턴 채움 — 워드마크 위에 사선 줄무늬 오버레이 */
-.lg-bad-pattern { position: relative; }
-.lg-bad-pattern::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent 0 3px,
-    rgba(255, 255, 255, 0.7) 3px 6px
-  );
-  pointer-events: none;
 }
 
 /* ---------- §6.2.7 사용 신청 박스 ---------- */

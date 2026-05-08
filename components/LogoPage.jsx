@@ -115,21 +115,18 @@ const COLOR_SEGMENTS = [
   { id: 'gray', bg: '#A7A9AC', wordmark: 'kimesBlack', wmLabel: '블랙' },
 ];
 
-// §6.2.6 Don'ts — 11종. 워드마크 SVG에 적용되는 변형 사례 (✗ 시각 신호로
-// 권장하지 않음을 명확히 안내). 텍스트 표기(다른 폰트로 "KIMES" 표기)는
-// §8 마케팅·콘텐츠 영역으로 이전 — 이 목록에서 제외.
+// §6.2.6 Don'ts — 8종. 워드마크 SVG에 빈도 높은 잘못된 사용 사례 (✗ 시각
+// 신호로 권장하지 않음을 명확히 안내). 회전·효과·박스 가두기 등 가이드
+// 범위 밖 케이스는 제외해 단순화.
 const DONTS = [
-  { id: 1,  title: '색 바꾸기',                     desc: '회사 컬러로 통일하지 않습니다',  bad: 'color' },
-  { id: 2,  title: '검은 쐐기 제거',                desc: 'i 안의 디테일을 지우지 않습니다', bad: 'wedge' },
-  { id: 3,  title: '가로·세로 늘리기',              desc: '비율을 변형하지 않습니다',       bad: 'stretch' },
-  { id: 4,  title: '회전·기울이기',                 desc: '수평을 깨뜨리지 않습니다',       bad: 'rotate' },
-  { id: 5,  title: '그림자·외곽선·글로우',           desc: '효과를 추가하지 않습니다',       bad: 'shadow' },
-  { id: 6,  title: '그라디언트 채움',                desc: '단색 외 채움을 쓰지 않습니다',   bad: 'gradient' },
-  { id: 7,  title: '원·박스·배지 안에 가두기',       desc: '컨테이너 안에 넣지 않습니다',    bad: 'box' },
-  { id: 8,  title: '입체·3D 효과',                  desc: '평면 워드마크를 유지합니다',    bad: '3d' },
-  { id: 9,  title: '워드마크 일부 잘라내기',         desc: '글자를 가리지 않습니다',         bad: 'crop' },
-  { id: 10, title: '회사 로고와 합쳐 새 로고 만들기', desc: '독립 워드마크로 유지합니다',     bad: 'merge' },
-  { id: 11, title: '패턴·텍스처 채움',                desc: '단색 채움만 사용합니다',         bad: 'pattern' },
+  { id: 1, title: '색 변경',                          desc: '회사 컬러로 통일하지 않습니다',          bad: 'color' },
+  { id: 2, title: '크기 변형 (가로·세로 늘이기)',      desc: '비율을 변형하지 않습니다',               bad: 'stretch' },
+  { id: 3, title: '다른 폰트로 재타이핑',              desc: '"KIMES" 텍스트로 바꾸지 않고 SVG 그대로', bad: 'font' },
+  { id: 4, title: '워드마크 위 텍스트·그래픽 겹치기',   desc: '워드마크 위에 다른 요소를 얹지 않습니다', bad: 'overlay' },
+  { id: 5, title: '색 반전',                          desc: 'KIMES Red·흰·검 외 색 반전을 피해주세요', bad: 'invert' },
+  { id: 6, title: '화질 낮은 이미지 사용',             desc: 'SVG 또는 고해상도 PNG를 사용해주세요',   bad: 'lowres' },
+  { id: 7, title: '비공식 워드마크 사용',              desc: '/logo에서 받은 공식 SVG만 사용해주세요',  bad: 'unofficial' },
+  { id: 8, title: '회사 로고와 잘못된 락업',           desc: '/co-branding의 락업 룰을 참고해주세요',   bad: 'badlockup' },
 ];
 
 const MIN_SIZES = [
@@ -432,31 +429,46 @@ function DontCard({ d }) {
   );
 }
 
-// 권장하지 않는 KIMES 워드마크 변형 11종을 CSS만으로 재현. 별도 이미지
+// 권장하지 않는 KIMES 워드마크 사용 8종을 CSS만으로 재현. 별도 이미지
 // 자산 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
-// "다른 폰트로 다시 타이핑" 항목은 §8 텍스트 표기 영역으로 이전되어 이
-// 목록에서 제외 — variant 'font' case 제거됨.
 function BadExample({ variant }) {
-  // 회사 로고와 합쳐(#10): 워드마크 + "×" + 가짜 회사 배지.
-  if (variant === 'merge') {
+  // #3 다른 폰트로 재타이핑 — 워드마크 SVG 대신 시스템 폰트 텍스트로
+  if (variant === 'font') {
     return (
       <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
-        <KimesWordmark height={22} />
-        <span className="lg-bad-merge-plus">×</span>
-        <span className="lg-bad-merge-co">CO.</span>
+        <span className="lg-bad-font-text">KIMES</span>
       </span>
     );
   }
-  // 쐐기 제거(#2): 워드마크 위에 흰 사각형 오버레이로 i의 검은 쐐기 가림.
-  if (variant === 'wedge') {
+  // #4 워드마크 위 텍스트·그래픽 겹치기 — 워드마크 위 작은 라벨 오버레이
+  if (variant === 'overlay') {
     return (
       <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
         <KimesWordmark height={28} />
-        <span className="lg-bad-wedge-cover" />
+        <span className="lg-bad-overlay-tag">NEW</span>
       </span>
     );
   }
-  // 나머지는 KIMES 워드마크에 CSS 클래스만 부착.
+  // #7 비공식 워드마크 — 워드마크 옆에 추가 단어로 비공식 변형 시뮬레이션
+  if (variant === 'unofficial') {
+    return (
+      <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
+        <KimesWordmark height={28} />
+        <span className="lg-bad-unofficial-extra">KOREA</span>
+      </span>
+    );
+  }
+  // #8 회사 로고와 잘못된 락업 — 워드마크 + 가짜 회사 배지 (간격 없이 붙음)
+  if (variant === 'badlockup') {
+    return (
+      <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
+        <span className="lg-bad-badlockup-co">CO.</span>
+        <KimesWordmark height={22} />
+      </span>
+    );
+  }
+  // 나머지(color / stretch / invert / lowres)는 워드마크에 CSS 필터·
+  // transform·overlay만 적용.
   return (
     <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
       <KimesWordmark height={28} />
