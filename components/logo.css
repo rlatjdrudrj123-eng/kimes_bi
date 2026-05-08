@@ -405,15 +405,21 @@
 .lg-color-bar-mark.dark  { background: var(--text-primary); }
 .lg-color-bar-mark.light { background: var(--kimes-gray); color: var(--text-primary); }
 
-/* ---------- §6.2.6 Don'ts 8종 그리드 (4×2 데스크톱 / 2×4 태블릿 / 1열 모바일) ---------- */
+/* ---------- §6.2.6 Don'ts 7종 (데스크톱 4+3 가운데 / 태블릿 2열 / 모바일 1열) ----------
+   7개를 깔끔히 배치하기 위해 grid 대신 flex+wrap+center. 데스크톱에서
+   첫 줄 4개 가득, 둘째 줄 3개가 가운데 정렬돼 외로운 빈 칸 X. */
 .lg-donts {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2);
   margin: var(--space-2) 0;
 }
-@media (max-width: 1100px) { .lg-donts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 480px)  { .lg-donts { grid-template-columns: 1fr; } }
+.lg-dont {
+  flex: 0 1 calc(25% - var(--space-2) * 3 / 4);
+}
+@media (max-width: 1100px) { .lg-dont { flex: 0 1 calc(50% - var(--space-2) / 2); } }
+@media (max-width: 480px)  { .lg-dont { flex: 0 1 100%; } }
 
 .lg-dont {
   position: relative;
@@ -483,17 +489,7 @@
 /* #2 크기 변형 — 가로로 늘이기 */
 .lg-bad-stretch svg { transform: scaleX(1.6); transform-origin: left center; }
 
-/* #3 다른 폰트로 재타이핑 — SVG 워드마크 대신 시스템 serif로 "KIMES" */
-.lg-bad-font-text {
-  font-family: 'Times New Roman', Georgia, serif;
-  font-weight: 700;
-  font-size: 28px;
-  letter-spacing: 0.02em;
-  color: var(--kimes-red);
-  font-style: italic;
-}
-
-/* #4 워드마크 위 텍스트·그래픽 겹치기 — 우상단 작은 라벨 오버레이 */
+/* #3 워드마크 위 텍스트·그래픽 겹치기 — 우상단 작은 라벨 오버레이 */
 .lg-bad-overlay { position: relative; }
 .lg-bad-overlay-tag {
   position: absolute;
@@ -510,7 +506,7 @@
   pointer-events: none;
 }
 
-/* #5 색 반전 — 빨강을 옅은 파랑으로 invert + 배경 다크 */
+/* #4 색 반전 — 빨강을 옅은 파랑으로 invert + 배경 다크 */
 .lg-bad-invert {
   background: var(--kimes-black);
   padding: 4px 8px;
@@ -518,10 +514,10 @@
 }
 .lg-bad-invert svg { filter: invert(1) hue-rotate(180deg); }
 
-/* #6 화질 낮은 이미지 — blur로 픽셀화 시뮬레이션 */
+/* #5 화질 낮은 이미지 — blur로 픽셀화 시뮬레이션 */
 .lg-bad-lowres svg { filter: blur(1.6px) contrast(0.9); }
 
-/* #7 비공식 워드마크 — 워드마크 옆에 추가 단어 ("KOREA") */
+/* #6 비공식 워드마크 — 워드마크 옆에 추가 단어 ("KOREA") */
 .lg-bad-unofficial { gap: 4px; }
 .lg-bad-unofficial-extra {
   font-family: var(--font-display);
@@ -531,7 +527,7 @@
   letter-spacing: -0.01em;
 }
 
-/* #8 회사 로고와 잘못된 락업 — 가짜 회사 배지가 워드마크에 너무 붙음 */
+/* #7 회사 로고와 잘못된 락업 — 가짜 회사 배지가 워드마크에 너무 붙음 */
 .lg-bad-badlockup { gap: 2px; }
 .lg-bad-badlockup-co {
   font-family: 'Arial', sans-serif;

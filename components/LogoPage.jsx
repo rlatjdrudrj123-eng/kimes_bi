@@ -115,18 +115,19 @@ const COLOR_SEGMENTS = [
   { id: 'gray', bg: '#A7A9AC', wordmark: 'kimesBlack', wmLabel: '블랙' },
 ];
 
-// §6.2.6 Don'ts — 8종. 워드마크 SVG에 빈도 높은 잘못된 사용 사례 (✗ 시각
+// §6.2.6 Don'ts — 7종. 워드마크 SVG에 빈도 높은 잘못된 사용 사례 (✗ 시각
 // 신호로 권장하지 않음을 명확히 안내). 회전·효과·박스 가두기 등 가이드
-// 범위 밖 케이스는 제외해 단순화.
+// 범위 밖 케이스 제외. "다른 폰트 재타이핑"은 §8 텍스트 표기 자유 메시지
+// 와 충돌해 제외 — #6 "비공식 워드마크 사용"이 보증 자리 재타이핑을
+// 자연스럽게 커버.
 const DONTS = [
   { id: 1, title: '색 변경',                          desc: '회사 컬러로 통일하지 않습니다',          bad: 'color' },
   { id: 2, title: '크기 변형 (가로·세로 늘이기)',      desc: '비율을 변형하지 않습니다',               bad: 'stretch' },
-  { id: 3, title: '다른 폰트로 재타이핑',              desc: '"KIMES" 텍스트로 바꾸지 않고 SVG 그대로', bad: 'font' },
-  { id: 4, title: '워드마크 위 텍스트·그래픽 겹치기',   desc: '워드마크 위에 다른 요소를 얹지 않습니다', bad: 'overlay' },
-  { id: 5, title: '색 반전',                          desc: 'KIMES Red·흰·검 외 색 반전을 피해주세요', bad: 'invert' },
-  { id: 6, title: '화질 낮은 이미지 사용',             desc: 'SVG 또는 고해상도 PNG를 사용해주세요',   bad: 'lowres' },
-  { id: 7, title: '비공식 워드마크 사용',              desc: '/logo에서 받은 공식 SVG만 사용해주세요',  bad: 'unofficial' },
-  { id: 8, title: '회사 로고와 잘못된 락업',           desc: '/co-branding의 락업 룰을 참고해주세요',   bad: 'badlockup' },
+  { id: 3, title: '워드마크 위 텍스트·그래픽 겹치기',   desc: '워드마크 위에 다른 요소를 얹지 않습니다', bad: 'overlay' },
+  { id: 4, title: '색 반전',                          desc: 'KIMES Red·흰·검 외 색 반전을 피해주세요', bad: 'invert' },
+  { id: 5, title: '화질 낮은 이미지 사용',             desc: 'SVG 또는 고해상도 PNG를 사용해주세요',   bad: 'lowres' },
+  { id: 6, title: '비공식 워드마크 사용',              desc: '/logo에서 받은 공식 SVG만 사용해주세요',  bad: 'unofficial' },
+  { id: 7, title: '회사 로고와 잘못된 락업',           desc: '/co-branding의 락업 룰을 참고해주세요',   bad: 'badlockup' },
 ];
 
 const MIN_SIZES = [
@@ -429,18 +430,10 @@ function DontCard({ d }) {
   );
 }
 
-// 권장하지 않는 KIMES 워드마크 사용 8종을 CSS만으로 재현. 별도 이미지
+// 권장하지 않는 KIMES 워드마크 사용 7종을 CSS만으로 재현. 별도 이미지
 // 자산 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
 function BadExample({ variant }) {
-  // #3 다른 폰트로 재타이핑 — 워드마크 SVG 대신 시스템 폰트 텍스트로
-  if (variant === 'font') {
-    return (
-      <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
-        <span className="lg-bad-font-text">KIMES</span>
-      </span>
-    );
-  }
-  // #4 워드마크 위 텍스트·그래픽 겹치기 — 워드마크 위 작은 라벨 오버레이
+  // #3 워드마크 위 텍스트·그래픽 겹치기 — 워드마크 위 작은 라벨 오버레이
   if (variant === 'overlay') {
     return (
       <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
@@ -449,7 +442,7 @@ function BadExample({ variant }) {
       </span>
     );
   }
-  // #7 비공식 워드마크 — 워드마크 옆에 추가 단어로 비공식 변형 시뮬레이션
+  // #6 비공식 워드마크 — 워드마크 옆에 추가 단어로 비공식 변형 시뮬레이션
   if (variant === 'unofficial') {
     return (
       <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
@@ -458,7 +451,7 @@ function BadExample({ variant }) {
       </span>
     );
   }
-  // #8 회사 로고와 잘못된 락업 — 워드마크 + 가짜 회사 배지 (간격 없이 붙음)
+  // #7 회사 로고와 잘못된 락업 — 워드마크 + 가짜 회사 배지 (간격 없이 붙음)
   if (variant === 'badlockup') {
     return (
       <span className={`lg-bad lg-bad-${variant}`} aria-hidden="true">
