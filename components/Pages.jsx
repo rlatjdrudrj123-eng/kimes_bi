@@ -36,13 +36,7 @@ function Stub({ sectionRef }) {
 
 // ApplicationsPage는 components/ApplicationsPage.jsx에서 정의 (§11 작업으로 분리).
 
-function DigitalPage() {
-  return (
-    <PageShell eyebrow="08" title="디지털·SNS 자산 가이드" toc={false}>
-      <Stub sectionRef="§12" />
-    </PageShell>
-  );
-}
+// DigitalPage는 components/DigitalPage.jsx에서 정의 (§12 작업으로 분리).
 
 function SpecialZonesIndex() {
   return (
@@ -146,7 +140,7 @@ Object.assign(window, {
   // CoBrandingPage:  별도 파일 components/CoBrandingPage.jsx에서 직접 등록
   // NotationPage:    별도 파일 components/NotationPage.jsx에서 직접 등록
   // ApplicationsPage: 별도 파일 components/ApplicationsPage.jsx에서 직접 등록
-  DigitalPage,
+  // DigitalPage:     별도 파일 components/DigitalPage.jsx에서 직접 등록
   SpecialZonesIndex,
   SpecialZoneMedicomtek,
   SpecialZoneBeautyDerma,
