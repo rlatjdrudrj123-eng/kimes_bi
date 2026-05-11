@@ -1,7 +1,10 @@
-// §9 — /faq (v2027.1). 사무국 자주 받는 질문 29개. 검색창 + 카테고리 필터
-// + 아코디언. 데이터: content/faq.json (어드민 편집).
+// §13 — /faq. 사무국이 받는 같은 질문을 미리 답해두는 페이지. 검색창 +
+// 카테고리 필터 + 아코디언.
+//
+// 데이터 출처: content/faq.json — 어드민(/admin/)에서 추가/수정/삭제 가능.
 
 const PageShell = window.PageShell;
+const SectionHeading = window.SectionHeading;
 const Link = window.Link;
 const { useState, useMemo } = React;
 
@@ -27,15 +30,17 @@ function FaqPage() {
 
   return (
     <PageShell
+      eyebrow="08"
       title="FAQ"
-      lede={`사무국이 자주 받는 질문 ${FAQS.length}개. 카테고리 필터 또는 검색.`}
+      subtitle="자주 묻는 질문"
+      lede={`사무국이 받는 같은 질문 ${FAQS.length}개를 미리 답해두었습니다. 위 검색창과 카테고리 필터로 빠르게 찾을 수 있습니다.`}
     >
-      {/* 검색 + 필터 */}
+      {/* §15.2.1 검색 + 필터 -------------------------------------------- */}
       <div className="fq-search">
         <input
           type="search"
           className="fq-search-input"
-          placeholder="질문 검색 (예: 색·로고·굿즈)"
+          placeholder="질문을 검색해주세요 (예: 색, 로고, 굿즈)"
           value={search}
           onChange={e => setSearch(e.target.value)}
           aria-label="질문 검색"
@@ -65,15 +70,15 @@ function FaqPage() {
         ))}
       </div>
 
-      {/* 아코디언 */}
+      {/* §15.2.2 아코디언 ----------------------------------------------- */}
       <div className="fq-list">
         {filtered.length === 0 ? (
           <p className="fq-empty">
-            검색 결과 없음. 다른 키워드 시도 또는 →{' '}
+            검색 결과가 없습니다. 다른 키워드로 시도해보시거나 →{' '}
             <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>
               {window.KIMES_EVENT.contact.email}
             </a>
-            로 문의.
+            로 문의해주세요.
           </p>
         ) : (
           filtered.map(f => (
@@ -95,7 +100,7 @@ function FaqPage() {
       </div>
 
       <p className="fq-foot">
-        가이드 외 사용 사례 → <Link to="/contact">/contact</Link>{' · '}
+        가이드에 없는 사용 케이스가 있다면 → <Link to="/contact">/contact</Link>{' · '}
         <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>
           {window.KIMES_EVENT.contact.email}
         </a>

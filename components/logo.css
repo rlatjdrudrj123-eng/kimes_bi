@@ -527,7 +527,7 @@
   letter-spacing: -0.01em;
 }
 
-/* #7 회사 로고와의 강제 결합 배치 — 가짜 회사 배지가 워드마크에 너무 붙음 */
+/* #7 회사 로고와 잘못된 락업 — 가짜 회사 배지가 워드마크에 너무 붙음 */
 .lg-bad-badlockup { gap: 2px; }
 .lg-bad-badlockup-co {
   font-family: 'Arial', sans-serif;

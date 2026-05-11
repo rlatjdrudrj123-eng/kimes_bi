@@ -1,12 +1,22 @@
-// §4 — /color (v2027.1). 메인 3색 (KIMES 공식 표기) · 보조 4색 (특별관·톤다운).
+// §7 — /color. KIMES 4브랜드 컬러 시스템: Primary 3 (Red·Black·White) +
+// Sub 4 (MedicomteK Blue·BEAUTY&DERMA Purple·INSPIRE Lime·Neutral Gray).
+// 컬러 값은 components/config.js의 KIMES_EVENT.colors 단일 출처 — §13
+// 특별관 페이지도 같은 출처 참조해 중복 정의 제거.
+//
+// 명세 §7.2 4개 섹션:
+//   §7.2.1 Primary Colors / 메인 컬러 (3장 큰 카드)
+//   §7.2.2 Sub Colors / 보조 컬러 (4장 카드 — 특별관 3 + 톤다운)
+//   §7.2.3 How to Use / 색 사용 원칙 (4줄)
+//   §7.2.4 Downloads / 다운로드 (.ase/Sketch/Figma + CSS 스니펫)
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
 const CopyButton = window.CopyButton;
 
-function formatRgb(arr)  { return arr.join(' '); }
-function formatCmyk(arr) { return arr.join(' '); }
+function formatRgb(arr)  { return arr.join(', '); }
+function formatCmyk(arr) { return arr.join(' / '); }
 
+// config.colors의 raw 데이터(rgb/cmyk 배열, hex)를 카드 표시용 정규화.
 function buildColor(spec) {
   return {
     label:   spec.label,
@@ -19,9 +29,9 @@ function buildColor(spec) {
 }
 
 const DOWNLOAD_ITEMS = [
-  { id: 'ase',    label: 'Adobe Swatch',      ext: '.ase',           file: 'KIMES_Colors.ase',           action: 'download' },
-  { id: 'sketch', label: 'Sketch 팔레트',     ext: '.sketchpalette', file: 'KIMES_Colors.sketchpalette', action: 'download' },
-  { id: 'figma',  label: 'Figma 라이브러리',  ext: '외부',           url: 'https://figma.com',           action: 'open' },
+  { id: 'ase',    label: 'Adobe Swatch',     ext: '.ase',           hint: 'Illustrator·Photoshop·InDesign 호환', file: 'kimes-colors.ase',           action: 'download' },
+  { id: 'sketch', label: 'Sketch 팔레트',    ext: '.sketchpalette', hint: 'Sketch 앱에서 가져오기',              file: 'kimes-colors.sketchpalette', action: 'download' },
+  { id: 'figma',  label: 'Figma 라이브러리', ext: '외부',           hint: 'Figma 커뮤니티 라이브러리 링크',       url: 'https://figma.com',           action: 'open' },
 ];
 
 function ColorPage() {
@@ -41,43 +51,54 @@ function ColorPage() {
   ];
 
   const cssSnippet = `:root {
+  /* Primary */
   --kimes-red:   ${colors.primary.red.hex};
   --kimes-black: ${colors.primary.black.hex};
   --kimes-white: ${colors.primary.white.hex};
-  --mc-blue:     ${colors.sub.mcBlue.hex};
-  --bd-purple:   ${colors.sub.bdPurple.hex};
-  --in-lime:     ${colors.sub.inLime.hex};
-  --kimes-gray:  ${colors.sub.gray.hex};
+
+  /* Sub */
+  --mc-blue:    ${colors.sub.mcBlue.hex};
+  --bd-purple:  ${colors.sub.bdPurple.hex};
+  --in-lime:    ${colors.sub.inLime.hex};
+  --kimes-gray: ${colors.sub.gray.hex};
 }`;
 
   return (
     <PageShell
-      title="컬러"
-      lede="메인 3색 — KIMES 공식 표기. 보조 4색 — 특별관 · 톤다운."
+      eyebrow="03"
+      title="Color"
+      subtitle="컬러"
+      lede="KIMES 워드마크와 공식 표기에는 Primary 3색을, 특별관 표기·톤다운에는 Sub 4색을 사용합니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
     >
-      {/* §4.1 메인 컬러 ---------------------------------------- */}
-      <SectionHeading id="primary" title="메인 컬러" />
+      {/* §7.2.1 Primary Colors ---------------------------------------- */}
+      <SectionHeading id="primary" title="Primary Colors" subtitle="메인 컬러" />
+      <p>KIMES 워드마크와 공식 표기.</p>
       <div className="clr-primary-grid">
         {PRIMARY.map(c => <PrimaryCard key={c.id} color={c} />)}
       </div>
 
-      {/* §4.2 보조 컬러 -------------------------------------------- */}
-      <SectionHeading id="sub" title="보조 컬러" />
+      {/* §7.2.2 Sub Colors -------------------------------------------- */}
+      <SectionHeading id="sub" title="Sub Colors" subtitle="보조 컬러" />
+      <p>특별관 표기 · 톤다운.</p>
       <div className="clr-sub-grid">
         {SUB.map(c => <SubCard key={c.id} color={c} />)}
       </div>
 
-      {/* §4.3 사용 원칙 -------------------------------------------- */}
-      <SectionHeading id="rules" title="사용 원칙" />
+      {/* §7.2.3 How to Use -------------------------------------------- */}
+      <SectionHeading id="rules" title="How to Use" subtitle="색 사용 원칙" />
       <ol className="clr-rules">
-        <li>메인 3색 — KIMES 워드마크와 공식 표기 자리.</li>
-        <li>보조 4색 — 특별관 표기·톤다운 자리. 메인 대체 불가 (Tier 1).</li>
-        <li>참가업체 자체 브랜드 컬러 — 그대로 유지.</li>
-        <li>인쇄물 — CMYK + Pantone 별색 병기 권장.</li>
+        <li>KIMES Primary 컬러는 KIMES 워드마크와 공식 표기에 사용합니다.</li>
+        <li>Sub 컬러는 특별관 표기와 톤다운 자리에 사용합니다. Primary를 대체하지 않습니다.</li>
+        <li>참가업체 자체 브랜드 컬러는 그대로 유지하세요.</li>
+        <li>인쇄물은 CMYK + Pantone 별색 병기를 권장합니다.</li>
       </ol>
 
-      {/* §4.4 다운로드 --------------------------------------------- */}
-      <SectionHeading id="downloads" title="다운로드" />
+      {/* §7.2.4 Downloads --------------------------------------------- */}
+      <SectionHeading id="downloads" title="Downloads" subtitle="다운로드" />
+      <p>
+        디자인 툴별 팔레트 파일과 코드용 CSS 스니펫. CSS 스니펫은 자산
+        파일 없이 바로 복사해 사용할 수 있습니다.
+      </p>
       <div className="clr-dl-grid">
         {DOWNLOAD_ITEMS.map(item => (
           <DownloadItem key={item.id} item={item} assetStatus={assetStatus} />
@@ -88,6 +109,7 @@ function ColorPage() {
   );
 }
 
+// Primary 카드 — 큰 색면(220px+) + HEX/RGB/CMYK/Pantone + 용도 한 줄.
 function PrimaryCard({ color }) {
   const isWhite = color.id === 'white';
   return (
@@ -118,8 +140,9 @@ function PrimaryCard({ color }) {
   );
 }
 
+// Sub 카드 — 100~150px 색면 + 라벨 + 한 줄 용도 + 컴팩트 메타.
 function SubCard({ color }) {
-  const isLight = color.id === 'in' || color.id === 'gray';
+  const isLight = color.id === 'in' || color.id === 'gray'; // 밝은 배경엔 검정 텍스트
   return (
     <article className={`clr-sub clr-sub-${color.id}`}>
       <div
@@ -158,7 +181,7 @@ function ColorRow({ term, value, ariaPrefix, compact }) {
       <dd className="clr-row-action">
         <CopyButton
           value={value}
-          label="복사"
+          label="Copy"
           ariaLabel={`${ariaPrefix} ${term} 값 ${value} 복사`}
         />
       </dd>
@@ -174,6 +197,7 @@ function DownloadItem({ item, assetStatus }) {
         <span className="clr-dl-label">{item.label}</span>
         <span className="clr-dl-ext">{item.ext}</span>
       </div>
+      <div className="clr-dl-hint">{item.hint}</div>
       <div className="clr-dl-action">
         {pending ? (
           <button
@@ -183,15 +207,15 @@ function DownloadItem({ item, assetStatus }) {
             aria-label={`${item.label} — Coming soon`}
             title="Coming soon"
           >
-            {item.action === 'open' ? '열기 ↗' : '다운로드'}
+            {item.action === 'open' ? 'Open ↗' : 'Download'}
           </button>
         ) : item.action === 'open' ? (
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="btn btn-md btn-outline">
-            열기 ↗
+            Open ↗
           </a>
         ) : (
           <a href={`/assets/colors/${item.file}`} className="btn btn-md btn-outline" download>
-            다운로드
+            Download
           </a>
         )}
       </div>
@@ -205,9 +229,12 @@ function CssSnippet({ code }) {
     <div className="clr-snippet">
       <div className="clr-snippet-head">
         <span className="clr-snippet-title">CSS Variables</span>
-        <CopyButton value={code} label="복사" ariaLabel="CSS 변수 스니펫 복사" />
+        <CopyButton value={code} label="Copy" ariaLabel="CSS 변수 스니펫 복사" />
       </div>
       <pre className="clr-snippet-code"><code>{code}</code></pre>
+      <div className="clr-snippet-hint">
+        프로젝트 CSS 최상단에 붙여 넣으면 <code>var(--kimes-red)</code>처럼 사용할 수 있습니다.
+      </div>
     </div>
   );
 }

@@ -82,22 +82,25 @@ function Footer() {
         </div>
       </div>
       <div className="shell-footer-legal">
-        © {event.organizerEn}. KIMES, MedicomteK, BEAUTY&DERMA SEOUL, INSPIRE Digital Health는 {event.organizerEn}의 등록 상표 (Tier 1). 무단 사용 시 법적 조치 대상.
+        © {event.organizerEn}. KIMES, MedicomteK, BEAUTY&DERMA SEOUL, INSPIRE Digital Health는 {event.organizerEn}의 등록 상표입니다. 무단 사용 시 법적 조치를 받을 수 있습니다.
       </div>
     </footer>
   );
 }
 
-// PageShell — every page wraps its body in this. v2027.1 §22.3: H1은 한글
-// 단독. eyebrow·subtitle prop은 이전 버전 호환을 위해 받기는 하지만
-// 렌더링하지 않음. `lede`는 본문 도입 단락.
+// PageShell — every page wraps its body in this. §22.5 영문/한글 패턴:
+// `title` = English H1 (Montserrat 800/900, big), `subtitle` = Korean sub
+// (Pretendard 500, KIMES Gray, smaller). `eyebrow` is the small section
+// number above the title (e.g., "02"). `lede` is the intro paragraph.
 // `toc` defaults to true; landing/stub pages pass false. TOC scans the
 // rendered DOM for H2s on mount.
-function PageShell({ title, lede, children, toc = true }) {
+function PageShell({ eyebrow, title, subtitle, lede, children, toc = true }) {
   return (
     <div className="page-shell">
       <header className="page-header">
+        {eyebrow && <div className="page-eyebrow">{eyebrow}</div>}
         <h1 className="page-title">{title}</h1>
+        {subtitle && <div className="page-subtitle">{subtitle}</div>}
         {lede && <p className="page-lede">{lede}</p>}
       </header>
       <div className={`page-body ${toc ? 'with-toc' : ''}`}>
@@ -108,12 +111,13 @@ function PageShell({ title, lede, children, toc = true }) {
   );
 }
 
-// SectionHeading — v2027.1 §22.3: H2는 한글 단독. `title`에 한글을 전달하면
-// 그것만 렌더링. subtitle prop은 이전 버전 호환용으로 받지만 무시.
-function SectionHeading({ id, title, className }) {
+// SectionHeading — §22.5 영문 H2 + 한글 서브 패턴. 페이지 안의 각 섹션
+// 헤더에 사용. title=영문, subtitle=한글. 둘 모두 또는 영문만 가능.
+function SectionHeading({ id, title, subtitle, className }) {
   return (
     <header className={`section-heading ${className || ''}`.trim()}>
       <h2 id={id}>{title}</h2>
+      {subtitle && <div className="section-subtitle">{subtitle}</div>}
     </header>
   );
 }
