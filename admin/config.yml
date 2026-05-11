@@ -1,19 +1,19 @@
-# Sveltia CMS 설정 — Downloads & Assets 단일 컬렉션
+# Sveltia CMS 설정 — 4 컬렉션 (Downloads / FAQ / Permissions / Special Zones)
 # ---------------------------------------------------------------------------
-# 이 어드민은 현재 1개 영역만 관리합니다: 자산 다운로드 URL과 status 토글.
-#
-# legacy content/*.json (intro / color / typography / logo / typography-in-use
-# / logo-rules / logo-lockup / asset-library) 등 17개 파일은 어떤 활성 라우트
-# 에서도 읽히지 않는 상태이므로 admin 컬렉션에서 제외. 해당 콘텐츠를 살리
-# 려면 ContentLoader 매핑 + 컴포넌트 리팩터 필요 (별도 작업).
-#
-# §9~§15 새 페이지(FAQ / Applications / Permissions / Special Zones / Notation
-# / Downloads / Contact)의 const 데이터도 마찬가지로 컴포넌트 코드에 박혀
-# 있어 admin에서 직접 편집 불가. 자산 status 토글 + 다운로드 URL 채우기는
-# downloads.json 한 파일로 사이트 전체 다운로드 버튼 동작에 즉시 반영.
+# 이 어드민에서 편집한 내용은 content/*.json 파일에 저장 → main 브랜치 자동
+# 커밋 → Netlify 30초 안에 재배포 → 사이트 즉시 반영.
 #
 # 인증: GitHub OAuth (Netlify 자동 OAuth 프록시 — 별도 OAuth App 등록 불필요).
-# 저장소에 push 권한 있는 GitHub 계정으로 로그인하면 main 브랜치에 직접 커밋.
+# 저장소에 push 권한 있는 GitHub 계정으로 로그인.
+#
+# 편집 가능 영역:
+# 1. Downloads & Assets — 자산 다운로드 URL · status 토글
+# 2. FAQ                — 자주 묻는 질문 추가/수정
+# 3. Permissions        — 권한·승인 매트릭스 18행
+# 4. Special Zones      — 특별관 3종 메타데이터 (컬러는 config.js 단일 출처)
+#
+# 컴포넌트 내부 const (Notation 표·Logo 버전·Color 토큰 등)는 디자인 시스템
+# 코어 데이터로 코드 영역에서 직접 관리.
 
 backend:
   name: github
@@ -23,8 +23,6 @@ backend:
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-# 로컬 개발 — localhost로 사이트 띄우면 "Work with Local Repository" 옵션이
-# 나타나 File System Access API로 직접 파일 편집.
 local_backend: true
 
 site_url: "/"
@@ -32,9 +30,12 @@ display_url: "/"
 logo_url: "/index.html"
 
 collections:
+  # =========================================================================
+  # 1) Downloads & Assets
+  # =========================================================================
   - name: "downloads_assets"
-    label: "Downloads & Assets"
-    description: "자산 다운로드 URL과 자산 상태 토글. status를 'ready'로 변경하면 사이트 전체 다운로드 버튼이 일괄 활성화됩니다. 각 항목의 url에 Google Drive 등 링크를 채우면 그 항목만 활성화됩니다. 저장 시 GitHub main 브랜치에 자동 커밋되고 Netlify가 30초 안에 재배포합니다."
+    label: "Downloads & Assets · 다운로드"
+    description: "자산 다운로드 URL과 자산 상태 토글. status를 'ready'로 변경하면 사이트 전체 다운로드 버튼이 일괄 활성화됩니다. 각 항목의 url에 Google Drive 등 링크를 채우면 그 항목만 활성화됩니다."
     files:
       - file: "content/downloads.json"
         name: "downloads"
@@ -47,8 +48,7 @@ collections:
             widget: "select"
             options:
               - { label: "준비 중 (Pending)", value: "pending" }
-              - { label: "공개 (Ready)", value: "ready" }
-
+              - { label: "공개 (Ready)",      value: "ready" }
           - name: "bundle"
             label: "통합 패키지"
             hint: "/downloads 페이지 상단의 큰 카드"
@@ -59,25 +59,23 @@ collections:
               - { name: "ext",   label: "확장자",      widget: "string", default: ".zip" }
               - { name: "size",  label: "용량",        widget: "string", default: "약 28 MB" }
               - { name: "url",   label: "다운로드 URL", widget: "string", required: false, hint: "비워두면 비활성. Google Drive 또는 직접 호스팅 URL." }
-
           - name: "categories"
             label: "카테고리별 다운로드"
             label_singular: "카테고리"
             hint: "/downloads 페이지의 카테고리 아코디언"
             widget: "list"
             fields:
-              - { name: "id",    label: "ID",       widget: "string" }
+              - { name: "id",    label: "ID",          widget: "string" }
               - { name: "label", label: "카테고리 라벨", widget: "string" }
               - name: "items"
                 label: "항목"
                 label_singular: "자산"
                 widget: "list"
                 fields:
-                  - { name: "name",     label: "이름",  widget: "string" }
-                  - { name: "url",      label: "URL",  widget: "string", required: false, hint: "비워두면 비활성. external이 true면 외부 링크 (새 탭)." }
+                  - { name: "name",     label: "이름", widget: "string" }
+                  - { name: "url",      label: "URL", widget: "string", required: false, hint: "비워두면 비활성." }
                   - { name: "size",     label: "용량", widget: "string", required: false }
-                  - { name: "external", label: "외부 링크?", widget: "boolean", default: false, hint: "Figma·Google Fonts·GitHub 등 외부 사이트 링크인 경우 체크" }
-
+                  - { name: "external", label: "외부 링크?", widget: "boolean", default: false }
           - name: "applications"
             label: "적용 예시 갤러리 (5종)"
             label_singular: "사례"
@@ -85,8 +83,105 @@ collections:
             widget: "list"
             fields:
               - { name: "id",        label: "ID",          widget: "string" }
-              - { name: "title",     label: "자료 제목",   widget: "string" }
-              - { name: "situation", label: "사용 상황",   widget: "string" }
-              - { name: "format",    label: "자료 형식",   widget: "string" }
+              - { name: "title",     label: "자료 제목",    widget: "string" }
+              - { name: "situation", label: "사용 상황",    widget: "string" }
+              - { name: "format",    label: "자료 형식",    widget: "string" }
               - { name: "compat",    label: "호환",        widget: "string" }
               - { name: "url",       label: "다운로드 URL", widget: "string", required: false }
+
+  # =========================================================================
+  # 2) FAQ
+  # =========================================================================
+  - name: "faq"
+    label: "FAQ · 자주 묻는 질문"
+    description: "/faq 페이지 질문·답변 + 카테고리. 추가/수정/삭제 즉시 사이트 반영. 각 항목 cat 필드는 categories 안의 id 중 하나여야 검색 필터에 정상 노출."
+    files:
+      - file: "content/faq.json"
+        name: "faq"
+        label: "FAQ"
+        format: "json"
+        fields:
+          - name: "categories"
+            label: "카테고리 (필터 칩)"
+            label_singular: "카테고리"
+            widget: "list"
+            fields:
+              - { name: "id",    label: "ID (영문, items.cat과 매칭)", widget: "string" }
+              - { name: "label", label: "라벨 (한글)", widget: "string" }
+          - name: "items"
+            label: "질문 목록"
+            label_singular: "질문"
+            widget: "list"
+            fields:
+              - { name: "id",  label: "ID (정렬 번호)", widget: "number", value_type: "int" }
+              - { name: "cat", label: "카테고리 ID",    widget: "string", hint: "위 categories 중 하나의 id" }
+              - { name: "q",   label: "질문",          widget: "string" }
+              - { name: "a",   label: "답변",          widget: "text" }
+
+  # =========================================================================
+  # 3) Permissions / Usage Rights
+  # =========================================================================
+  - name: "permissions"
+    label: "Permissions · 권한 매트릭스"
+    description: "/permissions 페이지 권한 매트릭스 18행 + 4단계 라벨 + 신청 절차·양식."
+    files:
+      - file: "content/permissions.json"
+        name: "permissions"
+        label: "Permissions"
+        format: "json"
+        fields:
+          - name: "levels"
+            label: "권한 단계 (4)"
+            widget: "list"
+            fields:
+              - { name: "id",    label: "ID (rows.level과 매칭)", widget: "string", hint: "free / preapproval / licensed / restricted" }
+              - { name: "label", label: "라벨 (한글)",  widget: "string" }
+              - { name: "en",    label: "라벨 (영문)",  widget: "string" }
+              - { name: "desc",  label: "설명",         widget: "string" }
+          - name: "rows"
+            label: "매트릭스 행"
+            label_singular: "행"
+            widget: "list"
+            fields:
+              - { name: "action", label: "사용 행위",  widget: "string" }
+              - { name: "level",  label: "권한 단계 ID", widget: "string", hint: "위 levels 중 하나의 id" }
+          - name: "applicationSteps"
+            label: "신청 절차 (3단계)"
+            widget: "list"
+            fields:
+              - { name: "num",   label: "번호",  widget: "number", value_type: "int" }
+              - { name: "title", label: "제목",  widget: "string" }
+              - { name: "desc",  label: "설명",  widget: "string" }
+          - name: "applicationForm"
+            label: "신청서 양식 (필드 목록)"
+            widget: "list"
+            field: { name: "field", label: "필드 라벨", widget: "string" }
+
+  # =========================================================================
+  # 4) Special Zones
+  # =========================================================================
+  - name: "special_zones"
+    label: "Special Zones · 특별관"
+    description: "/special-zones 인덱스 + 3 상세 페이지 메타데이터. 컬러는 components/config.js의 KIMES_EVENT.colors.sub에서 가져오므로 여기서 colorKey만 매핑."
+    files:
+      - file: "content/special-zones.json"
+        name: "special-zones"
+        label: "Special Zones"
+        format: "json"
+        fields:
+          - name: "zones"
+            label: "특별관 (3종)"
+            label_singular: "특별관"
+            widget: "list"
+            fields:
+              - { name: "id",       label: "ID",       widget: "string" }
+              - { name: "slug",     label: "URL slug", widget: "string", hint: "/special-zones/{slug}" }
+              - { name: "colorKey", label: "컬러 키 (config.js)", widget: "string", hint: "mcBlue / bdPurple / inLime" }
+              - { name: "colorVar", label: "CSS 변수", widget: "string", hint: "--mc-blue / --bd-purple / --in-lime" }
+              - { name: "name",     label: "정식 명칭 (영문)", widget: "string" }
+              - { name: "nameKo",   label: "정식 명칭 (한글)", widget: "string" }
+              - { name: "tagline",  label: "태그라인 (영문)", widget: "string" }
+              - { name: "lede",     label: "한 줄 소개 (한글)", widget: "string" }
+              - { name: "ledeEn",   label: "한 줄 소개 (영문)", widget: "string" }
+              - { name: "hall",     label: "Hall · 일정",     widget: "string" }
+              - { name: "boilerplate100", label: "보일러플레이트 (100자)", widget: "text" }

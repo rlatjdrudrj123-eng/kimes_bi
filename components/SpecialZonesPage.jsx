@@ -8,50 +8,15 @@ const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
 const Link = window.Link;
 
-// 3 특별관 데이터. 컬러는 config.js에서 단일 출처.
+// 3 특별관 데이터. 메타정보는 content/special-zones.json (어드민 편집 가능),
+// 컬러는 config.js의 KIMES_EVENT.colors.sub 단일 출처에서 colorKey로 매핑.
 function getZones() {
   const { colors } = window.KIMES_EVENT;
-  return [
-    {
-      id: 'medicomtek',
-      slug: 'medicomtek',
-      name: 'MedicomteK',
-      nameKo: '메디콤텍',
-      tagline: 'CONNECTED CARE',
-      lede: '의료 커뮤니케이션·커넥티드 케어 기술 전시',
-      ledeEn: 'Medical communication & connected care technologies',
-      hall: 'Hall B · 2027.03.18-21',
-      color: colors.sub.mcBlue,
-      colorVar: '--mc-blue',
-      boilerplate100: 'MedicomteK은 KIMES 안의 특별관으로 의료 커뮤니케이션·커넥티드 케어 기술을 모은 전시입니다. 의료 IT·원격진료·의료 통신 솔루션 회사들이 참가합니다.',
-    },
-    {
-      id: 'beauty-derma',
-      slug: 'beauty-derma',
-      name: 'BEAUTY&DERMA SEOUL',
-      nameKo: '뷰티앤더마 서울',
-      tagline: 'BEAUTY MEETS MEDICINE',
-      lede: '미용의학·피부과 전문 전시 (서울·부산 에디션)',
-      ledeEn: 'Aesthetic medicine & dermatology — Seoul & Busan editions',
-      hall: 'Hall C · 2027.03.18-21',
-      color: colors.sub.bdPurple,
-      colorVar: '--bd-purple',
-      boilerplate100: 'BEAUTY&DERMA SEOUL은 KIMES 안의 특별관으로 미용의학·피부과 전문 전시입니다. 서울·부산 두 에디션으로 운영되며 미용기기·피부과 솔루션 회사들이 참가합니다.',
-    },
-    {
-      id: 'inspire',
-      slug: 'inspire',
-      name: 'INSPIRE Digital Health',
-      nameKo: '인스파이어 디지털 헬스',
-      tagline: 'HEALTH MEETS INNOVATION',
-      lede: '디지털 헬스·웨어러블·헬스케어 AI 전시',
-      ledeEn: 'Digital health, wearables, and healthcare AI',
-      hall: 'Hall D · 2027.03.18-21',
-      color: colors.sub.inLime,
-      colorVar: '--in-lime',
-      boilerplate100: 'INSPIRE Digital Health는 KIMES 안의 특별관으로 디지털 헬스·웨어러블·헬스케어 AI 솔루션 전시입니다. 디지털 헬스 스타트업·플랫폼 회사들이 참가합니다.',
-    },
-  ];
+  const data = (window.CONTENT && window.CONTENT['special-zones']) || { zones: [] };
+  return (data.zones || []).map(z => ({
+    ...z,
+    color: colors.sub[z.colorKey],
+  }));
 }
 
 /* ---------- §13.2 인덱스 페이지 ---------- */

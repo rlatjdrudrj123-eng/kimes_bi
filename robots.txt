@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://delicate-blini-2da352.netlify.app/sitemap.xml

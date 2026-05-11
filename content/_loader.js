@@ -46,6 +46,9 @@
   // 데이터는 한·영 동일하게 적용되므로 로케일 분기 없음.
   const SHARED_FILES = [
     'downloads',
+    'faq',
+    'permissions',
+    'special-zones',
   ];
 
   const LOCALES = ['en', 'ko'];

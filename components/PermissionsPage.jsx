@@ -8,63 +8,24 @@ const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
 const Link = window.Link;
 
-// 14.2.1 매트릭스 18행 4열. 각 행: action + level (free/preapproval/licensed/restricted)
-const ROWS = [
-  // 자유 사용 (8) — 거의 모든 참가업체 해당
-  { action: '회사 보도자료 본문에 "KIMES 2027 참가" 텍스트 표기', level: 'free' },
-  { action: '마케팅·콘텐츠에 KIMES 텍스트 표기 (회사 폰트·컬러)', level: 'free' },
-  { action: '회사 홈페이지에 "KIMES 2027 참가" 배너·로고 게시 (행사 종료 후 제거)', level: 'free' },
-  { action: '회사 SNS 게시물에 KIMES 로고 노출', level: 'free' },
-  { action: '명함 옆면·뒷면 KIMES 표기 (행사 기간 한정)', level: 'free' },
-  { action: '이메일 서명 배너 KIMES 표기 (행사 기간 한정)', level: 'free' },
-  { action: '회사 영업 자료(PDF·PPT)에 KIMES 참가 표기', level: 'free' },
-  { action: '부스 사이니지·인쇄물에 KIMES 로고(SVG) 사용', level: 'free' },
-  // 사무국 협의 (4)
-  { action: '굿즈·기념품에 KIMES 로고 인쇄', level: 'preapproval' },
-  { action: 'TV·라디오·옥외·신문 광고에 KIMES 로고', level: 'preapproval' },
-  { action: '영상 인트로/아웃트로에 KIMES 로고', level: 'preapproval' },
-  { action: '회사 자체 컨퍼런스·웨비나에 KIMES 로고', level: 'preapproval' },
-  // 별도 계약 (1)
-  { action: '"KIMES 공식 파트너" 등 인증·후원 표현 사용', level: 'licensed' },
-  // 사용 제한 (5)
-  { action: 'KIMES 워드마크를 회사 로고와 결합한 새 로고', level: 'restricted' },
-  { action: 'KIMES 워드마크 색·형태 임의 변경 (§6.2.6)', level: 'restricted' },
-  { action: '행사 종료 후 KIMES 로고 상시 게시', level: 'restricted' },
-  { action: 'KIMES 사진·영상 무단 2차 가공', level: 'restricted' },
-  { action: 'KIMES 표기 변형 ("Kimes" / "킴스" / "케이아이엠이에스" 등)', level: 'restricted' },
-];
+// 데이터 출처: content/permissions.json — 어드민 편집 가능.
 
-const LEVELS = [
-  { id: 'free',        label: '자유 사용',     en: 'Free use',    desc: '별도 신청 없이 사용 가능' },
-  { id: 'preapproval', label: '사무국 협의',   en: 'Pre-approval', desc: '사전 협의 후 사용' },
-  { id: 'licensed',    label: '별도 계약',     en: 'Licensed',    desc: '라이선스 계약 필요' },
-  { id: 'restricted',  label: '사용 제한',     en: 'Restricted',  desc: '가이드 범위에서 사용하지 않음' },
-];
-
-const APPLICATION_STEPS = [
-  { num: 1, title: '신청서 작성', desc: '아래 양식으로 사용 목적·매체·기간·시안 첨부' },
-  { num: 2, title: '검토',         desc: '영업일 3~5일 안에 사무국 검토' },
-  { num: 3, title: '승인 회신',    desc: '메일 회신 + 추가 협의 사항이 있으면 동봉' },
-];
-
-const APPLICATION_FORM = [
-  '신청 회사',
-  '담당자 / 연락처',
-  '사용 목적 (굿즈·영상·광고 등 선택)',
-  '사용 매체·노출 채널',
-  '사용 기간',
-  '시안 (PDF·이미지 첨부)',
-  '부스 번호 (해당 시)',
-];
+const FALLBACK = { levels: [], rows: [], applicationSteps: [], applicationForm: [] };
 
 function PermissionsPage() {
   const { contact } = window.KIMES_EVENT;
   const assetStatus = (window.KIMES_EVENT.assets && window.KIMES_EVENT.assets.status) || 'pending';
   const pending = assetStatus !== 'ready';
 
+  const data = (window.CONTENT && window.CONTENT.permissions) || FALLBACK;
+  const ROWS = data.rows || [];
+  const LEVELS = data.levels || [];
+  const APPLICATION_STEPS = data.applicationSteps || [];
+  const APPLICATION_FORM = data.applicationForm || [];
+
   return (
     <PageShell
-      eyebrow="10"
+      eyebrow="08"
       title="Usage Rights"
       subtitle="권한·승인·라이선스"
       lede="이 페이지가 BI 가이드를 단순한 디자인 가이드와 구별 짓는 핵심입니다. 누가 무엇을 어디까지 할 수 있는지를 명문화한 매트릭스 + 신청 절차 + 라이선싱 문의 안내입니다."
