@@ -33,10 +33,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          # Pages 미활성 상태면 workflow가 자동으로 켬. repo Settings에서
+          # 수동 토글 불필요. Pages permission(권한)은 위 permissions
+          # 블록에서 이미 부여됨.
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
