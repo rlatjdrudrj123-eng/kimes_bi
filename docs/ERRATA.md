@@ -1369,6 +1369,89 @@ active 코드 0 tone hits, /applications · /notation 모두 200, 영세 업체
 
 ---
 
+## 2026-05-11 — 중간 트림 (페이지 12 → 9, eyebrow 재정렬, 죽은 라우트 정리)
+
+### 정정 내용
+
+B2B 참가업체용 가이드의 결을 회복하기 위해 사이트 5 영역을 간소화. 명세는
+스펙 본문을 전면 재작성하지 않고 영향받은 §-헤더에 인라인 정정 마커로
+표시 (§8 / §10 / §11 / §12 / §15). 본 항목이 단일 진실의 출처.
+
+| 영역 | 정정 전 (spec 본문) | 정정 후 (실제 코드) |
+|---|---|---|
+| §8 /typography | 6 sub-section + 6-weight 카드 + Gallery | **4 sub-section** (Two Assets / Fonts / Recommended / Wordmark Use). 외부 폰트 링크 2개로 단순화 |
+| §10 /applications | 5종 갤러리 페이지 | **페이지 통째로 제거**. 양식·자산은 §14 /downloads 카테고리(Logos / Templates / Marketing / Press / Forms)로 흡수 |
+| §11 /special-zones | Index + 3 상세 (4 페이지) | **단일 페이지** (`SpecialZonesIndex` 1개). 3개 zone 섹션 나열 |
+| §12 /permissions | 매트릭스 18행 + 권한 4단계 | **6행 + 3단계**. "사용 제한" 등급 제거 + `elseNote` 한 줄로 그 외 케이스 안내 |
+| §15 /contact | 동적 폼 (useState·Field·onSubmit) | **정적 안내 페이지**. 3 채널 카드 (mailto 링크) + 직접 연락처 (메일·전화) |
+
+### eyebrow 재정렬 (코드 단)
+
+스펙 §-번호는 그대로 두고 페이지 컴포넌트의 eyebrow만 nav 순서대로
+재정렬. (Downloads·Changelog 둘 다 "14"였던 충돌 해소)
+
+| 페이지 | 정정 전 | 정정 후 |
+|---|---|---|
+| OverviewPage | 01 | 01 (유지) |
+| LogoPage | 02 | 02 (유지) |
+| ColorPage | 03 | 03 (유지) |
+| TypographyPage | 04 | 04 (유지) |
+| NotationPage | 05 | 05 (유지) |
+| SpecialZonesPage | 07 | **06** |
+| PermissionsPage | 08 | **07** |
+| FaqPage | 09 | **08** |
+| DownloadsPage | 14 | **09** (충돌 해소) |
+| ContactPage | 10 | 10 (유지) |
+| ChangelogPage | 14 | **11** (충돌 해소) |
+
+### 적용 범위
+
+- **KIMES_BI_Guide_Spec.md** — §8 / §10 / §11 / §12 / §15 헤더 직후에
+  인라인 정정 마커 추가. 본문 재작성 없음 (스펙 IA 번호 보존)
+- **components/SpecialZonesPage.jsx** — `ZoneSection` 단일 컴포넌트로 재작성,
+  `ZoneDetail` + 3 wrapper 함수 제거, eyebrow 06
+- **components/PermissionsPage.jsx** — `elseNote` 표시 추가, eyebrow 07
+- **components/FaqPage.jsx** — eyebrow 08
+- **components/DownloadsPage.jsx** — eyebrow 09 (이전 14)
+- **components/Pages.jsx** — ChangelogPage eyebrow 11 (이전 14)
+- **components/ContactPage.jsx** — 동적 폼·useState 제거, 정적 안내로 재작성
+- **components/TypographyPage.jsx** — Gallery + 6-weight 카드 제거, 4 sub-section
+- **components/typography.css** — `.ty-font-grid` / `.ty-font-card` /
+  `.ty-font-weights` / `.ty-font-cta` / `.ty-gallery` / `.ty-data` 제거,
+  `.ty-font-links` 추가
+- **components/contact.css** — `.ct-channels` / `.ct-channel` / `.ct-direct`
+  로 재작성
+- **components/permissions.css** — `.pm-else-note` 추가
+- **components/Router.jsx** — `/applications` 라우트 + `/special-zones/*`
+  3 상세 라우트 제거. nav 6/7/8 재할당
+- **components/LandingPage.jsx** — `QUICK_LINKS`의 `/applications` 2건을
+  `/downloads`로 갱신 (이메일 서명 / SNS 카드 양식)
+- **content/faq.json** — Q11 답변을 `/downloads`의 Marketing 카테고리로 갱신
+- **content/downloads.json** — `applications` 필드 제거, `marketing`
+  카테고리 추가, `templates` 6항목으로 확장
+- **content/permissions.json** — `levels` 4→3 ("restricted" 제거),
+  `rows` 18→6, `elseNote` 추가
+- **components/applications.css + ApplicationsPage.jsx** — 파일 삭제
+- **index.html** — applications.css 링크 + ApplicationsPage.jsx script 제거
+- **sitemap.xml** — `/applications` + `/special-zones/medicomtek` +
+  `/special-zones/beauty-derma` + `/special-zones/inspire` 4 URL 제거
+  (현재 11 URL)
+
+### 변경되지 않은 항목
+
+- 명세서 §1·§2·§3 IA 본문 — 페이지 번호 매기기 자체는 보존 (스펙은 설계
+  의도 보존용, 실제 코드와의 차이는 인라인 마커로 표시)
+- §5·§6·§7·§9·§13·§14·§16 본문 — 실제 코드와 일치, 정정 불필요
+- §22 톤 규칙 — 트림 후에도 그대로 유효
+- 회차·일정·연락처 등 단일 출처(`window.KIMES_EVENT`) — 변경 없음
+
+### 검증
+
+`node scripts/check-tone.js` 0 hits 유지. 라우트 11개 모두 200. 어드민
+(Sveltia CMS + 5x 클릭 인플레이스 에디터) 트리거 모두 정상.
+
+---
+
 ## 작성·검토 규칙
 
 이 문서는 명세서가 inline 수정될 때마다 항목을 추가합니다. 형식:
