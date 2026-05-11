@@ -25,7 +25,7 @@ function DownloadsPage() {
 
   return (
     <PageShell
-      eyebrow="14"
+      eyebrow="09"
       title="Downloads"
       subtitle="에셋 다운로드"
       lede="가이드 전반에 흩어져 있는 자산을 한 페이지에 모았습니다. 통합 패키지 한 번에 받거나 카테고리별로 골라 받으실 수 있습니다."

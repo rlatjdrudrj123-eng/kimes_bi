@@ -22,7 +22,7 @@
     { "id": 8,  "cat": "notation", "q": "\"제42회\"를 \"42nd\"로 영문 표기할 때 형식은?",                                        "a": "\"KIMES 2027 — 42nd edition\" 형식." },
     { "id": 9,  "cat": "notation", "q": "보도자료에 KIMES 풀네임을 매번 써야 하나요?",                                           "a": "처음 등장할 때만 풀네임. 두 번째부터는 \"KIMES\"만 사용." },
     { "id": 10, "cat": "cobrand",  "q": "부스 헤더에 우리 회사 로고와 KIMES 로고 비율은?",                                       "a": "회사 로고와 비슷한 시각적 무게로 배치합니다. 픽셀 비율보다 눈으로 확인하세요 (참고: 약 1 : 0.7)." },
-    { "id": 11, "cat": "cobrand",  "q": "이메일 서명에 KIMES 로고를 넣고 싶은데 양식이 있나요?",                                 "a": "/applications에서 이메일 서명 배너 4종을 받으실 수 있습니다 (Outlook · Gmail · Apple Mail · 모바일)." },
+    { "id": 11, "cat": "cobrand",  "q": "이메일 서명에 KIMES 로고를 넣고 싶은데 양식이 있나요?",                                 "a": "/downloads의 Marketing 카테고리에서 이메일 서명 배너 4종을 받으실 수 있습니다 (Outlook · Gmail · Apple Mail · 모바일)." },
     { "id": 12, "cat": "cobrand",  "q": "명함에 KIMES 표기를 넣어도 되나요?",                                                    "a": "행사 기간 한정으로 가능. 행사 종료 후 재인쇄 시 제거 권장." },
     { "id": 13, "cat": "cobrand",  "q": "SNS 게시물에 KIMES 로고 들어간 걸 올릴 때 별도 승인 필요한가요?",                       "a": "일반적인 게시물은 별도 승인 불필요. 캡션에 @kimes_official 태그를 권장합니다 (의무 아님 — /notation §9.2.7 SNS Tag 참고)." },
     { "id": 14, "cat": "rights",   "q": "KIMES 로고가 들어간 굿즈를 만들어도 되나요?",                                           "a": "사전 승인 필요. kimes@kimes.kr." },

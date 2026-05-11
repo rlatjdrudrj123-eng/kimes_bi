@@ -47,7 +47,7 @@ function Stub({ sectionRef }) {
 
 function ChangelogPage() {
   return (
-    <PageShell eyebrow="14" title="변경 이력" toc={false}>
+    <PageShell eyebrow="11" title="변경 이력" toc={false}>
       <Stub sectionRef="§18" />
     </PageShell>
   );

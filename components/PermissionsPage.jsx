@@ -26,7 +26,7 @@ function PermissionsPage() {
 
   return (
     <PageShell
-      eyebrow="08"
+      eyebrow="07"
       title="Usage Rights"
       subtitle="권한·승인·라이선스"
       lede="이 페이지가 BI 가이드를 단순한 디자인 가이드와 구별 짓는 핵심입니다. 누가 무엇을 어디까지 할 수 있는지를 명문화한 매트릭스 + 신청 절차 + 라이선싱 문의 안내입니다."
