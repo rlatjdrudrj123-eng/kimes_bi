@@ -1,0 +1,50 @@
+# GitHub Pages 자동 배포
+# ---------------------------------------------------------------------------
+# main 브랜치 push 시 전체 폴더를 GitHub Pages에 배포. 정적 사이트라
+# 빌드 단계 X — 그대로 업로드.
+#
+# 사용자 일회 설정:
+#   GitHub repo → Settings → Pages → Source: "GitHub Actions" 선택
+#
+# 라이브 URL: https://rlatjdrudrj123-eng.github.io/kimes_bi/
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시에 여러 배포가 큐잉되면 마지막 것만 실행 (중간 것 취소).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 전체 폴더를 그대로 업로드 (Babel-standalone in-browser 환경,
+          # 빌드 단계 없음).
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

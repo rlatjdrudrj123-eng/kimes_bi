@@ -6,11 +6,20 @@
 ## 프로젝트 개요
 
 KIMES 2027 (제42회 국제 의료기기·병원설비 전시회) 참가업체용 BI 가이드
-사이트. 정적 React + Babel-standalone 페이지. 콘텐츠는 일부 legacy 영역만
-`content/*.json`에 있고, §9~§15 새 페이지 데이터는 React 컴포넌트 안 const
-배열에 박혀있음. 편집은 `/admin/`의 Sveltia CMS (GitHub OAuth) 또는 헤더
-KIMES 로고 5x 클릭으로 열리는 인플레이스 에디터로 GitHub 커밋. CMS 콘텐츠
-풀 매핑은 ContentLoader 확장 작업이 별도로 필요.
+사이트. 정적 React + Babel-standalone 페이지. 어드민 편집 가능 영역은
+`content/*.json` 4개 (downloads / faq / permissions / special-zones), 그
+외 페이지 데이터는 React 컴포넌트 안 const 배열. 편집은 `/admin/`의 Sveltia
+CMS (GitHub OAuth) 또는 헤더 KIMES 로고 5x 클릭으로 열리는 인플레이스
+에디터로 GitHub 커밋.
+
+## 호스팅
+
+GitHub Pages (Netlify에서 이전, 2026-05). main 브랜치 push → .github/
+workflows/pages.yml이 GitHub Actions로 자동 배포.
+
+라이브: https://rlatjdrudrj123-eng.github.io/kimes_bi/
+
+설정: repo Settings → Pages → Source: "GitHub Actions" 토글 (1회).
 
 ## 단일 출처
 

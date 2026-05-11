@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://delicate-blini-2da352.netlify.app/sitemap.xml
+Sitemap: https://rlatjdrudrj123-eng.github.io/kimes_bi/sitemap.xml
