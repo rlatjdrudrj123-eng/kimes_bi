@@ -65,6 +65,22 @@
   color: var(--text-secondary);
 }
 
+.pm-else-note {
+  margin: var(--space-3) 0 var(--space-5);
+  padding: 14px var(--space-3);
+  background: var(--surface-base);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+.pm-else-note strong {
+  color: var(--kimes-red);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
 /* ---------- 매트릭스 표 ---------- */
 .pm-matrix-wrap {
   overflow-x: auto;

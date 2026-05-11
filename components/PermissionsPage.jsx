@@ -20,6 +20,7 @@ function PermissionsPage() {
   const data = (window.CONTENT && window.CONTENT.permissions) || FALLBACK;
   const ROWS = data.rows || [];
   const LEVELS = data.levels || [];
+  const ELSE_NOTE = data.elseNote || '';
   const APPLICATION_STEPS = data.applicationSteps || [];
   const APPLICATION_FORM = data.applicationForm || [];
 
@@ -46,9 +47,7 @@ function PermissionsPage() {
       </div>
 
       <div className="pm-note">
-        매트릭스 활용 안내 — 상위 8개 행(보도자료·SNS·명함·이메일·부스 등)은
-        거의 모든 참가업체에 해당합니다. 하위 10개 행(굿즈·광고·영상·컨퍼런스
-        등)은 해당 상황이 있는 경우에만 참고하세요.
+        빈도 높은 핵심 6 케이스만 정리. 그 외 사용 케이스는 사무국과 협의해주세요.
       </div>
 
       <div className="pm-matrix-wrap">
@@ -73,6 +72,12 @@ function PermissionsPage() {
           </tbody>
         </table>
       </div>
+
+      {ELSE_NOTE && (
+        <div className="pm-else-note">
+          <strong>그 외 사용 케이스 안내</strong> — {ELSE_NOTE}
+        </div>
+      )}
 
       {/* §14.2.1 자산 선택 참고 ---------------------------------------- */}
       <div className="pm-asset-ref">
