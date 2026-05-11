@@ -68,12 +68,6 @@
   letter-spacing: 0.02em;
 }
 .ty-model-cta:hover { text-decoration: underline; }
-.ty-models-foot {
-  margin: var(--space-1) 0 var(--space-5);
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  line-height: 1.6;
-}
 
 /* ---------- §8.2 Fonts — 외부 링크 2개 (Montserrat·Pretendard) -------- */
 .ty-font-links {

@@ -129,7 +129,6 @@
 .pm-cell-active.pm-cell-free       { color: var(--status-ok);   background: rgba(21, 128, 61, 0.08); }
 .pm-cell-active.pm-cell-preapproval { color: var(--status-warn); background: rgba(180, 83, 9, 0.08); }
 .pm-cell-active.pm-cell-licensed   { color: var(--text-primary); background: var(--surface-subtle); }
-.pm-cell-active.pm-cell-restricted { color: var(--text-muted);  background: rgba(113, 113, 122, 0.08); }
 
 /* ---------- 자산 선택 참고 ---------- */
 .pm-asset-ref {
