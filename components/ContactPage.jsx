@@ -1,8 +1,5 @@
-// §15 — /contact. 단순 안내. 동적 폼 대신 mailto·tel 링크 + 처리 시간 안내.
-//
-// 이전 동적 폼은 백엔드 없이 mailto fallback이라 사용자가 폼 작성 후 메일
-// 클라이언트가 열림 — 이중 작업. 단순화해서 처음부터 mailto·tel 링크 직접
-// 노출.
+// §11 — /contact (v2027.1). 3종 문의 채널 — kimes@kimes.kr. 메일 제목
+// prefix로 분류 (mailto 링크 자동 적용).
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
@@ -12,25 +9,25 @@ const CHANNELS = [
     id: 'general',
     label: '일반 BI 문의',
     en: 'General Inquiry',
-    desc: '가이드에 없는 사용 케이스, 표기 질문',
+    desc: '가이드 외 사용 사례 · 표기 질문',
     time: '영업일 1~2일',
-    subject: '[BI 문의]',
+    subject: '[BI 문의] ',
   },
   {
     id: 'permission',
-    label: '승인 신청',
+    label: '사전 승인',
     en: 'Pre-approval',
-    desc: '굿즈·광고·영상 등 사전 승인 필요 항목',
-    time: '영업일 3~5일',
-    subject: '[승인 신청]',
+    desc: '굿즈·광고·영상물 등 사전 승인 대상',
+    time: '영업일 3~5일 1차 회신',
+    subject: '[승인 신청] ',
   },
   {
     id: 'license',
-    label: '라이선스 문의',
+    label: '라이선스',
     en: 'Licensing',
-    desc: '"공식 파트너" 등 별도 계약 필요 항목',
-    time: '영업일 5~10일 (협의 일정에 따라)',
-    subject: '[라이선스 문의]',
+    desc: '"공식 파트너" 등 별도 계약 필요 표현',
+    time: '영업일 5~10일 1차 회신',
+    subject: '[라이선스 문의] ',
   },
 ];
 
@@ -39,12 +36,10 @@ function ContactPage() {
 
   return (
     <PageShell
-      eyebrow="10"
-      title="Contact"
-      subtitle="문의·신청"
-      lede={`세 가지 종류의 문의·신청 모두 ${contact.email}로 받습니다. 메일 제목에 아래 prefix를 붙여주시면 사무국이 빠르게 분류합니다.`}
+      title="문의 · 신청"
+      lede={`3종 문의 채널 — ${contact.email}. 메일 제목 prefix로 분류.`}
     >
-      <SectionHeading id="channels" title="Inquiry Channels" subtitle="문의 종류" />
+      <SectionHeading id="channels" title="문의 채널" />
       <div className="ct-channels">
         {CHANNELS.map(c => (
           <article key={c.id} className="ct-channel">
@@ -53,18 +48,18 @@ function ContactPage() {
               <span className="ct-channel-en">{c.en}</span>
             </header>
             <p className="ct-channel-desc">{c.desc}</p>
-            <div className="ct-channel-meta">처리 시간 · {c.time}</div>
+            <div className="ct-channel-meta">회신 — {c.time}</div>
             <a
               href={`mailto:${contact.email}?subject=${encodeURIComponent(c.subject)}`}
               className="btn btn-primary btn-md"
             >
-              {c.subject} 메일 보내기 →
+              {c.subject.trim()} 메일 →
             </a>
           </article>
         ))}
       </div>
 
-      <SectionHeading id="direct" title="Direct" subtitle="직접 연락" />
+      <SectionHeading id="direct" title="직접 연락" />
       <div className="ct-direct">
         <ul className="ct-direct-list">
           <li>
@@ -77,8 +72,8 @@ function ContactPage() {
           </li>
         </ul>
         <p className="ct-direct-note">
-          승인 신청·라이선스 문의 시 매체·기간·시안(PDF·이미지)을 함께
-          첨부해주시면 검토가 빨라집니다.
+          사전 승인·라이선스 문의 시 매체·기간·시안 (PDF·이미지) 첨부 시
+          검토 단축.
         </p>
       </div>
     </PageShell>

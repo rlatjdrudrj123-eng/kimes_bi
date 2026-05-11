@@ -1,10 +1,15 @@
 #!/usr/bin/env node
-/* KIMES BI 가이드 — §22 자동 톤 검수
+/* KIMES BI 가이드 — §22 자동 톤 검수 (v2027.1 — Tier 분리)
  *
- * §22의 7원칙 + §22.10 브랜드 표기 룰 + §22.11 디자이너 언어 회피 +
- * §22.X 가이드틱 표현 회피를 components(.jsx) · content(.json) ·
- * 행사 메타(config.js) 안에서 검출. 매 페이지 작업 끝에 돌려 일괄 검수
- * 부담을 줄임.
+ * §22.1 톤 2단 분리 적용:
+ *   Tier 1 — 브랜드 보호 영역. 강한 표현 허용 ("변경 불가 / 무단 사용 금지 /
+ *            별도 계약 필요 / 사전 승인 필수"). 라인에 Tier 1 마커가 있으면
+ *            §22.6 강한 단어 룰 통과.
+ *   Tier 2 — 실무 권장 영역. "권장 / 권장하지 않음 / 피해주세요" 톤 강제.
+ *
+ * §22.4 용어 통일 (v2027.1 신규):
+ *   자산 (← 에셋), 결합 배치 (← 락업), 변형 (← 베리언트),
+ *   메인·보조 (← 프라이머리·세컨더리), 권장 사양 (← 권장 스펙).
  *
  * 사용:
  *   node scripts/check-tone.js
@@ -15,7 +20,8 @@
  *
  * 예외 처리:
  *   - rule.exemptIfPrecededBy: 매치 직전 문자열이 화이트리스트에 있으면 통과
- *   - rule.exemptIfLineHas:    같은 줄에 마커가 있으면 통과 (예: ✗ 메타 예시)
+ *   - rule.exemptIfLineHas:    같은 줄에 마커가 있으면 통과 (예: ✗ 메타 예시,
+ *                              Tier 1 마커)
  *   - rule.exemptFiles:        특정 파일은 검사 제외
  *   - 라인 끝 주석 `// allow-tone`이 있으면 그 줄의 모든 룰 통과
  */
@@ -31,40 +37,61 @@ const ROOT = path.resolve(__dirname, '..');
  * 각 룰: { term | regex, why, [exemptIfPrecededBy], [exemptIfLineHas],
  *         [exemptFiles], category }
  * ------------------------------------------------------------------- */
+// Tier 1 마커 — 라인에 이 표현 중 하나라도 있으면 §22.6 강한 단어 룰 통과.
+// "변경 불가 / 무단 사용 금지 / 별도 계약 필수 / 사전 승인 필수" 등 표준
+// Tier 1 표현이 들어간 본문은 브랜드 보호 영역이므로 강한 단어 허용.
+const TIER1_MARKERS = [
+  '(Tier 1)',
+  '변경 불가',
+  '제거 불가',
+  '사용 불가',
+  '대체 불가',
+  '분리 불가',
+  '결합 불가',
+  '무단 사용 금지',
+  '무단 사용',
+  '별도 계약 필수',
+  '별도 라이선스 계약 필수',
+  '사전 승인 필수',
+  '사전 승인 필요',
+  '병기 필수',
+  '✗',
+  '권장하지 않',
+];
+
 const RULES = [
-  /* === §22.6 강한 단어 정제 (4개 절대 케이스 외 사용 X) ============== */
-  // 가이드 본문에서 강제 톤. 4 케이스(워드마크 변형 / 미승인 라이선스 /
-  // 회차 오기 / 미승인 자산)를 제외하고는 권장 톤으로.
-  // ✗ 마커가 있는 메타 예시 라인(§10 Writing Style 표 등)은 제외.
+  /* === §22.6 강한 단어 정제 — Tier 2에만 적용 ====================== */
+  // Tier 1 마커가 있는 라인은 통과. Tier 2 본문(서체·SNS·한·영 혼용 등)에서
+  // "절대·반드시·금지" 사용 시만 위반.
   {
     term: '절대',
-    why: '§22.6 — 강한 표현 회피. 4 케이스 외엔 권장 톤 사용',
+    why: '§22.6 — Tier 2 영역에서 강한 표현 회피. Tier 1이면 라인에 마커 추가',
     category: 'strong',
-    exemptIfLineHas: ['✗', '권장하지 않'],
+    exemptIfLineHas: TIER1_MARKERS,
   },
   {
     term: '반드시',
-    why: '§22.6 — "권장합니다" / 평서문으로',
+    why: '§22.6 — Tier 2 영역에서 "권장합니다" / 평서문으로',
     category: 'strong',
-    exemptIfLineHas: ['✗', '권장하지 않'],
+    exemptIfLineHas: TIER1_MARKERS,
   },
   {
     term: '금지',
-    why: '§22.6 — "권장하지 않음" / "사무국 협의" 사용',
+    why: '§22.6 — Tier 1만 허용 ("무단 사용 금지" 등). Tier 2면 "권장하지 않음"',
     category: 'strong',
-    exemptIfLineHas: ['✗', '권장하지 않'],
+    exemptIfLineHas: TIER1_MARKERS,
   },
   {
     term: '위반',
     why: '§22.6 — 가이드 본문 사용 X (사무국 내부 용어)',
     category: 'strong',
-    exemptIfLineHas: ['✗'],
+    exemptIfLineHas: TIER1_MARKERS,
   },
   {
     term: '불가',
-    why: '§22.6 — "사용 제한" / "사용하지 않음" 사용',
+    why: '§22.6 — Tier 1만 허용 ("변경 불가" 등). Tier 2면 "사용하지 않음"',
     category: 'strong',
-    exemptIfLineHas: ['✗', '권장하지 않'],
+    exemptIfLineHas: TIER1_MARKERS,
   },
   {
     term: '하지 말 것',
@@ -201,16 +228,23 @@ const RULES = [
     why: '§22.X — "자유롭게 사용" 사용',
     category: 'guide-ish',
   },
-  // "자산" → "에셋" — 디자인·마케팅 컨텍스트만. 좁게 검출.
+  /* === §22.4 용어 통일 (v2027.1 신규) ================================ */
+  // v2027.0의 "에셋·락업" 선호를 v2027.1에서 "자산·결합 배치"로 역전.
+  // 한국어 일관성·법무 표현 호환성 확보.
   {
-    regex: /자산\s*(다운로드|라이브러리|카탈로그)/,
-    why: '§22.X — "에셋 다운로드/라이브러리/카탈로그" 사용 (디자인·마케팅 컨텍스트)',
-    category: 'guide-ish',
+    term: '에셋',
+    why: '§22.4 — "자산" 사용 (v2027.1 용어 통일)',
+    category: 'unified-term',
   },
   {
-    term: '두 자산 모델',
-    why: '§22.X — "두 에셋" 사용',
-    category: 'guide-ish',
+    term: '락업',
+    why: '§22.4 — "결합 배치" 사용 (v2027.1 용어 통일)',
+    category: 'unified-term',
+  },
+  {
+    term: '권장 스펙',
+    why: '§22.4 — "권장 사양" 사용',
+    category: 'unified-term',
   },
 
   /* === 자산 혼동 방지 (§22.4) ========================================
@@ -250,10 +284,11 @@ const RULES = [
 ];
 
 const CATEGORY_LABELS = {
-  strong:          '§22.6 강한 단어',
-  brand:           '§22.10 브랜드 표기',
+  strong:          '§22.6 강한 단어 (Tier 2)',
+  brand:           '§22.5 브랜드 표기',
   designer:        '§22.11 디자이너 언어',
   'guide-ish':     '§22.X 가이드틱 표현',
+  'unified-term':  '§22.4 용어 통일 (v2027.1)',
   'asset-confusion': '§22.4 자산 혼동',
   translation:     '번역투',
   cliche:          '마케팅 클리셰',

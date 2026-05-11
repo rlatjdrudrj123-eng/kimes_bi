@@ -47,7 +47,7 @@ function Stub({ sectionRef }) {
 
 function ChangelogPage() {
   return (
-    <PageShell eyebrow="11" title="변경 이력" toc={false}>
+    <PageShell title="변경 이력" toc={false}>
       <Stub sectionRef="§18" />
     </PageShell>
   );
@@ -56,7 +56,6 @@ function ChangelogPage() {
 function NotFoundPage() {
   return (
     <PageShell
-      eyebrow="404"
       title="페이지를 찾을 수 없습니다"
       lede="이 주소에 해당하는 페이지가 없습니다."
       toc={false}

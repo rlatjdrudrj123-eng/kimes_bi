@@ -172,4 +172,8 @@ collections:
               - { name: "lede",     label: "한 줄 소개 (한글)", widget: "string" }
               - { name: "ledeEn",   label: "한 줄 소개 (영문)", widget: "string" }
               - { name: "hall",     label: "Hall · 일정",     widget: "string" }
-              - { name: "boilerplate100", label: "보일러플레이트 (100자)", widget: "text" }
+              - { name: "positioning",      label: "포지셔닝 한 줄",          widget: "string", hint: "v2027.1 신규" }
+              - { name: "targetExhibitors", label: "타깃 참가업체",            widget: "string", hint: "v2027.1 신규" }
+              - { name: "targetVisitors",   label: "타깃 관람객",              widget: "string", hint: "v2027.1 신규" }
+              - { name: "priorYear",        label: "직전 회차 (2026) 실적",    widget: "string", hint: "v2027.1 신규 — 참가사·참관 수" }
+              - { name: "boilerplate100",   label: "보일러플레이트 (100자)",   widget: "text" }

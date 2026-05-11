@@ -1,14 +1,11 @@
-// §14 — /permissions. 권한·승인·라이선스 매트릭스. BI 가이드를 단순한
-// 디자인 가이드와 구별 짓는 핵심 페이지: 누가 무엇을 어디까지 할 수
-// 있는지를 명문화.
+// §8 — /permissions (v2027.1). 누가 무엇을 어디까지 사용할 수 있는가.
+// 사용 권한 매트릭스 · 신청 절차 · 라이선싱.
 //
-// 명세 §14.2.1~§14.2.5 평면 구조.
+// 데이터 출처: content/permissions.json — 어드민 편집 가능.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
 const Link = window.Link;
-
-// 데이터 출처: content/permissions.json — 어드민 편집 가능.
 
 const FALLBACK = { levels: [], rows: [], applicationSteps: [], applicationForm: [] };
 
@@ -26,17 +23,15 @@ function PermissionsPage() {
 
   return (
     <PageShell
-      eyebrow="07"
-      title="Usage Rights"
-      subtitle="권한·승인·라이선스"
-      lede="이 페이지가 BI 가이드를 단순한 디자인 가이드와 구별 짓는 핵심입니다. 누가 무엇을 어디까지 할 수 있는지를 명문화한 매트릭스 + 신청 절차 + 라이선싱 문의 안내입니다."
+      title="권한 · 승인 · 라이선스"
+      lede="누가 무엇을 어디까지 사용할 수 있는가. 사용 권한 매트릭스 · 신청 절차 · 라이선싱."
     >
-      {/* §14.2.1 권한 매트릭스 ----------------------------------------- */}
-      <SectionHeading id="matrix" title="Usage Rights Matrix" subtitle="사용 권한 매트릭스" />
+      {/* §8.1 사용 권한 매트릭스 */}
+      <SectionHeading id="matrix" title="사용 권한 매트릭스" />
       <div className="pm-legend">
         {LEVELS.map(l => (
           <div key={l.id} className={`pm-legend-item pm-level-${l.id}`}>
-            <span className="pm-legend-mark">{l.id === 'restricted' ? '✗' : '✓'}</span>
+            <span className="pm-legend-mark">✓</span>
             <div className="pm-legend-body">
               <div className="pm-legend-label">{l.label}</div>
               <div className="pm-legend-en">{l.en}</div>
@@ -44,10 +39,6 @@ function PermissionsPage() {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="pm-note">
-        빈도 높은 핵심 6 케이스만 정리. 그 외 사용 케이스는 사무국과 협의해주세요.
       </div>
 
       <div className="pm-matrix-wrap">
@@ -64,7 +55,7 @@ function PermissionsPage() {
                 <td className="pm-action">{row.action}</td>
                 {LEVELS.map(l => (
                   <td key={l.id} className={`pm-cell ${row.level === l.id ? `pm-cell-active pm-cell-${l.id}` : ''}`}>
-                    {row.level === l.id ? (l.id === 'restricted' ? '✗' : '✓') : ''}
+                    {row.level === l.id ? '✓' : ''}
                   </td>
                 ))}
               </tr>
@@ -75,41 +66,36 @@ function PermissionsPage() {
 
       {ELSE_NOTE && (
         <div className="pm-else-note">
-          <strong>그 외 사용 케이스 안내</strong> — {ELSE_NOTE}
+          <strong>매트릭스 외 사용 사례</strong> — {ELSE_NOTE}
         </div>
       )}
 
-      {/* §14.2.1 자산 선택 참고 ---------------------------------------- */}
+      {/* §8.2 자산 선택 기준 */}
       <div className="pm-asset-ref">
-        <h3 className="pm-asset-ref-title">에셋 선택 참고 (강제 아님)</h3>
-        <p>KIMES 표기에는 두 가지 에셋이 있습니다 (→ <Link to="/typography">/typography</Link>).</p>
+        <h3 className="pm-asset-ref-title">자산 선택 기준</h3>
         <ul>
-          <li><strong>워드마크 SVG</strong> — 보증·증명 자리 (보도자료 헤더 마크·부스 인증 마크·공문 헤더)</li>
-          <li><strong>텍스트 표기</strong> — 마케팅·콘텐츠 자리. 회사 폰트·컬러로 자유롭게 사용 가능</li>
+          <li><strong>워드마크 SVG 자리</strong> — 보증·증명 영역 (보도자료 헤더·부스 인증 마크·공문)</li>
+          <li><strong>텍스트 표기 자리</strong> — 마케팅·콘텐츠 영역 (회사 폰트·컬러 자유 사용)</li>
         </ul>
-        <p>
-          다른 폰트로 "KIMES"를 타이핑해 워드마크 자리에 박는 것은 권장하지
-          않습니다. 그 자리에는 워드마크 SVG를 사용해주세요. 마케팅·콘텐츠
-          자리의 텍스트 표기는 자유 사용 영역입니다 (위 매트릭스 두 번째
-          행 참고).
-        </p>
+        <p>상세 → <Link to="/typography">/typography</Link></p>
       </div>
 
-      {/* §14.2.2 행위 시점 ---------------------------------------------- */}
-      <SectionHeading id="timing" title="Timing" subtitle="행위 시점" />
+      {/* §8.3 사용 유효 기간 (Tier 1) */}
+      <SectionHeading id="timing" title="사용 유효 기간 (Tier 1)" />
       <div className="pm-timing">
         <p>
-          <strong>"KIMES 2027 참가" 표기는 행사 종료 시점(2027년 3월 21일)
-          까지 유효합니다.</strong>
+          "KIMES 2027 참가" 표기는 행사 종료일(2027.03.21)까지 유효.
         </p>
         <ul>
-          <li>행사 종료 후에는 회사 자료에서 KIMES 로고를 제거하거나 "지난 KIMES 2027 참가 (Past Exhibitor)" 표기로 변경합니다.</li>
-          <li>다음 회차 참가가 확정된 경우 새 회차 표기로 갱신합니다.</li>
+          <li>종료 후 — 회사 자료에서 KIMES 로고 제거 또는 "Past Exhibitor (KIMES 2027)" 표기 전환</li>
+          <li>차회 참가 확정 시 — 신규 회차 표기로 갱신</li>
         </ul>
       </div>
 
-      {/* §14.2.3 신청 절차 ---------------------------------------------- */}
-      <SectionHeading id="apply" title="Application Process" subtitle="신청 절차" />
+      {/* §8.4 사전 승인 신청 */}
+      <SectionHeading id="apply" title="사전 승인 신청" />
+      <p>신청 → 검토 → 회신 (영업일 3~5일).</p>
+      <p>행사 기간 굿즈 제작 시 행사 D-30 이전 신청 권장 (제작 리드타임 확보).</p>
       <div className="pm-steps">
         {APPLICATION_STEPS.map(s => (
           <div key={s.num} className="pm-step">
@@ -123,7 +109,7 @@ function PermissionsPage() {
       </div>
 
       <div className="pm-form">
-        <h3 className="pm-form-title">신청서 양식 (사용 목적·매체·기간·시안)</h3>
+        <h3 className="pm-form-title">신청서 항목</h3>
         <ul className="pm-form-list">
           {APPLICATION_FORM.map((f, i) => <li key={i}>{f}</li>)}
         </ul>
@@ -133,7 +119,7 @@ function PermissionsPage() {
               승인 신청서 다운로드 (.docx)
             </button>
           ) : (
-            <a href="/assets/forms/permission-application.docx" className="btn btn-md btn-outline" download>
+            <a href="/assets/forms/KIMES_Permission_Application.docx" className="btn btn-md btn-outline" download>
               승인 신청서 다운로드 (.docx)
             </a>
           )}
@@ -143,33 +129,31 @@ function PermissionsPage() {
         </div>
       </div>
 
-      {/* §14.2.4 가이드와 다른 사용이 발견되면 -------------------------- */}
-      <SectionHeading id="non-compliance" title="Non-compliance" subtitle="가이드와 다른 사용이 발견되면" />
-      <div className="pm-non-compliance">
-        <p>
-          가이드와 다르게 사용된 경우 사무국이 정정을 요청드릴 수 있습니다.
-          대부분의 경우 협의로 해결되며, 자세한 사항은 brand 문의로 알려
-          드립니다.
-        </p>
-        <p className="pm-non-compliance-foot">
-          궁금한 사항은 → <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        </p>
-      </div>
-
-      {/* §14.2.5 라이선싱 문의 ------------------------------------------ */}
-      <SectionHeading id="licensing" title="Licensing" subtitle="라이선싱 문의" />
+      {/* §8.5 라이선스 (Tier 1) */}
+      <SectionHeading id="licensing" title="라이선스 (Tier 1)" />
       <div className="pm-licensing">
         <p>
-          "KIMES 공식 파트너", "KIMES 추천 업체" 같은 인증·후원 표현은 별도
-          라이선스 계약이 필요합니다. 가격·계약 조건은 사무국이 개별 협의
-          합니다.
+          "KIMES 공식 파트너", "KIMES 추천 업체" 등 인증·후원 표현은 별도
+          라이선스 계약 필수. 가격·계약 조건 개별 협의.
         </p>
         <div className="pm-licensing-channel">
-          <a href={`mailto:${contact.email}?subject=${encodeURIComponent('[라이선스 문의]')}`} className="btn btn-md btn-primary">
+          <a href={`mailto:${contact.email}?subject=${encodeURIComponent('[라이선스 문의] ')}`} className="btn btn-md btn-primary">
             라이선스 문의 →
           </a>
           <span>제목 <code>[라이선스 문의]</code> · {contact.email}</span>
         </div>
+      </div>
+
+      {/* §8.6 가이드 위반 (Tier 1) */}
+      <SectionHeading id="non-compliance" title="가이드 위반 (Tier 1)" />
+      <div className="pm-non-compliance">
+        <p>
+          가이드와 다른 사용 발견 시 사무국이 정정·중단을 요청. 워드마크
+          변형·미승인 라이선스 표현·무단 굿즈·도용 사례는 법적 조치 대상.
+        </p>
+        <p className="pm-non-compliance-foot">
+          문의 → <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
       </div>
     </PageShell>
   );

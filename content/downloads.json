@@ -1,11 +1,11 @@
 {
-  "_comment": "어드민에서 편집 가능한 에셋 다운로드 데이터. status를 'ready'로 바꾸면 사이트 전체 다운로드 버튼이 일괄 활성화. 각 항목의 url에 Google Drive·외부 호스팅 등 직접 링크를 채우면 그 항목만 활성화.",
+  "_comment": "어드민에서 편집 가능한 자산 다운로드 데이터. status를 'ready'로 바꾸면 사이트 전체 다운로드 버튼이 일괄 활성화. 각 항목의 url에 Google Drive·외부 호스팅 등 직접 링크를 채우면 그 항목만 활성화.",
   "status": "pending",
   "bundle": {
     "title": "KIMES 2027 BI 패키지",
-    "desc": "모든 로고 + 컬러 팔레트 + 폰트 안내 + 표기 가이드 PDF",
+    "desc": "워드마크 4종 × 4포맷 · 특별관 3종 · 컬러 팔레트 · 서체 안내 · 표기 가이드 PDF · 보도자료 템플릿 · 부스 헤더 PSD · 미디어 자산",
     "ext": ".zip",
-    "size": "약 28 MB",
+    "size": "약 180 MB",
     "url": ""
   },
   "categories": [
@@ -55,7 +55,8 @@
       "items": [
         { "name": "공식 포스터 (A2·A3 세로형)", "url": "", "size": "약 6 MB", "external": false },
         { "name": "웹용 배너 KV (가로·정방·세로 7종 묶음)", "url": "", "size": "약 4 MB", "external": false },
-        { "name": "이메일 서명 배너 4종", "url": "", "size": "320 KB", "external": false }
+        { "name": "이메일 서명 배너 4종", "url": "", "size": "320 KB", "external": false },
+        { "name": "부스 헤더 PSD 템플릿", "url": "", "size": "약 80 MB", "external": false }
       ]
     },
     {

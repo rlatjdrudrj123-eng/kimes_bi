@@ -1,6 +1,5 @@
-// §8 — /typography. 두 에셋(워드마크 vs 텍스트 표기) + 권장 서체·사양.
-// 이전 6 sub-section에서 4 sub-section으로 압축 (Free Composition Gallery
-// 제거 + Fonts 카드 6 굵기 → 권장 2개만).
+// §5 — /typography (v2027.1). 자산 2종 (워드마크 SVG · 텍스트 표기) ·
+// 권장 서체 · 권장 사양 · 자산 선택 기준.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
@@ -11,33 +10,31 @@ function TypographyPage() {
 
   return (
     <PageShell
-      eyebrow="04"
-      title="Typography"
-      subtitle="타이포그래피"
-      lede="KIMES를 자기 자료에 표기할 때 두 가지 에셋(워드마크 SVG vs 텍스트 표기)을 어떻게 다르게 쓰는지, 권장 서체와 사양은 무엇인지 안내합니다."
+      title="타이포그래피"
+      lede="자산 2종 (워드마크 SVG · 텍스트 표기) · 권장 서체 · 권장 사양."
     >
-      {/* §8.1 두 에셋 ----------------------------------------------------- */}
-      <SectionHeading id="purpose" title="Two Asset Models" subtitle="두 에셋" />
+      {/* §5.1 자산 2종 ----------------------------------------------------- */}
+      <SectionHeading id="purpose" title="자산 2종" />
       <div className="ty-models">
         <article className="ty-model">
           <div className="ty-model-head">
-            <span className="ty-model-tag">에셋 1</span>
-            <h3 className="ty-model-name">KIMES 워드마크</h3>
+            <span className="ty-model-tag">자산 1</span>
+            <h3 className="ty-model-name">KIMES 워드마크 (SVG)</h3>
           </div>
-          <p className="ty-model-def">공식 KIMES SVG. 변형 없이 그대로 사용.</p>
+          <p className="ty-model-def">공식 자산. 변형 불가 (Tier 1).</p>
           <ul className="ty-model-uses">
-            <li>보도자료 헤더 락업</li>
+            <li>보도자료 헤더</li>
             <li>부스 인증 마크</li>
-            <li>공문·계약서 헤더</li>
+            <li>공문 · 계약서 헤더</li>
           </ul>
-          <Link to="/logo" className="ty-model-cta">에셋 다운로드 → /logo</Link>
+          <Link to="/logo" className="ty-model-cta">자산 다운로드 → /logo</Link>
         </article>
         <article className="ty-model">
           <div className="ty-model-head">
-            <span className="ty-model-tag">에셋 2</span>
+            <span className="ty-model-tag">자산 2</span>
             <h3 className="ty-model-name">KIMES 텍스트 표기</h3>
           </div>
-          <p className="ty-model-def">"KIMES" 4글자 텍스트. 회사 디자인 시스템에 맞춰 자유롭게 사용.</p>
+          <p className="ty-model-def">"KIMES" 4글자 텍스트. 회사 디자인 시스템 내 자유 사용 (Tier 2).</p>
           <ul className="ty-model-uses">
             <li>부스 그래픽 · 광고 카피</li>
             <li>SNS 콘텐츠</li>
@@ -46,13 +43,12 @@ function TypographyPage() {
         </article>
       </div>
 
-      {/* §8.2 사용 서체 — 두 폰트 + 권장 굵기 한 줄 ---------------------- */}
-      <SectionHeading id="fonts" title="Fonts" subtitle="사용 서체" />
+      {/* §5.2 권장 서체 ---------------------- */}
+      <SectionHeading id="fonts" title="권장 서체" />
       <p>
-        KIMES는 <strong>Montserrat</strong>(영문) + <strong>Pretendard</strong>
-        (한글) 페어를 권장합니다. 둘 다 무료·오픈소스. 굵기는{' '}
-        <strong>800 ExtraBold</strong> 또는 <strong>700 Bold</strong>를 권장
-        합니다 — 부스·인쇄물에서 멀리서도 또렷.
+        <strong>Montserrat</strong> (영문) + <strong>Pretendard</strong>
+        (한글) — 둘 다 무료 · 오픈소스. 굵기 800 ExtraBold 또는 700 Bold
+        권장 (부스 · 인쇄물 가독성).
       </p>
       <div className="ty-font-links">
         <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener noreferrer" className="ty-font-link">
@@ -65,15 +61,10 @@ function TypographyPage() {
         </a>
       </div>
 
-      {/* §8.3 권장 사양 ------------------------------------------------- */}
-      <SectionHeading id="recommended" title="Recommended Notation" subtitle="권장 사양" />
-      <p>
-        권장 사항입니다. 회사 디자인 시스템에 맞춰 자유 조정 가능합니다.
-        "KIMES {year} 참가" 같은 텍스트 표기를 자료에 넣을 때 이 사양을
-        기준으로 시작하시면 결이 자연스럽습니다.
-      </p>
+      {/* §5.3 권장 사양 ------------------------------------------------- */}
+      <SectionHeading id="recommended" title="권장 사양 (텍스트 표기)" />
       <div className="ty-rec">
-        <div className="ty-rec-sample" aria-label="권장 사양 텍스트 샘플 (SVG 아닌 진짜 텍스트)">
+        <div className="ty-rec-sample" aria-label="권장 사양 텍스트 샘플">
           <span className="ty-rec-main">KIMES {year}</span>
           <span className="ty-rec-sub">참가 · EXHIBITOR</span>
         </div>
@@ -86,15 +77,19 @@ function TypographyPage() {
           </tbody>
         </table>
       </div>
+      <p>회사 디자인 시스템에 맞춰 자유 조정 가능 (Tier 2).</p>
 
-      {/* §8.4 워드마크 자리에는 SVG 사용 (가드레일) --------------------- */}
-      <SectionHeading id="guardrail" title="Wordmark Use" subtitle="워드마크 자리에는 SVG" />
+      {/* §5.4 자산 선택 기준 --------------------- */}
+      <SectionHeading id="guardrail" title="자산 선택 기준" />
       <section className="ty-guard">
         <p>
-          공식 보증·증명이 필요한 자리(보도자료 헤더 마크, 부스 인증 마크,
-          공문 헤더 등)에는 KIMES 워드마크 SVG를 사용해주세요. 다른 폰트로
-          "KIMES"를 타이핑해서 워드마크 자리에 박는 것은 피해주세요. 그 외
-          마케팅·콘텐츠 텍스트 표기는 자유롭게 사용하셔도 됩니다.
+          <strong>워드마크 SVG 자리</strong> — 공식 보증·증명 영역 (보도자료
+          헤더 · 부스 인증 마크 · 공문 헤더). 타 폰트로 타이핑한 "KIMES"
+          대체 불가 (Tier 1).
+        </p>
+        <p>
+          <strong>텍스트 표기 자리</strong> — 마케팅·콘텐츠 영역. 회사 폰트·
+          컬러 자유 사용.
         </p>
         <Link to="/logo#versions" className="btn btn-primary btn-md">
           KIMES 워드마크 다운로드 →
@@ -102,8 +97,8 @@ function TypographyPage() {
       </section>
 
       <p className="ty-cross">
-        로고 에셋은 → <Link to="/logo">/logo</Link>{' · '}
-        표기 규칙·승인 필요 표현은 → <Link to="/notation">/notation</Link>
+        로고 자산 — <Link to="/logo">/logo</Link> · 표기 규칙 ·
+        승인 필요 표현 — <Link to="/notation">/notation</Link>
       </p>
     </PageShell>
   );
