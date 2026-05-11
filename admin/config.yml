@@ -76,18 +76,6 @@ collections:
                   - { name: "url",      label: "URL", widget: "string", required: false, hint: "비워두면 비활성." }
                   - { name: "size",     label: "용량", widget: "string", required: false }
                   - { name: "external", label: "외부 링크?", widget: "boolean", default: false }
-          - name: "applications"
-            label: "적용 예시 갤러리 (5종)"
-            label_singular: "사례"
-            hint: "/applications 페이지의 5개 카드"
-            widget: "list"
-            fields:
-              - { name: "id",        label: "ID",          widget: "string" }
-              - { name: "title",     label: "자료 제목",    widget: "string" }
-              - { name: "situation", label: "사용 상황",    widget: "string" }
-              - { name: "format",    label: "자료 형식",    widget: "string" }
-              - { name: "compat",    label: "호환",        widget: "string" }
-              - { name: "url",       label: "다운로드 URL", widget: "string", required: false }
 
   # =========================================================================
   # 2) FAQ
@@ -123,7 +111,7 @@ collections:
   # =========================================================================
   - name: "permissions"
     label: "Permissions · 권한 매트릭스"
-    description: "/permissions 페이지 권한 매트릭스 18행 + 4단계 라벨 + 신청 절차·양식."
+    description: "/permissions 페이지 권한 매트릭스 6행 + 3단계 라벨 + 신청 절차·양식."
     files:
       - file: "content/permissions.json"
         name: "permissions"
@@ -131,10 +119,10 @@ collections:
         format: "json"
         fields:
           - name: "levels"
-            label: "권한 단계 (4)"
+            label: "권한 단계 (3)"
             widget: "list"
             fields:
-              - { name: "id",    label: "ID (rows.level과 매칭)", widget: "string", hint: "free / preapproval / licensed / restricted" }
+              - { name: "id",    label: "ID (rows.level과 매칭)", widget: "string", hint: "free / preapproval / licensed" }
               - { name: "label", label: "라벨 (한글)",  widget: "string" }
               - { name: "en",    label: "라벨 (영문)",  widget: "string" }
               - { name: "desc",  label: "설명",         widget: "string" }
@@ -162,7 +150,7 @@ collections:
   # =========================================================================
   - name: "special_zones"
     label: "Special Zones · 특별관"
-    description: "/special-zones 인덱스 + 3 상세 페이지 메타데이터. 컬러는 components/config.js의 KIMES_EVENT.colors.sub에서 가져오므로 여기서 colorKey만 매핑."
+    description: "/special-zones 단일 페이지의 3 zone 메타데이터. 컬러는 components/config.js의 KIMES_EVENT.colors.sub에서 가져오므로 여기서 colorKey만 매핑."
     files:
       - file: "content/special-zones.json"
         name: "special-zones"

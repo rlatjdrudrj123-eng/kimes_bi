@@ -72,17 +72,18 @@ workflows/pages.yml이 GitHub Actions로 자동 배포.
   Netlify가 자동으로 GitHub OAuth 프록시(api.netlify.com)를 제공해
   별도 OAuth App 등록 불필요.
 
-### 콘텐츠 매핑 한계 (현재)
+### CMS 편집 가능 영역
 
-§9~§15 페이지의 데이터(FAQ 항목·Application 타일·Permission 매트릭스 등)
-는 React 컴포넌트 안 const 배열에 박혀있어 CMS 편집으로 직접 수정 불가.
-CMS는 legacy `content/*.json`(intro / color / typography / logo /
-typography-in-use / logo-rules / logo-lockup / asset-library) 영역만
-실시간 반영.
+`content/*.json` 4 파일이 단일 진실의 출처:
 
-자산 다운로드 URL 관리·페이지 콘텐츠 풀 편집은 ContentLoader 확장 + 컴포
-넌트 리팩터(const → JSON) 작업이 필요. 우선순위는 자산 status 토글 + 자산
-URL 관리부터.
+- `downloads.json` — 자산 status 토글 + 통합 패키지 + 카테고리별 항목·URL
+- `faq.json`        — 자주 묻는 질문 + 카테고리
+- `permissions.json` — 권한 매트릭스 6행 + 3단계 + 신청 절차·양식
+- `special-zones.json` — 특별관 3종 메타데이터 (컬러는 config.js 단일 출처)
+
+그 외 페이지 데이터(Logo·Color·Typography·Notation 등)는 React 컴포넌트
+안 const 배열에서 직접 관리 — 디자인 시스템 코어 데이터라 잦은 편집
+대상 아님.
 
 ## 자산 상태 플래그
 

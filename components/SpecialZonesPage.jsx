@@ -1,8 +1,6 @@
 // §11 — /special-zones. KIMES 안에서 운영되는 3개 특별관 정보를 한 페이지에
-// 모아서 안내. 이전 4페이지(인덱스 + 3 상세) 구조에서 1페이지 단일화 —
-// 특별관 참가업체는 5-10%만이라 별도 상세 페이지는 과함.
-//
-// 데이터: content/special-zones.json (어드민 편집), 컬러: config.js 단일 출처.
+// 섹션으로 나열. 데이터: content/special-zones.json (어드민 편집).
+// 컬러: config.js의 KIMES_EVENT.colors.sub 단일 출처.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;

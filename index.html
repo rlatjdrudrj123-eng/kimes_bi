@@ -27,14 +27,6 @@
 <link rel="stylesheet" href="components/downloads.css" />
 <link rel="stylesheet" href="components/contact.css" />
 
-<!-- Legacy section stylesheets (still loaded; surviving Foundations
-     components reference them. Phase 2 reattaches each component to its
-     destination route, then we'll prune.) -->
-<link rel="stylesheet" href="components/logo-on-backgrounds.css" />
-<link rel="stylesheet" href="components/logo-lockup.css" />
-<link rel="stylesheet" href="components/typography-in-use.css" />
-
-
 <!-- Editor overlay CSS (lightweight in-place editor; trigger: 5x click on
      the KIMES wordmark in the header — class .brand-mark — or visit
      /#admin). Sveltia CMS at /admin/ is the canonical editor — this
@@ -83,21 +75,13 @@
 <!-- Load order:
      1. LogoSvgs.js → window.LOGO_SVGS
      2. Wordmarks.jsx → KimesWordmark, InlineLogo, etc. (reads LOGO_SVGS)
-     3. DocsSections.jsx → exports surviving Foundations components
-        (Hero, ColorTokens, Typography, LogoCatalog, CoEventPage, hooks)
-     4. Per-section components (TypographyInUse, LogoOnBackgrounds,
-        LogoLockup, AssetLibrary) — registered on window for Phase 2 use
-     5. Router.jsx → useHashRoute + ROUTES + matchRoute + Link
-     6. AppShell.jsx → Header + Footer + PageShell + TocSidebar
-     7. Pages.jsx → 18 placeholder pages (incl. NotFound) on window
-     8. Inline App mount below -->
+     3. Router.jsx → useHashRoute + ROUTES + matchRoute + Link
+     4. AppShell.jsx → Header + Footer + PageShell + TocSidebar
+     5. Pages.jsx → ChangelogPage + NotFoundPage stubs
+     6. Per-page implementations (LandingPage … ContactPage)
+     7. Inline App mount below -->
 <script src="components/LogoSvgs.js"></script>
 <script type="text/babel" src="components/Wordmarks.jsx"></script>
-<script type="text/babel" src="components/DocsSections.jsx"></script>
-<script type="text/babel" src="components/TypographyInUse.jsx"></script>
-<script type="text/babel" src="components/LogoOnBackgrounds.jsx"></script>
-<script type="text/babel" src="components/LogoLockup.jsx"></script>
-<script type="text/babel" src="components/AssetLibrary.jsx"></script>
 <script type="text/babel" src="components/Router.jsx"></script>
 <script type="text/babel" src="components/CopyButton.jsx"></script>
 <script type="text/babel" src="components/AppShell.jsx"></script>

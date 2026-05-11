@@ -48,7 +48,7 @@ function KimesWordmark({ height = 48, variant = 'primary', suffix, color, accent
 
 /* ---------- MedicomteK ---------- */
 //   variant: 'primary' | '2026'
-function MedicomtekWordmark({ height = 40, variant = 'primary', suffix, color, accent, suffixColor, ...rest }) {
+function MedicomteKWordmark({ height = 40, variant = 'primary', suffix, color, accent, suffixColor, ...rest }) {
   let v = variant;
   if (suffix === '2026' || variant === '2026') v = '2026';
   const map = { primary: 'mc', '2026': 'mc2026' };
@@ -93,7 +93,7 @@ function InspireTagline({ height = 36, ...rest }) {
 Object.assign(window, {
   InlineLogo,
   KimesWordmark,
-  MedicomtekWordmark,
+  MedicomteKWordmark,
   BeautyDermaWordmark,
   InspireWordmark,
   InspireTagline,

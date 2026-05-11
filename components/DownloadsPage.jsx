@@ -11,7 +11,7 @@ const { useState } = React;
 
 // JSON 로드 실패 시 폴백 (빈 구조). 정상 흐름에서는 _loader.js가 CONTENT_READY
 // 이후 React 마운트하므로 window.CONTENT.downloads 항상 존재.
-const FALLBACK = { status: 'pending', bundle: {}, categories: [], applications: [] };
+const FALLBACK = { status: 'pending', bundle: {}, categories: [] };
 
 function DownloadsPage() {
   const data = (window.CONTENT && window.CONTENT.downloads) || FALLBACK;
