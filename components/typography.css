@@ -2,7 +2,7 @@
    진짜 CSS 렌더 원칙(이미지 X) — 모든 사례는 inline style 또는 클래스로
    직접 폰트 사양 전달. */
 
-/* ---------- §8.1 Two Asset Models — 워드마크 vs 텍스트 표기 ----------- */
+/* ---------- §8.1 Two Asset Models — 로고 vs 텍스트 표기 ----------- */
 .ty-models {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

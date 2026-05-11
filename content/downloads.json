@@ -1,5 +1,5 @@
 {
-  "_comment": "어드민에서 편집 가능한 에셋 다운로드 데이터. status를 'ready'로 바꾸면 사이트 전체 다운로드 버튼이 일괄 활성화. 각 항목의 url에 Google Drive·외부 호스팅 등 직접 링크를 채우면 그 항목만 활성화.",
+  "_comment": "어드민에서 편집 가능한 파일 다운로드 데이터. status를 'ready'로 바꾸면 사이트 전체 다운로드 버튼이 일괄 활성화. 각 항목의 url에 Google Drive·외부 호스팅 등 직접 링크를 채우면 그 항목만 활성화.",
   "status": "pending",
   "bundle": {
     "title": "KIMES 2027 BI 패키지",
@@ -13,10 +13,10 @@
       "id": "logos",
       "label": "Logos / 로고",
       "items": [
-        { "name": "KIMES 워드마크 (4버전 × 4포맷)", "url": "", "size": "약 8 MB", "external": false },
-        { "name": "MedicomteK 워드마크", "url": "", "size": "약 2 MB", "external": false },
-        { "name": "BEAUTY&DERMA SEOUL 워드마크", "url": "", "size": "약 2 MB", "external": false },
-        { "name": "INSPIRE Digital Health 워드마크", "url": "", "size": "약 2 MB", "external": false }
+        { "name": "KIMES 로고 (4버전 × 4포맷)", "url": "", "size": "약 8 MB", "external": false },
+        { "name": "MedicomteK 로고", "url": "", "size": "약 2 MB", "external": false },
+        { "name": "BEAUTY&DERMA SEOUL 로고", "url": "", "size": "약 2 MB", "external": false },
+        { "name": "INSPIRE Digital Health 로고", "url": "", "size": "약 2 MB", "external": false }
       ]
     },
     {

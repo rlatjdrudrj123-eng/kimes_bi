@@ -68,7 +68,7 @@
   };
 
   // ---- KIMES 컬러 (Primary 3 + Sub 4) -------------------------------------
-  // KIMES 4브랜드 시스템: KIMES 워드마크용 Primary 3색 + 특별관 3종 + 톤다운
+  // KIMES 4브랜드 시스템: KIMES 로고용 Primary 3색 + 특별관 3종 + 톤다운
   // Gray. /color, /logo 미세글씨, /special-zones 컬러 정의 모두 이 단일
   // 출처 참조 (§13 특별관 페이지 컬러 중복 정의 제거).
   // 사이트 내부 UI 토큰(--surface-*, --text-*)은 별개 유지 (§19).

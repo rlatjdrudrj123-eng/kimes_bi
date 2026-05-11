@@ -62,6 +62,8 @@ function Header() {
 
 function Footer() {
   // 푸터 표기는 components/config.js의 KIMES_EVENT를 단일 출처로 사용.
+  // 공식 채널(사이트·메일·전화·SNS)은 모든 페이지에서 노출되도록 푸터에
+  // 통합 (이전 /overview §2.6에서 이동).
   const { event, guide, contact } = window.KIMES_EVENT;
   return (
     <footer className="shell-footer">
@@ -72,13 +74,21 @@ function Footer() {
           <Link to="/changelog" className="ft-link">변경 이력 보기 →</Link>
         </div>
         <div className="shell-footer-col">
-          <div>대표 문의: <a href={`mailto:${contact.email}`}>{contact.email}</a></div>
-          <div>대표 전화: <a href={`tel:${contact.tel.replace(/-/g,'')}`}>{contact.tel}</a></div>
-          <div className="ft-meta">승인 검토: 영업일 3–5일</div>
+          <div className="ft-strong">문의·신청</div>
+          <div>메일: <a href={`mailto:${contact.email}`}>{contact.email}</a></div>
+          <div>전화: <a href={`tel:${contact.tel.replace(/-/g,'')}`}>{contact.tel}</a></div>
+          <div className="ft-meta">승인 검토 — 영업일 3–5일</div>
         </div>
         <div className="shell-footer-col">
-          <div>주최: {event.organizationKo}</div>
-          <div>공식 사이트: <a href="https://kimes.kr" target="_blank" rel="noopener noreferrer">kimes.kr</a></div>
+          <div className="ft-strong">공식 채널</div>
+          <div>사이트: <a href="https://kimes.kr" target="_blank" rel="noopener noreferrer">kimes.kr</a></div>
+          <div>인스타: <a href="https://instagram.com/kimes_official" target="_blank" rel="noopener noreferrer">@kimes_official</a></div>
+          <div>링크드인: <a href="https://linkedin.com/company/kimes" target="_blank" rel="noopener noreferrer">/company/kimes</a></div>
+          <div>유튜브: <a href="https://youtube.com/@kimes" target="_blank" rel="noopener noreferrer">/@kimes</a></div>
+        </div>
+        <div className="shell-footer-col">
+          <div className="ft-strong">주최</div>
+          <div>{event.organizationKo}</div>
         </div>
       </div>
       <div className="shell-footer-legal">

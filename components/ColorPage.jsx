@@ -68,11 +68,11 @@ function ColorPage() {
       eyebrow="03"
       title="Color"
       subtitle="컬러"
-      lede="KIMES 워드마크와 공식 표기에는 Primary 3색을, 특별관 표기·톤다운에는 Sub 4색을 사용합니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
+      lede="KIMES 로고와 공식 표기에는 Primary 3색을, 특별관 표기·톤다운에는 Sub 4색을 사용합니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
     >
       {/* §7.2.1 Primary Colors ---------------------------------------- */}
       <SectionHeading id="primary" title="Primary Colors" subtitle="메인 컬러" />
-      <p>KIMES 워드마크와 공식 표기.</p>
+      <p>KIMES 로고와 공식 표기.</p>
       <div className="clr-primary-grid">
         {PRIMARY.map(c => <PrimaryCard key={c.id} color={c} />)}
       </div>
@@ -87,7 +87,7 @@ function ColorPage() {
       {/* §7.2.3 How to Use -------------------------------------------- */}
       <SectionHeading id="rules" title="How to Use" subtitle="색 사용 원칙" />
       <ol className="clr-rules">
-        <li>KIMES Primary 컬러는 KIMES 워드마크와 공식 표기에 사용합니다.</li>
+        <li>KIMES Primary 컬러는 KIMES 로고와 공식 표기에 사용합니다.</li>
         <li>Sub 컬러는 특별관 표기와 톤다운 자리에 사용합니다. Primary를 대체하지 않습니다.</li>
         <li>참가업체 자체 브랜드 컬러는 그대로 유지하세요.</li>
         <li>인쇄물은 CMYK + Pantone 별색 병기를 권장합니다.</li>
@@ -228,7 +228,7 @@ function CssSnippet({ code }) {
   return (
     <div className="clr-snippet">
       <div className="clr-snippet-head">
-        <span className="clr-snippet-title">CSS Variables</span>
+        <span className="clr-snippet-title">CSS·SCSS 변수 <span className="clr-snippet-aud">(개발자용)</span></span>
         <CopyButton value={code} label="Copy" ariaLabel="CSS 변수 스니펫 복사" />
       </div>
       <pre className="clr-snippet-code"><code>{code}</code></pre>

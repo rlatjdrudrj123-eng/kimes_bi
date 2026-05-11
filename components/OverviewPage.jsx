@@ -83,19 +83,6 @@ function OverviewPage() {
     { n: '14', ko: '바이오 / 제약',         en: 'Bio & pharmaceuticals' },
   ];
 
-  // §5.3.6 — 공식 채널. 단일 창구로 통합: 모든 문의(브랜드·참가·승인·
-  // 라이선스)는 kimes@kimes.kr / 02-551-0102. 사이트·SNS는 [열기],
-  // 이메일·전화는 [복사] (수신자 필드 또는 주소록 붙여 넣기 편하게).
-  const contact = window.KIMES_EVENT.contact;
-  const CHANNELS = [
-    { label: '공식 사이트', display: 'kimes.kr',          url: 'https://kimes.kr',                       action: 'open' },
-    { label: '대표 문의',   display: contact.email,        value: contact.email,                          action: 'copy' },
-    { label: '대표 전화',   display: contact.tel,          value: contact.tel,                            action: 'copy' },
-    { label: '인스타그램',  display: '@kimes_official',    url: 'https://instagram.com/kimes_official',   action: 'open' },
-    { label: '링크드인',    display: '/company/kimes',     url: 'https://linkedin.com/company/kimes',     action: 'open' },
-    { label: '유튜브',      display: '/@kimes',            url: 'https://youtube.com/@kimes',             action: 'open' },
-  ];
-
   return (
     <PageShell
       eyebrow="01"
@@ -170,38 +157,7 @@ function OverviewPage() {
         ))}
       </ol>
 
-      {/* §5.3.6 공식 채널 -------------------------------------------- */}
-      <SectionHeading id="channels" title="Official Channels" subtitle="공식 채널" />
-      <p>
-        KIMES 사무국과 직접 연결되는 채널입니다. 이메일은 [Copy]로 수신자
-        필드에 붙여 넣고, 사이트·SNS는 [Open]으로 새 탭에서 확인하세요.
-      </p>
-      <ul className="ov-channels">
-        {CHANNELS.map(ch => (
-          <li key={ch.label} className="ov-ch">
-            <span className="ov-ch-label">{ch.label}</span>
-            <span className="ov-ch-value">{ch.display}</span>
-            <span className="ov-ch-action">
-              {ch.action === 'open' ? (
-                <a
-                  href={ch.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-sm btn-outline"
-                >
-                  Open ↗
-                </a>
-              ) : (
-                <CopyButton
-                  value={ch.value}
-                  label="Copy"
-                  ariaLabel={`${ch.label} ${ch.value} 복사`}
-                />
-              )}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {/* §5.3.6 공식 채널 — 푸터로 이동 (모든 페이지 공통 노출). */}
     </PageShell>
   );
 }

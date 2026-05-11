@@ -84,6 +84,41 @@
 .landing-meta-live .landing-meta-label { color: var(--kimes-red); }
 .landing-meta-upcoming .landing-meta-label { color: var(--kimes-red); }
 
+/* ---------- 자산 공개 예정 알림 (assets.status === 'pending') ---------- */
+.landing-asset-notice {
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-subtle);
+  border-left: 3px solid var(--kimes-red);
+  border-radius: var(--radius-sm);
+}
+.landing-asset-notice-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.landing-asset-notice-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kimes-red);
+}
+.landing-asset-notice-date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.landing-asset-notice-body {
+  margin: 6px 0 0;
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
 /* ---------- 공통 섹션 ---------- */
 .landing-section {
   padding-top: var(--space-6);

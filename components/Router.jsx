@@ -50,7 +50,7 @@ function useHashRoute() {
 }
 
 // Route table. Routes with a numeric `nav` value appear in the global
-// header in that order. `cta: true` marks the "에셋 다운로드" CTA pinned
+// header in that order. `cta: true` marks the "파일 다운로드" CTA pinned
 // to the right end of the header.
 // 라벨은 §22.5 영문/한글 사용 규칙에 따라 영문. 글로벌 nav, CTA 버튼,
 // 라우트 매핑 모두 단일 출처. 한글 서브타이틀은 PageShell에서 별도 prop.

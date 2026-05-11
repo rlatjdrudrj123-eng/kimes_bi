@@ -1,6 +1,6 @@
-/* /logo — §6 KIMES 워드마크 페이지 */
+/* /logo — §6 KIMES 로고 페이지 */
 
-/* ---------- §6.2.1 hero (워드마크 + 설명) ---------- */
+/* ---------- §6.2.1 hero (로고 + 설명) ---------- */
 .lg-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
@@ -175,7 +175,7 @@
   color: var(--text-primary);
 }
 @media (max-width: 600px) {
-  /* 모바일에서는 1X 라벨이 화면 밖으로 나가지 않도록 워드마크 자체를 축소 */
+  /* 모바일에서는 1X 라벨이 화면 밖으로 나가지 않도록 로고 자체를 축소 */
   .lg-clear-stage { padding: var(--space-2); transform: scale(0.7); transform-origin: center; }
 }
 
@@ -220,7 +220,7 @@
 }
 
 /* ---------- §6.2.5 배경별 사용 — 11칸 격자 시스템 (KT BI 차용) ------
-   좌측 라벨(워드마크명·규정명·룰) + 우측 11칸 단색 격자(각 칸에 워드마크
+   좌측 라벨(로고명·규정명·룰) + 우측 11칸 단색 격자(각 칸에 로고
    또는 빨간 빗금). KT 결을 차용했으나 폰트·여백·텍스트 톤은 KIMES 토큰
    그대로. */
 .lg-grid-stack {
@@ -293,7 +293,7 @@
   min-width: 0;
 }
 /* 사용 X 칸: 빨간 대각선 빗금. 단색 배경 위에 반투명 빗금으로 차단 의도
-   명확화. 워드마크는 표시 X. */
+   명확화. 로고는 표시 X. */
 .lg-grid-cell.is-blocked::after {
   content: '';
   position: absolute;
@@ -314,13 +314,13 @@
   color: var(--text-muted);
 }
 
-/* 모바일에선 11칸이 좁아져 워드마크가 깨질 수 있어 cell 높이 축소 */
+/* 모바일에선 11칸이 좁아져 로고가 깨질 수 있어 cell 높이 축소 */
 @media (max-width: 600px) {
   .lg-grid-cells { height: 44px; }
   .lg-grid-cell svg { transform: scale(0.9); }
 }
 
-/* Gray 워드마크 자유 사용 한 줄 안내 — 칩 다음 줄에 가벼운 톤으로 */
+/* Gray 로고 자유 사용 한 줄 안내 — 칩 다음 줄에 가벼운 톤으로 */
 .lg-gray-note {
   margin: var(--space-2) 0 var(--space-5);
   font-size: var(--fs-caption);
@@ -350,7 +350,47 @@
   letter-spacing: -0.005em;
 }
 
-/* ---------- 브랜드 컬러 칩 5구간 — 칩 사이 여백 + 라벨(워드마크 종류) -- */
+/* ---------- §3.5 빠른 참고 / 상세 사양 사이 H3 라벨 ---------- */
+.lg-h3-inline {
+  margin: var(--space-4) 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ---------- §3.5 빠른 참고 표 (영세업체용) ---------- */
+.lg-quickref {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-body);
+}
+.lg-quickref th,
+.lg-quickref td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-line);
+}
+.lg-quickref th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+}
+.lg-quickref tr:last-child td { border-bottom: 0; }
+.lg-quickref td:first-child {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.lg-quickref td:last-child {
+  color: var(--text-secondary);
+}
+
+/* ---------- 브랜드 컬러 칩 5구간 — 칩 사이 여백 + 라벨(로고 종류) -- */
 .lg-color-bar-wrap {
   margin-bottom: var(--space-5);
 }
@@ -489,7 +529,7 @@
 /* #2 크기 변형 — 가로로 늘이기 */
 .lg-bad-stretch svg { transform: scaleX(1.6); transform-origin: left center; }
 
-/* #3 워드마크 위 텍스트·그래픽 겹치기 — 우상단 작은 라벨 오버레이 */
+/* #3 로고 위 텍스트·그래픽 겹치기 — 우상단 작은 라벨 오버레이 */
 .lg-bad-overlay { position: relative; }
 .lg-bad-overlay-tag {
   position: absolute;
@@ -517,7 +557,7 @@
 /* #5 화질 낮은 이미지 — blur로 픽셀화 시뮬레이션 */
 .lg-bad-lowres svg { filter: blur(1.6px) contrast(0.9); }
 
-/* #6 비공식 워드마크 — 워드마크 옆에 추가 단어 ("KOREA") */
+/* #6 비공식 로고 — 로고 옆에 추가 단어 ("KOREA") */
 .lg-bad-unofficial { gap: 4px; }
 .lg-bad-unofficial-extra {
   font-family: var(--font-display);
@@ -527,7 +567,7 @@
   letter-spacing: -0.01em;
 }
 
-/* #7 회사 로고와 잘못된 락업 — 가짜 회사 배지가 워드마크에 너무 붙음 */
+/* #7 회사 로고와 잘못된 락업 — 가짜 회사 배지가 로고에 너무 붙음 */
 .lg-bad-badlockup { gap: 2px; }
 .lg-bad-badlockup-co {
   font-family: 'Arial', sans-serif;

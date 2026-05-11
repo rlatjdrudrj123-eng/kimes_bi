@@ -165,6 +165,10 @@ function NotationPage() {
 
       {/* §10.2.6 구분 기호 ---------------------------------------------- */}
       <SectionHeading id="separator" title="Separators" subtitle="구분 기호" />
+      <p>
+        날짜 범위는 en-dash(–) 또는 물결(~)을 사용해주세요. 디자인 작업 시
+        상세 구분은 아래 표를 참고하세요.
+      </p>
       <table className="ws-table">
         <thead>
           <tr><th>기호</th><th>이름</th><th>용도</th><th>예시</th></tr>
@@ -184,7 +188,7 @@ function NotationPage() {
       {/* §9.2.7 SNS 태그·해시태그 (이전 §12 /digital 흡수) ------------- */}
       <SectionHeading id="sns" title="SNS Tag" subtitle="SNS 태그·해시태그" />
       <p>
-        SNS 콘텐츠에 KIMES 워드마크가 등장할 때 캡션에 공식 태그를 권장합니다.
+        SNS 콘텐츠에 KIMES 로고가 등장할 때 캡션에 공식 태그를 권장합니다.
         의무는 아니나 사무국 노출 추적·답례 인사 자료로 활용됩니다.
       </p>
       <table className="ws-table">

@@ -81,15 +81,15 @@ function PermissionsPage() {
 
       {/* §14.2.1 자산 선택 참고 ---------------------------------------- */}
       <div className="pm-asset-ref">
-        <h3 className="pm-asset-ref-title">에셋 선택 참고 (강제 아님)</h3>
-        <p>KIMES 표기에는 두 가지 에셋이 있습니다 (→ <Link to="/typography">/typography</Link>).</p>
+        <h3 className="pm-asset-ref-title">파일 선택 참고 (강제 아님)</h3>
+        <p>KIMES 표기에는 두 가지 파일이 있습니다 (→ <Link to="/typography">/typography</Link>).</p>
         <ul>
-          <li><strong>워드마크 SVG</strong> — 보증·증명 자리 (보도자료 헤더 마크·부스 인증 마크·공문 헤더)</li>
+          <li><strong>로고 SVG</strong> — 보증·증명 자리 (보도자료 헤더 마크·부스 인증 마크·공문 헤더)</li>
           <li><strong>텍스트 표기</strong> — 마케팅·콘텐츠 자리. 회사 폰트·컬러로 자유롭게 사용 가능</li>
         </ul>
         <p>
-          다른 폰트로 "KIMES"를 타이핑해 워드마크 자리에 박는 것은 권장하지
-          않습니다. 그 자리에는 워드마크 SVG를 사용해주세요. 마케팅·콘텐츠
+          다른 폰트로 "KIMES"를 타이핑해 로고 자리에 박는 것은 권장하지
+          않습니다. 그 자리에는 로고 SVG를 사용해주세요. 마케팅·콘텐츠
           자리의 텍스트 표기는 자유 사용 영역입니다 (위 매트릭스 두 번째
           행 참고).
         </p>

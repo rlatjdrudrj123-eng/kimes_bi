@@ -13,13 +13,13 @@ const Link = window.Link;
 
 // §4.2.4 자주 찾는 자료 — 4×2 그리드의 8개 타일.
 const QUICK_LINKS = [
-  { to: '/downloads',    label: '에셋 패키지',           desc: '.zip 통합 패키지',           icon: 'download' },
+  { to: '/downloads',    label: '파일 패키지',           desc: '.zip 통합 패키지',           icon: 'download' },
   { to: '/overview',     label: '공식 명칭 한·영',       desc: '복사해서 바로 사용',          icon: 'doc' },
   { to: '/notation',     label: '표기 규칙',              desc: '명칭·날짜·숫자·SNS 태그',     icon: 'doc' },
   { to: '/downloads',    label: '이메일 서명 배너',      desc: '메일 마지막에 첨부',          icon: 'mail' },
   { to: '/downloads',    label: 'SNS 카드 양식',          desc: '인스타·링크드인 공유용',       icon: 'sns' },
   { to: '/overview',     label: '보도자료 보일러플레이트', desc: '40·100·200·400자',           icon: 'press' },
-  { to: '/faq',          label: '자주 묻는 질문',          desc: '9개 분류 29개 답변',          icon: 'help' },
+  { to: '/faq',          label: '자주 묻는 질문',          desc: '9개 분류 32개 답변',          icon: 'help' },
   { to: '/contact',      label: '승인 신청',              desc: '특수 사용 사전 검토',         icon: 'check' },
 ];
 
@@ -33,7 +33,9 @@ const UPDATES = [
 
 function LandingPage() {
   const { event } = window.KIMES_EVENT;
+  const assets = window.KIMES_EVENT.assets || {};
   const status = window.KIMES_EVENT.getEventStatus(new Date());
+  const assetsPending = assets.status !== 'ready';
 
   return (
     <div className="landing">
@@ -65,6 +67,19 @@ function LandingPage() {
           <div className="landing-meta-sub">{status.sub}</div>
         </aside>
       </section>
+
+      {assetsPending && (
+        <section className="landing-asset-notice" aria-label="자산 공개 일정">
+          <div className="landing-asset-notice-row">
+            <span className="landing-asset-notice-label">자산 공개 예정</span>
+            <span className="landing-asset-notice-date">행사 D-60 · 2027.01.17</span>
+          </div>
+          <p className="landing-asset-notice-body">
+            그 전까지는 공식 명칭·표기 규칙·회사 소개 문구만 사용 가능합니다.
+            로고·컬러 팔레트·템플릿 등 다운로드 파일은 D-60에 일괄 공개됩니다.
+          </p>
+        </section>
+      )}
 
       {/* §4.2.2 이 가이드는 누구를 위한 것인가 -------------------------- */}
       <section className="landing-section" id="audience">

@@ -5,7 +5,7 @@
 
 :root {
   /* KIMES 4브랜드 시스템 (§7 Primary + Sub) — config.js의 colors 객체와 같은 값.
-     워드마크·공식 표기는 Primary, 특별관·톤다운은 Sub. */
+     로고·공식 표기는 Primary, 특별관·톤다운은 Sub. */
   /* Primary */
   --kimes-red:   #E60012;
   --kimes-black: #231815;
@@ -382,8 +382,14 @@
   margin: 0 auto;
   padding: var(--space-5) var(--space-3) var(--space-3);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-4);
+}
+@media (max-width: 900px) {
+  .shell-footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .shell-footer-inner { grid-template-columns: 1fr; }
 }
 .shell-footer-col { display: flex; flex-direction: column; gap: 6px; }
 .shell-footer-col a { color: var(--text-secondary); text-decoration: underline; }
