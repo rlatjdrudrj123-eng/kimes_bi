@@ -76,9 +76,6 @@ function PermissionsPage() {
         </div>
       )}
 
-      <p className="pm-asset-link">
-        파일 선택은 → <Link to="/overview">/overview</Link>의 Wordmark Use 참고.
-      </p>
 
       {/* §8.x Timing 섹션 — 매트릭스 1행("행사 종료 후 제거")과 중복이라 삭제 */}
 

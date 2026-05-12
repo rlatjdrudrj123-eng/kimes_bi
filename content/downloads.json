@@ -1,9 +1,9 @@
 {
-  "_comment": "어드민에서 편집 가능한 파일 다운로드 데이터. status를 'ready'로 바꾸면 사이트 전체 다운로드 버튼이 일괄 활성화. 각 항목의 url에 Google Drive·외부 호스팅 등 직접 링크를 채우면 그 항목만 활성화.",
+  "_comment": "v2027.1 — BI 필수 파일만. status를 'ready'로 바꾸면 다운로드 버튼 일괄 활성화. url을 채우면 항목별 활성화.",
   "status": "pending",
   "bundle": {
     "title": "KIMES 2027 BI 패키지",
-    "desc": "로고 전체 · 컬러 팔레트 · 서체 안내 · 표기 가이드 PDF",
+    "desc": "로고 4종 · 컬러 팔레트 · 표기 가이드 PDF",
     "ext": ".zip",
     "size": "약 28 MB",
     "url": ""
@@ -21,20 +21,9 @@
     },
     {
       "id": "colors",
-      "label": "Colors / 컬러",
+      "label": "Colors / 컬러 팔레트",
       "items": [
-        { "name": "Adobe Swatch (Illustrator·Photoshop·InDesign)", "url": "", "size": "12 KB", "external": false },
-        { "name": "Sketch 팔레트", "url": "", "size": "8 KB", "external": false },
-        { "name": "Figma 라이브러리 링크", "url": "https://figma.com", "size": "외부", "external": true },
-        { "name": "CSS·SCSS 변수 스니펫", "url": "", "size": "4 KB", "external": false }
-      ]
-    },
-    {
-      "id": "fonts",
-      "label": "Fonts / 서체",
-      "items": [
-        { "name": "Montserrat (Google Fonts)", "url": "https://fonts.google.com/specimen/Montserrat", "size": "외부", "external": true },
-        { "name": "Pretendard (GitHub)", "url": "https://github.com/orioncactus/pretendard/releases/latest", "size": "외부", "external": true }
+        { "name": "Adobe Swatch (.ase)", "url": "", "size": "12 KB", "external": false }
       ]
     },
     {
@@ -42,19 +31,7 @@
       "label": "Templates / 양식",
       "items": [
         { "name": "보도자료 템플릿 (한·영)", "url": "", "size": "120 KB", "external": false },
-        { "name": "회사 홈페이지 배너 (1920·1200·모바일)", "url": "", "size": "1.2 MB", "external": false },
         { "name": "SNS 카드 (1:1, 4:5, 9:16, OG)", "url": "", "size": "1.5 MB", "external": false },
-        { "name": "카탈로그·브로셔 표지 (A4 / 레터)", "url": "", "size": "480 KB", "external": false },
-        { "name": "마케팅 초청 카드 (이메일·SNS·카톡 공유용)", "url": "", "size": "200 KB", "external": false },
-        { "name": "부스 소개 카드 (A4·A5)", "url": "", "size": "240 KB", "external": false }
-      ]
-    },
-    {
-      "id": "marketing",
-      "label": "Marketing / 마케팅 자료",
-      "items": [
-        { "name": "공식 포스터 (A2·A3 세로형)", "url": "", "size": "약 6 MB", "external": false },
-        { "name": "웹용 배너 KV (가로·정방·세로 7종 묶음)", "url": "", "size": "약 4 MB", "external": false },
         { "name": "이메일 서명 배너 4종", "url": "", "size": "320 KB", "external": false }
       ]
     },

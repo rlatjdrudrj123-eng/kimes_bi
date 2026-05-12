@@ -33,7 +33,7 @@ function SpecialZonesIndex() {
 
       <p className="sz-foot-note">
         특별관 단독 표기는 특별관 내부 한정. 외부 자료(보도자료·홈페이지·
-        SNS 등)는 KIMES와 병기. 규칙은 → <Link to="/overview">/overview</Link>의 Name Notation 참고.
+        SNS 등)는 KIMES와 병기. → <Link to="/overview">/overview</Link>의 Official Names 참고.
       </p>
     </PageShell>
   );

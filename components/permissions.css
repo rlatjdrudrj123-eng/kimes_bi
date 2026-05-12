@@ -130,54 +130,6 @@
 .pm-cell-active.pm-cell-preapproval { color: var(--status-warn); background: rgba(180, 83, 9, 0.08); }
 .pm-cell-active.pm-cell-licensed   { color: var(--text-primary); background: var(--surface-subtle); }
 
-/* ---------- 파일 선택 참고 ---------- */
-.pm-asset-ref {
-  margin: var(--space-2) 0 var(--space-5);
-  padding: var(--space-3);
-  background: var(--surface-base);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-}
-.pm-asset-ref-title {
-  margin: 0 0 var(--space-1);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--fs-body-lg);
-  color: var(--text-primary);
-}
-.pm-asset-ref p {
-  margin: 0 0 var(--space-1);
-  font-size: var(--fs-caption);
-  line-height: 1.65;
-  color: var(--text-primary);
-}
-.pm-asset-ref ul {
-  margin: 4px 0 var(--space-1);
-  padding-left: 22px;
-  font-size: var(--fs-caption);
-  line-height: 1.7;
-  color: var(--text-primary);
-}
-.pm-asset-ref a { color: var(--kimes-red); font-weight: 600; text-decoration: none; }
-.pm-asset-ref a:hover { text-decoration: underline; }
-
-/* ---------- §14.2.2 행위 시점 ---------- */
-.pm-timing {
-  margin: var(--space-2) 0 var(--space-5);
-  padding: var(--space-3);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
-}
-.pm-timing p { margin: 0 0 var(--space-1); font-size: var(--fs-body); color: var(--text-primary); }
-.pm-timing ul {
-  margin: var(--space-1) 0 0;
-  padding-left: 22px;
-  font-size: var(--fs-body);
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
 /* ---------- §14.2.3 신청 절차 ---------- */
 .pm-steps {
   display: grid;
@@ -252,46 +204,19 @@
   flex-wrap: wrap;
 }
 
-/* ---------- §14.2.4 / §14.2.5 ---------- */
-.pm-non-compliance,
-.pm-licensing {
+/* ---------- 가이드 위반 사용 안내 ---------- */
+.pm-non-compliance {
   margin: var(--space-2) 0 var(--space-5);
   padding: var(--space-3);
   border: 1px solid var(--surface-line);
   border-radius: var(--radius-md);
   background: var(--surface-base);
 }
-.pm-non-compliance p,
-.pm-licensing p {
-  margin: 0 0 var(--space-2);
+.pm-non-compliance p {
+  margin: 0;
   font-size: var(--fs-body);
   line-height: 1.65;
   color: var(--text-primary);
 }
-.pm-non-compliance-foot {
-  font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  color: var(--text-secondary);
-}
-.pm-non-compliance-foot a,
-.pm-licensing-channel a { color: var(--kimes-red); font-weight: 600; text-decoration: none; }
-.pm-non-compliance-foot a:hover,
-.pm-licensing-channel a:hover { text-decoration: underline; }
-
-.pm-licensing-channel {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-}
-.pm-licensing-channel span {
-  font-size: var(--fs-caption);
-  color: var(--text-secondary);
-}
-.pm-licensing-channel code {
-  font-family: var(--font-mono);
-  background: var(--surface-muted);
-  padding: 1px 5px;
-  border-radius: 3px;
-  font-size: 0.92em;
-}
+.pm-non-compliance p a { color: var(--kimes-red); font-weight: 600; text-decoration: none; }
+.pm-non-compliance p a:hover { text-decoration: underline; }
