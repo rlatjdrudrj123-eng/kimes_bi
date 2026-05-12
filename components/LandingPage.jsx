@@ -14,7 +14,7 @@ const QUICK_LINKS = [
   { to: '/notation',  label: '표기 규칙',           desc: '명칭·날짜·숫자·SNS 태그', icon: 'doc' },
   { to: '/downloads', label: '이메일 서명 배너',   desc: '메일 서명용',              icon: 'mail' },
   { to: '/downloads', label: 'SNS 카드 양식',       desc: 'SNS 공유용',               icon: 'sns' },
-  { to: '/faq',       label: '자주 묻는 질문',      desc: '32개 항목',                icon: 'help' },
+  { to: '/faq',       label: '자주 묻는 질문',      desc: '23개 항목',                icon: 'help' },
   { to: '/contact',   label: '승인 신청',           desc: '사전 승인 신청',           icon: 'check' },
 ];
 
@@ -27,8 +27,7 @@ function LandingPage() {
       <section className="landing-hero">
         <div className="landing-hero-text">
           <h1 className="landing-headline">
-            <span className="landing-headline-line">{event.nameKo}</span>
-            <span className="landing-headline-line">브랜드 가이드</span>
+            {event.nameKo} 브랜드 가이드
           </h1>
           <p className="landing-subhead">
             보도자료·부스·초청장·SNS에서의 KIMES 표기 규정.
