@@ -8,11 +8,11 @@
       "colorVar": "--mc-blue",
       "name": "MedicomteK",
       "nameKo": "메디콤텍",
-      "tagline": "ADVANCED MEDICAL COMPONENTS",
-      "lede": "최첨단 의료기기 부품·소재 전시 (AI·딥러닝·로봇 분야 포함)",
-      "ledeEn": "Advanced medical components, materials, AI & robotics",
+      "tagline": "COMPONENTS & MATERIALS",
+      "lede": "의료기기 부품·소재 전시",
+      "ledeEn": "Medical components & materials exhibition",
       "hall": "COEX 전시장 전관 · 2027.03.18–21",
-      "boilerplate100": "최첨단 의료기기 부품·소재 전시. AI·딥러닝·로봇 과학 분야 포함. 부품·장비 업계 최신 정보 교환의 장."
+      "boilerplate100": "최첨단 의료기기 부품·소재 전시. 부품·장비 업계 최신 정보 교환의 장."
     },
     {
       "id": "beauty-derma",
@@ -32,8 +32,8 @@
       "slug": "inspire",
       "colorKey": "inLime",
       "colorVar": "--in-lime",
-      "name": "KIMES INSPIRE",
-      "nameKo": "키메스 인스파이어",
+      "name": "INSPIRE Digital Health",
+      "nameKo": "인스파이어 디지털 헬스",
       "tagline": "HEALTH MEETS INNOVATION",
       "lede": "의료 AI·디지털 헬스케어·웨어러블·데이터 분석 전시",
       "ledeEn": "Medical AI, digital healthcare, wearables & data analytics",
