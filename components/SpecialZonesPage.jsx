@@ -15,14 +15,6 @@ function getZones() {
   }));
 }
 
-function isLightHex(hex) {
-  const h = hex.replace('#', '');
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  return (0.2126 * r + 0.7152 * g + 0.0722 * b) > 160;
-}
-
 function SpecialZonesIndex() {
   const zones = getZones();
   const assetStatus = (window.KIMES_EVENT.assets && window.KIMES_EVENT.assets.status) || 'pending';
@@ -47,19 +39,33 @@ function SpecialZonesIndex() {
   );
 }
 
-// 특별관 1종 섹션 — Hero(컬러 색면) + 컬러 메타 + 로고 다운로드 + 한 줄
-// 보일러플레이트. 이전 별도 페이지의 6 섹션 정보를 1 섹션으로 압축.
+// 특별관 1종 섹션 — 헤더(태그라인+이름) + 이미지 placeholder 영역 +
+// 컬러 메타 + 로고 다운로드 + 한 줄 보일러플레이트.
 function ZoneSection({ zone, pending }) {
   return (
     <section className="sz-section" id={zone.slug}>
-      <div className="sz-hero" style={{ background: zone.color.hex }}>
-        <div className="sz-hero-content" style={{ color: isLightHex(zone.color.hex) ? '#231815' : '#fff' }}>
-          <div className="sz-hero-tagline">{zone.tagline}</div>
-          <h2 className="sz-hero-name">{zone.name}</h2>
-          <div className="sz-hero-name-ko">{zone.nameKo}</div>
-          <p className="sz-hero-lede-en">{zone.ledeEn}</p>
+      <header className="sz-section-head">
+        <div className="sz-tagline" style={{ color: zone.color.hex }}>
+          {zone.tagline}
         </div>
-      </div>
+        <h2 className="sz-zone-name">
+          {zone.name}
+          <span className="sz-zone-name-ko">{zone.nameKo}</span>
+        </h2>
+      </header>
+
+      <figure
+        className="sz-image-slot"
+        style={{ '--zone-accent': zone.color.hex }}
+        aria-label={`${zone.name} 키비주얼 이미지 영역`}
+      >
+        <span className="sz-image-slot-label">
+          이미지 영역 · {zone.name}
+        </span>
+        <span className="sz-image-slot-sub">
+          키비주얼 자료 도착 시 교체
+        </span>
+      </figure>
 
       <div className="sz-meta">
         <div className="sz-meta-row">

@@ -4,57 +4,77 @@
   margin: 0 0 var(--space-5);
 }
 
-/* 섹션 상단 컬러 색면 — 컴팩트 밴드 (좌:tagline+name+ko / 우:ledeEn) */
-.sz-hero {
+/* 섹션 헤더 — 태그라인 + 이름 (컬러 박스 대체) */
+.sz-section-head {
   margin: var(--space-2) 0 var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md);
 }
-.sz-hero-content {
-  display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  align-items: center;
-  gap: var(--space-3);
-  max-width: none;
-}
-@media (max-width: 700px) {
-  .sz-hero-content { grid-template-columns: 1fr; gap: 4px; }
-}
-.sz-hero-tagline {
-  display: block;
+.sz-tagline {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
-  opacity: 0.8;
-  margin-bottom: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
-.sz-hero-name {
+.sz-zone-name {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: -0.01em;
-  line-height: 1.1;
+  line-height: 1.15;
+  color: var(--text-primary);
 }
-.sz-hero-name-ko {
+.sz-zone-name-ko {
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 10px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--fs-caption);
-  opacity: 0.8;
+  color: var(--text-muted);
+  letter-spacing: 0;
 }
-.sz-hero-lede-en {
-  margin: 0;
+
+/* 이미지 placeholder — 키비주얼 자료 도착 시 교체 */
+.sz-image-slot {
+  position: relative;
+  margin: 0 0 var(--space-3);
+  aspect-ratio: 16 / 5;
+  border: 2px dashed var(--surface-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  overflow: hidden;
+}
+.sz-image-slot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--zone-accent, transparent);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.sz-image-slot-label {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--fs-caption);
-  line-height: 1.4;
-  opacity: 0.85;
-  justify-self: end;
-  text-align: right;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.sz-image-slot-sub {
+  position: relative;
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  opacity: 0.7;
 }
 @media (max-width: 700px) {
-  .sz-hero-lede-en { justify-self: start; text-align: left; }
+  .sz-image-slot { aspect-ratio: 16 / 7; }
 }
 
 /* 메타 — 한 줄 소개·위치·컬러·로고 파일 */
