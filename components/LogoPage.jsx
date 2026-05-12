@@ -236,7 +236,7 @@ function LogoPage() {
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
       <p>
         로고 SVG는 원본 그대로 사용. 텍스트 표기는 →{' '}
-        <Link to="/notation">/notation</Link> 참고.
+        <Link to="/overview">/overview</Link> 참고.
       </p>
       <div className="lg-donts">
         {DONTS.map(d => <DontCard key={d.id} d={d} />)}
@@ -249,7 +249,6 @@ function LogoPage() {
         <ul className="lg-apply-list">
           <li>굿즈·기념품 제작 (티셔츠·머그컵·에코백 등)</li>
           <li>영상물에 KIMES 로고 등장 (TVC·바이럴·웨비나 인트로)</li>
-          <li>외부 미디어 광고 집행</li>
           <li>가이드에 없는 새로운 사용 케이스</li>
         </ul>
         <div className="lg-apply-actions">

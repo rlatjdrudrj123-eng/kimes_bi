@@ -61,22 +61,10 @@ function ContactPage() {
         ))}
       </div>
 
-      <SectionHeading id="direct" title="Direct" subtitle="직접 연락" />
-      <div className="ct-direct">
-        <ul className="ct-direct-list">
-          <li>
-            <strong>메일</strong> —{' '}
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          </li>
-          <li>
-            <strong>전화</strong> —{' '}
-            <a href={`tel:${contact.tel.replace(/-/g, '')}`}>{contact.tel}</a>
-          </li>
-        </ul>
-        <p className="ct-direct-note">
-          승인 신청·라이선스 문의 시 매체·기간·시안(PDF·이미지)을 첨부해주세요.
-        </p>
-      </div>
+      <p className="ct-direct-note">
+        승인 신청·라이선스 문의 시 매체·기간·시안(PDF·이미지)을 첨부해주세요.
+        직접 연락처는 푸터 참고.
+      </p>
     </PageShell>
   );
 }

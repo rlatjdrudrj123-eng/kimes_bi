@@ -1,30 +1,64 @@
-// §2 — /overview (v2027.1). KIMES 한눈에 보기 — 공식 명칭·일정·
-// 보일러플레이트·핵심 숫자·14 카테고리. 행사 메타데이터는
-// components/config.js의 KIMES_EVENT에서 읽음.
+// §2 — /overview (v2027.1). KIMES 한눈에 보기 + 표기·서체 규칙 통합.
+// 행사 메타데이터는 components/config.js의 KIMES_EVENT에서 읽음.
 //
-// 5개 섹션:
-//   §2.1 공식 명칭 (정식·약식·약칭)
-//   §2.2 일정·장소
-//   §2.3 보일러플레이트 4벌 한·영
-//   §2.4 핵심 숫자 (참가업체·참가국·관람객)
-//   §2.5 14개 전시 카테고리
-// 공식 채널은 푸터로 이동 (전 페이지 공통 노출).
+// 11개 섹션:
+//   §2.1 공식 명칭 (Official Names)
+//   §2.2 일정·장소 (Date & Venue)
+//   §2.3 보일러플레이트 4벌 한·영 (Boilerplate)
+//   §2.4 핵심 숫자 (Key Numbers — 참가업체·참가국·관람객)
+//   §2.5 14개 전시 카테고리 (Categories)
+//   §2.6 명칭 표기 규칙 (Name Notation) ← 이전 /notation
+//   §2.7 권장 서체 (Fonts) ← 이전 /notation
+//   §2.8 권장 사양 (Recommended Notation) ← 이전 /notation
+//   §2.9 로고 자리에는 SVG (Wordmark Use) ← 이전 /notation
+//   §2.10 SNS 태그 (SNS Tag) ← 이전 /notation
+//   §2.11 별도 계약 필요 표현 (Restricted Expressions) ← 이전 /notation
+//
+// /notation의 Edition·Place & Booth 섹션은 §2.1·§2.2와 중복이라 제거.
+// 공식 채널은 푸터로 이동.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
 const CopyButton = window.CopyButton;
+const Link = window.Link;
+
+// §2.6 명칭 표기 규칙
+const NAME_RULES = [
+  { case: '처음 언급', ok: 'KIMES 2027 (The 42nd Korea International Medical & Hospital Equipment Show)', bad: 'KIMES (풀네임 생략)' },
+  { case: '두 번째부터', ok: 'KIMES', bad: '"킴스", "kimes" 소문자' },
+  { case: '따옴표', ok: '사용하지 않음', bad: '"KIMES"' },
+  { case: '이탤릭', ok: '사용하지 않음', bad: '*KIMES*' },
+  { case: '한글 표기', ok: 'KIMES (영문 그대로)', bad: '킴스 / 킴즈 / 케이아이엠이에스' },
+];
+
+// §2.10 SNS 태그
+const SNS_RULES = [
+  { item: '공식 태그',     value: '@kimes_official',                       hint: 'SNS 게시물 캡션에 멘션' },
+  { item: '해시태그',      value: '#KIMES2027 · #KIMES · #의료기기전시회 · #COEX', hint: '게시물 본문 또는 캡션 끝' },
+  { item: '라이브 스트리밍', value: 'KIMES 로고 노출 시 사전 통보 권장',     hint: '의무 아님 — 사무국 노출 추적용' },
+];
+
+// §2.11 별도 계약·승인 필요 표현
+const RESTRICTED = [
+  'KIMES 공식 파트너 / Official Partner of KIMES',
+  'KIMES 추천 / KIMES Recommended',
+  'KIMES 인증 / KIMES Certified',
+  'KIMES 후원 / Sponsored by KIMES',
+  'KIMES 주최 / Organized by KIMES',
+  'KIMES 로고를 회사 로고와 합친 새 로고',
+  '"KIMES 2027 official ___" 형태의 모든 표현',
+];
 
 function OverviewPage() {
   const { event } = window.KIMES_EVENT;
+  const { year } = window.KIMES_EVENT;
 
-  // §5.3.1 — 공식 명칭. 회차/연도가 들어간 정식·줄임은 config에서.
   const NAME_ROWS = [
     { label: '정식', ko: event.fullNameKo, en: event.fullNameEn },
     { label: '줄임', ko: event.nameKo,     en: event.nameEn },
     { label: '약칭', ko: 'KIMES',          en: 'KIMES' },
   ];
 
-  // §5.3.2 — 일정·장소.
   const FACT_ROWS = [
     { label: '기간', ko: event.dateRangeKo,      en: event.dateRangeEn },
     { label: '장소', ko: event.venueKo,          en: event.venueEn },
@@ -33,10 +67,6 @@ function OverviewPage() {
     { label: '주관', ko: 'KIMES 사무국',          en: 'KIMES Secretariat' },
   ];
 
-  // §5.3.3 — 보일러플레이트 4벌 × 한·영. 한국어 40·100·200자는 명세 §5.3.3
-  // 그대로, 한국어 400자와 영문 4벌은 명세 톤(차분·단정)에 맞게 작성.
-  // 회차·연도·주최·공동주최·숫자 표기는 모두 §10.2.5 / §10.2.6 규칙 준수.
-  // Phase 4 /downloads 작업 시 content/overview.json으로 분리 예정.
   const BOILERPLATES_KO = {
     40:  { use: 'SNS·이메일 제목',           text: '한국 최대 의료기기 전시회 KIMES 2027, 3월 18~21일 코엑스' },
     100: { use: '보도자료 리드',             text: 'KIMES 2027은 1,400여 개 기업과 8만여 명이 참여하는 한국 최대 의료기기 전시회로, 3월 18~21일 코엑스에서 열립니다.' },
@@ -51,10 +81,6 @@ function OverviewPage() {
   };
   const LENGTHS = [40, 100, 200, 400];
 
-  // §5.3.4 — 핵심 숫자 4장. §22.5 통계 카드 패턴: 카드는 숫자·라벨만,
-  // 출처(잠정·실적 시점)는 섹션 lede에 한 줄로 명시 — 카드 시각 임팩트
-  // 유지. 출처 정보는 config.numbers.*.source에 기록되어 있지만 카드에
-  // 렌더링하지 않음.
   const numbers = window.KIMES_EVENT.numbers;
   const NUM_CARDS = [
     { value: numbers.exhibitors.value, label: '참가업체' },
@@ -62,7 +88,6 @@ function OverviewPage() {
     { value: numbers.visitors.value,   label: '관람객' },
   ];
 
-  // §5.3.5 — 14개 전시 카테고리. 명세 §5.3.5의 한·영 병기 그대로.
   const CATEGORIES = [
     { n: '01', ko: '영상진단기기 및 용품',  en: 'Imaging diagnostics' },
     { n: '02', ko: '진찰 및 진단 관련기기', en: 'Examination & diagnosis' },
@@ -85,19 +110,19 @@ function OverviewPage() {
       eyebrow="01"
       title="Overview"
       subtitle="한눈에 보기"
-      lede="보도자료·홈페이지·SNS·이메일용 공식 문구."
+      lede="공식 명칭·일정·보일러플레이트·표기 규칙·서체."
     >
-      {/* §5.3.1 공식 명칭 ----------------------------------------- */}
+      {/* §2.1 공식 명칭 ----------------------------------------- */}
       <SectionHeading id="official-names" title="Official Names" subtitle="공식 명칭" />
       <p>KIMES 표기에 사용하는 공식 명칭. 행별 [Copy] 버튼으로 복사.</p>
       <FactTable rows={NAME_ROWS} caption="공식 명칭 한·영 표기" />
 
-      {/* §5.3.2 일정·장소 ----------------------------------------- */}
+      {/* §2.2 일정·장소 ----------------------------------------- */}
       <SectionHeading id="schedule" title="Date & Venue" subtitle="일정·장소" />
       <p>공식 일정 및 장소. 영문은 해외 채널용.</p>
       <FactTable rows={FACT_ROWS} caption="일정 및 장소 한·영 표기" />
 
-      {/* §5.3.3 보일러플레이트 4벌 ---------------------------- */}
+      {/* §2.3 보일러플레이트 ---------------------------- */}
       <SectionHeading id="boilerplates" title="Boilerplate" subtitle="한 줄 소개" />
       <p>표준 회사 소개문 4벌. [Copy] 버튼으로 복사해 사용.</p>
       {LENGTHS.map(len => (
@@ -109,7 +134,7 @@ function OverviewPage() {
         />
       ))}
 
-      {/* §5.3.4 핵심 숫자 ----------------------------------------- */}
+      {/* §2.4 핵심 숫자 ----------------------------------------- */}
       <SectionHeading id="numbers" title="Key Numbers" subtitle="핵심 숫자" />
       <p>
         KIMES 규모 표기용 공식 수치. 참가업체·참가국은 2027 기준, 관람객은
@@ -124,7 +149,7 @@ function OverviewPage() {
         ))}
       </div>
 
-      {/* §5.3.5 14개 전시 카테고리 ----------------------------------- */}
+      {/* §2.5 14개 전시 카테고리 ----------------------------------- */}
       <SectionHeading id="categories" title="Categories" subtitle="14개 전시 카테고리" />
       <p>
         영상진단부터 바이오·제약까지 14개 카테고리. 부스 위치 및 참가업체
@@ -140,12 +165,113 @@ function OverviewPage() {
         ))}
       </ol>
 
-      {/* §5.3.6 공식 채널 — 푸터로 이동 (모든 페이지 공통 노출). */}
+      {/* §2.6 명칭 표기 규칙 (← 이전 /notation §6.1) ------------------ */}
+      <SectionHeading id="name-rules" title="Name Notation" subtitle="명칭 표기 규칙" />
+      <table className="ws-table">
+        <thead>
+          <tr><th>상황</th><th className="ws-col-ok">✓ OK</th><th className="ws-col-bad">✗ 미권장</th></tr>
+        </thead>
+        <tbody>
+          {NAME_RULES.map((r, i) => (
+            <tr key={i}>
+              <td>{r.case}</td>
+              <td className="ws-cell-ok">{r.ok}</td>
+              <td className="ws-cell-bad">{r.bad}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* §2.7 권장 서체 (← 이전 /notation §6.4) ----------------------- */}
+      <SectionHeading id="fonts" title="Fonts" subtitle="권장 서체" />
+      <p>
+        권장 서체: <strong>Montserrat</strong>(영문) + <strong>Pretendard</strong>
+        (한글). 굵기 <strong>800 ExtraBold</strong> 또는{' '}
+        <strong>700 Bold</strong>. 둘 다 무료·오픈소스.
+      </p>
+      <div className="ty-font-links">
+        <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener noreferrer" className="ty-font-link">
+          <span className="ty-font-link-name">Montserrat</span>
+          <span className="ty-font-link-source">Google Fonts ↗</span>
+        </a>
+        <a href="https://github.com/orioncactus/pretendard/releases/latest" target="_blank" rel="noopener noreferrer" className="ty-font-link">
+          <span className="ty-font-link-name">Pretendard</span>
+          <span className="ty-font-link-source">GitHub ↗</span>
+        </a>
+      </div>
+
+      {/* §2.8 권장 사양 (← 이전 /notation §6.5) ----------------------- */}
+      <SectionHeading id="recommended" title="Recommended Notation" subtitle="권장 사양" />
+      <p>회사 폰트가 있으면 우선 사용. 없을 경우 아래 사양 참고.</p>
+      <div className="ty-rec">
+        <div className="ty-rec-sample" aria-label="권장 사양 텍스트 샘플">
+          <span className="ty-rec-main">KIMES {year}</span>
+          <span className="ty-rec-sub">참가 · EXHIBITOR</span>
+        </div>
+        <table className="ty-rec-spec">
+          <tbody>
+            <tr><th>메인 라인</th><td>Montserrat 800 ExtraBold · 18pt 환산</td></tr>
+            <tr><th>보조 라인</th><td>Pretendard 700 Bold · 11pt 환산</td></tr>
+            <tr><th>색</th><td>KIMES Red 또는 KIMES Black</td></tr>
+            <tr><th>한·영 혼용</th><td>숫자·영문 약어·브랜드명은 Montserrat</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* §2.9 로고 자리에는 SVG (← 이전 /notation §6.6) --------------- */}
+      <SectionHeading id="guardrail" title="Wordmark Use" subtitle="로고 자리에는 SVG" />
+      <section className="ty-guard">
+        <p>
+          공식 보증·증명 자리(보도자료 헤더, 부스 인증, 공문 헤더 등)는
+          로고 SVG 사용. 다른 폰트로 "KIMES" 타이핑해 로고 자리에 사용 금지. {/* allow-tone */}
+          일반 텍스트 표기는 자유.
+        </p>
+        <Link to="/logo#versions" className="btn btn-primary btn-md">
+          KIMES 로고 다운로드 →
+        </Link>
+      </section>
+
+      {/* §2.10 SNS 태그 (← 이전 /notation §6.7) ----------------------- */}
+      <SectionHeading id="sns" title="SNS Tag" subtitle="SNS 태그·해시태그" />
+      <p>SNS 콘텐츠에 KIMES 로고 사용 시 캡션 공식 태그 권장(의무 아님).</p>
+      <table className="ws-table">
+        <thead>
+          <tr><th>항목</th><th>권장</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          {SNS_RULES.map((r, i) => (
+            <tr key={i}>
+              <td>{r.item}</td>
+              <td><code>{r.value}</code></td>
+              <td className="ws-sns-hint">{r.hint}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* §2.11 별도 계약 필요 표현 (← 이전 /notation §6.8) ------------ */}
+      <SectionHeading id="restricted" title="Restricted Expressions" subtitle="별도 계약·승인이 필요한 표현" />
+      <section className="ws-restricted">
+        <p>
+          다음 표현은 별도 계약이 필요합니다. 사용 전 사무국과 협의해주세요.
+        </p>
+        <ul className="ws-restricted-list">
+          {RESTRICTED.map((r, i) => <li key={i}>{r}</li>)}
+        </ul>
+        <div className="ws-restricted-actions">
+          <a href="#/contact?type=license" className="btn btn-primary btn-md">
+            라이선스 문의 →
+          </a>
+          <span className="ws-restricted-channel">
+            {window.KIMES_EVENT.contact.email} · {window.KIMES_EVENT.contact.tel}
+          </span>
+        </div>
+      </section>
     </PageShell>
   );
 }
 
-// 공식 명칭·일정 같은 [구분 / 한국어 / 영문 / 복사] 4컬럼 표.
+// 공식 명칭·일정 — 4컬럼 표 (구분 / 한국어 / 영문 / 복사).
 function FactTable({ rows, caption }) {
   return (
     <div className="ov-table-wrap">
@@ -187,14 +313,11 @@ function FactTable({ rows, caption }) {
   );
 }
 
-// 보일러플레이트 길이 단위(40·100·200·400자) 그룹. 각 그룹 안에서
-// 한·영 박스를 좌·우(데스크탑) 또는 위·아래(모바일)로 배치.
 function BoilerplateSection({ limit, ko, en }) {
   return (
     <section className="bp-section" aria-labelledby={`bp-${limit}`}>
       <div className="bp-section-head">
-        <h3 id={`bp-${limit}`} className="bp-section-title">{limit}자 이내</h3>
-        <span className="bp-section-use">{ko.use}</span>
+        <h3 id={`bp-${limit}`} className="bp-section-title">{limit}자 — {ko.use}</h3>
       </div>
       <div className="bp-grid">
         <BoilerplateBox

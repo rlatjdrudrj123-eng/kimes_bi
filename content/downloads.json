@@ -62,11 +62,7 @@
       "id": "docs",
       "label": "Documents / 문서",
       "items": [
-        { "name": "BI 가이드 PDF 전체 (인쇄용)", "url": "", "size": "약 12 MB", "external": false },
-        { "name": "권한·승인 신청서", "url": "", "size": "60 KB", "external": false },
-        { "name": "MedicomteK 특별관 가이드 PDF", "url": "", "size": "약 4 MB", "external": false },
-        { "name": "BEAUTY&DERMA SEOUL 특별관 가이드 PDF", "url": "", "size": "약 4 MB", "external": false },
-        { "name": "INSPIRE 특별관 가이드 PDF", "url": "", "size": "약 4 MB", "external": false }
+        { "name": "권한·승인 신청서", "url": "", "size": "60 KB", "external": false }
       ]
     }
   ]

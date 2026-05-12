@@ -77,21 +77,10 @@ function PermissionsPage() {
       )}
 
       <p className="pm-asset-link">
-        파일 선택은 → <Link to="/notation">/notation</Link> 참고.
+        파일 선택은 → <Link to="/overview">/overview</Link>의 Wordmark Use 참고.
       </p>
 
-      {/* §14.2.2 행위 시점 ---------------------------------------------- */}
-      <SectionHeading id="timing" title="Timing" subtitle="행위 시점" />
-      <div className="pm-timing">
-        <p>
-          <strong>"KIMES 2027 참가" 표기는 행사 종료 시점(2027년 3월 21일)
-          까지 유효합니다.</strong>
-        </p>
-        <ul>
-          <li>행사 종료 후: 로고 제거 또는 "지난 KIMES 2027 참가 (Past Exhibitor)"로 변경.</li>
-          <li>다음 회차 참가 확정 시 새 회차 표기로 갱신.</li>
-        </ul>
-      </div>
+      {/* §8.x Timing 섹션 — 매트릭스 1행("행사 종료 후 제거")과 중복이라 삭제 */}
 
       {/* §14.2.3 신청 절차 ---------------------------------------------- */}
       <SectionHeading id="apply" title="Application Process" subtitle="신청 절차" />
@@ -137,20 +126,7 @@ function PermissionsPage() {
         </p>
       </div>
 
-      {/* §14.2.5 라이선싱 문의 ------------------------------------------ */}
-      <SectionHeading id="licensing" title="Licensing" subtitle="라이선싱 문의" />
-      <div className="pm-licensing">
-        <p>
-          "KIMES 공식 파트너", "KIMES 추천 업체" 등 인증·후원 표현은 별도
-          계약 필요. 조건은 개별 협의.
-        </p>
-        <div className="pm-licensing-channel">
-          <a href={`mailto:${contact.email}?subject=${encodeURIComponent('[라이선스 문의]')}`} className="btn btn-md btn-primary">
-            라이선스 문의 →
-          </a>
-          <span>제목 <code>[라이선스 문의]</code> · {contact.email}</span>
-        </div>
-      </div>
+      {/* §8.x Licensing 섹션 — 매트릭스 6행("공식 파트너 등")과 중복이라 삭제 */}
     </PageShell>
   );
 }

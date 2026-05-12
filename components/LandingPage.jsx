@@ -11,7 +11,7 @@ const Link = window.Link;
 // §1.6 자주 찾는 자료 — 6장 (Overview 중복분 제거).
 const QUICK_LINKS = [
   { to: '/downloads', label: '파일 패키지',        desc: '.zip 통합 패키지',         icon: 'download' },
-  { to: '/notation',  label: '표기 규칙',           desc: '명칭·날짜·숫자·SNS 태그', icon: 'doc' },
+  { to: '/overview',  label: '표기 규칙',           desc: '명칭·SNS 태그·서체',   icon: 'doc' },
   { to: '/downloads', label: '이메일 서명 배너',   desc: '메일 서명용',              icon: 'mail' },
   { to: '/downloads', label: 'SNS 카드 양식',       desc: 'SNS 공유용',               icon: 'sns' },
   { to: '/faq',       label: '자주 묻는 질문',      desc: '23개 항목',                icon: 'help' },
