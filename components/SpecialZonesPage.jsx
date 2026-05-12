@@ -33,16 +33,15 @@ function SpecialZonesIndex() {
       eyebrow="06"
       title="Special Zones"
       subtitle="특별관"
-      lede="KIMES 2027은 3개의 특별관을 운영합니다. 각 특별관은 KIMES 안에서 별도 테마와 시각 정체성을 갖습니다. 특별관 참가업체는 KIMES 표기에 더해 해당 특별관 표기도 함께 사용할 수 있습니다."
+      lede="KIMES 2027은 3개 특별관 운영. 특별관 참가업체는 KIMES 표기와 해당 특별관 표기를 병기."
     >
       {zones.map(z => (
         <ZoneSection key={z.id} zone={z} pending={pending} />
       ))}
 
       <p className="sz-foot-note">
-        특별관 단독 표기는 특별관 안에서만 사용합니다. 외부 자료(보도자료·
-        회사 홈페이지·SNS 등)에서는 KIMES와 함께 표기해주세요. 표기 규칙은
-        → <Link to="/notation">/notation</Link>.
+        특별관 단독 표기는 특별관 내부 한정. 외부 자료(보도자료·홈페이지·
+        SNS 등)는 KIMES와 병기. 규칙은 → <Link to="/notation">/notation</Link>.
       </p>
     </PageShell>
   );
@@ -80,14 +79,13 @@ function ZoneSection({ zone, pending }) {
           </span>
         </div>
         <div className="sz-meta-row">
-          <span className="sz-meta-key">로고 자산</span>
+          <span className="sz-meta-key">로고 파일</span>
           <span className="sz-meta-val">
-            {['SVG', 'PNG', 'AI', 'EPS'].map(ext => (
-              <button key={ext} type="button" className="btn btn-sm btn-outline" disabled={pending} title={pending ? 'Coming soon' : ''}>
+            {['SVG', 'PNG', 'AI'].map(ext => (
+              <button key={ext} type="button" className="btn btn-sm btn-outline" disabled={pending} title={pending ? '준비 중' : ''}>
                 {ext}
               </button>
             ))}
-            {pending && <span className="sz-pending"> Coming Soon</span>}
           </span>
         </div>
       </div>

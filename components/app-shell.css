@@ -196,7 +196,7 @@
 .btn-ghost:hover { background: var(--surface-muted); }
 
 /* Disabled state — native <button disabled> + <a/span class="is-disabled">.
-   Used by 자산 준비 중 다운로드 버튼 (config.assets.status === 'pending'). */
+   Used by 파일 준비 중 다운로드 버튼 (config.assets.status === 'pending'). */
 .btn:disabled,
 .btn.is-disabled {
   opacity: 0.45;

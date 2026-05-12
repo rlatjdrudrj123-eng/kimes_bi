@@ -77,7 +77,7 @@ function Footer() {
           <div className="ft-strong">문의·신청</div>
           <div>메일: <a href={`mailto:${contact.email}`}>{contact.email}</a></div>
           <div>전화: <a href={`tel:${contact.tel.replace(/-/g,'')}`}>{contact.tel}</a></div>
-          <div className="ft-meta">승인 검토 — 영업일 3–5일</div>
+          <div className="ft-meta">승인 검토 · 영업일 3~5일</div>
         </div>
         <div className="shell-footer-col">
           <div className="ft-strong">공식 채널</div>

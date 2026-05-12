@@ -42,7 +42,7 @@ function ContactPage() {
       eyebrow="10"
       title="Contact"
       subtitle="문의·신청"
-      lede={`세 가지 종류의 문의·신청 모두 ${contact.email}로 받습니다. 메일 제목에 아래 prefix를 붙여주시면 사무국이 빠르게 분류합니다.`}
+      lede={`모든 문의·신청은 ${contact.email}로 받습니다. 메일 제목 앞에 아래 분류 태그를 붙여주세요.`}
     >
       <SectionHeading id="channels" title="Inquiry Channels" subtitle="문의 종류" />
       <div className="ct-channels">
@@ -77,8 +77,7 @@ function ContactPage() {
           </li>
         </ul>
         <p className="ct-direct-note">
-          승인 신청·라이선스 문의 시 매체·기간·시안(PDF·이미지)을 함께
-          첨부해주시면 검토가 빨라집니다.
+          승인 신청·라이선스 문의 시 매체·기간·시안(PDF·이미지)을 첨부해주세요.
         </p>
       </div>
     </PageShell>

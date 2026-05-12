@@ -18,8 +18,8 @@
     editionLabelEn: '42nd edition',
     nameKo: 'KIMES 2027',
     nameEn: 'KIMES 2027',
-    fullNameKo: '제42회 국제 의료기기·병원설비 전시회 KIMES 2027',
-    fullNameEn: 'KIMES 2027 — Korea International Medical & Hospital Equipment Show',
+    fullNameKo: '제42회 국제의료기기·병원설비전시회',
+    fullNameEn: 'The 42nd Korea International Medical & Hospital Equipment Show',
     // 행사 기간 (KST)
     dateStart: '2027-03-18T00:00:00+09:00',
     dateEnd:   '2027-03-21T23:59:59+09:00',
@@ -56,13 +56,13 @@
     tel:   '02-551-0102',
   };
 
-  // ---- 자산 상태 플래그 ---------------------------------------------------
+  // ---- 파일 상태 플래그 ---------------------------------------------------
   // 가이드 전반의 다운로드 버튼(로고 SVG/PNG/AI/EPS, 특별관 로고 패키지,
   // 보일러플레이트 ZIP 등) 동작을 일괄 제어하는 플래그.
-  //   'pending' — 자산 미도착. 모든 다운로드 버튼이 disabled + "준비 중"
+  //   'pending' — 파일 미도착. 모든 다운로드 버튼이 disabled + "준비 중"
   //               라벨 표시. 신뢰도 보호 목적 (404 회피).
-  //   'ready'   — 자산 도착. 버튼이 정상 다운로드 링크로 동작.
-  // Phase 4 자산 패키지 정리 완료 시 'ready'로 토글.
+  //   'ready'   — 파일 도착. 버튼이 정상 다운로드 링크로 동작.
+  // Phase 4 파일 패키지 정리 완료 시 'ready'로 토글.
   const assets = {
     status: 'pending',
   };
@@ -102,9 +102,9 @@
 
   // ---- 가이드 자체 정보 --------------------------------------------------
   const guide = {
-    version: 'v2027.0',
+    version: 'v2027.1',
     // 푸터·랜딩의 "최종 갱신" 표기. 콘텐츠 갱신 시 함께 수정.
-    updatedAt: '2026-05-07',
+    updatedAt: '2026-05-12',
   };
 
   // ---- 다음 회차 (행사 종료 후 자동 표기될 메시지용) ---------------------

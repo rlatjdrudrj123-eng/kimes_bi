@@ -28,15 +28,8 @@ function buildColor(spec) {
   };
 }
 
-const DOWNLOAD_ITEMS = [
-  { id: 'ase',    label: 'Adobe Swatch',     ext: '.ase',           hint: 'Illustrator·Photoshop·InDesign 호환', file: 'kimes-colors.ase',           action: 'download' },
-  { id: 'sketch', label: 'Sketch 팔레트',    ext: '.sketchpalette', hint: 'Sketch 앱에서 가져오기',              file: 'kimes-colors.sketchpalette', action: 'download' },
-  { id: 'figma',  label: 'Figma 라이브러리', ext: '외부',           hint: 'Figma 커뮤니티 라이브러리 링크',       url: 'https://figma.com',           action: 'open' },
-];
-
 function ColorPage() {
   const { colors } = window.KIMES_EVENT;
-  const assetStatus = (window.KIMES_EVENT.assets && window.KIMES_EVENT.assets.status) || 'pending';
 
   const PRIMARY = [
     { id: 'red',   ...buildColor(colors.primary.red) },
@@ -68,7 +61,7 @@ function ColorPage() {
       eyebrow="03"
       title="Color"
       subtitle="컬러"
-      lede="KIMES 로고와 공식 표기에는 Primary 3색을, 특별관 표기·톤다운에는 Sub 4색을 사용합니다. 각 값에는 [Copy] 버튼이 있어 클립보드에 바로 담을 수 있습니다."
+      lede="Primary 3색은 로고·공식 표기용. Sub 4색은 특별관 표기·톤다운용. [Copy] 버튼으로 복사."
     >
       {/* §7.2.1 Primary Colors ---------------------------------------- */}
       <SectionHeading id="primary" title="Primary Colors" subtitle="메인 컬러" />
@@ -93,17 +86,7 @@ function ColorPage() {
         <li>인쇄물은 CMYK + Pantone 별색 병기를 권장합니다.</li>
       </ol>
 
-      {/* §7.2.4 Downloads --------------------------------------------- */}
-      <SectionHeading id="downloads" title="Downloads" subtitle="다운로드" />
-      <p>
-        디자인 툴별 팔레트 파일과 코드용 CSS 스니펫. CSS 스니펫은 자산
-        파일 없이 바로 복사해 사용할 수 있습니다.
-      </p>
-      <div className="clr-dl-grid">
-        {DOWNLOAD_ITEMS.map(item => (
-          <DownloadItem key={item.id} item={item} assetStatus={assetStatus} />
-        ))}
-      </div>
+      {/* §4.4 CSS Variables (Downloads 섹션 삭제, CSS 블록만 유지) */}
       <CssSnippet code={cssSnippet} />
     </PageShell>
   );
@@ -189,41 +172,6 @@ function ColorRow({ term, value, ariaPrefix, compact }) {
   );
 }
 
-function DownloadItem({ item, assetStatus }) {
-  const pending = assetStatus !== 'ready';
-  return (
-    <div className="clr-dl-card">
-      <div className="clr-dl-head">
-        <span className="clr-dl-label">{item.label}</span>
-        <span className="clr-dl-ext">{item.ext}</span>
-      </div>
-      <div className="clr-dl-hint">{item.hint}</div>
-      <div className="clr-dl-action">
-        {pending ? (
-          <button
-            type="button"
-            className="btn btn-md btn-outline"
-            disabled
-            aria-label={`${item.label} — Coming soon`}
-            title="Coming soon"
-          >
-            {item.action === 'open' ? 'Open ↗' : 'Download'}
-          </button>
-        ) : item.action === 'open' ? (
-          <a href={item.url} target="_blank" rel="noopener noreferrer" className="btn btn-md btn-outline">
-            Open ↗
-          </a>
-        ) : (
-          <a href={`/assets/colors/${item.file}`} className="btn btn-md btn-outline" download>
-            Download
-          </a>
-        )}
-      </div>
-      {pending && <div className="clr-dl-pending">Coming Soon</div>}
-    </div>
-  );
-}
-
 function CssSnippet({ code }) {
   return (
     <div className="clr-snippet">
@@ -233,7 +181,7 @@ function CssSnippet({ code }) {
       </div>
       <pre className="clr-snippet-code"><code>{code}</code></pre>
       <div className="clr-snippet-hint">
-        프로젝트 CSS 최상단에 붙여 넣으면 <code>var(--kimes-red)</code>처럼 사용할 수 있습니다.
+        프로젝트 CSS 최상단에 삽입. <code>var(--kimes-red)</code> 형식으로 사용.
       </div>
     </div>
   );

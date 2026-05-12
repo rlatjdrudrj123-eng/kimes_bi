@@ -33,7 +33,7 @@ function FaqPage() {
       eyebrow="08"
       title="FAQ"
       subtitle="자주 묻는 질문"
-      lede={`사무국이 받는 같은 질문 ${FAQS.length}개를 미리 답해두었습니다. 위 검색창과 카테고리 필터로 빠르게 찾을 수 있습니다.`}
+      lede={`자주 묻는 질문 ${FAQS.length}개. 검색·카테고리 필터 제공.`}
     >
       {/* §15.2.1 검색 + 필터 -------------------------------------------- */}
       <div className="fq-search">

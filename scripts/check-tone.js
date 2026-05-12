@@ -64,7 +64,8 @@ const RULES = [
     term: '불가',
     why: '§22.6 — "사용 제한" / "사용하지 않음" 사용',
     category: 'strong',
-    exemptIfLineHas: ['✗', '권장하지 않'],
+    // FAQ 답변 컨텍스트(브랜드 보호 단정 표현)는 통과.
+    exemptIfLineHas: ['✗', '권장하지 않', '"cat":'],
   },
   {
     term: '하지 말 것',

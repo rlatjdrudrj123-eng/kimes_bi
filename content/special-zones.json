@@ -12,7 +12,7 @@
       "lede": "의료 커뮤니케이션·커넥티드 케어 기술 전시",
       "ledeEn": "Medical communication & connected care technologies",
       "hall": "Hall B · 2027.03.18-21",
-      "boilerplate100": "MedicomteK은 KIMES 안의 특별관으로 의료 커뮤니케이션·커넥티드 케어 기술을 모은 전시입니다. 의료 IT·원격진료·의료 통신 솔루션 회사들이 참가합니다."
+      "boilerplate100": "의료 커뮤니케이션·커넥티드 케어 기술 전시. 의료 IT·원격진료·통신 솔루션 회사 참가."
     },
     {
       "id": "beauty-derma",
@@ -25,7 +25,7 @@
       "lede": "미용의학·피부과 전문 전시 (서울·부산 에디션)",
       "ledeEn": "Aesthetic medicine & dermatology — Seoul & Busan editions",
       "hall": "Hall C · 2027.03.18-21",
-      "boilerplate100": "BEAUTY&DERMA SEOUL은 KIMES 안의 특별관으로 미용의학·피부과 전문 전시입니다. 서울·부산 두 에디션으로 운영되며 미용기기·피부과 솔루션 회사들이 참가합니다."
+      "boilerplate100": "미용의학·피부과 전문 전시. 서울·부산 두 에디션 운영. 미용기기·피부과 솔루션 회사 참가."
     },
     {
       "id": "inspire",
@@ -38,7 +38,7 @@
       "lede": "디지털 헬스·웨어러블·헬스케어 AI 전시",
       "ledeEn": "Digital health, wearables, and healthcare AI",
       "hall": "Hall D · 2027.03.18-21",
-      "boilerplate100": "INSPIRE Digital Health는 KIMES 안의 특별관으로 디지털 헬스·웨어러블·헬스케어 AI 솔루션 전시입니다. 디지털 헬스 스타트업·플랫폼 회사들이 참가합니다."
+      "boilerplate100": "디지털 헬스·웨어러블·헬스케어 AI 솔루션 전시. 디지털 헬스 스타트업·플랫폼 회사 참가."
     }
   ]
 }

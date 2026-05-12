@@ -11,144 +11,59 @@
 
 const Link = window.Link;
 
-// §4.2.4 자주 찾는 자료 — 4×2 그리드의 8개 타일.
+// §1.6 자주 찾는 자료 — 6장 (Overview 중복분 제거).
 const QUICK_LINKS = [
-  { to: '/downloads',    label: '파일 패키지',           desc: '.zip 통합 패키지',           icon: 'download' },
-  { to: '/overview',     label: '공식 명칭 한·영',       desc: '복사해서 바로 사용',          icon: 'doc' },
-  { to: '/notation',     label: '표기 규칙',              desc: '명칭·날짜·숫자·SNS 태그',     icon: 'doc' },
-  { to: '/downloads',    label: '이메일 서명 배너',      desc: '메일 마지막에 첨부',          icon: 'mail' },
-  { to: '/downloads',    label: 'SNS 카드 양식',          desc: '인스타·링크드인 공유용',       icon: 'sns' },
-  { to: '/overview',     label: '보도자료 보일러플레이트', desc: '40·100·200·400자',           icon: 'press' },
-  { to: '/faq',          label: '자주 묻는 질문',          desc: '9개 분류 32개 답변',          icon: 'help' },
-  { to: '/contact',      label: '승인 신청',              desc: '특수 사용 사전 검토',         icon: 'check' },
-];
-
-// §4.2.5 최근 3개 공지. /changelog와 동일한 데이터 — Phase 4에서 JSON으로
-// 분리 예정. 그때까지는 여기에 인라인.
-const UPDATES = [
-  { date: '2026-05-07', title: 'v2027.0 — 참가업체용 가이드로 전면 개편' },
-  { date: '2026-04-15', title: '특별관 BI 추가 (MedicomteK / BEAUTY&DERMA SEOUL / INSPIRE)' },
-  { date: '2026-03-20', title: '공식 보일러플레이트 한·영 갱신' },
+  { to: '/downloads', label: '파일 패키지',        desc: '.zip 통합 패키지',         icon: 'download' },
+  { to: '/notation',  label: '표기 규칙',           desc: '명칭·날짜·숫자·SNS 태그', icon: 'doc' },
+  { to: '/downloads', label: '이메일 서명 배너',   desc: '메일 서명용',              icon: 'mail' },
+  { to: '/downloads', label: 'SNS 카드 양식',       desc: 'SNS 공유용',               icon: 'sns' },
+  { to: '/faq',       label: '자주 묻는 질문',      desc: '32개 항목',                icon: 'help' },
+  { to: '/contact',   label: '승인 신청',           desc: '사전 승인 신청',           icon: 'check' },
 ];
 
 function LandingPage() {
   const { event } = window.KIMES_EVENT;
-  const assets = window.KIMES_EVENT.assets || {};
-  const status = window.KIMES_EVENT.getEventStatus(new Date());
-  const assetsPending = assets.status !== 'ready';
 
   return (
     <div className="landing">
-      {/* §4.2.1 Hero ----------------------------------------------- */}
+      {/* §1.1 Hero (좌측만) ----------------------------------------- */}
       <section className="landing-hero">
         <div className="landing-hero-text">
           <h1 className="landing-headline">
-            {event.nameKo} 참가업체를 위한 브랜드 가이드
+            <span className="landing-headline-line">{event.nameKo}</span>
+            <span className="landing-headline-line">브랜드 가이드</span>
           </h1>
           <p className="landing-subhead">
-            보도자료, 부스 디자인, 초청장, SNS — KIMES와 함께하는 모든 자료에서
-            브랜드를 정확하게 표기하는 방법입니다.
+            보도자료·부스·초청장·SNS에서의 KIMES 표기 규정.
           </p>
           <div className="landing-cta-row">
             <Link to="/downloads" className="btn btn-primary btn-lg">로고 다운로드</Link>
             <Link to="/overview" className="btn btn-outline btn-lg">가이드 보기</Link>
           </div>
         </div>
-        <aside
-          className={`landing-meta-box landing-meta-${status.state}`}
-          aria-label="행사 일정"
-        >
-          <div className="landing-meta-line">
-            {event.dateShort} · {event.venueShortKo}
-          </div>
-          <div className="landing-meta-label" aria-live="polite">
-            {status.label}
-          </div>
-          <div className="landing-meta-sub">{status.sub}</div>
-        </aside>
       </section>
 
-      {assetsPending && (
-        <section className="landing-asset-notice" aria-label="자산 공개 일정">
-          <div className="landing-asset-notice-row">
-            <span className="landing-asset-notice-label">자산 공개 예정</span>
-            <span className="landing-asset-notice-date">행사 D-60 · 2027.01.17</span>
-          </div>
-          <p className="landing-asset-notice-body">
-            그 전까지는 공식 명칭·표기 규칙·회사 소개 문구만 사용 가능합니다.
-            로고·컬러 팔레트·템플릿 등 다운로드 파일은 D-60에 일괄 공개됩니다.
-          </p>
-        </section>
-      )}
-
-      {/* §4.2.2 이 가이드는 누구를 위한 것인가 -------------------------- */}
+      {/* §1.4 사용 대상 (1단) ------------------------------------------ */}
       <section className="landing-section" id="audience">
         <div className="landing-h2-block">
-          <h2 className="landing-h2">Audience</h2>
-          <div className="landing-h2-sub">이 가이드는 누구를 위한 것인가</div>
+          <h2 className="landing-h2">대상</h2>
         </div>
-        <div className="landing-audience">
+        <div className="landing-audience landing-audience-single">
           <div className="landing-audience-card landing-audience-yes">
-            <h3>이 가이드가 필요한 분</h3>
+            <h3>대상 사용자</h3>
             <ul>
               <li>{event.nameKo} 참가업체 마케팅·디자인 담당자</li>
               <li>참가업체 외주 대행사 (PR·디자인·영상)</li>
               <li>특별관 참가업체 (MedicomteK / BEAUTY&amp;DERMA SEOUL / INSPIRE Digital Health)</li>
             </ul>
           </div>
-          <div className="landing-audience-card landing-audience-no">
-            <h3>다른 자료가 필요한 분</h3>
-            <ul>
-              <li>
-                일반 관람객 → <a href="https://kimes.kr" target="_blank" rel="noopener noreferrer">kimes.kr</a> 방문 안내
-              </li>
-              <li>언론사 → 프레스룸 안내</li>
-              <li>스폰서·후원사 → 별도 스폰서 키트 안내</li>
-            </ul>
-          </div>
         </div>
       </section>
 
-      {/* §4.2.3 5분 빠른 시작 ----------------------------------------- */}
-      <section className="landing-section" id="quickstart">
-        <div className="landing-h2-block">
-          <h2 className="landing-h2">Quick Start</h2>
-          <div className="landing-h2-sub">5분 빠른 시작</div>
-        </div>
-        <ol className="landing-steps">
-          <li className="landing-step">
-            <span className="landing-step-num" aria-hidden="true">1</span>
-            <div className="landing-step-body">
-              <span className="landing-step-title">공식 표기 확인</span>
-              <Link to="/overview" className="landing-step-link">/overview →</Link>
-            </div>
-          </li>
-          <li className="landing-step">
-            <span className="landing-step-num" aria-hidden="true">2</span>
-            <div className="landing-step-body">
-              <span className="landing-step-title">로고·컬러 받기</span>
-              <span className="landing-step-link">
-                <Link to="/logo">/logo</Link>
-                <span className="landing-step-sep"> · </span>
-                <Link to="/color">/color</Link>
-              </span>
-            </div>
-          </li>
-          <li className="landing-step">
-            <span className="landing-step-num" aria-hidden="true">3</span>
-            <div className="landing-step-body">
-              <span className="landing-step-title">텍스트·표기 규칙 확인</span>
-              <Link to="/notation" className="landing-step-link">/notation →</Link>
-            </div>
-          </li>
-        </ol>
-      </section>
-
-      {/* §4.2.4 자주 찾는 자료 ----------------------------------------- */}
+      {/* §1.6 자주 찾는 자료 (6장) ------------------------------------ */}
       <section className="landing-section" id="quick-links">
         <div className="landing-h2-block">
-          <h2 className="landing-h2">Quick Links</h2>
-          <div className="landing-h2-sub">자주 찾는 자료</div>
+          <h2 className="landing-h2">자주 찾는 자료</h2>
         </div>
         <div className="landing-tiles">
           {QUICK_LINKS.map(item => (
@@ -163,34 +78,16 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* §4.2.5 공지·업데이트 ----------------------------------------- */}
-      <section className="landing-section" id="updates">
-        <div className="landing-h2-block">
-          <h2 className="landing-h2">Recent Updates</h2>
-          <div className="landing-h2-sub">최근 업데이트</div>
-        </div>
-        <ul className="landing-updates-list">
-          {UPDATES.map(u => (
-            <li key={u.date}>
-              <span className="landing-update-date">{u.date}</span>
-              <span className="landing-update-title">{u.title}</span>
-            </li>
-          ))}
-        </ul>
-        <Link to="/changelog" className="landing-updates-more">전체 변경 이력 →</Link>
-      </section>
-
-      {/* §4.2.6 문의 박스 ---------------------------------------------- */}
+      {/* §1.8 문의 ---------------------------------------------- */}
       <section className="landing-section" id="contact">
         <div className="landing-contact-box">
           <div className="landing-h2-block">
-            <h2 className="landing-h2 landing-contact-h2">Contact</h2>
-            <div className="landing-h2-sub">더 궁금한 점이 있다면</div>
+            <h2 className="landing-h2 landing-contact-h2">문의</h2>
           </div>
           <p>
-            가이드에 없는 사용 사례가 있나요?{' '}
+            가이드에 없는 사용 사례는{' '}
             <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>로
-            문의해주세요. 영업일 3~5일 안에 답변드립니다.
+            문의. 영업일 3~5일 내 회신.
           </p>
         </div>
       </section>

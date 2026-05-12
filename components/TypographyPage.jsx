@@ -14,7 +14,7 @@ function TypographyPage() {
       eyebrow="04"
       title="Typography"
       subtitle="타이포그래피"
-      lede="KIMES를 자기 자료에 표기할 때 두 가지 파일(로고 SVG vs 텍스트 표기)을 어떻게 다르게 쓰는지, 권장 서체와 사양은 무엇인지 안내합니다."
+      lede="KIMES 표기용 파일 두 종(로고 SVG / 텍스트) 구분 및 권장 서체·사양 안내."
     >
       {/* §8.1 두 파일 ----------------------------------------------------- */}
       <SectionHeading id="purpose" title="Two Asset Models" subtitle="두 파일" />
@@ -49,10 +49,9 @@ function TypographyPage() {
       {/* §8.2 사용 서체 — 두 폰트 + 권장 굵기 한 줄 ---------------------- */}
       <SectionHeading id="fonts" title="Fonts" subtitle="사용 서체" />
       <p>
-        KIMES는 <strong>Montserrat</strong>(영문) + <strong>Pretendard</strong>
-        (한글) 페어를 권장합니다. 둘 다 무료·오픈소스. 굵기는{' '}
-        <strong>800 ExtraBold</strong> 또는 <strong>700 Bold</strong>를 권장
-        합니다 — 부스·인쇄물에서 멀리서도 또렷.
+        권장 서체: <strong>Montserrat</strong>(영문) + <strong>Pretendard</strong>
+        (한글). 굵기 <strong>800 ExtraBold</strong> 또는{' '}
+        <strong>700 Bold</strong>. 둘 다 무료·오픈소스.
       </p>
       <div className="ty-font-links">
         <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener noreferrer" className="ty-font-link">
@@ -67,10 +66,7 @@ function TypographyPage() {
 
       {/* §8.3 권장 사양 ------------------------------------------------- */}
       <SectionHeading id="recommended" title="Recommended Notation" subtitle="권장 사양" />
-      <p>
-        회사 폰트가 따로 있다면 그대로 사용해주세요. 회사 디자인 시스템이
-        따로 없는 경우 아래 사양을 참고하시면 결이 자연스럽습니다.
-      </p>
+      <p>회사 폰트가 있으면 우선 사용. 없을 경우 아래 사양 참고.</p>
       <div className="ty-rec">
         <div className="ty-rec-sample" aria-label="권장 사양 텍스트 샘플 (SVG 아닌 진짜 텍스트)">
           <span className="ty-rec-main">KIMES {year}</span>
@@ -90,10 +86,9 @@ function TypographyPage() {
       <SectionHeading id="guardrail" title="Wordmark Use" subtitle="로고 자리에는 SVG" />
       <section className="ty-guard">
         <p>
-          공식 보증·증명이 필요한 자리(보도자료 헤더 마크, 부스 인증 마크,
-          공문 헤더 등)에는 KIMES 로고 SVG를 사용해주세요. 다른 폰트로
-          "KIMES"를 타이핑해서 로고 자리에 박는 것은 피해주세요. 그 외
-          마케팅·콘텐츠 텍스트 표기는 자유롭게 사용하셔도 됩니다.
+          공식 보증·증명 자리(보도자료 헤더, 부스 인증, 공문 헤더 등)는
+          로고 SVG 사용. 다른 폰트로 "KIMES" 타이핑해 로고 자리에 사용 금지. {/* allow-tone */}
+          일반 텍스트 표기는 자유.
         </p>
         <Link to="/logo#versions" className="btn btn-primary btn-md">
           KIMES 로고 다운로드 →

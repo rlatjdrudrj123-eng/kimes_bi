@@ -14,8 +14,8 @@ const KimesWordmark = window.KimesWordmark;
 const InlineLogo = window.InlineLogo;
 
 // 4개 로고 버전. 각 카드: SVG 키 + 라벨 + 용도 + 다운로드 파일명.
-// 파일은 /assets/logos/ 안에 위치 (벤더 제공 자산 — 본 리포에 미포함된
-// 경우 링크가 404 반환할 수 있음. Phase 4 자산 패키지 정리 시 일괄 검증).
+// 파일은 /assets/logos/ 안에 위치 (벤더 제공 파일 — 본 리포에 미포함된
+// 경우 링크가 404 반환할 수 있음. Phase 4 파일 패키지 정리 시 일괄 검증).
 //
 // 연도 일체형(예: KIMES 2027 일체형)은 로고 SVG와 숫자의 자간·
 // 베이스라인·시각 무게가 정밀히 맞은 단일 SVG여야 정확. 코드 합성으로는
@@ -60,7 +60,6 @@ const FILE_FORMATS = [
   { ext: 'svg', label: 'SVG' },
   { ext: 'png', label: 'PNG' },
   { ext: 'ai',  label: 'AI'  },
-  { ext: 'eps', label: 'EPS' },
 ];
 
 // §6.2.5 배경별 사용 — KT 11칸 격자 시스템 + KIMES 4브랜드 칩.
@@ -83,9 +82,8 @@ const BRIGHTNESS_HEX = [
 const GRID_BARS = [
   {
     id: 'red',
-    label: 'Primary Wordmark (Red)',
+    label: 'Primary Logo (Red)',
     sub: '메인 로고 (레드)',
-    rightLabel: '명도 배경색 규정',
     rule: '명도 10% 이하 흰색·매우 옅은 배경에서만 사용. 그 외엔 Black 또는 White로.',
     showScale: true,
     cells: BRIGHTNESS_HEX.map((bg, i) => i <= 1
@@ -94,9 +92,8 @@ const GRID_BARS = [
   },
   {
     id: 'bw-brightness',
-    label: 'Black / White Wordmark',
+    label: 'Black / White Logo',
     sub: '블랙·화이트 로고',
-    rightLabel: '명도 배경색 규정',
     rule: '0–30% 배경: Black 로고 / 40–100% 배경: White 로고.',
     showScale: true,
     cells: BRIGHTNESS_HEX.map((bg, i) => i <= 3
@@ -144,7 +141,7 @@ function LogoPage() {
       eyebrow="02"
       title="Logo"
       subtitle="로고"
-      lede="KIMES 로고의 정식 자산을 다운로드하고, 어떤 상황에서 어떤 버전을 써야 하는지 확인하세요. 변형·재타이핑·임의 색상 변경은 권장하지 않는 사용입니다."
+      lede="KIMES 로고 파일과 사용 규정. 변형·재타이핑·임의 색상 변경은 권장하지 않습니다."
     >
       {/* §6.2.1 KIMES 로고 ----------------------------------------- */}
       <SectionHeading id="wordmark" title="Wordmark" subtitle="KIMES 로고" />
@@ -153,24 +150,18 @@ function LogoPage() {
           <KimesWordmark height={120} />
         </div>
         <p className="lg-hero-desc">
-          KIMES 로고는 1980년 첫 행사 이래 단단하고 직선적인 산세리프로
-          한국 의료기기 산업의 무게감을 표현해왔습니다. 강렬한 빨강과 두꺼운
-          글자, 그리고 <code>i</code> 안에 자리 잡은 검은 쐐기 — 이 세 요소가
-          KIMES만의 시각적 정체성입니다.
+          KIMES 로고는 1980년 첫 행사부터 사용된 산세리프 워드마크.
+          빨강·블랙 두 색과 <code>i</code> 안의 쐐기가 핵심 요소.
         </p>
       </div>
 
       {/* §6.2.2 로고 버전 (그리드 카드) -------------------------------- */}
       <SectionHeading id="versions" title="Versions" subtitle="로고 버전" />
+      <p>용도별 버전. SVG는 디지털·웹, PNG는 미리보기, AI는 인쇄·간판용.</p>
       <p>
-        용도에 맞는 버전을 선택해 다운로드하세요. SVG는 디지털·웹 표준,
-        PNG는 빠른 미리보기·메신저 첨부, AI/EPS는 인쇄·간판 작업용입니다.
-      </p>
-      <p>
-        행사 직전 발표용 연도 일체형 로고(예: KIMES 2027 일체형)는
-        사무국이 별도로 제공합니다. 필요한 경우{' '}
-        <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>로
-        요청해주세요.
+        연도 일체형 로고는 별도 제공. 필요 시{' '}
+        <a href={`mailto:${window.KIMES_EVENT.contact.email}`}>{window.KIMES_EVENT.contact.email}</a>{' '}
+        요청.
       </p>
       <div className="lg-versions">
         {LOGO_VERSIONS.map(v => (
@@ -188,16 +179,15 @@ function LogoPage() {
       {/* §6.2.3 클리어 스페이스 ---------------------------------------- */}
       <SectionHeading id="clearspace" title="Clear Space" subtitle="클리어 스페이스" />
       <p>
-        로고 사방으로 K 높이만큼의 빈 영역을 확보합니다. 이 영역 안에는
-        다른 로고·문구·이미지가 들어가지 않도록 합니다.
+        로고 사방으로 K 높이만큼 여백 확보. 여백 안에는 다른 로고·문구·
+        이미지를 두지 않습니다.
       </p>
       <ClearSpaceDiagram />
 
       {/* §6.2.4 최소 크기 ---------------------------------------------- */}
       <SectionHeading id="minsize" title="Minimum Size" subtitle="최소 크기" />
       <p>
-        다음 크기 이상에서만 KIMES 로고를 사용합니다. 더 작아지면
-        <code> i</code> 안의 검은 쐐기가 뭉개져 식별이 어려워집니다.
+        최소 크기 미만 사용 금지. <code>i</code> 안의 쐐기 식별성 저하. {/* allow-tone */}
       </p>
       <div className="lg-minsize">
         {MIN_SIZES.map(m => (
@@ -226,12 +216,7 @@ function LogoPage() {
         </tbody>
       </table>
 
-      <h3 className="lg-h3-inline">상세 사양</h3>
-      <div className="lg-grid-stack">
-        {GRID_BARS.map(bar => <GridBar key={bar.id} bar={bar} />)}
-      </div>
-
-      {/* H3 sub-section — 격자 2개 다음, 브랜드 단색 칩 5개 */}
+      {/* H3 sub-section — 빠른 참고 다음, 브랜드 단색 칩 5개 */}
       <header className="lg-h3-block">
         <h3 className="lg-h3" id="color-bg">Brand Color Backgrounds</h3>
         <div className="lg-h3-sub">브랜드 컬러 배경</div>
@@ -248,9 +233,8 @@ function LogoPage() {
       {/* §6.2.6 Don'ts — 11종 -------------------------------------- */}
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
       <p>
-        KIMES 로고 SVG는 변형하지 않고 그대로 사용합니다. 텍스트 표기는
-        마케팅·콘텐츠 영역의 별개 작업입니다 — 권장 사양·표기 사례는 →{' '}
-        <Link to="/typography">/typography</Link>.
+        로고 SVG는 원본 그대로 사용. 텍스트 표기는 →{' '}
+        <Link to="/typography">/typography</Link> 참고.
       </p>
       <div className="lg-donts">
         {DONTS.map(d => <DontCard key={d.id} d={d} />)}
@@ -259,10 +243,7 @@ function LogoPage() {
       {/* §6.2.7 로고 사용 신청 ------------------------------------------ */}
       <section className="lg-apply" id="apply">
         <SectionHeading title="Request Approval" subtitle="로고 사용 신청" className="lg-apply-heading" />
-        <p>
-          가이드에 명시된 일반적인 사용은 별도 신청이 필요 없습니다. 다만
-          다음 경우는 사무국 사전 승인을 받아주세요.
-        </p>
+        <p>일반 사용은 신청 불필요. 다음의 경우 사전 승인 필요.</p>
         <ul className="lg-apply-list">
           <li>굿즈·기념품 제작 (티셔츠·머그컵·에코백 등)</li>
           <li>영상물에 KIMES 로고 등장 (TVC·바이럴·웨비나 인트로)</li>
@@ -344,8 +325,7 @@ function ClearSpaceDiagram() {
         </div>
       </div>
       <figcaption className="lg-clear-caption">
-        <strong>1X = K의 높이</strong> · 점선 안쪽이 빈 영역 (다른 로고·문구·
-        이미지가 들어갈 수 없는 구역)
+        <strong>1X = K의 높이</strong> · 점선 안쪽 여백
       </figcaption>
     </figure>
   );
@@ -360,11 +340,10 @@ function GridBar({ bar }) {
       <header className="lg-grid-label">
         <div className="lg-grid-label-en" id={`grid-${bar.id}-label`}>{bar.label}</div>
         <div className="lg-grid-label-ko">{bar.sub}</div>
-        <div className="lg-grid-label-right">{bar.rightLabel}</div>
         <div className="lg-grid-label-rule">{bar.rule}</div>
       </header>
       <div className="lg-grid-right">
-        <div className="lg-grid-cells" role="group" aria-label={`${bar.label} ${bar.rightLabel}`}>
+        <div className="lg-grid-cells" role="group" aria-label={bar.label}>
           {bar.cells.map((cell, i) => (
             <div
               key={i}
@@ -446,7 +425,7 @@ function DontCard({ d }) {
 }
 
 // 권장하지 않는 KIMES 로고 사용 7종을 CSS만으로 재현. 별도 이미지
-// 자산 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
+// 파일 없이 인라인 SVG에 transform/filter/clip-path 등을 적용.
 function BadExample({ variant }) {
   // #3 로고 위 텍스트·그래픽 겹치기 — 로고 위 작은 라벨 오버레이
   if (variant === 'overlay') {
@@ -509,8 +488,8 @@ function CrossGlyph() {
   );
 }
 
-// 연도 일체형 로고는 사무국이 단일 SVG 자산으로 별도 제공. 코드 합성
+// 연도 일체형 로고는 사무국이 단일 SVG 파일으로 별도 제공. 코드 합성
 // 방식(KimesYearComposite)은 자간·베이스라인·시각 무게가 정확히 안 맞아
-// 제거됨. 필요하면 사무국 brand 문의로 SVG 자산 요청.
+// 제거됨. 필요하면 사무국 brand 문의로 SVG 파일 요청.
 
 window.LogoPage = LogoPage;

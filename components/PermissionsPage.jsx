@@ -29,7 +29,7 @@ function PermissionsPage() {
       eyebrow="07"
       title="Usage Rights"
       subtitle="권한·승인·라이선스"
-      lede="이 페이지가 BI 가이드를 단순한 디자인 가이드와 구별 짓는 핵심입니다. 누가 무엇을 어디까지 할 수 있는지를 명문화한 매트릭스 + 신청 절차 + 라이선싱 문의 안내입니다."
+      lede="사용 권한·신청 절차·라이선스 안내."
     >
       {/* §14.2.1 권한 매트릭스 ----------------------------------------- */}
       <SectionHeading id="matrix" title="Usage Rights Matrix" subtitle="사용 권한 매트릭스" />
@@ -47,7 +47,7 @@ function PermissionsPage() {
       </div>
 
       <div className="pm-note">
-        빈도 높은 핵심 6 케이스만 정리. 그 외 사용 케이스는 사무국과 협의해주세요.
+        자주 발생하는 6개 케이스. 그 외는 사무국과 협의해주세요.
       </div>
 
       <div className="pm-matrix-wrap">
@@ -79,21 +79,9 @@ function PermissionsPage() {
         </div>
       )}
 
-      {/* §14.2.1 자산 선택 참고 ---------------------------------------- */}
-      <div className="pm-asset-ref">
-        <h3 className="pm-asset-ref-title">파일 선택 참고 (강제 아님)</h3>
-        <p>KIMES 표기에는 두 가지 파일이 있습니다 (→ <Link to="/typography">/typography</Link>).</p>
-        <ul>
-          <li><strong>로고 SVG</strong> — 보증·증명 자리 (보도자료 헤더 마크·부스 인증 마크·공문 헤더)</li>
-          <li><strong>텍스트 표기</strong> — 마케팅·콘텐츠 자리. 회사 폰트·컬러로 자유롭게 사용 가능</li>
-        </ul>
-        <p>
-          다른 폰트로 "KIMES"를 타이핑해 로고 자리에 박는 것은 권장하지
-          않습니다. 그 자리에는 로고 SVG를 사용해주세요. 마케팅·콘텐츠
-          자리의 텍스트 표기는 자유 사용 영역입니다 (위 매트릭스 두 번째
-          행 참고).
-        </p>
-      </div>
+      <p className="pm-asset-link">
+        파일 선택은 → <Link to="/typography">/typography</Link> 참고.
+      </p>
 
       {/* §14.2.2 행위 시점 ---------------------------------------------- */}
       <SectionHeading id="timing" title="Timing" subtitle="행위 시점" />
@@ -103,8 +91,8 @@ function PermissionsPage() {
           까지 유효합니다.</strong>
         </p>
         <ul>
-          <li>행사 종료 후에는 회사 자료에서 KIMES 로고를 제거하거나 "지난 KIMES 2027 참가 (Past Exhibitor)" 표기로 변경합니다.</li>
-          <li>다음 회차 참가가 확정된 경우 새 회차 표기로 갱신합니다.</li>
+          <li>행사 종료 후: 로고 제거 또는 "지난 KIMES 2027 참가 (Past Exhibitor)"로 변경.</li>
+          <li>다음 회차 참가 확정 시 새 회차 표기로 갱신.</li>
         </ul>
       </div>
 
@@ -144,15 +132,11 @@ function PermissionsPage() {
       </div>
 
       {/* §14.2.4 가이드와 다른 사용이 발견되면 -------------------------- */}
-      <SectionHeading id="non-compliance" title="Non-compliance" subtitle="가이드와 다른 사용이 발견되면" />
+      <SectionHeading id="non-compliance" title="위반 사용" /> {/* allow-tone */}
       <div className="pm-non-compliance">
         <p>
-          가이드와 다르게 사용된 경우 사무국이 정정을 요청드릴 수 있습니다.
-          대부분의 경우 협의로 해결되며, 자세한 사항은 brand 문의로 알려
-          드립니다.
-        </p>
-        <p className="pm-non-compliance-foot">
-          궁금한 사항은 → <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          가이드와 다른 사용이 확인되면 사무국이 정정 요청. 문의:{' '}
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
         </p>
       </div>
 
@@ -160,9 +144,8 @@ function PermissionsPage() {
       <SectionHeading id="licensing" title="Licensing" subtitle="라이선싱 문의" />
       <div className="pm-licensing">
         <p>
-          "KIMES 공식 파트너", "KIMES 추천 업체" 같은 인증·후원 표현은 별도
-          라이선스 계약이 필요합니다. 가격·계약 조건은 사무국이 개별 협의
-          합니다.
+          "KIMES 공식 파트너", "KIMES 추천 업체" 등 인증·후원 표현은 별도
+          계약 필요. 조건은 개별 협의.
         </p>
         <div className="pm-licensing-channel">
           <a href={`mailto:${contact.email}?subject=${encodeURIComponent('[라이선스 문의]')}`} className="btn btn-md btn-primary">

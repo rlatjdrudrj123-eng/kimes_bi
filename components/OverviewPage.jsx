@@ -40,16 +40,16 @@ function OverviewPage() {
   // 회차·연도·주최·공동주최·숫자 표기는 모두 §10.2.5 / §10.2.6 규칙 준수.
   // Phase 4 /downloads 작업 시 content/overview.json으로 분리 예정.
   const BOILERPLATES_KO = {
-    40:  { use: 'SNS·이메일 제목용',         text: '한국 최대 의료기기 전시회 KIMES 2027, 3월 18~21일 코엑스' },
-    100: { use: '보도자료 리드문용',         text: 'KIMES 2027은 1,400여 개 기업과 8만여 명이 참여하는 한국 최대 의료기기 전시회로, 3월 18~21일 코엑스에서 열립니다.' },
-    200: { use: '회사 소개 페이지·블로그용',  text: 'KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18~21일 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리를 아우릅니다.' },
-    400: { use: '보도자료 회사 소개 칸용',    text: 'KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18일부터 21일까지 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리의 최신 의료기기와 병원설비를 선보입니다. 의료진·연구자·구매 담당자 등 8만여 명이 직접 참관합니다. KIMES 2027에는 MedicomteK, BEAUTY&DERMA SEOUL, INSPIRE Digital Health 세 개 특별관이 함께 열려 분야별 전문 전시를 운영합니다.' },
+    40:  { use: 'SNS·이메일 제목',           text: '한국 최대 의료기기 전시회 KIMES 2027, 3월 18~21일 코엑스' },
+    100: { use: '보도자료 리드',             text: 'KIMES 2027은 1,400여 개 기업과 8만여 명이 참여하는 한국 최대 의료기기 전시회로, 3월 18~21일 코엑스에서 열립니다.' },
+    200: { use: '회사 소개·블로그',          text: 'KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18~21일 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리를 아우릅니다.' },
+    400: { use: '보도자료 회사 소개',        text: 'KIMES는 한국이앤엑스가 KMDA·KMDIA와 함께 1980년부터 매년 개최해 온 대한민국 대표 의료기기·병원설비 전시회입니다. 2027년에는 제42회를 맞아 3월 18일부터 21일까지 코엑스에서 열리며, 60여 개국 1,400여 개 기업이 참가해 영상진단·수술·치료·재활·뷰티·디지털 헬스 등 14개 카테고리의 최신 의료기기와 병원설비를 선보입니다. 의료진·연구자·구매 담당자 등 8만여 명이 직접 참관합니다. KIMES 2027에는 MedicomteK, BEAUTY&DERMA SEOUL, INSPIRE Digital Health 세 개 특별관이 함께 열려 분야별 전문 전시를 운영합니다.' },
   };
   const BOILERPLATES_EN = {
     40:  { use: 'Email subject / SNS',       text: 'KIMES 2027 · Mar 18–21 · COEX, Seoul' },
     100: { use: 'Press release lede',        text: "KIMES 2027 — Korea's largest medical equipment show. 1,400+ exhibitors, 80,000+ trade visitors." },
-    200: { use: 'About page · blog',         text: "Hosted by KOREA E&EX INC. with KMDA and KMDIA since 1980, KIMES is Korea's largest medical equipment show. KIMES 2027 (42nd edition) runs March 18–21 at COEX with 1,400+ exhibitors from 60+ countries." },
-    400: { use: 'Press release boilerplate', text: "Hosted by KOREA E&EX INC. with KMDA and KMDIA since 1980, KIMES is Korea's largest medical equipment show. The 42nd edition (KIMES 2027) runs March 18–21 at COEX, Seoul, with 1,400+ exhibitors from 60+ countries in 14 categories. KIMES 2027 hosts MedicomteK, BEAUTY&DERMA SEOUL, and INSPIRE Digital Health as special zones, with 80,000+ trade visitors — clinicians, researchers, hospital purchasers." },
+    200: { use: 'About page · blog',         text: "KIMES 2027, The 42nd Korea International Medical & Hospital Equipment Show, runs March 18–21 at COEX. Hosted by KOREA E&EX INC. with KMDA and KMDIA, it draws 1,400+ exhibitors from 60+ countries." },
+    400: { use: 'Press release boilerplate', text: "KIMES 2027, The 42nd Korea International Medical & Hospital Equipment Show, runs March 18–21 at COEX, Seoul. Hosted by KOREA E&EX INC. with KMDA and KMDIA since 1980, it is Korea's largest medical equipment show, featuring 1,400+ exhibitors from 60+ countries across 14 categories. Special zones include MedicomteK, BEAUTY&DERMA SEOUL, and INSPIRE Digital Health, drawing 80,000+ trade visitors." },
   };
   const LENGTHS = [40, 100, 200, 400];
 
@@ -88,33 +88,21 @@ function OverviewPage() {
       eyebrow="01"
       title="Overview"
       subtitle="한눈에 보기"
-      lede="보도자료·홈페이지·SNS·이메일에 그대로 복사해 쓸 수 있는 공식 문구를 한 페이지에 모았습니다."
+      lede="보도자료·홈페이지·SNS·이메일용 공식 문구."
     >
       {/* §5.3.1 공식 명칭 ----------------------------------------- */}
       <SectionHeading id="official-names" title="Official Names" subtitle="공식 명칭" />
-      <p>
-        회사 자료에 KIMES를 표기할 때 다음 명칭을 그대로 사용합니다. 각 행
-        우측의 [Copy] 버튼으로 한국어·영문 어느 쪽이든 클립보드에 바로
-        담을 수 있습니다.
-      </p>
+      <p>KIMES 표기에 사용하는 공식 명칭. 행별 [Copy] 버튼으로 복사.</p>
       <FactTable rows={NAME_ROWS} caption="공식 명칭 한·영 표기" />
 
       {/* §5.3.2 일정·장소 ----------------------------------------- */}
       <SectionHeading id="schedule" title="Date & Venue" subtitle="일정·장소" />
-      <p>
-        보도자료·초청장·홈페이지에 사용할 정확한 일정과 장소입니다. 영문은
-        보도자료·해외 채널용으로 그대로 복사해서 사용합니다.
-      </p>
+      <p>공식 일정 및 장소. 영문은 해외 채널용.</p>
       <FactTable rows={FACT_ROWS} caption="일정 및 장소 한·영 표기" />
 
       {/* §5.3.3 보일러플레이트 4벌 ---------------------------- */}
       <SectionHeading id="boilerplates" title="Boilerplate" subtitle="한 줄 소개" />
-      <p>
-        보도자료 끝의 표준 회사 소개문처럼 길이별로 4벌을 준비했습니다.
-        각 박스의 [Copy] 버튼으로 클립보드에 담은 뒤 원하는 자료에
-        그대로 붙여 넣으면 됩니다. 좌측 하단에 실제 글자 수와 한도가
-        표시되며, 한도를 넘으면 빨갛게 강조됩니다.
-      </p>
+      <p>표준 회사 소개문 4벌. [Copy] 버튼으로 복사해 사용.</p>
       {LENGTHS.map(len => (
         <BoilerplateSection
           key={len}
@@ -127,9 +115,8 @@ function OverviewPage() {
       {/* §5.3.4 핵심 숫자 ----------------------------------------- */}
       <SectionHeading id="numbers" title="Key Numbers" subtitle="핵심 숫자" />
       <p>
-        보도자료·홈페이지에 KIMES 규모를 표기할 때 다음 숫자를 사용합니다.
-        참가업체·참가국 수는 KIMES 2027 기준이며, 관람객 수는 직전 회차
-        (2026) 실적입니다.
+        KIMES 규모 표기용 공식 수치. 참가업체·참가국은 2027 기준, 관람객은
+        2026 실적.
       </p>
       <div className="ov-num-grid" role="list">
         {NUM_CARDS.map(card => (
@@ -143,9 +130,8 @@ function OverviewPage() {
       {/* §5.3.5 14개 전시 카테고리 ----------------------------------- */}
       <SectionHeading id="categories" title="Categories" subtitle="14개 전시 카테고리" />
       <p>
-        KIMES는 영상진단부터 바이오·제약까지 14개 전시 카테고리로 구성됩니다.
-        각 카테고리별 부스 위치와 참가업체 명단은 행사 직전 공식 사이트에
-        공개됩니다.
+        영상진단부터 바이오·제약까지 14개 카테고리. 부스 위치 및 참가업체
+        명단은 행사 직전 공식 사이트 공개.
       </p>
       <ol className="ov-cat-list">
         {CATEGORIES.map(c => (
