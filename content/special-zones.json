@@ -1,5 +1,5 @@
 {
-  "_comment": "특별관 3종 메타데이터. 컬러는 config.js의 KIMES_EVENT.colors.sub 단일 출처에서 가져오므로 여기서 편집 X (slug에 매핑된 colorKey로 참조).",
+  "_comment": "특별관 3종 메타데이터. 콘텐츠는 kimes.kr/concurrent-events 공식 페이지 기준. 컬러는 config.js의 KIMES_EVENT.colors.sub 단일 출처에서 가져오므로 여기서 편집 X (slug에 매핑된 colorKey로 참조).",
   "zones": [
     {
       "id": "medicomtek",
@@ -8,11 +8,11 @@
       "colorVar": "--mc-blue",
       "name": "MedicomteK",
       "nameKo": "메디콤텍",
-      "tagline": "CONNECTED CARE",
-      "lede": "의료 커뮤니케이션·커넥티드 케어 기술 전시",
-      "ledeEn": "Medical communication & connected care technologies",
-      "hall": "Hall B · 2027.03.18-21",
-      "boilerplate100": "의료 커뮤니케이션·커넥티드 케어 기술 전시. 의료 IT·원격진료·통신 솔루션 회사 참가."
+      "tagline": "ADVANCED MEDICAL COMPONENTS",
+      "lede": "최첨단 의료기기 부품·소재 전시 (AI·딥러닝·로봇 분야 포함)",
+      "ledeEn": "Advanced medical components, materials, AI & robotics",
+      "hall": "COEX 전시장 전관 · 2027.03.18–21",
+      "boilerplate100": "최첨단 의료기기 부품·소재 전시. AI·딥러닝·로봇 과학 분야 포함. 부품·장비 업계 최신 정보 교환의 장."
     },
     {
       "id": "beauty-derma",
@@ -22,23 +22,23 @@
       "name": "BEAUTY&DERMA SEOUL",
       "nameKo": "뷰티앤더마 서울",
       "tagline": "BEAUTY MEETS MEDICINE",
-      "lede": "미용의학·피부과 전문 전시 (서울·부산 에디션)",
-      "ledeEn": "Aesthetic medicine & dermatology — Seoul & Busan editions",
-      "hall": "Hall C · 2027.03.18-21",
-      "boilerplate100": "미용의학·피부과 전문 전시. 서울·부산 두 에디션 운영. 미용기기·피부과 솔루션 회사 참가."
+      "lede": "K-뷰티·더마코스메틱·의료 미용 기기 전시",
+      "ledeEn": "K-Beauty, dermo-cosmetics & aesthetic medical devices",
+      "hall": "COEX 3층 E홀·E홀 로비 / 1층 A홀 로비 · 2027.03.18–21",
+      "boilerplate100": "K-뷰티·더마코스메틱·의료 미용 기기 전시. 피부 관리 기기·스킨케어·필러·레이저 장비 한국 경쟁력."
     },
     {
       "id": "inspire",
       "slug": "inspire",
       "colorKey": "inLime",
       "colorVar": "--in-lime",
-      "name": "INSPIRE Digital Health",
-      "nameKo": "인스파이어 디지털 헬스",
+      "name": "KIMES INSPIRE",
+      "nameKo": "키메스 인스파이어",
       "tagline": "HEALTH MEETS INNOVATION",
-      "lede": "디지털 헬스·웨어러블·헬스케어 AI 전시",
-      "ledeEn": "Digital health, wearables, and healthcare AI",
-      "hall": "Hall D · 2027.03.18-21",
-      "boilerplate100": "디지털 헬스·웨어러블·헬스케어 AI 솔루션 전시. 디지털 헬스 스타트업·플랫폼 회사 참가."
+      "lede": "의료 AI·디지털 헬스케어·웨어러블·데이터 분석 전시",
+      "ledeEn": "Medical AI, digital healthcare, wearables & data analytics",
+      "hall": "COEX 1층 그랜드볼룸 · 2027.03.18–21",
+      "boilerplate100": "헬스케어 혁신 융합 전시. 의료 AI·디지털 헬스케어·웨어러블·데이터 분석 솔루션. OPEN STAGE 세션 4일간 운영."
     }
   ]
 }
