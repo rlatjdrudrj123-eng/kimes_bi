@@ -152,8 +152,7 @@ function LogoPage() {
           <KimesWordmark height={120} />
         </div>
         <p className="lg-hero-desc">
-          KIMES 로고는 1980년 첫 행사부터 사용된 산세리프 워드마크.
-          빨강·블랙 두 색과 <code>i</code> 안의 쐐기가 핵심 요소.
+          KIMES 공식 로고. 본 가이드의 사용 규정에 따라 사용해주세요.
         </p>
       </div>
 
