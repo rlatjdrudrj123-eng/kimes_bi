@@ -28,7 +28,7 @@ function Stub({ sectionRef }) {
 
 // ColorPage는 components/ColorPage.jsx에서 정의 (§7 작업으로 분리).
 
-// TypographyPage는 components/TypographyPage.jsx에서 정의 (§8 작업으로 분리).
+// TypographyPage 페이지는 v2027.1에서 /notation (NotationPage)으로 흡수.
 
 // NotationPage는 components/NotationPage.jsx에서 정의 (§9 Writing Style 통합 작업).
 
@@ -79,7 +79,7 @@ Object.assign(window, {
   // ColorPage:    별도 파일 components/ColorPage.jsx에서 직접 등록
   LogoPage,
   ColorPage,
-  // TypographyPage:  별도 파일 components/TypographyPage.jsx에서 직접 등록
+  // TypographyPage 페이지: /notation으로 흡수 (v2027.1)
   // NotationPage:    별도 파일 components/NotationPage.jsx에서 직접 등록
   // ApplicationsPage: 별도 파일 components/ApplicationsPage.jsx에서 직접 등록
   // (/co-branding 페이지: 디자이너 영역이라 통째로 제거 — Restricted Expressions만 /notation으로 흡수)

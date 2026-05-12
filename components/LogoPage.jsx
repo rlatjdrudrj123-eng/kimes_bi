@@ -236,7 +236,7 @@ function LogoPage() {
       <SectionHeading id="donts" title="Don'ts" subtitle="피해야 할 사용 예시" />
       <p>
         로고 SVG는 원본 그대로 사용. 텍스트 표기는 →{' '}
-        <Link to="/typography">/typography</Link> 참고.
+        <Link to="/notation">/notation</Link> 참고.
       </p>
       <div className="lg-donts">
         {DONTS.map(d => <DontCard key={d.id} d={d} />)}

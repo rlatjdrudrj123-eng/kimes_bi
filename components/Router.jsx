@@ -50,21 +50,19 @@ function useHashRoute() {
 }
 
 // Route table. Routes with a numeric `nav` value appear in the global
-// header in that order. `cta: true` marks the "파일 다운로드" CTA pinned
-// to the right end of the header.
-// 라벨은 §22.5 영문/한글 사용 규칙에 따라 영문. 글로벌 nav, CTA 버튼,
-// 라우트 매핑 모두 단일 출처. 한글 서브타이틀은 PageShell에서 별도 prop.
+// header in that order. `cta: true` marks the "다운로드" CTA pinned to
+// the right end of the header.
+// v2027.1: nav 라벨 영문, /typography는 /notation으로 흡수.
 const ROUTES = [
   { path: '/',                           page: 'LandingPage' },
-  { path: '/overview',                   page: 'OverviewPage',           label: 'Overview',       nav: 1 },
-  { path: '/logo',                       page: 'LogoPage',               label: 'Logo',           nav: 2 },
-  { path: '/color',                      page: 'ColorPage',              label: 'Color',          nav: 3 },
-  { path: '/typography',                 page: 'TypographyPage',         label: 'Typography',     nav: 4 },
-  { path: '/notation',                   page: 'NotationPage',           label: 'Writing Style',  nav: 5 },
-  { path: '/special-zones',              page: 'SpecialZonesIndex',      label: 'Special Zones',  nav: 6 },
-  { path: '/permissions',                page: 'PermissionsPage',        label: 'Usage Rights',   nav: 7 },
-  { path: '/faq',                        page: 'FaqPage',                label: 'FAQ',            nav: 8 },
-  { path: '/downloads',                  page: 'DownloadsPage',          label: 'Downloads',      cta: true },
+  { path: '/overview',                   page: 'OverviewPage',           label: 'Overview',         nav: 1 },
+  { path: '/logo',                       page: 'LogoPage',               label: 'Logo',             nav: 2 },
+  { path: '/color',                      page: 'ColorPage',              label: 'Color',            nav: 3 },
+  { path: '/notation',                   page: 'NotationPage',           label: 'Writing & Type',   nav: 4 },
+  { path: '/special-zones',              page: 'SpecialZonesIndex',      label: 'Concurrent Events', nav: 5 },
+  { path: '/permissions',                page: 'PermissionsPage',        label: 'Usage Rights',     nav: 6 },
+  { path: '/faq',                        page: 'FaqPage',                label: 'FAQ',              nav: 7 },
+  { path: '/downloads',                  page: 'DownloadsPage',          label: 'Downloads',        cta: true },
   { path: '/contact',                    page: 'ContactPage' },
   { path: '/changelog',                  page: 'ChangelogPage' },
 ];

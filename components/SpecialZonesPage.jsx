@@ -31,7 +31,7 @@ function SpecialZonesIndex() {
   return (
     <PageShell
       eyebrow="06"
-      title="Special Zones"
+      title="Concurrent Events"
       subtitle="특별관"
       lede="KIMES 2027은 3개 특별관 운영. 특별관 참가업체는 KIMES 표기와 해당 특별관 표기를 병기."
     >

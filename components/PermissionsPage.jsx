@@ -77,7 +77,7 @@ function PermissionsPage() {
       )}
 
       <p className="pm-asset-link">
-        파일 선택은 → <Link to="/typography">/typography</Link> 참고.
+        파일 선택은 → <Link to="/notation">/notation</Link> 참고.
       </p>
 
       {/* §14.2.2 행위 시점 ---------------------------------------------- */}

@@ -4,43 +4,43 @@
   margin: 0 0 var(--space-5);
 }
 
-/* 섹션 상단 컬러 색면 + 영문 메타 */
+/* 섹션 상단 컬러 색면 + 영문 메타 — 컴팩트 사이즈 */
 .sz-hero {
-  margin: var(--space-2) 0 var(--space-4);
-  padding: var(--space-5) var(--space-4);
+  margin: var(--space-2) 0 var(--space-3);
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
 }
 .sz-hero-content {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   max-width: 64ch;
 }
 .sz-hero-tagline {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 13px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   opacity: 0.85;
 }
 .sz-hero-name {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 40px;
+  font-size: 26px;
   letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 1.05;
 }
 .sz-hero-name-ko {
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--fs-body-lg);
+  font-weight: 600;
+  font-size: var(--fs-body);
   opacity: 0.85;
 }
 .sz-hero-lede-en {
-  margin: 8px 0 0;
-  font-size: var(--fs-body);
-  line-height: 1.55;
+  margin: 4px 0 0;
+  font-size: var(--fs-caption);
+  line-height: 1.5;
   opacity: 0.8;
 }
 
