@@ -49,44 +49,6 @@
   flex-wrap: wrap;
 }
 
-/* Hero meta box (D-카운트다운) */
-.landing-meta-box {
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-  background: var(--surface-base);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-self: end;
-}
-.landing-meta-line {
-  font-family: var(--font-display);
-  font-size: var(--fs-caption);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-.landing-meta-label {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--kimes-red);
-  line-height: 1.1;
-}
-.landing-meta-sub {
-  font-size: var(--fs-caption);
-  color: var(--text-secondary);
-}
-.landing-meta-past .landing-meta-label {
-  color: var(--text-secondary);
-  font-size: 22px;
-  letter-spacing: -0.005em;
-}
-.landing-meta-live .landing-meta-label { color: var(--kimes-red); }
-.landing-meta-upcoming .landing-meta-label { color: var(--kimes-red); }
-
 /* ---------- 공통 섹션 ---------- */
 .landing-section {
   padding-top: var(--space-6);

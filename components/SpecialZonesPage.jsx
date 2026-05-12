@@ -1,4 +1,4 @@
-// §11 — /special-zones. KIMES 안에서 운영되는 3개 특별관 정보를 한 페이지에
+// §7 — /special-zones (v2027.1). KIMES 산하 3개 특별관 정보를 한 페이지에
 // 섹션으로 나열. 데이터: content/special-zones.json (어드민 편집).
 // 컬러: config.js의 KIMES_EVENT.colors.sub 단일 출처.
 

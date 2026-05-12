@@ -1,8 +1,5 @@
-// §14 — /permissions. 권한·승인·라이선스 매트릭스. BI 가이드를 단순한
-// 디자인 가이드와 구별 짓는 핵심 페이지: 누가 무엇을 어디까지 할 수
-// 있는지를 명문화.
-//
-// 명세 §14.2.1~§14.2.5 평면 구조.
+// §8 — /permissions (v2027.1). 권한·승인·라이선스 매트릭스 + 신청
+// 절차 + 라이선싱.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;

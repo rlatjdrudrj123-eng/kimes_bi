@@ -1,13 +1,12 @@
-// §7 — /color. KIMES 4브랜드 컬러 시스템: Primary 3 (Red·Black·White) +
-// Sub 4 (MedicomteK Blue·BEAUTY&DERMA Purple·INSPIRE Lime·Neutral Gray).
-// 컬러 값은 components/config.js의 KIMES_EVENT.colors 단일 출처 — §13
-// 특별관 페이지도 같은 출처 참조해 중복 정의 제거.
+// §4 — /color (v2027.1). Primary 3 (Red·Black·White) + Sub 4
+// (MedicomteK Blue·BEAUTY&DERMA Purple·INSPIRE Lime·Neutral Gray).
+// 컬러 값은 components/config.js의 KIMES_EVENT.colors 단일 출처.
 //
-// 명세 §7.2 4개 섹션:
-//   §7.2.1 Primary Colors / 메인 컬러 (3장 큰 카드)
-//   §7.2.2 Sub Colors / 보조 컬러 (4장 카드 — 특별관 3 + 톤다운)
-//   §7.2.3 How to Use / 색 사용 원칙 (4줄)
-//   §7.2.4 Downloads / 다운로드 (.ase/Sketch/Figma + CSS 스니펫)
+// 3개 섹션:
+//   §4.1 Primary Colors / 메인 컬러 (3장 큰 카드)
+//   §4.2 Sub Colors / 보조 컬러 (4장 카드)
+//   §4.3 How to Use / 색 사용 원칙
+//   + CSS·SCSS 변수 코드 블록 (개발자용)
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;

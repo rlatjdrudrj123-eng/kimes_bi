@@ -1,8 +1,5 @@
-// §15 — /contact. 단순 안내. 동적 폼 대신 mailto·tel 링크 + 처리 시간 안내.
-//
-// 이전 동적 폼은 백엔드 없이 mailto fallback이라 사용자가 폼 작성 후 메일
-// 클라이언트가 열림 — 이중 작업. 단순화해서 처음부터 mailto·tel 링크 직접
-// 노출.
+// §11 — /contact (v2027.1). 문의 채널 3종 (BI / 승인 / 라이선스)
+// mailto 링크 + 직접 연락처.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;

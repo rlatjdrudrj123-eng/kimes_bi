@@ -173,14 +173,12 @@
 /* ---------- §5.3.4 핵심 숫자 ---------- */
 .ov-num-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-2);
   margin: var(--space-2) 0 var(--space-5);
 }
-@media (max-width: 900px) { .ov-num-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 480px) { .ov-num-grid { grid-template-columns: 1fr; } }
-/* §22.5 통계 카드 패턴 — 숫자·라벨만, 출처는 섹션 lede에. 메타 라벨이
-   없어진 만큼 숫자 임팩트를 키우고 라벨 호흡을 늘림. */
+@media (max-width: 700px) { .ov-num-grid { grid-template-columns: 1fr; } }
+/* §22.5 통계 카드 패턴 — 숫자·라벨만, 출처는 섹션 lede에. */
 .ov-num {
   border: 1px solid var(--surface-line);
   border-radius: var(--radius-md);
@@ -193,7 +191,7 @@
 .ov-num-value {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(44px, 5.5vw, 60px);
+  font-size: clamp(32px, 3.4vw, 42px);
   line-height: 1;
   letter-spacing: -0.025em;
   color: var(--text-primary);

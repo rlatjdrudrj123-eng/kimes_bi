@@ -1,8 +1,6 @@
-// §14 — /downloads. 가이드 전반에서 흩어져 있는 파일을 한 페이지에 모아
-// 한 번에 다운로드. 통합 패키지 + 카테고리별 + 사용 약관 동의.
-//
+// §10 — /downloads (v2027.1). 통합 패키지 + 카테고리별 + 사용 약관 동의.
 // 데이터는 content/downloads.json 단일 출처. 어드민(/admin/)에서 status
-// 토글 + 항목별 URL 편집 가능. 빈 url은 disabled (Coming Soon).
+// 토글 + 항목별 URL 편집 가능. 빈 url은 disabled.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;

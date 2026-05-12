@@ -1,16 +1,14 @@
-// §5 — KIMES 한눈에 보기 (/overview).
+// §2 — /overview (v2027.1). KIMES 한눈에 보기 — 공식 명칭·일정·
+// 보일러플레이트·핵심 숫자·14 카테고리. 행사 메타데이터는
+// components/config.js의 KIMES_EVENT에서 읽음.
 //
-// 보도자료·홈페이지·SNS·이메일에 그대로 복사해 쓸 수 있는 공식 문구를
-// 한 페이지에 모은 것. 행사 메타데이터는 components/config.js의
-// KIMES_EVENT에서 읽음 — 매년 회차 갱신 시 단일 출처에서 전파.
-//
-// 페이지 구성:
-//   §5.3.1 공식 명칭 (정식·줄임·약칭)        ← 이 커밋
-//   §5.3.2 일정·장소                         ← 이 커밋
-//   §5.3.3 보일러플레이트 4벌 한·영          ← 다음 커밋
-//   §5.3.4 핵심 숫자 4개 카드                ← 그 다음 커밋
-//   §5.3.5 14개 전시 카테고리
-//   §5.3.6 공식 채널
+// 5개 섹션:
+//   §2.1 공식 명칭 (정식·약식·약칭)
+//   §2.2 일정·장소
+//   §2.3 보일러플레이트 4벌 한·영
+//   §2.4 핵심 숫자 (참가업체·참가국·관람객)
+//   §2.5 14개 전시 카테고리
+// 공식 채널은 푸터로 이동 (전 페이지 공통 노출).
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
@@ -62,7 +60,6 @@ function OverviewPage() {
     { value: numbers.exhibitors.value, label: '참가업체' },
     { value: numbers.countries.value,  label: '참가국' },
     { value: numbers.visitors.value,   label: '관람객' },
-    { value: numbers.categories.value, label: '전시 카테고리' },
   ];
 
   // §5.3.5 — 14개 전시 카테고리. 명세 §5.3.5의 한·영 병기 그대로.

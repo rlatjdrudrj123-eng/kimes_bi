@@ -36,100 +36,22 @@
   text-decoration: line-through;
   text-decoration-color: rgba(113, 113, 122, 0.4);
 }
-.ws-row-bad td {
-  color: var(--text-muted);
-  background: var(--surface-subtle);
-  font-style: italic;
-}
-
-/* ---------- §10.2.2 회차 — 불릿 ---------- */
-.ws-bullets {
-  margin: var(--space-2) 0 var(--space-5);
-  padding-left: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: var(--fs-body);
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-.ws-bullets code {
-  font-family: var(--font-mono);
-  font-size: 0.92em;
-  padding: 1px 5px;
-  background: var(--surface-muted);
-  border-radius: 3px;
-}
-
-/* ---------- §10.2.5 숫자 카드 ---------- */
-.ws-numbers {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-2);
-  margin: var(--space-2) 0 var(--space-5);
-}
-@media (max-width: 1000px) { .ws-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 500px)  { .ws-numbers { grid-template-columns: 1fr; } }
-
-.ws-number-card {
-  padding: var(--space-3);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.ws-number-rule {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--fs-body);
-  color: var(--text-primary);
-  letter-spacing: -0.005em;
-}
-.ws-number-desc {
-  font-size: var(--fs-caption);
-  color: var(--text-secondary);
-  line-height: 1.55;
-}
-.ws-number-sample {
-  margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-body);
-  color: var(--kimes-red);
-  letter-spacing: 0.01em;
-  padding: 6px 8px;
-  background: var(--surface-subtle);
-  border-radius: var(--radius-sm);
-}
-
-/* ---------- §10.2.6 구분 기호 ---------- */
-.ws-sep-mark {
-  font-family: var(--font-mono);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--kimes-red);
-  text-align: center;
-  width: 60px;
-}
-.ws-sep-name {
-  font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  color: var(--text-secondary);
-  width: 130px;
-}
-.ws-sep-example {
-  font-family: var(--font-body);
-  color: var(--text-primary);
-}
-
-/* ---------- §9.2.7 SNS 태그 — 표 셀 hint ---------- */
+/* ---------- §6.7 SNS 태그 — 표 셀 hint ---------- */
 .ws-sns-hint {
   color: var(--text-muted);
   font-size: var(--fs-caption);
 }
 
-/* ---------- §9.2.8 별도 계약 표현 박스 ---------- */
+/* ---------- §6.1 Name Notation 표 아래 미주 (→ /overview Date & Venue) ---------- */
+.ws-footnote {
+  margin: calc(var(--space-2) * -1) 0 var(--space-5);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+.ws-footnote a { color: var(--kimes-red); font-weight: 500; text-decoration: none; }
+.ws-footnote a:hover { text-decoration: underline; }
+
+/* ---------- §6.8 별도 계약 표현 박스 ---------- */
 .ws-restricted {
   margin: var(--space-2) 0 var(--space-5);
   padding: var(--space-4);

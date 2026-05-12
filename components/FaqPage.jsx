@@ -1,7 +1,5 @@
-// §13 — /faq. 사무국이 받는 같은 질문을 미리 답해두는 페이지. 검색창 +
-// 카테고리 필터 + 아코디언.
-//
-// 데이터 출처: content/faq.json — 어드민(/admin/)에서 추가/수정/삭제 가능.
+// §9 — /faq (v2027.1). 자주 묻는 질문 32개. 검색창 + 카테고리 필터 +
+// 아코디언. 데이터 출처: content/faq.json (어드민 편집).
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;

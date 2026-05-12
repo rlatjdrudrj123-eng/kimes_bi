@@ -1,6 +1,4 @@
-// §8 — /typography. 두 파일(로고 vs 텍스트 표기) + 권장 서체·사양.
-// 이전 6 sub-section에서 4 sub-section으로 압축 (Free Composition Gallery
-// 제거 + Fonts 카드 6 굵기 → 권장 2개만).
+// §5 — /typography (v2027.1). 두 파일(로고 vs 글자 표기) + 권장 서체·사양.
 
 const PageShell = window.PageShell;
 const SectionHeading = window.SectionHeading;
