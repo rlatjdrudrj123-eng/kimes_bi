@@ -100,18 +100,13 @@
 .shell-logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
   text-decoration: none;
   color: var(--text-primary);
   flex: 0 0 auto;
+  height: 100%;
 }
-.shell-logo-sub {
-  font-family: var(--font-body);
-  font-size: var(--fs-caption);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--text-muted);
-  white-space: nowrap;
+.shell-logo svg {
+  display: block;
 }
 .shell-nav {
   display: flex;
@@ -472,7 +467,6 @@
 
 @media (max-width: 640px) {
   .shell-header-inner { padding: 0 var(--space-2); }
-  .shell-logo-sub { display: none; }
   .shell-cta { padding: 0 14px; }
   .page-shell { padding: var(--space-4) var(--space-2) var(--space-6); }
   .page-title { font-size: 32px; }
