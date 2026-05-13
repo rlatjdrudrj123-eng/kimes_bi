@@ -23,7 +23,6 @@ function Header() {
       <div className="shell-header-inner">
         <Link to="/" className="shell-logo brand-mark" ariaLabel={`${window.KIMES_EVENT.event.nameKo} BI 가이드 — 시작 페이지`}>
           <KimesWordmark height={20} />
-          <span className="shell-logo-sub">{window.KIMES_EVENT.event.year} BI Guide</span>
         </Link>
 
         <nav className={`shell-nav ${open ? 'is-open' : ''}`} aria-label="주 메뉴">

@@ -371,7 +371,6 @@
 
 /* ---------- Footer (§3.4) ---------- */
 .shell-footer {
-  background: var(--surface-subtle);
   border-top: 1px solid var(--surface-line);
   font-size: var(--fs-caption);
   color: var(--text-secondary);

@@ -580,19 +580,9 @@
   letter-spacing: 0.02em;
 }
 
-/* ---------- §6.2.7 사용 신청 박스 ---------- */
+/* ---------- §3.7 사용 신청 — 플레인 타이포 ---------- */
 .lg-apply {
-  margin-top: var(--space-5);
-  padding: var(--space-4);
-  background: var(--surface-subtle);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  border-top: 3px solid var(--kimes-red);
-}
-.lg-apply-h2 {
-  /* 페이지 H2 스타일 유지하되 박스 안에 어울리도록 마진 조정 */
-  margin: 0 0 var(--space-2) !important;
-  font-size: var(--fs-h3) !important;
+  margin-top: var(--space-4);
 }
 .lg-apply p {
   margin: 0 0 var(--space-2);
@@ -604,19 +594,31 @@
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 .lg-apply-actions {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-3);
   flex-wrap: wrap;
+  margin-top: var(--space-2);
 }
+.lg-apply-actions .btn {
+  background: transparent;
+  color: var(--kimes-red);
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+.lg-apply-actions .btn:hover { text-decoration: underline; }
 .lg-apply-channel {
+  font-family: var(--font-mono);
   font-size: var(--fs-caption);
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 .lg-apply-channel a {
   color: var(--kimes-red);
-  text-decoration: underline;
+  text-decoration: none;
 }
+.lg-apply-channel a:hover { text-decoration: underline; }

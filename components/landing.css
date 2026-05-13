@@ -80,37 +80,28 @@
 }
 .landing-audience-single .landing-audience-card { max-width: 640px; }
 .landing-audience-card {
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-  background: var(--surface-base);
+  padding: 0;
 }
 .landing-audience-card h3 {
-  font-size: var(--fs-h3);
-  font-weight: 700;
+  font-size: var(--fs-body);
+  font-weight: 600;
   margin: 0 0 var(--space-2);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
+  color: var(--text-muted);
 }
 .landing-audience-card ul {
   margin: 0;
   padding-left: 18px;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 .landing-audience-card a {
-  color: var(--status-info);
-  text-decoration: underline;
+  color: var(--kimes-red);
+  text-decoration: none;
 }
-.landing-audience-yes {
-  border-top: 3px solid var(--kimes-red);
-}
-.landing-audience-yes h3 { color: var(--text-primary); }
-.landing-audience-no {
-  background: var(--surface-subtle);
-}
-.landing-audience-no h3 { color: var(--text-secondary); }
+.landing-audience-card a:hover { text-decoration: underline; }
 
 /* ---------- §4.2.3 Quick start ---------- */
 .landing-steps {
@@ -251,12 +242,9 @@
 }
 .landing-updates-more:hover { text-decoration: underline; }
 
-/* ---------- §4.2.6 Contact box ---------- */
+/* ---------- §1.8 Contact — 박스 없이 단순 본문 ---------- */
 .landing-contact-box {
-  background: var(--surface-subtle);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
+  padding: 0;
 }
 .landing-contact-h2 {
   margin: 0 0 var(--space-1);
