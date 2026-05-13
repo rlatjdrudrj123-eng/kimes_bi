@@ -1,30 +1,30 @@
-/* /contact — §15 단순 안내. 동적 폼 제거 후 mailto·tel 링크 카드 + 직접
-   연락 안내. */
+/* /contact — §11 문의 채널 안내. 카드 프레임 없이 hairline 분리. */
 
 .ct-channels {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin: var(--space-2) 0 var(--space-5);
-}
-@media (max-width: 900px) { .ct-channels { grid-template-columns: 1fr; } }
-
-.ct-channel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-3);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
+  margin: var(--space-2) 0 var(--space-5);
+  border-top: 1px solid var(--surface-line);
+}
+
+.ct-channel {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--surface-line);
+}
+@media (max-width: 700px) {
+  .ct-channel {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
 }
 .ct-channel-head {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 4px;
+  flex-direction: column;
+  gap: 2px;
 }
 .ct-channel-label {
   font-family: var(--font-display);
@@ -32,13 +32,7 @@
   font-size: var(--fs-body-lg);
   color: var(--text-primary);
 }
-.ct-channel-en {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+.ct-channel-en { display: none; }
 .ct-channel-desc {
   margin: 0;
   font-size: var(--fs-caption);
@@ -46,44 +40,27 @@
   color: var(--text-secondary);
 }
 .ct-channel-meta {
-  margin: 4px 0 var(--space-2);
+  margin: 4px 0 0;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
 }
 .ct-channel .btn {
-  margin-top: auto;
-  align-self: flex-start;
-}
-
-.ct-direct {
-  margin: var(--space-2) 0 var(--space-4);
-  padding: var(--space-3);
-  background: var(--surface-subtle);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-}
-.ct-direct-list {
-  margin: 0 0 var(--space-2);
-  padding-left: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: var(--fs-body);
-  line-height: 1.7;
-  color: var(--text-primary);
-}
-.ct-direct-list a {
+  background: transparent;
   color: var(--kimes-red);
+  border: none;
+  padding: 0;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
 }
-.ct-direct-list a:hover { text-decoration: underline; }
+.ct-channel .btn:hover {
+  text-decoration: underline;
+}
+
 .ct-direct-note {
-  margin: 0;
-  padding-top: var(--space-2);
-  border-top: 1px solid var(--surface-line);
+  margin: var(--space-2) 0 0;
   font-size: var(--fs-caption);
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }

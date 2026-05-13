@@ -168,54 +168,46 @@
 .landing-step-link a:hover { color: var(--kimes-red); }
 .landing-step-sep { color: var(--text-muted); }
 
-/* ---------- §4.2.4 Quick links ---------- */
+/* ---------- §1.6 자주 찾는 자료 — 카드 프레임 없이 텍스트 행 ---------- */
 .landing-tiles {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--surface-line);
 }
-@media (max-width: 1023px) {
-  .landing-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .landing-tiles { grid-template-columns: 1fr; }
 }
 .landing-tile {
   display: grid;
-  grid-template-rows: auto auto auto;
-  gap: 4px;
-  padding: var(--space-3);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
+  grid-template-columns: 28px 1fr auto;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--surface-line);
   text-decoration: none;
   color: var(--text-primary);
-  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+  transition: color 120ms ease;
 }
 .landing-tile:hover {
-  border-color: var(--kimes-red);
-  background: var(--surface-subtle);
-  transform: translateY(-1px);
+  color: var(--kimes-red);
 }
 .landing-tile-icon {
-  width: 36px; height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
-  background: var(--surface-muted);
-  color: var(--kimes-red);
-  margin-bottom: 4px;
+  color: var(--text-muted);
 }
+.landing-tile:hover .landing-tile-icon { color: var(--kimes-red); }
 .landing-tile-label {
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--fs-body);
-  color: var(--text-primary);
+  color: inherit;
 }
 .landing-tile-desc {
   font-size: var(--fs-caption);
   color: var(--text-muted);
-  line-height: 1.4;
+  text-align: right;
 }
 
 /* ---------- §4.2.5 Updates ---------- */

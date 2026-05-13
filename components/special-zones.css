@@ -40,62 +40,38 @@
   position: relative;
   margin: 0 0 var(--space-3);
   aspect-ratio: 16 / 5;
-  border: 2px dashed var(--surface-line);
-  border-radius: var(--radius-md);
   background: var(--surface-subtle);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  overflow: hidden;
-}
-.sz-image-slot::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--zone-accent, transparent);
-  opacity: 0.06;
-  pointer-events: none;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--space-3);
 }
 .sz-image-slot-label {
-  position: relative;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--fs-caption);
+  font-family: var(--font-mono);
+  font-size: 11px;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--text-muted);
 }
-.sz-image-slot-sub {
-  position: relative;
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  opacity: 0.7;
-}
+.sz-image-slot-sub { display: none; }
 @media (max-width: 700px) {
   .sz-image-slot { aspect-ratio: 16 / 7; }
 }
 
-/* 메타 — 한 줄 소개·위치·컬러·로고 파일 */
+/* 메타 — 한 줄 소개·위치·컬러·로고 파일 (프레임 없이 hairline 분리만) */
 .sz-meta {
   display: flex;
   flex-direction: column;
-  gap: 0;
   margin: var(--space-2) 0 var(--space-3);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
+  border-top: 1px solid var(--surface-line);
 }
 .sz-meta-row {
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: var(--space-3);
-  padding: var(--space-3);
-  align-items: center;
+  padding: var(--space-2) 0;
+  align-items: baseline;
   border-bottom: 1px solid var(--surface-line);
 }
-.sz-meta-row:last-child { border-bottom: 0; }
 @media (max-width: 700px) {
   .sz-meta-row { grid-template-columns: 1fr; gap: 6px; }
 }

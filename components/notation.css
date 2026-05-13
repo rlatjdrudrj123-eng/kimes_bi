@@ -52,14 +52,9 @@
 .ws-footnote a { color: var(--kimes-red); font-weight: 500; text-decoration: none; }
 .ws-footnote a:hover { text-decoration: underline; }
 
-/* ---------- §6.8 별도 계약 표현 박스 ---------- */
+/* ---------- §2.6 별도 계약 표현 — 플레인 타이포 ---------- */
 .ws-restricted {
   margin: var(--space-2) 0 var(--space-5);
-  padding: var(--space-4);
-  background: var(--surface-subtle);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  border-top: 3px solid var(--kimes-red);
 }
 .ws-restricted p {
   margin: 0 0 var(--space-2);
@@ -71,20 +66,32 @@
   padding-left: 22px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   color: var(--text-primary);
   font-size: var(--fs-body);
   line-height: 1.7;
 }
 .ws-restricted-actions {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-3);
   flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+.ws-restricted-actions .btn {
+  background: transparent;
+  color: var(--kimes-red);
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ws-restricted-actions .btn:hover {
+  text-decoration: underline;
 }
 .ws-restricted-channel {
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 

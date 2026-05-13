@@ -1,82 +1,68 @@
 /* /permissions — §14 권한·승인·라이선스 */
 
-/* ---------- 범례 ---------- */
+/* ---------- 범례 — 인라인, 카드 프레임 없음 ---------- */
 .pm-legend {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-2);
-  margin: var(--space-2) 0 var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--surface-line);
+  border-bottom: 1px solid var(--surface-line);
 }
-@media (max-width: 900px) { .pm-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 480px) { .pm-legend { grid-template-columns: 1fr; } }
 
 .pm-legend-item {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 8px;
-  padding: var(--space-3);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: var(--fs-caption);
+  line-height: 1.5;
 }
+/* 작은 컬러 도트로 권한 단계 표시 */
 .pm-legend-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  font-weight: 700;
-  font-size: 14px;
-  color: #fff;
+  flex-shrink: 0;
+  transform: translateY(-1px);
+  font-size: 0;
+  color: transparent;
 }
 .pm-legend-item.pm-level-free       .pm-legend-mark { background: var(--status-ok); }
 .pm-legend-item.pm-level-preapproval .pm-legend-mark { background: var(--status-warn); }
 .pm-legend-item.pm-level-licensed   .pm-legend-mark { background: var(--text-primary); }
-.pm-legend-item.pm-level-restricted .pm-legend-mark { background: var(--text-muted); }
-.pm-legend-body { display: flex; flex-direction: column; gap: 2px; }
+.pm-legend-body { display: inline; }
 .pm-legend-label {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--fs-body);
+  font-weight: 600;
   color: var(--text-primary);
+  margin-right: 6px;
 }
-.pm-legend-en {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
+.pm-legend-en { display: none; }
 .pm-legend-desc {
-  margin-top: 2px;
-  font-size: var(--fs-caption);
+  display: inline;
   color: var(--text-secondary);
-  line-height: 1.5;
 }
 
+/* 노트 — 띠 없이 본문 안 미주 */
 .pm-note {
-  margin: var(--space-2) 0 var(--space-3);
-  padding: 12px var(--space-3);
-  background: var(--surface-subtle);
-  border-left: 3px solid var(--kimes-red);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 0 0 var(--space-3);
   font-size: var(--fs-caption);
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .pm-else-note {
   margin: var(--space-3) 0 var(--space-5);
-  padding: 14px var(--space-3);
-  background: var(--surface-base);
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
   font-size: var(--fs-body);
   line-height: 1.65;
   color: var(--text-primary);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--surface-line);
 }
 .pm-else-note strong {
-  color: var(--kimes-red);
+  color: var(--text-primary);
   font-weight: 700;
   margin-right: 4px;
 }

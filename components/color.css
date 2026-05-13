@@ -12,25 +12,18 @@
 .clr-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
-  overflow: hidden;
 }
 .clr-card-swatch {
   min-height: 220px;
-  border-bottom: 1px solid var(--surface-line);
 }
-/* 검정 카드는 위쪽 보더가 거의 안 보이므로 별도 처리 */
-.clr-card.clr-black .clr-card-swatch { border-bottom-color: rgba(255,255,255,0.06); }
-/* 흰 카드는 색면이 페이지 배경과 같으므로 점선 보더로 가시화 */
-.clr-card-swatch-white { border: 1px dashed var(--surface-line); border-bottom-style: solid; }
+/* 흰 카드는 색면이 페이지 배경과 같으므로 1px 보더로 가시화 */
+.clr-card-swatch-white { border: 1px solid var(--surface-line); }
 
 .clr-card-body {
-  padding: var(--space-3);
+  padding: var(--space-2) 0 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 .clr-card-name {
   font-family: var(--font-display);
@@ -100,9 +93,6 @@
 .clr-sub {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--surface-line);
-  border-radius: var(--radius-md);
-  background: var(--surface-base);
   overflow: hidden;
 }
 .clr-sub-swatch {
@@ -124,10 +114,10 @@
 }
 .clr-sub-swatch.is-light .clr-sub-swatch-label { text-shadow: none; }
 .clr-sub-body {
-  padding: var(--space-3);
+  padding: var(--space-2) 0 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 .clr-sub-usage {
   font-size: var(--fs-caption);
